@@ -11,5 +11,5 @@ public class GestorHabitaciones {
     public GestorHabitaciones() {
         this.listaHabitaciones = new ArrayList<>();
     }
-
+//Cris te quiero, te fuiste a la B de local y con ventaja deportiva
 }
