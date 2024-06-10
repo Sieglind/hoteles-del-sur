@@ -1,4 +1,4 @@
-package org.example.usuarios;
+package org.example.enums;
 
 public enum Segmento {
     BRONCE,

@@ -1,6 +1,6 @@
-package org.example.gestores;
+package org.example.gestor.impl;
 
-import org.example.usuarios.Cliente;
+import org.example.entidades.persona.Cliente;
 
 import java.util.ArrayList;
 import java.util.List;

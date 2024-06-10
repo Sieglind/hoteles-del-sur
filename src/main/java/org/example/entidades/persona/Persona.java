@@ -1,4 +1,4 @@
-package org.example.usuarios;
+package org.example.entidades.persona;
 
 public abstract class Persona {
     // private final String id;

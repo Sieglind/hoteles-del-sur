@@ -1,6 +1,8 @@
-package org.example.reservas;
+package org.example.entidades;
 
-import org.example.usuarios.Cliente;
+import org.example.entidades.persona.Cliente;
+import org.example.enums.Estado;
+import org.example.enums.TipoDeHabitacion;
 
 import java.util.Date;
 
