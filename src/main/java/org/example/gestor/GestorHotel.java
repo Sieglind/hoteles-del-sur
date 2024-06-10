@@ -1,4 +1,6 @@
-package org.example.gestores;
+package org.example.gestor;
+
+import org.example.gestor.impl.*;
 
 public class GestorHotel {
 

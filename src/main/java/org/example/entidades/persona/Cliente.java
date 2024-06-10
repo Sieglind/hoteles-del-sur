@@ -1,4 +1,6 @@
-package org.example.usuarios;
+package org.example.entidades.persona;
+
+import org.example.enums.Segmento;
 
 public class Cliente extends Persona{
 

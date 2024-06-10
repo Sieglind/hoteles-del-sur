@@ -1,6 +1,6 @@
-package org.example.gestores;
+package org.example.gestor.impl;
 
-import org.example.reservas.Habitacion;
+import org.example.entidades.Habitacion;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.example.reservas;
+package org.example.entidades;
 
 public class Servicio {
     private final String nombre;

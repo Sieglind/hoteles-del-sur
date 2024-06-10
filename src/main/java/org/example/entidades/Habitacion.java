@@ -1,4 +1,6 @@
-package org.example.reservas;
+package org.example.entidades;
+
+import org.example.enums.TipoDeHabitacion;
 
 public class Habitacion {
 

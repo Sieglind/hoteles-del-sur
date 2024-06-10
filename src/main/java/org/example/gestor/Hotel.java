@@ -1,4 +1,4 @@
-package org.example.gestores;
+package org.example.gestor;
 
 public class Hotel {
     private final String nombre;

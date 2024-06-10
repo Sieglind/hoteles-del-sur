@@ -1,4 +1,4 @@
-package org.example.reservas;
+package org.example.enums;
 
 public enum TipoDeHabitacion {
     SIMPLE,
