@@ -13,3 +13,4 @@ public class GestorEmpleados {
         this.empleados = new ArrayList<Empleado>();
     }
 }
+//este gestor lo hace tamy
