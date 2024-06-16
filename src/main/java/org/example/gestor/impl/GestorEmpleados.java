@@ -19,6 +19,9 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
 
     @Override
     public String crear(Empleado empleado) throws ObjetoYaExisteExcepcion {
+        if(empleado==null){
+            throw new IllegalArgumentException("El empleado no pudo ser registrado correctamente");
+        }
         if(empleados.containsKey(empleado.getDni())){
             throw new ObjetoYaExisteExcepcion("Ya existe registrado un empleado con DNI " + empleado.getDni());
         }
@@ -31,7 +34,7 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
         Empleado empleado = empleados.get(dni);
 
         if(empleado == null){
-            throw new ObjectoNoEncontradoExcepcion("No existe registrado ningún empleado con DNI: " + empleado.getDni());
+            throw new ObjectoNoEncontradoExcepcion("No existe registrado ningún empleado con DNI: " + dni);
         }
         return empleado;
     }
