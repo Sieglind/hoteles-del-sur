@@ -1,5 +1,7 @@
 package org.example.entidades.persona;
 
+import java.util.Objects;
+
 public abstract class Persona {
     // private final String id;
     private final String nombre;
@@ -37,5 +39,17 @@ public abstract class Persona {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Persona persona)) return false;
+        return Objects.equals(dni, persona.dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(dni);
     }
 }
