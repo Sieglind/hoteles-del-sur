@@ -2,6 +2,8 @@ package org.example.entidades;
 
 import org.example.enums.TipoDeHabitacion;
 
+import java.util.Objects;
+
 public class Habitacion {
 
     private final String numeroDeHabitacion;
@@ -44,9 +46,24 @@ public class Habitacion {
     }
 
     @Override
+    public String toString() {
+        return "Habitacion{" +
+                "numeroDeHabitacion='" + numeroDeHabitacion + '\'' +
+                ", tipoDeHabitacion=" + tipoDeHabitacion +
+                ", numeroDeCamas=" + numeroDeCamas +
+                ", disponible=" + disponible +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (o instanceof Habitacion habitacion) {
-            return this.numeroDeHabitacion.equals(habitacion.numeroDeHabitacion);
-        } else return false;
+        if (this == o) return true;
+        if (!(o instanceof Habitacion that)) return false;
+        return Objects.equals(numeroDeHabitacion, that.numeroDeHabitacion);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numeroDeHabitacion);
     }
 }
