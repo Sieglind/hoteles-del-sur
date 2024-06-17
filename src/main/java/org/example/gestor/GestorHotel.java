@@ -19,4 +19,8 @@ public class GestorHotel {
         this.gestorReservas = new GestorReservas();
         this.gestorEmpleados = new GestorEmpleados();
     }
+
+    public GestorDeServicios getGestorDeServicios() {
+        return gestorDeServicios;
+    }
 }
