@@ -10,12 +10,37 @@ public class GestorDeServicios {
 
     public GestorDeServicios() {
         this.servicios = new ArrayList<>();
-        //por aca paso facu
     }
 
     public GestorDeServicios(List<Servicio> servicios) {
         this.servicios = servicios;
     }
 
-    //Hola larita
+    // Método para agregar un servicio
+    public void agregarServicio(Servicio servicio) {
+        servicios.add(servicio);
+    }
+
+    // Método para eliminar un servicio
+    public void eliminarServicio(String nombre) {
+        servicios.removeIf(servicio -> servicio.getNombre().equals(nombre));
+    }
+
+    // Método para buscar un servicio por nombre
+    public Servicio buscarServicio(String nombre) {
+        for (Servicio servicio : servicios) {
+            if (servicio.getNombre().equals(nombre)) {
+                return servicio;
+            }
+        }
+        return null;
+    }
+
+    // Método para listar todos los servicios
+    public void listarServicios() {
+        for (Servicio servicio : servicios) {
+            System.out.println(servicio);
+        }
+    }
+
 }
