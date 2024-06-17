@@ -18,4 +18,8 @@ public class Cliente extends Persona{
     public void setSegmento(Segmento segmento) {
         this.segmento = segmento;
     }
+
+
+
+
 }
