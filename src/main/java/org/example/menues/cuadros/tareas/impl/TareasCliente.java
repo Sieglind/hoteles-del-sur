@@ -12,6 +12,8 @@ import org.example.sistema.gestor.impl.GestorClientes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class TareasCliente extends JPanelCustom implements Renderizable<Cliente> {
@@ -57,6 +59,41 @@ public class TareasCliente extends JPanelCustom implements Renderizable<Cliente>
         resultadoArea.setEditable(false);
         add(formPanel, BorderLayout.NORTH);
         add(new JScrollPane(resultadoArea), BorderLayout.SOUTH);
+
+        JButton crearButton = new JButton("Añadir Cliente");
+        JButton buscarButton = new JButton("Buscar");
+        JButton actualizarButton = new JButton("Actualizar");
+        JButton eliminarButton = new JButton("Eliminar");
+        crearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelCrear();
+            }
+        });
+        formPanel.add(crearButton);
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelBuscar();
+            }
+        });
+        formPanel.add(buscarButton);
+
+        actualizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelActualizar();
+            }
+        });
+        formPanel.add(actualizarButton);
+
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelEliminar();
+            }
+        });
+        formPanel.add(eliminarButton);
     }
 
     @Override
