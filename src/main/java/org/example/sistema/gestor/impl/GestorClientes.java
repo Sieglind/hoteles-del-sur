@@ -63,5 +63,14 @@ public class GestorClientes implements IGestor<String, Cliente> {
         listaClientes.remove(key);
         return true;
     }
+
+    public void cargarClientes(List<Cliente> clientes) {
+
+        clientes.forEach(cliente -> {
+            if(!listaClientes.containsKey(cliente.getDni())) { //verifica si ya se encuentra
+                listaClientes.put(cliente.getDni(), cliente);
+            }
+        });
+    }
 }
 
