@@ -14,12 +14,13 @@ public class Empleado extends Persona {
         this.available = true;
     }
 
-    public Empleado(String nombre, String apellido, String dni, Cargo cargo, boolean available, String password) {
+    public Empleado(String nombre, String apellido, String dni, Cargo cargo, String password) {
         super(nombre, apellido, dni);
         this.cargo = cargo;
-        this.available = available;
+        this.available = true;
         this.password = password;
     }
+
 
     public Cargo getCargo() {
         return cargo;

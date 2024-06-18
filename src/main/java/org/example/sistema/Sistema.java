@@ -1,11 +1,20 @@
 package org.example.sistema;
 
+import org.example.sistema.entidades.Habitacion;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
+import org.example.sistema.enums.TipoDeHabitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sistema {
 
@@ -25,16 +34,11 @@ public class Sistema {
         this.gestorDeServicios = new GestorDeServicios();
         this.gestorReservas = new GestorReservas();
         this.gestorEmpleados = new GestorEmpleados();
-        Empleado administrador = new Empleado("Facundo",
-                "Square","123456789",
-                Cargo.ADMINISTRADOR,
-                true,"123456");
-        try {
-            gestorEmpleados.crear(administrador);
-        } catch (ObjetoYaExisteExcepcion excepcion){
-            System.out.println("Sopenco");
-        }
+
+        this.gestorEmpleados.cargarEmpleados(UtilidadesCSV.importarEmpleados());
+
     }
+
 
     public static synchronized Sistema getInstance() {
         if (sistema == null) {
@@ -47,4 +51,15 @@ public class Sistema {
         Empleado empleado = gestorEmpleados.buscar(dni);
         return empleado.getPassword().equals(password) && empleado.getCargo().equals(Cargo.ADMINISTRADOR);
     }
+
+    public String listarHabitaciones () {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n Lista de Habitaciones :\n");
+
+        this.gestorHabitaciones.buscarTodos().forEach(habitacion -> sb.append("\t").append(habitacion).append("\n"));
+        return sb.toString();
+    }
+
+
+
 }

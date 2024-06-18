@@ -5,5 +5,5 @@ public enum Cargo {
     CONSIERGE,
     VALET,
     LIMPIEZA,
-    MENTENIMIENTO
+    MANTENIMIENTO
 }

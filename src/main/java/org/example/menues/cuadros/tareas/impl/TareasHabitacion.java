@@ -2,56 +2,71 @@ package org.example.menues.cuadros.tareas.impl;
 
 import org.example.menues.cuadros.JPanelCustom;
 import org.example.menues.cuadros.tareas.Renderizable;
+import org.example.menues.enums.Tarea;
+import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.TipoDeHabitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.impl.GestorHabitaciones;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class TareasHabitacion extends JPanelCustom implements Renderizable<Cliente> {
-    private JTextField numeroDehabitacion;
-    private JComboBox<TipoDeHabitacion> tipoDehabitacion;
+    private final JLabel numeroDeHabitacion = new JLabel("Numero de habitacion: ");
+    private JTextField campoNumeroHabitacion = new JTextField();
+    private JLabel tipoDeHabitacion = new JLabel("Tipo de Habitacion: ");
+    private JComboBox<TipoDeHabitacion> campoTipoDehabitacion = new JComboBox<>(TipoDeHabitacion.values());
     private JCheckBox disponibilidad;
     private JTextArea resultadoArea;
     private String numeroHabitacion;
     private TipoDeHabitacion tipoHabitacion;
     private boolean disponible;
     private Habitacion habitacion;
-    private GestorHabitaciones gestorHabitaciones;
+    private Tarea tarea;
+    private final Dimension DIMENSION = new Dimension(300, 30);
 
-    public TareasHabitacion() {
-        setLayout(new BorderLayout());
-        initComponents();
-        gestorHabitaciones = new GestorHabitaciones();
+    public TareasHabitacion(Tarea tarea) {
+        super();
+        this.tarea = tarea;
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setVisible(true);
+        seleccionarPanel(tarea);
     }
 
-    private void initComponents() {
-        JPanel formPanel = new JPanel(new GridLayout(5, 2));
-        formPanel.setBorder(BorderFactory.createTitledBorder("Habitacion"));
+    private void seleccionarPanel(Tarea tarea) {
 
-        formPanel.add(new JLabel("Numero de Habitacion:"));
-        numeroDehabitacion = new JTextField(15);
-        formPanel.add(numeroDehabitacion);
-
-        formPanel.add(new JLabel("Tipo de Habitacion:"));
-        tipoDehabitacion = new JComboBox<>(TipoDeHabitacion.values());
-        formPanel.add(tipoDehabitacion);
-
-
-        formPanel.add(new JLabel("Disponible:"));
-        disponibilidad = new JCheckBox();
-        formPanel.add(disponibilidad);
-
-
-        resultadoArea = new JTextArea(10, 30);
-        resultadoArea.setEditable(false);
-        add(formPanel, BorderLayout.NORTH);
-        add(new JScrollPane(resultadoArea), BorderLayout.SOUTH);
+        switch (tarea) {
+            case CREAR -> panelCrear();
+            case BUSCAR -> panelBuscar();
+            case LISTAR -> panelListar();
+            case ACTUALIZAR -> panelActualizar();
+            case BORRAR -> panelEliminar();
+        }
+//        JPanel formPanel = new JPanel(new GridLayout(5, 2));
+//        formPanel.setBorder(BorderFactory.createTitledBorder("Habitacion"));
+//
+//        formPanel.add(new JLabel("Numero de Habitacion:"));
+//        campocampoNumeroDeHabitacion = new JTextField(15);
+//        formPanel.add(campocampoNumeroDeHabitacion);
+//
+//        formPanel.add(new JLabel("Tipo de Habitacion:"));
+//        tipoDehabitacion = new JComboBox<>(TipoDeHabitacion.values());
+//        formPanel.add(tipoDehabitacion);
+//
+//
+//        formPanel.add(new JLabel("Disponible:"));
+//        disponibilidad = new JCheckBox();
+//        formPanel.add(disponibilidad);
+//
+//
+//        resultadoArea = new JTextArea(10, 30);
+//        resultadoArea.setEditable(false);
+//        add(formPanel, BorderLayout.NORTH);
+//        add(new JScrollPane(resultadoArea), BorderLayout.SOUTH);
 
 //        JButton saveButton = new JButton("Guardar");
 //        saveButton.addActionListener(new ActionListener() {
@@ -66,117 +81,133 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
 
     @Override
     public void panelCrear() {
-        resultadoArea.setText("");
+        this.setBorder(new TitledBorder("Crear Habitación"));
 
-        try{
-            numeroHabitacion = numeroDehabitacion.getText();
-            tipoHabitacion= (TipoDeHabitacion) tipoDehabitacion.getSelectedItem();
-            disponible = disponibilidad.isSelected();
+        this.add(dimensionarObjeto(numeroDeHabitacion));
+        this.add(dimensionarObjeto(campoNumeroHabitacion));
+        this.add(dimensionarObjeto(tipoDeHabitacion));
+        this.add(dimensionarObjeto(campoTipoDehabitacion));
 
-            if(numeroHabitacion.isEmpty() || tipoHabitacion == null ){
-                resultadoArea.setText("Todos los campos son obligatorios");
-                return;
-            }
+        JPanel botones = new JPanel();
+        botones.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton guardar = new JButton("Guardar");
+        botones.add(guardar);
+        JButton cancelar = new JButton("Cancelar");
+        botones.add(cancelar);
+        this.add(dimensionarObjeto(botones));
+        botones.setVisible(true);
 
-            habitacion = new Habitacion(numeroHabitacion, tipoHabitacion);
-            gestorHabitaciones.crear(habitacion);
-            resultadoArea.setText("Habitacion creada: " +habitacion);
-            limpiarCampos();
-        }catch (ObjetoYaExisteExcepcion e){
-            resultadoArea.setText(e.getMessage());
-        }
+        guardar.addActionListener(e -> {
+        });
+    }
+
+    private JComponent dimensionarObjeto(JComponent component) {
+        component.setMaximumSize(DIMENSION);
+        component.setAlignmentX(Component.LEFT_ALIGNMENT);
+        return component;
     }
 
     @Override
     public void panelBuscar() {
-            try{
-                numeroHabitacion = numeroDehabitacion.getText();
-                if(numeroHabitacion.isEmpty()  ){
-                    resultadoArea.setText("Todos los campos son obligatorios");
-                }
+        this.setBorder(new TitledBorder("Buscar Habitacion"));
 
-                habitacion = gestorHabitaciones.buscar(numeroHabitacion);
+        this.add(dimensionarObjeto(numeroDeHabitacion));
+        this.add(dimensionarObjeto(campoNumeroHabitacion));
 
-                tipoDehabitacion.setSelectedItem(habitacion.getTipoDeHabitacion());
-                disponibilidad.setSelected(habitacion.isDisponible());
-
-            }catch (ObjectoNoEncontradoExcepcion e){
-                resultadoArea.setText(e.getMessage());
-            }
-
-
+        JPanel botones = new JPanel();
+        botones.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton buscar = new JButton("Buscar");
+        botones.add(buscar);
+        JButton cancelar = new JButton("Cancelar");
+        botones.add(cancelar);
+        this.add(dimensionarObjeto(botones));
+        botones.setVisible(true);
     }
 
     @Override
     public void panelListar() {
-        resultadoArea.setText("");
-        ArrayList<Habitacion> habitaciones = (ArrayList<Habitacion>) gestorHabitaciones.buscarTodos();
+        this.setBorder(new TitledBorder("Listar Habitaciones"));
 
-        if (habitaciones.isEmpty()) {
-            resultadoArea.setText("No hay habitaciones registradas");
-        } else {
-            String[] columas = {"Número", "Tipo", "Número de Camas", "Disponible", "Segmento"};
-            Object[][] data = new Object[habitaciones.size()][5];
-            for (int i = 0; i < habitaciones.size(); i++) {
-                habitacion = habitaciones.get(i);
-                data[i][0] = habitacion.getNumeroDeHabitacion();
-                data[i][1] = habitacion.getTipoDeHabitacion();
-                data[i][3] = habitacion.isDisponible();
-            }
-            JTable tabla = new JTable(data, columas);
+        String listadoHabitaciones = Sistema.getInstance().listarHabitaciones();
 
-            JScrollPane scrollPane = new JScrollPane(tabla);
-            tabla.setFillsViewportHeight(true);
-            JPanel tablaPanel = new JPanel(new BorderLayout());
-            tablaPanel.add(scrollPane, BorderLayout.CENTER);
+        JTextArea resultadoArea = new JTextArea(listadoHabitaciones);
+        resultadoArea.setEditable(false);
 
-        }
+        JScrollPane scrollPane = new JScrollPane(resultadoArea);
+        scrollPane.setPreferredSize(DIMENSION);
+
+        this.add(scrollPane);
+
+        JPanel botones = new JPanel();
+        JButton cancelar = new JButton("Cancelar");
+        botones.add(cancelar);
+        this.add(dimensionarObjeto(botones));
+        botones.setVisible(true);
+
     }
+
     @Override
     public void panelActualizar() {
+        this.setBorder(new TitledBorder("Actualizar Habitacion"));
 
-        resultadoArea.setText("");
+        this.add(dimensionarObjeto(numeroDeHabitacion));
+        this.add(dimensionarObjeto(campoNumeroHabitacion));
 
-        try{
-            numeroHabitacion = numeroDehabitacion.getText();
-            tipoHabitacion= (TipoDeHabitacion) tipoDehabitacion.getSelectedItem();
-            disponible = disponibilidad.isSelected();
+        JPanel botones = new JPanel();
+        botones.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton buscar = new JButton("Buscar");
+        botones.add(buscar);
 
-            if(numeroHabitacion.isEmpty() || tipoHabitacion == null){
-                resultadoArea.setText("Todos los campos son Obligatorios!");
-                return;
-            }
+        this.add(dimensionarObjeto(numeroDeHabitacion));
+        this.add(dimensionarObjeto(campoNumeroHabitacion));
 
-            habitacion = new Habitacion(numeroHabitacion,tipoHabitacion);
-            gestorHabitaciones.actualizar(numeroHabitacion,habitacion);
+        JButton actualizar = new JButton("Actualizar");
+        botones.add(actualizar);
+        this.add(dimensionarObjeto(botones));
+        botones.setVisible(true);
 
-        }catch (ObjectoNoEncontradoExcepcion e){
-            resultadoArea.setText(e.getMessage());
-        }
+        JButton cancelar = new JButton("Cancelar");
+        botones.add(cancelar);
+        this.add(dimensionarObjeto(botones));
+        botones.setVisible(true);
+
     }
 
     @Override
     public void panelEliminar() {
-        resultadoArea.setText("");
+        this.setBorder(new TitledBorder("Eliminar Habitacion"));
 
-        try{
-            numeroHabitacion = numeroDehabitacion.getText();
-            boolean eliminado = gestorHabitaciones.eliminar(numeroHabitacion);
+        this.add(dimensionarObjeto(numeroDeHabitacion));
+        this.add(dimensionarObjeto(campoNumeroHabitacion));
 
-            if(eliminado){
-                resultadoArea.setText("Habitacion con numero" + numeroHabitacion + "eliminada");
-                limpiarCampos();
-            }
+        JPanel botones = new JPanel();
+        botones.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton buscar = new JButton("Buscar");
+        botones.add(buscar);
 
-        }catch (ObjectoNoEncontradoExcepcion e){
-            resultadoArea.setText(e.getMessage());
-        }
+        this.add(dimensionarObjeto(numeroDeHabitacion));
+        this.add(dimensionarObjeto(campoNumeroHabitacion));
+
+        JButton eliminar = new JButton("Eliminar");
+        botones.add(eliminar);
+        this.add(dimensionarObjeto(botones));
+        botones.setVisible(true);
+
+        JButton cancelar = new JButton("Cancelar");
+        botones.add(cancelar);
+        this.add(dimensionarObjeto(botones));
+        botones.setVisible(true);
 
     }
 
-    private void limpiarCampos(){
-        numeroDehabitacion.setText("");
-        tipoDehabitacion.setSelectedItem(null);
+    private void limpiarCampos() {
+        campoNumeroHabitacion.setText("");
+        campoTipoDehabitacion.setSelectedItem(null);
         disponibilidad.setSelected(false);
     }
+
+    public Habitacion obtenerNuevaHabitacion() {
+        return new Habitacion(campoNumeroHabitacion.getText(), TipoDeHabitacion.valueOf(campoTipoDehabitacion.getSelectedItem().toString()));
+    }
+
 }
