@@ -1,9 +1,11 @@
 package org.example.sistema;
 
+import org.example.sistema.entidades.Habitacion;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
+import org.example.sistema.enums.TipoDeHabitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.Hotel;
@@ -49,4 +51,15 @@ public class Sistema {
         Empleado empleado = gestorEmpleados.buscar(dni);
         return empleado.getPassword().equals(password) && empleado.getCargo().equals(Cargo.ADMINISTRADOR);
     }
+
+    public String listarHabitaciones () {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n Lista de Habitaciones :\n");
+
+        this.gestorHabitaciones.buscarTodos().forEach(habitacion -> sb.append("\t").append(habitacion).append("\n"));
+        return sb.toString();
+    }
+
+
+
 }

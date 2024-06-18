@@ -4,6 +4,6 @@ public enum Tarea {
     CREAR,
     BUSCAR,
     LISTAR,
-    ACTUALZIAR,
+    ACTUALIZAR,
     BORRAR
 }

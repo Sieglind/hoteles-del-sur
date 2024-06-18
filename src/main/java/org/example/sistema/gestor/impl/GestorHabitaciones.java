@@ -13,6 +13,7 @@ import java.util.Map;
 public class GestorHabitaciones implements IGestor <String,Habitacion>{
     private final Map<String,Habitacion> listaHabitaciones;
 
+
     public GestorHabitaciones() {
         this.listaHabitaciones = new HashMap<>();
     }
@@ -65,4 +66,7 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
     private String obtenerClave (Habitacion habitacion) {
         return habitacion.getNumeroDeHabitacion();
     }
+
+
+
 }
