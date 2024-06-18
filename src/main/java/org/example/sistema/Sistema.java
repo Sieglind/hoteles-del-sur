@@ -32,48 +32,11 @@ public class Sistema {
         this.gestorDeServicios = new GestorDeServicios();
         this.gestorReservas = new GestorReservas();
         this.gestorEmpleados = new GestorEmpleados();
-        Empleado administrador = new Empleado("Facundo",
-                "Square", "123456789",
-                Cargo.ADMINISTRADOR, "123456");
-        try {
-            gestorEmpleados.crear(administrador);
-        } catch (ObjetoYaExisteExcepcion excepcion) {
-            System.out.println("Sopenco");
-        }
 
-        List<Empleado> listaEmpleados = importarEmpleados();
+        this.gestorEmpleados.cargarEmpleados(UtilidadesCSV.importarEmpleados());
+
     }
 
-    private List<Empleado> importarEmpleados() {
-        String filePath = "src/main/resources/empleados.csv";
-
-        List<Empleado> empleados = new ArrayList<>();
-
-        try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
-            String[] renglon;
-
-            while ((renglon = csvReader.readNext()) != null) {
-                String[] valores = renglon[0].split(";");
-                Cargo cargo = Cargo.valueOf(valores[3]);
-
-                Empleado empleado = new Empleado(
-                        valores[0],
-                        valores[1],
-                        valores[2],
-                        Cargo.valueOf(valores[3]),
-                        cargo.equals(Cargo.ADMINISTRADOR) ? valores[4] : null
-                );
-
-                empleados.add(empleado);
-
-            }
-            this.gestorEmpleados.cargarEmpleados(empleados);
-
-        } catch (IOException | CsvValidationException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
 
     public static synchronized Sistema getInstance() {
         if (sistema == null) {
