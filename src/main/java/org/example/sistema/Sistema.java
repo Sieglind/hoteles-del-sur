@@ -37,6 +37,8 @@ public class Sistema {
 
         this.gestorEmpleados.cargarEmpleados(UtilidadesCSV.importarEmpleados());
 
+        this.gestorClientes.cargarClientes(UtilidadesCSV.importarClientes());
+
     }
 
 
