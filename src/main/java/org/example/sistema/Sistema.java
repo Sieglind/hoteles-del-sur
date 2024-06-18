@@ -3,6 +3,7 @@ package org.example.sistema;
 import org.example.sistema.entidades.Habitacion;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import org.example.sistema.enums.TipoDeHabitacion;
@@ -52,7 +53,7 @@ public class Sistema {
         return empleado.getPassword().equals(password) && empleado.getCargo().equals(Cargo.ADMINISTRADOR);
     }
 
-    public String listarHabitaciones () {
+    public String listarHabitaciones() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n Lista de Habitaciones :\n");
 
@@ -60,6 +61,27 @@ public class Sistema {
         return sb.toString();
     }
 
+    public String listarClientes() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n Lista de Clientes :\n");
+        this.gestorHabitaciones.buscarTodos().forEach(cliente -> sb.append("\t").append(cliente).append("\n"));
+        return sb.toString();
+    }
 
+    public String mostrarCliente(String dni){
+        StringBuilder sb = new StringBuilder();
+        Cliente cliente=null;
+        try {
+            cliente = this.gestorClientes.buscar(dni);
+        }catch (ObjectoNoEncontradoExcepcion e){
+            sb.append(e.getMessage());
+        }
+        sb.append("-----------------------------\n")
+                .append("ID: ").append(cliente.getDni()).append("\n")
+                .append("Nombre: ").append(cliente.getNombre()).append("\n")
+                .append("Dirección: ").append(cliente.getApellido()).append("\n")
+                .append("Segmento: ").append(cliente.getSegmento().toString()).append("\n");
+        return sb.toString();
+    }
 
 }
