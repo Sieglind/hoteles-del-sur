@@ -3,7 +3,7 @@ package org.example.menues.acciones;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.Sistema;
 import org.example.menues.VentanaPrincipal;
-import org.example.menues.cuadros.cuadrosflow.CuadroTareas;
+import org.example.menues.cuadros.cuadrosflow.CuadroDeEntidades;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +28,7 @@ public class AccionLogin implements ActionListener {
         String password = String.valueOf(campoPassword.getPassword()); //Idem pero con password
         try {
             if (sistema.login(usuario, password)) {
-                VentanaPrincipal.cambiarCuadroEnVentanaPrincipal(new CuadroTareas());
+                VentanaPrincipal.cambiarCuadroEnVentanaPrincipal(new CuadroDeEntidades());
             } else {
                 JOptionPane.showMessageDialog(this.parent,
                         "Contraseña incorrecta",
