@@ -8,10 +8,10 @@ public class Empleado extends Persona {
     private String password;
     private boolean available;
 
-    public Empleado(String nombre, String apellido, String dni, Cargo cargo, boolean available) {
+    public Empleado(String nombre, String apellido, String dni, Cargo cargo) {
         super(nombre, apellido, dni);
         this.cargo = cargo;
-        this.available = available;
+        this.available = true;
     }
 
     public Empleado(String nombre, String apellido, String dni, Cargo cargo, boolean available, String password) {

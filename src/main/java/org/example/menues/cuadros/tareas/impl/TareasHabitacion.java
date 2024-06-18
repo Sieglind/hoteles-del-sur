@@ -16,12 +16,10 @@ import java.util.ArrayList;
 public class TareasHabitacion extends JPanelCustom implements Renderizable<Cliente> {
     private JTextField numeroDehabitacion;
     private JComboBox<TipoDeHabitacion> tipoDehabitacion;
-    private JTextField numeroDeCamas;
     private JCheckBox disponibilidad;
     private JTextArea resultadoArea;
     private String numeroHabitacion;
     private TipoDeHabitacion tipoHabitacion;
-    private Integer numeroCamas;
     private boolean disponible;
     private Habitacion habitacion;
     private GestorHabitaciones gestorHabitaciones;
@@ -44,9 +42,6 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
         tipoDehabitacion = new JComboBox<>(TipoDeHabitacion.values());
         formPanel.add(tipoDehabitacion);
 
-        formPanel.add(new JLabel("Numero de Camas:"));
-        numeroDeCamas = new JTextField(15);
-        formPanel.add(numeroDeCamas);
 
         formPanel.add(new JLabel("Disponible:"));
         disponibilidad = new JCheckBox();
@@ -76,7 +71,6 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
         try{
             numeroHabitacion = numeroDehabitacion.getText();
             tipoHabitacion= (TipoDeHabitacion) tipoDehabitacion.getSelectedItem();
-            numeroCamas = Integer.parseInt(numeroDeCamas.getText());
             disponible = disponibilidad.isSelected();
 
             if(numeroHabitacion.isEmpty() || tipoHabitacion == null ){
@@ -84,7 +78,7 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
                 return;
             }
 
-            habitacion = new Habitacion(numeroHabitacion, tipoHabitacion,numeroDeCamas,disponible);
+            habitacion = new Habitacion(numeroHabitacion, tipoHabitacion);
             gestorHabitaciones.crear(habitacion);
             resultadoArea.setText("Habitacion creada: " +habitacion);
             limpiarCampos();
@@ -104,7 +98,6 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
                 habitacion = gestorHabitaciones.buscar(numeroHabitacion);
 
                 tipoDehabitacion.setSelectedItem(habitacion.getTipoDeHabitacion());
-                numeroDeCamas.setText(String.valueOf(habitacion.getNumeroDeCamas()));
                 disponibilidad.setSelected(habitacion.isDisponible());
 
             }catch (ObjectoNoEncontradoExcepcion e){
@@ -128,7 +121,6 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
                 habitacion = habitaciones.get(i);
                 data[i][0] = habitacion.getNumeroDeHabitacion();
                 data[i][1] = habitacion.getTipoDeHabitacion();
-                data[i][2] = habitacion.getNumeroDeCamas();
                 data[i][3] = habitacion.isDisponible();
             }
             JTable tabla = new JTable(data, columas);
@@ -148,7 +140,6 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
         try{
             numeroHabitacion = numeroDehabitacion.getText();
             tipoHabitacion= (TipoDeHabitacion) tipoDehabitacion.getSelectedItem();
-            numeroCamas = Integer.parseInt(numeroDeCamas.getText());
             disponible = disponibilidad.isSelected();
 
             if(numeroHabitacion.isEmpty() || tipoHabitacion == null){
@@ -186,7 +177,6 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
     private void limpiarCampos(){
         numeroDehabitacion.setText("");
         tipoDehabitacion.setSelectedItem(null);
-        numeroDeCamas.setText("");
         disponibilidad.setSelected(false);
     }
 }
