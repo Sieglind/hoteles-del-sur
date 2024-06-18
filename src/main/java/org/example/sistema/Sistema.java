@@ -1,6 +1,8 @@
 package org.example.sistema;
 
 import org.example.sistema.entidades.Habitacion;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import org.example.sistema.enums.TipoDeHabitacion;
@@ -9,6 +11,9 @@ import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sistema {
@@ -29,22 +34,11 @@ public class Sistema {
         this.gestorDeServicios = new GestorDeServicios();
         this.gestorReservas = new GestorReservas();
         this.gestorEmpleados = new GestorEmpleados();
-        Habitacion habitacionPrubea = new Habitacion("513", TipoDeHabitacion.DOBLE);
-        try {
-            gestorHabitaciones.crear(habitacionPrubea);
-        }catch (ObjetoYaExisteExcepcion ex) {
-            System.out.println("Sopenco");
-        }
-        Empleado administrador = new Empleado("Facundo",
-                "Square","asd",
-                Cargo.ADMINISTRADOR,
-                true,"asd");
-        try {
-            gestorEmpleados.crear(administrador);
-        } catch (ObjetoYaExisteExcepcion excepcion){
-            System.out.println("Sopenco");
-        }
+
+        this.gestorEmpleados.cargarEmpleados(UtilidadesCSV.importarEmpleados());
+
     }
+
 
     public static synchronized Sistema getInstance() {
         if (sistema == null) {

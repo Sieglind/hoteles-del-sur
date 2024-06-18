@@ -63,5 +63,9 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
         empleados.remove(dni);
         return true;
     }
+
+    public void cargarEmpleados(List<Empleado> empleados) {
+        empleados.forEach(empleado -> this.empleados.put(empleado.getDni(), empleado));
+    }
 }
 
