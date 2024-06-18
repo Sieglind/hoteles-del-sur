@@ -1,11 +1,15 @@
 package org.example.sistema;
 
+import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
+import org.example.sistema.enums.TipoDeHabitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
+
+import java.util.List;
 
 public class Sistema {
 
@@ -25,10 +29,16 @@ public class Sistema {
         this.gestorDeServicios = new GestorDeServicios();
         this.gestorReservas = new GestorReservas();
         this.gestorEmpleados = new GestorEmpleados();
+        Habitacion habitacionPrubea = new Habitacion("513", TipoDeHabitacion.DOBLE);
+        try {
+            gestorHabitaciones.crear(habitacionPrubea);
+        }catch (ObjetoYaExisteExcepcion ex) {
+            System.out.println("Sopenco");
+        }
         Empleado administrador = new Empleado("Facundo",
-                "Square","123456789",
+                "Square","asd",
                 Cargo.ADMINISTRADOR,
-                true,"123456");
+                true,"asd");
         try {
             gestorEmpleados.crear(administrador);
         } catch (ObjetoYaExisteExcepcion excepcion){
@@ -47,4 +57,15 @@ public class Sistema {
         Empleado empleado = gestorEmpleados.buscar(dni);
         return empleado.getPassword().equals(password) && empleado.getCargo().equals(Cargo.ADMINISTRADOR);
     }
+
+    public String listarHabitaciones () {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n Lista de Habitaciones :\n");
+
+        this.gestorHabitaciones.buscarTodos().forEach(habitacion -> sb.append("\t").append(habitacion).append("\n"));
+        return sb.toString();
+    }
+
+
+
 }
