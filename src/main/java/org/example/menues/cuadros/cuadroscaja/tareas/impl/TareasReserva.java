@@ -27,7 +27,7 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
     private final JTextField CAMPO_FECHA_INICIO = crearCampoDeTexto();
     private final JLabel ETIQUETA_FECHA_FIN = crearEtiqueta("Ingrese la fecha de salida: ");
     private final JTextField CAMPO_FECHA_FIN = crearCampoDeTexto();
-    private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.HABITACIONES.name()));
+    private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.RESERVAS.name()));
 
     public TareasReserva(Tarea tarea) {
         super();
