@@ -7,10 +7,13 @@ import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
+import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.Segmento;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.List;
 
 public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
@@ -79,19 +82,30 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
     @Override
     public void panelListar() {
         this.setBorder(BorderFactory.createTitledBorder("Listar Cliente"));
+        List<Cliente> habitaciones = Sistema.getInstance().listarClientes();
 
-        String listadoClientes = Sistema.getInstance().listarClientes();
+        JPanel panelClientes = new JPanel();
+        panelClientes.setLayout(new BoxLayout(panelClientes, BoxLayout.Y_AXIS));
+        habitaciones.forEach(cliente -> {
+            JPanel panelCliente = new JPanel();
+            panelCliente.setBorder(new LineBorder(Color.BLACK,1));
+            JLabel dNI = new JLabel("DNI: " + cliente.getDni());
+            JLabel nombreYApellido = new JLabel("Nombre y Apellido: " + cliente.getNombre() + " " + cliente.getApellido());
+            JLabel segmento = new JLabel("Segmento: " + cliente.getSegmento());
+            panelCliente.add(dNI);
+            panelCliente.add(nombreYApellido);
+            panelCliente.add(segmento);
+            panelCliente.setVisible(true);
+            dimensionarCompomente(panelClientes,LEFT_ALIGNMENT);
+            panelClientes.add(panelCliente);
+        });
 
-        JTextArea resultadoArea = new JTextArea(listadoClientes);
-        resultadoArea.setEditable(false);
-
-        JScrollPane scrollPane = new JScrollPane(resultadoArea);
-        scrollPane.setPreferredSize(DIMENSION);
-
-        this.add(scrollPane);
+        JScrollPane contenedorDeLista = new JScrollPane(panelClientes);
+        this.add(contenedorDeLista);
 
         JPanel zocalo = new CuadroBotonesZocalo();
         zocalo.add(BOTON_VOLVER);
+        this.add(zocalo);
     }
 
     @Override

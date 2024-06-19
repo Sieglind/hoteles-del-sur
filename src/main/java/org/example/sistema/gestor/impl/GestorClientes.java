@@ -9,10 +9,13 @@ import org.example.sistema.gestor.IGestor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GestorClientes implements IGestor<String, Cliente> {
 
-    private TreeMap<String, Cliente> listaClientes;
+    private final TreeMap<String, Cliente> listaClientes;
+    private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
     public GestorClientes() {
         this.listaClientes = new TreeMap<>();
@@ -22,7 +25,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
     @Override
     public String crear(Cliente cliente) throws ObjetoYaExisteExcepcion {
         if (listaClientes.containsKey(cliente.getDni())) {
-            throw new ObjetoYaExisteExcepcion("El cliente con DNI " + cliente.getDni() + " ya existe.");
+            throw new ObjetoYaExisteExcepcion(cliente);
         }
         listaClientes.put(cliente.getDni(), cliente);
         return cliente.getDni();
@@ -64,13 +67,15 @@ public class GestorClientes implements IGestor<String, Cliente> {
         return true;
     }
 
-    public void cargarClientes(List<Cliente> clientes) {
-
+    public GestorClientes conClientes(List<Cliente> clientes) {
         clientes.forEach(cliente -> {
-            if(!listaClientes.containsKey(cliente.getDni())) { //verifica si ya se encuentra
-                listaClientes.put(cliente.getDni(), cliente);
+            try {
+                crear(cliente);
+            } catch (ObjetoYaExisteExcepcion excepcion) {
+                LOG.log(Level.WARNING,excepcion.getMessage());
             }
         });
+        return this;
     }
 }
 
