@@ -1,6 +1,7 @@
 package org.example.sistema;
 
 import org.example.sistema.entidades.Habitacion;
+import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.Servicio;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
@@ -53,10 +54,15 @@ public class Sistema {
         return this.gestorClientes.buscarTodos();
     }
 
+    public List<Reserva> listarReservas() {
+        return this.gestorReservas.buscarTodos();
+    }
+
     public List<Empleado> listarEmpleados() {
         return this.gestorEmpleados.buscarTodos();
     }
-    public List<Servicio> listarServicios(){
+
+    public List<Servicio> listarServicios() {
         return this.gestorDeServicios.buscarTodos();
     }
 
