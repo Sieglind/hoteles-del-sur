@@ -21,7 +21,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
     private final JTextField CAMPO_DNI = crearCampoDeTexto();
     private final JLabel EIQUETA_NOMBRE = crearEtiqueta("Ingrese el Nombre:");
     private final JTextField CAMPO_NOMBRE = crearCampoDeTexto();
-    private final JLabel APELLIDO = crearEtiqueta("Ingrese el Apellido:");
+    private final JLabel ETIQUETA_APELLIDO = crearEtiqueta("Ingrese el Apellido:");
     private final JTextField CAMPO_APELLIDO = crearCampoDeTexto();
     private final JLabel SEGMENTO = crearEtiqueta("Ingrese el Segmento:");
     private final JComboBox<Segmento> LISTA_SEGMENTO = new JComboBox<>(Segmento.values());
@@ -54,7 +54,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
         this.add(CAMPO_DNI);
         this.add(EIQUETA_NOMBRE);
         this.add(CAMPO_NOMBRE);
-        this.add(APELLIDO);
+        this.add(ETIQUETA_APELLIDO);
         this.add(CAMPO_APELLIDO);
         this.add(SEGMENTO);
         this.add(LISTA_SEGMENTO);
@@ -122,7 +122,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
         this.add(EIQUETA_NOMBRE);
         this.add(CAMPO_NOMBRE);
-        this.add(APELLIDO);
+        this.add(ETIQUETA_APELLIDO);
         this.add(CAMPO_APELLIDO);
         this.add(SEGMENTO);
         this.add(LISTA_SEGMENTO);

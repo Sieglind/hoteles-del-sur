@@ -14,12 +14,11 @@ public class CuadroDeTareas extends CuadroFlowCustom {
     private void cargarBotones(String nombreDeEntidad) {
         AccionCuadroTareas accionCuadroTareas = new AccionCuadroTareas();
         for(Tarea tarea : Tarea.values()){
-            JButton button = new JButton(tarea.name());
+            Icon icono = new ImageIcon(tarea.getUrlIcono());
+            JButton button = new JButton(tarea.name(),icono);
             button.setName(nombreDeEntidad);
             button.addActionListener(accionCuadroTareas);
             this.add(button);
         }
     }
-
-
 }
