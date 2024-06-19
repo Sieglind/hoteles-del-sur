@@ -1,26 +1,25 @@
-﻿Spa;Dia Spa;40000
-Spa;Masaje Facial;12000
-Spa;Masaje Descontracturante;15000
-Spa;Masaje Relajante;13000
-Spa ;Detox Pies;9000
-Spa;Depilacion;12000
-Gym;Pase Dia Completo;4000
-Gym;Pase 1 hs;2000
-Gym;Personal Trainner;8000
-Gym;Candado;1000
-Gym;Suscripcion Mensual;60000
-Restaurant;Menu Semanal;130000
-Restaurant;Sugerencia del Chef;15000
-Restaurant;Menu del dia;12000
-Restaurant;Menu diario;20000
-Restaurant;Servicio a la habitacion;4000
-Parking;Estacionamiento diario;13000
-Parking;Estacionamiento semanal;70000
-Parking;Estacionamiento mensual;210000
-Bar;Trago de autor;7000
-Bar;Barra libre por dia;50000
-Bar;Bebida sin alcohol;5000
-Bar;"Blue Label ""es un elisir""";60000
-Bar;Botella Champagne;40000
-Laundry;Valet Completo;6000
-Seguridad; Caja fuerte habitacion;4000
+﻿Spa;Masaje Facial;12000;0001
+Spa;Masaje Descontracturante;15000;0002
+Spa;Masaje Relajante;13000;0003
+Spa ;Detox Pies;9000;0004
+Spa;Depilacion;12000;0005
+Gym;Pase Dia Completo;4000;0006
+Gym;Pase 1 hs;2000;0007
+Gym;Personal Trainner;8000;0008
+Gym;Candado;1000;0009
+Gym;Suscripcion Mensual;60000;00010
+Restaurant;Menu Semanal;130000;0011
+Restaurant;Sugerencia del Chef;15000;0012
+Restaurant;Menu del dia;12000;0013
+Restaurant;Menu diario;20000;0014
+Restaurant;Servicio a la habitacion;4000;0015
+Parking;Estacionamiento diario;13000;0016
+Parking;Estacionamiento semanal;70000;0017
+Parking;Estacionamiento mensual;210000;0018
+Bar;Trago de autor;7000;0019
+Bar;Barra libre por dia;50000;0020
+Bar;Bebida sin alcohol;5000;0021
+Bar;"Blue Label ""es un elisir""";60000;0022
+Bar;Botella Champagne;40000;0023
+Laundry;Valet Completo;6000;0024
+Seguridad; Caja fuerte habitacion;4000;0025
