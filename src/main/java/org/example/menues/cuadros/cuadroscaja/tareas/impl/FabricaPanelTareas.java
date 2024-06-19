@@ -10,9 +10,7 @@ public class FabricaPanelTareas {
         return switch (entidad) {
             case CLIENTES -> new TareasCliente(tarea);
             case EMPLEADOS -> new TareasEmpleado(tarea);
-            case RESERVAS ->
-                //TODO Retornar panel reservas
-                    null;
+            case RESERVAS -> new TareasReserva(tarea);
             case HABITACIONES -> new TareasHabitacion(tarea);
             case SERVICIOS -> new TareasServicio(tarea);
             case ACTIVIDADES ->
