@@ -7,15 +7,17 @@ import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
-import org.example.sistema.entidades.persona.Cliente;
-import org.example.sistema.enums.Segmento;
+import org.example.sistema.entidades.persona.Empleado;
+import org.example.sistema.enums.Cargo;
+
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.List;
 
-public class TareasCliente extends CuadroCajaCustom implements Tareas {
+
+public class TareasEmpleado extends CuadroCajaCustom implements Tareas {
 
     private final JLabel ETIQUETA_DNI = crearEtiqueta("DNI:");
     private final JTextField CAMPO_DNI = crearCampoDeTexto();
@@ -23,16 +25,16 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
     private final JTextField CAMPO_NOMBRE = crearCampoDeTexto();
     private final JLabel ETIQUETA_APELLIDO = crearEtiqueta("Ingrese el Apellido:");
     private final JTextField CAMPO_APELLIDO = crearCampoDeTexto();
-    private final JLabel SEGMENTO = crearEtiqueta("Ingrese el Segmento:");
-    private final JComboBox<Segmento> LISTA_SEGMENTO = new JComboBox<>(Segmento.values());
-    private final JButton BOTON_VOLVER = crearBoton("Volver",LEFT_ALIGNMENT,new AccionVolver(Entidad.CLIENTES.name()));
+    private final JLabel ETIQUETA_CARGO = crearEtiqueta("Ingrese el Cargo:");
+    private final JComboBox<Cargo> LISTA_CARGO = new JComboBox<>(Cargo.values());
+    private final JButton BOTON_VOLVER = crearBoton("Volver",LEFT_ALIGNMENT,new AccionVolver(Entidad.EMPLEADOS.name()));
 
 
-    public TareasCliente(Tarea tarea) {
+    public TareasEmpleado(Tarea tarea) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setVisible(true);
-        dimensionarCompomente(LISTA_SEGMENTO,LEFT_ALIGNMENT);
+        dimensionarCompomente(LISTA_CARGO,LEFT_ALIGNMENT);
         elegirPanel(tarea);
     }
 
@@ -48,7 +50,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelCrear() {
-        this.setBorder(BorderFactory.createTitledBorder("Crear Cliente"));
+        this.setBorder(BorderFactory.createTitledBorder("Crear Empleado"));
         limpiarCampos();
         this.add(ETIQUETA_DNI);
         this.add(CAMPO_DNI);
@@ -56,8 +58,8 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
         this.add(CAMPO_NOMBRE);
         this.add(ETIQUETA_APELLIDO);
         this.add(CAMPO_APELLIDO);
-        this.add(SEGMENTO);
-        this.add(LISTA_SEGMENTO);
+        this.add(ETIQUETA_CARGO);
+        this.add(LISTA_CARGO);
 
         JPanel zocalo = new CuadroBotonesZocalo();
         JButton guardar = new JButton("Guardar");
@@ -68,7 +70,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelBuscar() {
-        this.setBorder(BorderFactory.createTitledBorder("Buscar Cliente"));
+        this.setBorder(BorderFactory.createTitledBorder("Buscar Empleado"));
         this.add(ETIQUETA_DNI);
         this.add(CAMPO_DNI);
 
@@ -81,26 +83,26 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelListar() {
-        this.setBorder(BorderFactory.createTitledBorder("Listar Cliente"));
-        List<Cliente> habitaciones = Sistema.getInstance().listarClientes();
+        this.setBorder(BorderFactory.createTitledBorder("Listar Empleados"));
+        List<Empleado> habitaciones = Sistema.getInstance().listarEmpleados();
 
-        JPanel panelClientes = new JPanel();
-        panelClientes.setLayout(new BoxLayout(panelClientes, BoxLayout.Y_AXIS));
-        habitaciones.forEach(cliente -> {
-            JPanel panelCliente = new JPanel();
-            panelCliente.setBorder(new LineBorder(Color.BLACK,1));
-            JLabel dNI = new JLabel("DNI: " + cliente.getDni());
-            JLabel nombreYApellido = new JLabel("Nombre y Apellido: " + cliente.getNombre() + " " + cliente.getApellido());
-            JLabel segmento = new JLabel("Segmento: " + cliente.getSegmento());
-            panelCliente.add(dNI);
-            panelCliente.add(nombreYApellido);
-            panelCliente.add(segmento);
-            panelCliente.setVisible(true);
-            dimensionarCompomente(panelClientes,LEFT_ALIGNMENT);
-            panelClientes.add(panelCliente);
+        JPanel panelEmpleados = new JPanel();
+        panelEmpleados.setLayout(new BoxLayout(panelEmpleados, BoxLayout.Y_AXIS));
+        habitaciones.forEach(empleado -> {
+            JPanel panelEmpleado = new JPanel();
+            panelEmpleado.setBorder(new LineBorder(Color.BLACK,1));
+            JLabel dNI = new JLabel("DNI: " + empleado.getDni());
+            JLabel nombreYApellido = new JLabel("Nombre y Apellido: " + empleado.getNombre() + " " + empleado.getApellido());
+            JLabel cargo = new JLabel("Cargo: " + empleado.getCargo());
+            panelEmpleado.add(dNI);
+            panelEmpleado.add(nombreYApellido);
+            panelEmpleado.add(cargo);
+            panelEmpleado.setVisible(true);
+            dimensionarCompomente(panelEmpleados,LEFT_ALIGNMENT);
+            panelEmpleados.add(panelEmpleado);
         });
 
-        JScrollPane contenedorDeLista = new JScrollPane(panelClientes);
+        JScrollPane contenedorDeLista = new JScrollPane(panelEmpleados);
         this.add(contenedorDeLista);
 
         JPanel zocalo = new CuadroBotonesZocalo();
@@ -110,7 +112,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelActualizar() {
-        this.setBorder(BorderFactory.createTitledBorder("Actualizar Cliente"));
+        this.setBorder(BorderFactory.createTitledBorder("Actualizar Empleado"));
         this.add(ETIQUETA_DNI);
         this.add(CAMPO_DNI);
 
@@ -118,14 +120,14 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
         JButton buscar = new JButton("Buscar");
         zocalo.add(buscar);
 
-      //  Sistema.getInstance().mostrarCliente(ETIQUETA_DNI);
+        //  Sistema.getInstance().mostrarEmpleado(ETIQUETA_DNI);
 
         this.add(EIQUETA_NOMBRE);
         this.add(CAMPO_NOMBRE);
         this.add(ETIQUETA_APELLIDO);
         this.add(CAMPO_APELLIDO);
-        this.add(SEGMENTO);
-        this.add(LISTA_SEGMENTO);
+        this.add(ETIQUETA_CARGO);
+        this.add(LISTA_CARGO);
         JButton actualizar = new JButton("Actualizar");
         zocalo.add(actualizar);
         zocalo.add(BOTON_VOLVER);
@@ -134,7 +136,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelEliminar() {
-        this.setBorder(BorderFactory.createTitledBorder("Eliminar Cliente"));
+        this.setBorder(BorderFactory.createTitledBorder("Eliminar Empleado"));
         this.add(ETIQUETA_DNI);
         this.add(CAMPO_DNI);
 
@@ -151,7 +153,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
         CAMPO_DNI.setText("");
         CAMPO_NOMBRE.setText("");
         CAMPO_APELLIDO.setText("");
-        LISTA_SEGMENTO.setSelectedIndex(0);
+        LISTA_CARGO.setSelectedIndex(0);
     }
 
     private JLabel crearEtiqueta(String texto){

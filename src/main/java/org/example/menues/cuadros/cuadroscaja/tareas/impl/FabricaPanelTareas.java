@@ -9,9 +9,7 @@ public class FabricaPanelTareas {
     public static JPanelCustom obtenerPanelTarea(Entidad entidad, Tarea tarea) {
         return switch (entidad) {
             case CLIENTES -> new TareasCliente(tarea);
-            case EMPLEADOS ->
-                //TODO Retornar panel empleados
-                    null;
+            case EMPLEADOS -> new TareasEmpleado(tarea);
             case RESERVAS ->
                 //TODO Retornar panel reservas
                     null;

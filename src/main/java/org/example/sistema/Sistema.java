@@ -53,6 +53,9 @@ public class Sistema {
         return this.gestorClientes.buscarTodos();
     }
 
+    public List<Empleado> listarEmpleados() {
+        return this.gestorEmpleados.buscarTodos();
+    }
     public List<Servicio> listarServicios(){
         return this.gestorDeServicios.buscarTodos();
     }
