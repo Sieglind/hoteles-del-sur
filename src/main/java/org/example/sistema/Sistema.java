@@ -52,4 +52,7 @@ public class Sistema {
         return this.gestorClientes.buscarTodos();
     }
 
+    public List<Empleado> listarEmpleados() {
+        return this.gestorEmpleados.buscarTodos();
+    }
 }
