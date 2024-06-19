@@ -10,9 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccionLogin implements ActionListener {
+
     private final JPanel parent;
     private final JTextField campoUsuario;
     private final JPasswordField campoPassword;
+
+    private static final String TITULO_ERROR_LOGIN = "Error de Login";
+    private static final String MENSAJE_CONTRASENIA_ERRONEA = "Contraseña Invalida";
+    private static final String MENSAJE_USUARIO_INVALIDO = "Usuario Invalido";
 
     public AccionLogin(JPanel parent, JTextField userField, JPasswordField passwordField) {
         this.parent = parent;
@@ -24,20 +29,20 @@ public class AccionLogin implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Sistema sistema = Sistema.getInstance();
-        String usuario = campoUsuario.getText(); //El usuario que es escribio en el campito usuario
-        String password = String.valueOf(campoPassword.getPassword()); //Idem pero con password
+        String usuario = campoUsuario.getText();
+        String password = String.valueOf(campoPassword.getPassword());
         try {
             if (sistema.login(usuario, password)) {
-                VentanaPrincipal.cambiarCuadroEnVentanaPrincipal(new CuadroDeEntidades());
+                VentanaPrincipal.cambiarCuadro(new CuadroDeEntidades());
             } else {
-                JOptionPane.showMessageDialog(this.parent,
-                        "Contraseña incorrecta",
-                        "Error de Login", JOptionPane.ERROR_MESSAGE);
+                emitirError(MENSAJE_CONTRASENIA_ERRONEA);
             }
         } catch (ObjectoNoEncontradoExcepcion excepcion) {
-            JOptionPane.showMessageDialog(this.parent,
-                    "Ese usuario no existe",
-                    "Error de Login", JOptionPane.ERROR_MESSAGE);
+            emitirError(MENSAJE_USUARIO_INVALIDO);
         }
+    }
+
+    private void emitirError(String mensaje){
+        JOptionPane.showMessageDialog(this.parent, mensaje, TITULO_ERROR_LOGIN, JOptionPane.ERROR_MESSAGE);
     }
 }

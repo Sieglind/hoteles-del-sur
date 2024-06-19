@@ -3,7 +3,7 @@ package org.example.sistema.entidades.persona;
 import java.util.Objects;
 
 public abstract class Persona {
-    // private final String id;
+
     private final String nombre;
     private final String apellido;
     private final String dni;
@@ -55,6 +55,6 @@ public abstract class Persona {
         return
                 "\nNombre: " + nombre +
                 "\nApellido: " + apellido +
-                "\nDni: " + dni;
+                "\nDNI: " + dni;
     }
 }

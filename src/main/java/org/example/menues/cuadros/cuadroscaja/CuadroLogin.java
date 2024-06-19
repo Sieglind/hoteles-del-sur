@@ -7,8 +7,12 @@ import javax.swing.border.TitledBorder;
 
 public class CuadroLogin extends CuadroCajaCustom {
 
-    private static final JTextField userField = new JTextField(COLUMNS);
-    private static final JPasswordField passwordField = new JPasswordField(COLUMNS);
+    private final TitledBorder border = BorderFactory.createTitledBorder("Login");
+    private final JLabel bienvenida = crearEtiqueta("Bienvenido");
+    private final JLabel etiquetaUsuario = crearEtiqueta("Usuario:");
+    private final JTextField campoUsuario = crearCampoDeTexto();
+    private final JLabel etiquetaPassword = crearEtiqueta("Password:");
+    private final JPasswordField campoPassword = new JPasswordField(COLUMNS);
 
     public CuadroLogin() {
         super();
@@ -16,20 +20,25 @@ public class CuadroLogin extends CuadroCajaCustom {
     }
 
     private void setupPanel() {
-        this.setBorder(new TitledBorder("Login"));
-
-        this.add(createCenteredLabel("Bienvenido"));
-
-        this.add(createCenteredLabel("Usuario: "));
-        userField.setMaximumSize(DIMENSION);
-        this.add(userField);
-
-        this.add(createCenteredLabel("Contraseña: "));
-        passwordField.setMaximumSize(DIMENSION);
-        this.add(passwordField);
-
+        this.setBorder(border);
+        bienvenida.setHorizontalAlignment(SwingConstants.CENTER);
+        this.add(bienvenida);
+        this.add(etiquetaUsuario);
+        campoUsuario.setMaximumSize(DIMENSION);
+        this.add(campoUsuario);
+        this.add(etiquetaPassword);
+        campoPassword.setMaximumSize(DIMENSION);
+        this.add(campoPassword);
         this.add(ESPACIO);
-        this.add(createCenteredButton("Enviar", new AccionLogin(this,userField,passwordField)));
+        this.add(crearBoton("Enviar",CENTER_ALIGNMENT, new AccionLogin(this, campoUsuario, campoPassword)));
+    }
+
+    private JTextField crearCampoDeTexto(){
+        return crearCampoDeTexto(CENTER_ALIGNMENT);
+    }
+
+    private JLabel crearEtiqueta(String texto) {
+        return crearEtiqueta(texto, CENTER_ALIGNMENT);
     }
 
 }

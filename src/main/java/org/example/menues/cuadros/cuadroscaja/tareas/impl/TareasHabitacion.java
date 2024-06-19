@@ -1,21 +1,21 @@
-package org.example.menues.cuadros.tareas.impl;
+package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
 import org.example.menues.cuadros.JPanelCustom;
-import org.example.menues.cuadros.tareas.Renderizable;
+import org.example.menues.cuadros.cuadroscaja.CuadroBotonesZocalo;
+import org.example.menues.cuadros.cuadroscaja.CuadroCajaCustom;
+import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.TipoDeHabitacion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.gestor.impl.GestorHabitaciones;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 
-public class TareasHabitacion extends JPanelCustom implements Renderizable<Cliente> {
+
+public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
     private final JLabel numeroDeHabitacion = new JLabel("Numero de habitacion: ");
     private JTextField campoNumeroHabitacion = new JTextField();
     private JLabel tipoDeHabitacion = new JLabel("Tipo de Habitacion: ");
@@ -27,7 +27,6 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
     private boolean disponible;
     private Habitacion habitacion;
     private Tarea tarea;
-    private final Dimension DIMENSION = new Dimension(300, 30);
 
     public TareasHabitacion(Tarea tarea) {
         super();
@@ -128,22 +127,23 @@ public class TareasHabitacion extends JPanelCustom implements Renderizable<Clien
     public void panelListar() {
         this.setBorder(new TitledBorder("Listar Habitaciones"));
 
-        String listadoHabitaciones = Sistema.getInstance().listarHabitaciones();
+        JPanel panelDeHabitaciones = new JPanel();
+        List<Habitacion> habitaciones = Sistema.getInstance().listarHabitaciones();
+        habitaciones.forEach(habitacion -> {
+            JPanel panelDeHabitacion = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            JLabel numeroHabitacion = new JLabel("Numero de habitacion: " + habitacion.getNumeroDeHabitacion());
+            JLabel tipoDeHabitacion = new JLabel("Tipo de Habitacion: " + habitacion.getTipoDeHabitacion());
+            panelDeHabitacion.add(numeroHabitacion);
+            panelDeHabitacion.add(tipoDeHabitacion);
+            panelDeHabitacion.setVisible(true);
+            panelDeHabitaciones.add(panelDeHabitacion);
+        });
+        JScrollPane contenedorDeLista = new JScrollPane(panelDeHabitaciones);
 
-        JTextArea resultadoArea = new JTextArea(listadoHabitaciones);
-        resultadoArea.setEditable(false);
 
-        JScrollPane scrollPane = new JScrollPane(resultadoArea);
-        scrollPane.setPreferredSize(DIMENSION);
-
-        this.add(scrollPane);
-
-        JPanel botones = new JPanel();
+        JPanel zocalo = new CuadroBotonesZocalo();
         JButton cancelar = new JButton("Cancelar");
-        botones.add(cancelar);
-        this.add(dimensionarObjeto(botones));
-        botones.setVisible(true);
-
+        zocalo.add(cancelar);
     }
 
     @Override

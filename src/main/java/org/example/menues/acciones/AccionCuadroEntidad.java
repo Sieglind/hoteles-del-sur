@@ -12,6 +12,6 @@ public class AccionCuadroEntidad implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         JButton button = (JButton) event.getSource();
-        VentanaPrincipal.cambiarCuadroEnVentanaPrincipal(new CuadroDeTareas(button.getName()));
+        VentanaPrincipal.cambiarCuadro(new CuadroDeTareas(button.getName()));
     }
 }

@@ -8,6 +8,8 @@ import java.io.File;
 
 public class JPanelCustom extends JPanel {
 
+    protected static final Component ESPACIO = Box.createRigidArea(new Dimension(0,10));
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
