@@ -81,7 +81,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelListar() {
-        this.setBorder(BorderFactory.createTitledBorder("Listar Cliente"));
+        this.setBorder(BorderFactory.createTitledBorder("Listar Clientes"));
         List<Cliente> habitaciones = Sistema.getInstance().listarClientes();
 
         JPanel panelClientes = new JPanel();
