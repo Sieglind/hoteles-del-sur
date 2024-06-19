@@ -27,8 +27,8 @@ public class Sistema {
         this.hotel = hotel;
         this.gestorClientes = new GestorClientes().conClientes(UtilidadesCSV.importarClientes());
         this.gestorEmpleados = new GestorEmpleados().conEmpleados(UtilidadesCSV.importarEmpleados());
-        this.gestorHabitaciones = new GestorHabitaciones();
-        this.gestorDeServicios = new GestorDeServicios();
+        this.gestorHabitaciones = new GestorHabitaciones().conHabitacion(UtilidadesCSV.importarHabitaciones());
+        this.gestorDeServicios = new GestorDeServicios().conServicios(UtilidadesCSV.importarServicios());
         this.gestorReservas = new GestorReservas();
     }
 

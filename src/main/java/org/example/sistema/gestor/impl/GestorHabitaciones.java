@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GestorHabitaciones implements IGestor <String,Habitacion>{
     private final Map<String,Habitacion> listaHabitaciones;
 
+    private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
     public GestorHabitaciones() {
         this.listaHabitaciones = new HashMap<>();
@@ -67,6 +70,16 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
         return habitacion.getNumeroDeHabitacion();
     }
 
+    public GestorHabitaciones conHabitacion(List<Habitacion> habitaciones) {
+        habitaciones.forEach(habitacion -> {
+            try {
+                crear(habitacion);
+            } catch (ObjetoYaExisteExcepcion excepcion) {
+                LOG.log(Level.WARNING,excepcion.getMessage());
+            }
+        });
+        return this;
+    }
 
 
 }
