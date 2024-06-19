@@ -9,23 +9,19 @@ import org.example.menues.enums.Tarea;
 public class FabricaPanelTareas {
 
     public static JPanelCustom obtenerPanelTarea(Entidad entidad, Tarea tarea) {
-        switch (entidad) {
-            case CLIENTES:
-                return new TareasCliente(tarea);
-            case EMPLEADOS:
+        return switch (entidad) {
+            case CLIENTES -> new TareasCliente(tarea);
+            case EMPLEADOS ->
                 //TODO Retornar panel empleados
-                return null;
-            case RESERVAS:
+                    null;
+            case RESERVAS ->
                 //TODO Retornar panel reservas
-                return null;
-            case HABITACIONES:
-                //TODO Retornar panel habitaciones
-                return new TareasHabitacion(tarea);
-            case ACTIVIDADES:
+                    null;
+            case HABITACIONES -> new TareasHabitacion(tarea);
+            case ACTIVIDADES ->
                 //TODO Retornar panel actividades
-                return null;
-        }
-        return null;
+                    null;
+        };
     }
 
 }

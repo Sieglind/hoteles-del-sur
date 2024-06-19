@@ -16,6 +16,6 @@ public class AccionCuadroTareas implements ActionListener {
         JButton button = (JButton) event.getSource();
         Entidad entidad = Entidad.valueOf(button.getName());
         Tarea tarea = Tarea.valueOf(button.getText());
-        VentanaPrincipal.cambiarCuadroEnVentanaPrincipal(FabricaPanelTareas.obtenerPanelTarea(entidad,tarea));
+        VentanaPrincipal.cambiarCuadro(FabricaPanelTareas.obtenerPanelTarea(entidad,tarea));
     }
 }
