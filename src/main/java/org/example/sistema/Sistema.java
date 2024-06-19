@@ -1,6 +1,7 @@
 package org.example.sistema;
 
 import org.example.sistema.entidades.Habitacion;
+import org.example.sistema.entidades.Servicio;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
@@ -50,6 +51,10 @@ public class Sistema {
 
     public List<Cliente> listarClientes() {
         return this.gestorClientes.buscarTodos();
+    }
+
+    public List<Servicio> listarServicios(){
+        return this.gestorDeServicios.buscarTodos();
     }
 
 }

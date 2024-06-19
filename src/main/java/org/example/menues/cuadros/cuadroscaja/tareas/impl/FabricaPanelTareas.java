@@ -16,6 +16,7 @@ public class FabricaPanelTareas {
                 //TODO Retornar panel reservas
                     null;
             case HABITACIONES -> new TareasHabitacion(tarea);
+            case SERVICIOS -> new TareasServicio(tarea);
             case ACTIVIDADES ->
                 //TODO Retornar panel actividades
                     null;
