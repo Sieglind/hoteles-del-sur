@@ -1,6 +1,7 @@
 package org.example.menues.acciones;
 
 import org.example.menues.VentanaPrincipal;
+import org.example.menues.cuadros.cuadrosflow.CuadroDeEntidades;
 import org.example.menues.cuadros.cuadrosflow.CuadroDeTareas;
 
 import java.awt.event.ActionEvent;
@@ -8,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class AccionVolver implements ActionListener {
 
-    private final String nombreDeEntidad;
+    private String nombreDeEntidad;
 
     public AccionVolver(String nombreDeEntidad) {
         this.nombreDeEntidad = nombreDeEntidad;
@@ -16,6 +17,10 @@ public class AccionVolver implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        VentanaPrincipal.cambiarCuadro(new CuadroDeTareas(nombreDeEntidad));
+        if (nombreDeEntidad == null) {
+            VentanaPrincipal.cambiarCuadro(new CuadroDeEntidades());
+        } else {
+            VentanaPrincipal.cambiarCuadro(new CuadroDeTareas(nombreDeEntidad));
+        }
     }
 }
