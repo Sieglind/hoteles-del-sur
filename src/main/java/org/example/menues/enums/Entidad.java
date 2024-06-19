@@ -5,6 +5,7 @@ public enum Entidad {
     EMPLEADOS("Empleado"),
     RESERVAS("Reserva"),
     HABITACIONES("Habitacion"),
+    SERVICIOS("Servicios"),
     ACTIVIDADES("Actividad");
 
     private final String entidad;
@@ -13,7 +14,4 @@ public enum Entidad {
         this.entidad = entidad;
     }
 
-    public String getEntidad() {
-        return entidad;
-    }
 }
