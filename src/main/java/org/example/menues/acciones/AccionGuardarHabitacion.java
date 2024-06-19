@@ -1,16 +1,17 @@
-package org.example.menues.cuadros.tareas.impl;
+package org.example.menues.acciones;
 
+import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BotonGuardarHabitacion implements ActionListener {
+public class AccionGuardarHabitacion implements ActionListener {
 
     private Habitacion habitacion;
 
-    public BotonGuardarHabitacion(TareasHabitacion padre) {
+    public AccionGuardarHabitacion(TareasHabitacion padre) {
         this.habitacion = padre.obtenerNuevaHabitacion();
     }
 

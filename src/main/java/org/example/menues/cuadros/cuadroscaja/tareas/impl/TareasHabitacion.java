@@ -1,21 +1,17 @@
-package org.example.menues.cuadros.tareas.impl;
+package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
 import org.example.menues.cuadros.JPanelCustom;
-import org.example.menues.cuadros.tareas.Renderizable;
+import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.TipoDeHabitacion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.gestor.impl.GestorHabitaciones;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.ArrayList;
 
-public class TareasHabitacion extends JPanelCustom implements Renderizable<Cliente> {
+public class TareasHabitacion extends JPanelCustom implements Tareas {
     private final JLabel numeroDeHabitacion = new JLabel("Numero de habitacion: ");
     private JTextField campoNumeroHabitacion = new JTextField();
     private JLabel tipoDeHabitacion = new JLabel("Tipo de Habitacion: ");

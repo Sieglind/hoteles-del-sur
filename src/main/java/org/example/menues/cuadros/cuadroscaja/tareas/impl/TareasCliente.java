@@ -1,19 +1,18 @@
-package org.example.menues.cuadros.tareas.impl;
+package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.cuadros.cuadroscaja.CuadroBotonesZocalo;
 import org.example.menues.cuadros.cuadroscaja.CuadroCajaCustom;
-import org.example.menues.cuadros.tareas.Renderizable;
+import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
-import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.Segmento;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TareasCliente extends CuadroCajaCustom implements Renderizable<Cliente> {
+public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     private final JLabel ETIQUETA_DNI = crearEtiqueta("DNI:");
     private final JTextField CAMPO_DNI = crearCampoDeTexto();
@@ -102,7 +101,6 @@ public class TareasCliente extends CuadroCajaCustom implements Renderizable<Clie
         this.add(CAMPO_DNI);
 
         JPanel zocalo = new CuadroBotonesZocalo();
-        zocalo.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton buscar = new JButton("Buscar");
         zocalo.add(buscar);
 

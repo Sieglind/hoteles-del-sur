@@ -1,8 +1,6 @@
-package org.example.menues.cuadros.tareas;
+package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
 import org.example.menues.cuadros.JPanelCustom;
-import org.example.menues.cuadros.tareas.impl.TareasCliente;
-import org.example.menues.cuadros.tareas.impl.TareasHabitacion;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 

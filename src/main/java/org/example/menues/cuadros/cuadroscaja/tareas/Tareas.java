@@ -1,6 +1,6 @@
-package org.example.menues.cuadros.tareas;
+package org.example.menues.cuadros.cuadroscaja.tareas;
 
-public interface Renderizable<E> {
+public interface Tareas {
     void panelCrear();
     void panelBuscar();
     void panelListar();
