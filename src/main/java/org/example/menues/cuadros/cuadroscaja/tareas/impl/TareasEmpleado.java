@@ -163,4 +163,8 @@ public class TareasEmpleado extends CuadroCajaCustom implements Tareas {
     private JTextField crearCampoDeTexto(){
         return crearCampoDeTexto(LEFT_ALIGNMENT);
     }
+
+    public Empleado obtenerNuevoEmpleado(){
+        return new Empleado (CAMPO_DNI.getText(),CAMPO_NOMBRE.getText(), CAMPO_APELLIDO.getText(), Cargo.valueOf(LISTA_CARGO.getSelectedItem().toString()));
+    }
 }
