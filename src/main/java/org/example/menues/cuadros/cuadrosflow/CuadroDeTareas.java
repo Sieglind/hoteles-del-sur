@@ -5,10 +5,12 @@ import org.example.menues.acciones.AccionVolver;
 import org.example.menues.enums.Tarea;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 public class CuadroDeTareas extends CuadroFlowCustom {
 
     public CuadroDeTareas(String nombreDeEntidad) {
+        this.setBorder(new TitledBorder(nombreDeEntidad.toUpperCase()));
         cargarBotones(nombreDeEntidad);
     }
 
