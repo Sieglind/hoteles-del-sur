@@ -29,4 +29,6 @@ public class PanelDeEntradas extends CuadroCajaCustom {
     public String getCampoDni() {
         return CAMPO_DNI.getText();
     }
+
+
 }

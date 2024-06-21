@@ -1,5 +1,6 @@
 package org.example.menues.cuadros.cuadroscaja;
 
+import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.enums.TipoDeHabitacion;
 
@@ -14,30 +15,30 @@ public class PanelHabitacion extends CuadroCajaCustom {
     private final JTextField CAMPO_NUMERO_HABITACION = crearCampoDeTexto();
     private final JLabel ETIQUETA_TIPO_HABITACION = crearEtiqueta("Tipo de Habitacion: ");
     private final JComboBox<TipoDeHabitacion> CAMPO_TIPO_HABITACION = new JComboBox<>(TipoDeHabitacion.values());
+    //private final JLabel disponible = crearEtiqueta("Disponible: ");
     private final JCheckBox DISPONIBILIDAD = new JCheckBox("Disponible");
 
     public PanelHabitacion(boolean editable) {
-        this.setVisible(editable);
-        dimensionarCompomente(CAMPO_TIPO_HABITACION, CENTER_ALIGNMENT);
+        this.setBorder(new TitledBorder("Habitacion"));
         this.add(ETIQUETA_NUMERO_HABITACION);
         this.add(CAMPO_NUMERO_HABITACION);
         this.add(ETIQUETA_TIPO_HABITACION);
+        dimensionarCompomente(CAMPO_TIPO_HABITACION,CENTER_ALIGNMENT);
         this.add(CAMPO_TIPO_HABITACION);
-        this.add(DISPONIBILIDAD);
-        if (!editable) {
+
+        if(!editable){
             this.CAMPO_NUMERO_HABITACION.setEnabled(false);
             this.CAMPO_NUMERO_HABITACION.setDisabledTextColor(Color.BLACK);
             this.CAMPO_TIPO_HABITACION.setEnabled(false);
+            this.CAMPO_TIPO_HABITACION.setSelectedItem(-1);
             this.DISPONIBILIDAD.setEnabled(false);
+            this.setVisible(false);
         }
-        this.add(this.CAMPO_NUMERO_HABITACION);
-        this.add(this.CAMPO_TIPO_HABITACION);
     }
 
     @Override
     protected void paintComponent(Graphics fondo) {
-        this.setBackground(Color.WHITE);
-        this.setOpaque(true);
+
     }
 
     private JLabel crearEtiqueta(String texto) {
@@ -46,6 +47,14 @@ public class PanelHabitacion extends CuadroCajaCustom {
 
     private JTextField crearCampoDeTexto() {
         return crearCampoDeTexto(CENTER_ALIGNMENT);
+    }
+
+    public Habitacion obtenerHabitacion(){
+        Border border = new LineBorder(Color.BLACK,3);
+        this.setBorder(new TitledBorder(border,"Resultados"));
+
+        return new Habitacion(CAMPO_NUMERO_HABITACION.getText(), (TipoDeHabitacion) CAMPO_TIPO_HABITACION.getSelectedItem());
+
     }
 
     public void fillValues(Habitacion habitacion) {
@@ -57,5 +66,12 @@ public class PanelHabitacion extends CuadroCajaCustom {
         this.setVisible(true);
         this.revalidate();
         this.repaint();
+    }
+
+    public void eliminarCampos(){
+        this.CAMPO_NUMERO_HABITACION.setText("");
+        this.CAMPO_TIPO_HABITACION.setSelectedItem(-1);
+        this.DISPONIBILIDAD.setSelected(false);
+        this.setVisible(false);
     }
 }

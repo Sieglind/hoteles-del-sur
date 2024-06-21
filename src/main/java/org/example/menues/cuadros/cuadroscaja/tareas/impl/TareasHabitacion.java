@@ -1,18 +1,21 @@
 package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
+import org.example.menues.acciones.habitacion.AccionBuscarHabitacion;
 import org.example.menues.acciones.AccionVolver;
+import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
+import org.example.menues.acciones.habitacion.AccionEliminarHabitacion;
 import org.example.menues.cuadros.cuadroscaja.*;
+import org.example.menues.cuadros.cuadroscaja.PanelEntradaHabitacion;
 import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.enums.TipoDeHabitacion;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
@@ -21,7 +24,7 @@ public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.HABITACIONES.name()));
 
-    private PanelDeEntradas panelDeEntradas;
+    private PanelEntradaHabitacion panelDeEntradas;
     private PanelHabitacion panelHabitacion;
     private PanelBotones panelBotones;
 
@@ -45,23 +48,20 @@ public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelCrear() {
-        this.setBorder(new TitledBorder("Crear Habitación"));
-
         this.panelDeEntradas = crearPanelDeEntradas(false);
         this.panelHabitacion = crearPanelHabitacion(true);
         this.panelBotones = crearPanelBotones(Tarea.CREAR);
-
+        panelBotones.getBotonGuardar().addActionListener(new AccionCrearHabitacion(this,panelDeEntradas,panelHabitacion) );
     }
 
 
     @Override
     public void panelBuscar() {
         this.setBorder(new TitledBorder("Buscar Habitacion"));
-
         this.panelDeEntradas = crearPanelDeEntradas(true);
-        this.panelHabitacion = crearPanelHabitacion(true);
-        this.panelBotones = crearPanelBotones(Tarea.CREAR);
-
+        this.panelHabitacion = crearPanelHabitacion(false);
+        this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
+        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarHabitacion(this,panelDeEntradas,panelHabitacion));
     }
 
     @Override
@@ -87,11 +87,11 @@ public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
 
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
-
+        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarHabitacion(this,panelDeEntradas));
     }
 
-   private PanelDeEntradas crearPanelDeEntradas(boolean editable){
-        PanelDeEntradas panelDeEntrada = new PanelDeEntradas(editable);
+   private PanelEntradaHabitacion crearPanelDeEntradas(boolean editable){
+        PanelEntradaHabitacion panelDeEntrada = new PanelEntradaHabitacion(editable);
         this.add(panelDeEntrada,crearConfiguracion(0.1,0));
         return panelDeEntrada;
    }
@@ -120,5 +120,7 @@ public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
         configuracion.fill = GridBagConstraints.BOTH;
         return configuracion;
     }
+
+
 
 }
