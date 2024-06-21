@@ -7,6 +7,7 @@ import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
@@ -68,5 +69,17 @@ public class Sistema {
 
     public Cliente buscarCLiente(String campoDni) throws ObjectoNoEncontradoExcepcion {
         return gestorClientes.buscar(campoDni);
+    }
+
+    public Habitacion buscarHabitacion (String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
+        return gestorHabitaciones.buscar(numeroHabitacion);
+    }
+
+    public void crearHabitacion(Habitacion valor) throws ObjetoYaExisteExcepcion {
+        gestorHabitaciones.crear(valor);
+    }
+
+    public void eliminarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
+        gestorHabitaciones.eliminar(numeroHabitacion);
     }
 }
