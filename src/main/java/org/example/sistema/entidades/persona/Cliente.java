@@ -21,6 +21,7 @@ public class Cliente extends Persona{
 
     @Override
     public String toString() {
-        return super.toString() + " | Segmento: " + this.segmento;
+        return super.toString() +
+                "\nSegmento: " + segmento;
     }
 }
