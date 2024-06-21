@@ -15,7 +15,7 @@ import java.util.Vector;
 
 public class TareasEmpleado extends CuadroCajaCustom implements Tareas {
 
-    private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.CLIENTES.name()));
+    private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.EMPLEADOS.name()));
 
     private PanelDeEntradas panelDeEntradas;
     private PanelEmpleado panelEmpleado;
