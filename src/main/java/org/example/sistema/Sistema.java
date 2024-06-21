@@ -66,7 +66,4 @@ public class Sistema {
         return this.gestorDeServicios.buscarTodos();
     }
 
-    public Cliente buscarCLiente(String campoDni) throws ObjectoNoEncontradoExcepcion {
-        return gestorClientes.buscar(campoDni);
-    }
 }
