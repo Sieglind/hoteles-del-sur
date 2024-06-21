@@ -2,10 +2,9 @@ package org.example.sistema.excepciones;
 
 public class ObjectoNoEncontradoExcepcion extends Exception{
 
-    private final String parametro;
+    private final static String MENSAJE_NO_ENCONTRADO = "No hubo resultados para: ";
 
     public ObjectoNoEncontradoExcepcion(String parametro){
-        super();
-        this.parametro = parametro;
+        super(MENSAJE_NO_ENCONTRADO + parametro);
     }
 }

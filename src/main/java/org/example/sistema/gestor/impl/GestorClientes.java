@@ -36,7 +36,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
     public Cliente buscar(String key) throws ObjectoNoEncontradoExcepcion {
         Cliente cliente = listaClientes.get(key);
         if (cliente == null) {
-            throw new ObjectoNoEncontradoExcepcion("Cliente con ID " + key + " no encontrado.");
+            throw new ObjectoNoEncontradoExcepcion(key);
         }
         return cliente;
     }
@@ -51,7 +51,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
     @Override
     public Cliente actualizar(String key, Cliente cliente) throws ObjectoNoEncontradoExcepcion {
         if (!listaClientes.containsKey(key)) {
-            throw new ObjectoNoEncontradoExcepcion("Cliente con DNI " + key + " no encontrado.");
+            throw new ObjectoNoEncontradoExcepcion(key);
         }
         listaClientes.put(key, cliente);
         return cliente;
@@ -61,7 +61,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
     @Override
     public boolean eliminar(String key) throws ObjectoNoEncontradoExcepcion {
         if (!listaClientes.containsKey(key)) {
-            throw new ObjectoNoEncontradoExcepcion("Cliente con DNI " + key + " no encontrado.");
+            throw new ObjectoNoEncontradoExcepcion(key);
         }
         listaClientes.remove(key);
         return true;
