@@ -71,6 +71,10 @@ public class Sistema {
         return gestorClientes.buscar(campoDni);
     }
 
+    public Servicio buscarServicio(Integer clave) throws ObjectoNoEncontradoExcepcion {
+        return gestorDeServicios.buscar(clave);
+    }
+
     public String crearReserva(Reserva reserva) throws ObjetoYaExisteExcepcion{
         return gestorReservas.crear(reserva);
     }
@@ -93,5 +97,13 @@ public class Sistema {
 
     public void eliminarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
         gestorHabitaciones.eliminar(numeroHabitacion);
+    }
+
+    public void crearCliente(Cliente cliente) throws ObjetoYaExisteExcepcion {
+        gestorClientes.crear(cliente);
+    }
+
+    public void borrarCliente(String campoDni) throws ObjectoNoEncontradoExcepcion {
+        gestorClientes.eliminar(campoDni);
     }
 }

@@ -2,7 +2,6 @@ package org.example.menues.acciones.cliente;
 
 import org.example.menues.cuadros.cuadroscaja.PanelCliente;
 import org.example.menues.cuadros.cuadroscaja.PanelDeEntradas;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasCliente;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
@@ -13,12 +12,10 @@ import java.awt.event.ActionListener;
 
 public class AccionBuscarCliente implements ActionListener {
 
-    TareasCliente panelDeTareas;
     PanelDeEntradas panelDeEntradas;
     PanelCliente panelCliente;
 
-    public AccionBuscarCliente(TareasCliente panelDeTareas, PanelDeEntradas panelDeEntradas, PanelCliente panelCliente) {
-        this.panelDeTareas = panelDeTareas;
+    public AccionBuscarCliente(PanelDeEntradas panelDeEntradas, PanelCliente panelCliente) {
         this.panelDeEntradas = panelDeEntradas;
         this.panelCliente = panelCliente;
     }
@@ -28,8 +25,10 @@ public class AccionBuscarCliente implements ActionListener {
         try {
             Cliente cliente = Sistema.getInstance().buscarCLiente(panelDeEntradas.getCampoDni());
             this.panelCliente.fillValues(cliente);
+            panelCliente.getParent().revalidate();
+            panelCliente.getParent().repaint();
         } catch (ObjectoNoEncontradoExcepcion excepcion) {
-            JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
         }
     }
 }
