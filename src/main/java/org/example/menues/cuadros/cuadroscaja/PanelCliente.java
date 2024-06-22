@@ -22,14 +22,14 @@ public class PanelCliente extends CuadroCajaCustom {
 
     public PanelCliente(boolean editable) {
         this.setVisible(editable);
-        dimensionarCompomente(LISTA_SEGMENTO,CENTER_ALIGNMENT);
+        dimensionarCompomente(LISTA_SEGMENTO, CENTER_ALIGNMENT);
         this.add(this.ETIQUETA_DNI);
         this.add(this.CAMPO_DNI);
         this.add(this.EIQUETA_NOMBRE);
         this.add(this.CAMPO_NOMBRE);
         this.add(this.ETIQUETA_APELLIDO);
         this.add(this.CAMPO_APELLIDO);
-        if(!editable){
+        if (!editable) {
             this.CAMPO_DNI.setEnabled(false);
             this.CAMPO_DNI.setDisabledTextColor(Color.BLACK);
             this.CAMPO_NOMBRE.setEnabled(false);
@@ -45,21 +45,19 @@ public class PanelCliente extends CuadroCajaCustom {
 
     @Override
     protected void paintComponent(Graphics fondo) {
-        this.setBackground(Color.WHITE);
-        this.setOpaque(true);
     }
 
-    private JLabel crearEtiqueta(String texto){
-        return crearEtiqueta(texto,Component.CENTER_ALIGNMENT);
+    private JLabel crearEtiqueta(String texto) {
+        return crearEtiqueta(texto, Component.CENTER_ALIGNMENT);
     }
 
-    private JTextField crearCampoDeTexto(){
+    private JTextField crearCampoDeTexto() {
         return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
     public void fillValues(Cliente cliente) {
-        Border border = new LineBorder(Color.BLACK,3);
-        this.setBorder(new TitledBorder(border,"Resultados"));
+        Border border = new LineBorder(Color.BLACK, 3);
+        this.setBorder(new TitledBorder(border, "Resultados"));
         this.CAMPO_DNI.setText(cliente.getDni());
         this.CAMPO_NOMBRE.setText(cliente.getNombre());
         this.CAMPO_APELLIDO.setText(cliente.getApellido());
@@ -67,5 +65,13 @@ public class PanelCliente extends CuadroCajaCustom {
         this.setVisible(true);
         this.revalidate();
         this.repaint();
+    }
+
+    public Cliente obtenerCliente() {
+        return new Cliente(
+                CAMPO_NOMBRE.getText(),
+                CAMPO_APELLIDO.getText(),
+                CAMPO_DNI.getText(),
+                (Segmento) LISTA_SEGMENTO.getSelectedItem());
     }
 }

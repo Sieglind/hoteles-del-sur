@@ -1,7 +1,9 @@
 package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
 import org.example.menues.acciones.AccionVolver;
+import org.example.menues.acciones.cliente.AccionBorraCliente;
 import org.example.menues.acciones.cliente.AccionBuscarCliente;
+import org.example.menues.acciones.cliente.AccionCrearCliente;
 import org.example.menues.cuadros.cuadroscaja.*;
 import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
@@ -42,19 +44,20 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
 
     @Override
     public void panelCrear() {
-        this.setBorder(BorderFactory.createTitledBorder("Crear Cliente"));
-        this.panelDeEntradas = crearPanelDeEntradas(false);
-        this.panelCliente = crearPanelCliente(true);
-        this.panelBotones = crearPanelBotones(Tarea.CREAR);
+        setBorder(BorderFactory.createTitledBorder("Crear Cliente"));
+        panelDeEntradas = crearPanelDeEntradas(false);
+        panelCliente = crearPanelCliente(true);
+        panelBotones = crearPanelBotones(Tarea.CREAR);
+        panelBotones.getBotonGuardar().addActionListener(new AccionCrearCliente(panelCliente));
     }
 
     @Override
     public void panelBuscar() {
         this.setBorder(BorderFactory.createTitledBorder("Buscar Cliente"));
-        this.panelDeEntradas = crearPanelDeEntradas(true);
-        this.panelCliente = crearPanelCliente(false);
-        this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarCliente(this,panelDeEntradas,panelCliente));
+        panelDeEntradas = crearPanelDeEntradas(true);
+        panelCliente = crearPanelCliente(false);
+        panelBotones = crearPanelBotones(Tarea.BUSCAR);
+        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarCliente(panelDeEntradas,panelCliente));
     }
 
     @Override
@@ -62,23 +65,24 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
         this.setBorder(BorderFactory.createTitledBorder("Listar Clientes"));
         List<Cliente> clientes = Sistema.getInstance().listarClientes();
         JList<Cliente> listaClientes = new JList<>(new Vector<>(clientes));
-        this.add(new JScrollPane(listaClientes));
-        this.panelBotones = crearPanelBotones(Tarea.LISTAR);
+        add(new JScrollPane(listaClientes));
+        panelBotones = crearPanelBotones(Tarea.LISTAR);
     }
 
     @Override
     public void panelActualizar() {
-        this.setBorder(BorderFactory.createTitledBorder("Actualizar Cliente"));
-        this.panelDeEntradas = crearPanelDeEntradas(true);
-        this.panelBotones= crearPanelBotones(Tarea.ACTUALIZAR);
+        setBorder(BorderFactory.createTitledBorder("Actualizar Cliente"));
+        panelDeEntradas = crearPanelDeEntradas(true);
+        panelBotones= crearPanelBotones(Tarea.ACTUALIZAR);
     }
 
     @Override
     public void panelEliminar() {
         this.setBorder(BorderFactory.createTitledBorder("Eliminar Cliente"));
 
-        this.panelDeEntradas = crearPanelDeEntradas(true);
-        this.panelBotones = crearPanelBotones(Tarea.BORRAR);
+        panelDeEntradas = crearPanelDeEntradas(true);
+        panelBotones = crearPanelBotones(Tarea.BORRAR);
+        panelBotones.getBotonBorrar().addActionListener(new AccionBorraCliente(panelDeEntradas));
     }
 
     private PanelDeEntradas crearPanelDeEntradas(boolean completo) {
