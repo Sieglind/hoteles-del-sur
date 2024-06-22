@@ -1,6 +1,12 @@
 package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
 import org.example.menues.acciones.AccionVolver;
+import org.example.menues.acciones.cliente.AccionBuscarCliente;
+import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
+import org.example.menues.acciones.habitacion.AccionEliminarHabitacion;
+import org.example.menues.acciones.reserva.AccionBuscarReserva;
+import org.example.menues.acciones.reserva.AccionCrearReserva;
+import org.example.menues.acciones.reserva.AccionEliminarReserva;
 import org.example.menues.cuadros.cuadroscaja.*;
 import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
@@ -18,7 +24,7 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.RESERVAS.name()));
 
-    private PanelDeEntradas panelDeEntradasReserva;
+    private PanelEntradasReserva panelDeEntradasReserva;
     private PanelReserva panelReserva;
     private PanelBotones panelBotones;
 
@@ -48,6 +54,7 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
         this.panelDeEntradasReserva = crearPanelDeEntradas(false);
         this.panelReserva = crearPanelReserva(true);
         this.panelBotones = crearPanelBotones(Tarea.CREAR);
+        panelBotones.getBotonGuardar().addActionListener(new AccionCrearReserva(this,panelDeEntradasReserva,panelReserva) );
 
     }
 
@@ -57,6 +64,7 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
         this.panelDeEntradasReserva = crearPanelDeEntradas(true);
         this.panelReserva = crearPanelReserva(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
+        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarReserva(this, panelDeEntradasReserva, panelReserva));
     }
 
     @Override
@@ -83,10 +91,11 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
 
         this.panelDeEntradasReserva = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
+        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarReserva(this,panelDeEntradasReserva));
     }
 
-    private PanelDeEntradas crearPanelDeEntradas(boolean completo) {
-        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo);
+    private PanelEntradasReserva crearPanelDeEntradas(boolean completo) {
+        PanelEntradasReserva panelDeEntradas = new PanelEntradasReserva(completo);
         this.add(panelDeEntradas, crearConfiguracion(0.1, 0));
         return panelDeEntradas;
     }
