@@ -72,6 +72,22 @@ public class Sistema {
         return gestorClientes.buscar(campoDni);
     }
 
+    public Servicio buscarServicio(Integer clave) throws ObjectoNoEncontradoExcepcion {
+        return gestorDeServicios.buscar(clave);
+    }
+
+    public String crearReserva(Reserva reserva) throws ObjetoYaExisteExcepcion{
+        return gestorReservas.crear(reserva);
+    }
+
+    public Reserva buscarReserva (String idReserva)throws ObjectoNoEncontradoExcepcion{
+        return gestorReservas.buscar(idReserva);
+    }
+
+    public void eliminarReserva (String id)throws ObjectoNoEncontradoExcepcion{
+        gestorReservas.eliminar(id);
+    }
+
     public Habitacion buscarHabitacion (String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
         return gestorHabitaciones.buscar(numeroHabitacion);
     }
@@ -100,5 +116,13 @@ public class Sistema {
         }else{
             throw new CampoRequeridoExcepcion(camposNulos.toString());
         }
+    }
+
+    public void crearCliente(Cliente cliente) throws ObjetoYaExisteExcepcion {
+        gestorClientes.crear(cliente);
+    }
+
+    public void borrarCliente(String campoDni) throws ObjectoNoEncontradoExcepcion {
+        gestorClientes.eliminar(campoDni);
     }
 }

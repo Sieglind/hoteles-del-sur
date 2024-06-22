@@ -18,6 +18,8 @@ public class GestorReservas implements IGestor<String, Reserva> {
     public String crear(Reserva reserva) throws ObjetoYaExisteExcepcion {
         if (reservas.containsKey(reserva.getIdReserva())) {
             throw new ObjetoYaExisteExcepcion("Ya existe una reserva con el id: " + reserva.getIdReserva());
+        }else{
+            reservas.put(reserva.getIdReserva(), reserva);
         }
         return reserva.getIdReserva();
     }
