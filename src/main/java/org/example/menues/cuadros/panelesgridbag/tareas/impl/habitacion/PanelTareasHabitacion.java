@@ -5,7 +5,7 @@ import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
 import org.example.menues.acciones.habitacion.AccionEliminarHabitacion;
 import org.example.menues.cuadros.panelesgridbag.*;
-import org.example.menues.cuadros.panelesgridbag.PanelEntradaHabitacion;
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
@@ -23,7 +23,7 @@ public class PanelTareasHabitacion extends PanelCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.HABITACIONES.name()));
 
-    private PanelEntradaHabitacion panelDeEntradas;
+    private PanelDeEntradas panelDeEntradas;
     private PanelHabitacion panelHabitacion;
     private PanelBotones panelBotones;
 
@@ -60,7 +60,7 @@ public class PanelTareasHabitacion extends PanelCustom implements ITareas {
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelHabitacion = crearPanelHabitacion(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarHabitacion(this,panelDeEntradas,panelHabitacion));
+        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarHabitacion(panelDeEntradas,panelHabitacion));
     }
 
     @Override
@@ -86,11 +86,11 @@ public class PanelTareasHabitacion extends PanelCustom implements ITareas {
 
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
-        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarHabitacion(this,panelDeEntradas));
+        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarHabitacion(panelDeEntradas));
     }
 
-   private PanelEntradaHabitacion crearPanelDeEntradas(boolean editable){
-        PanelEntradaHabitacion panelDeEntrada = new PanelEntradaHabitacion(editable);
+   private PanelDeEntradas crearPanelDeEntradas(boolean visible){
+        PanelDeEntradas panelDeEntrada = new PanelDeEntradas(visible,"Nro. de Habitacion");
         this.add(panelDeEntrada,crearConfiguracion(0.1,0));
         return panelDeEntrada;
    }

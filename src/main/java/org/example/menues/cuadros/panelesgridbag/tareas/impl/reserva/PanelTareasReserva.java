@@ -21,7 +21,7 @@ public class PanelTareasReserva extends PanelCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.RESERVAS.name()));
 
-    private PanelEntradasReserva panelDeEntradasReserva;
+    private PanelDeEntradas panelDeEntradas;
     private PanelReserva panelReserva;
     private PanelBotones panelBotones;
 
@@ -48,20 +48,20 @@ public class PanelTareasReserva extends PanelCustom implements ITareas {
     public void panelCrear() {
         this.setBorder(BorderFactory.createTitledBorder("Crear Reserva"));
 
-        this.panelDeEntradasReserva = crearPanelDeEntradas(false);
+        this.panelDeEntradas = crearPanelDeEntradas(false);
         this.panelReserva = crearPanelReserva(true);
         this.panelBotones = crearPanelBotones(Tarea.CREAR);
-        panelBotones.getBotonGuardar().addActionListener(new AccionCrearReserva(this,panelDeEntradasReserva,panelReserva) );
+        panelBotones.getBotonGuardar().addActionListener(new AccionCrearReserva(panelDeEntradas,panelReserva) );
 
     }
 
     @Override
     public void panelBuscar() {
         this.setBorder(BorderFactory.createTitledBorder("Buscar Reserva"));
-        this.panelDeEntradasReserva = crearPanelDeEntradas(true);
+        this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelReserva = crearPanelReserva(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarReserva(this, panelDeEntradasReserva, panelReserva));
+        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarReserva(panelDeEntradas,panelReserva));
     }
 
     @Override
@@ -77,7 +77,7 @@ public class PanelTareasReserva extends PanelCustom implements ITareas {
     public void panelActualizar() {
         this.setBorder(new TitledBorder("Actualizar Reserva"));
 
-        this.panelDeEntradasReserva = crearPanelDeEntradas(true);
+        this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
 
     }
@@ -86,13 +86,13 @@ public class PanelTareasReserva extends PanelCustom implements ITareas {
     public void panelBorrar() {
         this.setBorder(BorderFactory.createTitledBorder("Eliminar Cliente"));
 
-        this.panelDeEntradasReserva = crearPanelDeEntradas(true);
+        this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
-        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarReserva(this,panelDeEntradasReserva));
+        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarReserva(panelDeEntradas));
     }
 
-    private PanelEntradasReserva crearPanelDeEntradas(boolean completo) {
-        PanelEntradasReserva panelDeEntradas = new PanelEntradasReserva(completo);
+    private PanelDeEntradas crearPanelDeEntradas(boolean completo) {
+        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo,"Id de Reserva");
         this.add(panelDeEntradas, crearConfiguracion(0.1, 0));
         return panelDeEntradas;
     }

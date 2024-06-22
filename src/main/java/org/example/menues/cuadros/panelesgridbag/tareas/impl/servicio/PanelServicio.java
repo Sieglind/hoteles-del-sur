@@ -66,7 +66,7 @@ public class PanelServicio extends PanelCustom {
         this.CAMPO_NOMBRE.setText(servicio.getNombre());
         this.CAMPO_DESCRIPCION.setText(servicio.getDescripcion());
         this.CAMPO_PRECIO.setText(String.valueOf(servicio.getPrecio()));
-        this.CAMPO_CLAVE.setText(String.valueOf(servicio.getClave()));
+        this.CAMPO_CLAVE.setText(String.valueOf(servicio.getCodigo()));
         this.setVisible(true);
         this.revalidate();
         this.repaint();

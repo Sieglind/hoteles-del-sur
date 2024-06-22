@@ -86,7 +86,7 @@ public class PanelTareasCliente extends PanelCustom implements ITareas {
     }
 
     private PanelDeEntradas crearPanelDeEntradas(boolean completo) {
-        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo);
+        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo,"DNI");
         this.add(panelDeEntradas, crearConfiguracion(0.1, 0));
         return panelDeEntradas;
     }

@@ -57,7 +57,7 @@ public class PanelHabitacion extends PanelCustom {
 
     }
 
-    public void fillValues(Habitacion habitacion) {
+    public void llenarCampos(Habitacion habitacion) {
         Border border = new LineBorder(Color.BLACK, 3);
         this.setBorder(new TitledBorder(border, "Resultados"));
         this.CAMPO_NUMERO_HABITACION.setText(habitacion.getNumeroDeHabitacion());

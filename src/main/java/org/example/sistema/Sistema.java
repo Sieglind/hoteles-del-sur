@@ -72,7 +72,7 @@ public class Sistema {
         return gestorClientes.buscar(campoDni);
     }
 
-    public Servicio buscarServicio(Integer clave) throws ObjectoNoEncontradoExcepcion {
+    public Servicio buscarServicio(String clave) throws ObjectoNoEncontradoExcepcion {
         return gestorDeServicios.buscar(clave);
     }
 

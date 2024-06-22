@@ -1,8 +1,7 @@
 package org.example.menues.acciones.habitacion;
 
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
-import org.example.menues.cuadros.panelesgridbag.PanelEntradaHabitacion;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelTareasHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
@@ -13,12 +12,10 @@ import java.awt.event.ActionListener;
 
 public class AccionBuscarHabitacion implements ActionListener {
 
-   PanelTareasHabitacion panelDeTareas;
-   PanelEntradaHabitacion panelEntradas;
-   PanelHabitacion panelHabitacion;
+    PanelDeEntradas panelEntradas;
+    PanelHabitacion panelHabitacion;
 
-    public AccionBuscarHabitacion(PanelTareasHabitacion panelDeTareas, PanelEntradaHabitacion panelEntradas, PanelHabitacion panelHabitacion) {
-        this.panelDeTareas = panelDeTareas;
+    public AccionBuscarHabitacion(PanelDeEntradas panelEntradas, PanelHabitacion panelHabitacion) {
         this.panelEntradas = panelEntradas;
         this.panelHabitacion = panelHabitacion;
     }
@@ -26,10 +23,10 @@ public class AccionBuscarHabitacion implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evento) {
         try{
-            Habitacion habitacion = Sistema.getInstance().buscarHabitacion(panelEntradas.getNroHabitacion());
-            this.panelHabitacion.fillValues(habitacion);
+            Habitacion habitacion = Sistema.getInstance().buscarHabitacion(panelEntradas.obtenerCampo());
+            this.panelHabitacion.llenarCampos(habitacion);
         }catch(ObjectoNoEncontradoExcepcion e){
-            JOptionPane.showMessageDialog(panelDeTareas,e.getMessage());
+            JOptionPane.showMessageDialog(panelEntradas.getParent(),e.getMessage());
         }
     }
 

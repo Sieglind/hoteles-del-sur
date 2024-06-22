@@ -5,18 +5,14 @@ import java.awt.*;
 
 public class PanelDeEntradas extends PanelCustom {
 
-    private final JLabel ETIQUETA_DNI = crearEtiqueta("DNI:");
-    private final JTextField CAMPO_DNI = crearCampoDeTexto();
-    private final JLabel ETIQUETA_CLAVE = crearEtiqueta("CLAVE:");
-    private final JTextField CAMPO_CLAVE = crearCampoDeTexto();
+    private final JTextField CAMPO = crearCampoDeTexto();
 
 
-    public PanelDeEntradas(boolean completo) {
+    public PanelDeEntradas(boolean completo, String etiqueta) {
+        JLabel ETIQUETA = crearEtiqueta(etiqueta);
         if (completo){
-            this.add(ETIQUETA_DNI);
-            this.add(CAMPO_DNI);
-            this.add(ETIQUETA_CLAVE);
-            this.add(CAMPO_CLAVE);
+            this.add(ETIQUETA);
+            this.add(CAMPO);
         }
     }
 
@@ -31,14 +27,7 @@ public class PanelDeEntradas extends PanelCustom {
         return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
-    public String getCampoDni() {
-        return CAMPO_DNI.getText();
+    public String obtenerCampo() {
+        return CAMPO.getText();
     }
-
-    public Integer getCampoClave() {
-        return Integer.parseInt(CAMPO_CLAVE.getText());
-    }
-
-
-
 }

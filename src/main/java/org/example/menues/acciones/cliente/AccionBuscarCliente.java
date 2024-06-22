@@ -23,7 +23,7 @@ public class AccionBuscarCliente implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
-            Cliente cliente = Sistema.getInstance().buscarCLiente(panelDeEntradas.getCampoDni());
+            Cliente cliente = Sistema.getInstance().buscarCLiente(panelDeEntradas.obtenerCampo());
             this.panelCliente.fillValues(cliente);
             panelCliente.getParent().revalidate();
             panelCliente.getParent().repaint();

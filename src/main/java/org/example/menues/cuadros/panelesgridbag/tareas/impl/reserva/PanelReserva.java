@@ -75,7 +75,7 @@ public class PanelReserva extends PanelCustom {
         return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
-    public void fillValues(Reserva reserva) {
+    public void rellenarCampos(Reserva reserva) {
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
         this.CAMPO_BUSCAR_CLIENTE.setText(reserva.getCliente().getDni());

@@ -4,16 +4,16 @@ public class Servicio {
     private final String nombre;
     private final String descripcion;
     private float precio;
-    private final Integer clave;
+    private final String codigo;
     private boolean disponible;
 
 
-    public Servicio(String nombre, String descripcion, float precio,Integer clave) {
+    public Servicio(String nombre, String descripcion, float precio,String codigo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.disponible = true;
-        this.clave = clave;
+        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -28,8 +28,8 @@ public class Servicio {
         return precio;
     }
 
-    public Integer getClave(){
-        return clave;
+    public String getCodigo(){
+        return codigo;
     }
 
     public void setPrecio(float precio) {
@@ -47,7 +47,7 @@ public class Servicio {
     @Override
     public String toString() {
         return "\nServicio" +
-                "/Clave: " + clave +
+                "/Clave: " + codigo +
                 "/Nombre: " + nombre +
                 "/Descripcion: " + descripcion +
                 "/Precio: " + precio;

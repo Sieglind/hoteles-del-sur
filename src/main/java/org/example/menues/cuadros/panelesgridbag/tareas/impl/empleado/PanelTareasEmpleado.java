@@ -46,7 +46,7 @@ public class PanelTareasEmpleado extends PanelCustom implements ITareas {
         this.panelDeEntradas = crearPanelDeEntradas(false);
         this.panelEmpleado = crearPanelEmpleado(true);
         this.panelBotones = crearPanelBotones(Tarea.CREAR);
-        this.panelBotones.getBotonGuardar().addActionListener(new AccionCrearNuevoEmpleado(this, panelEmpleado));
+        this.panelBotones.getBotonGuardar().addActionListener(new AccionCrearNuevoEmpleado(panelEmpleado));
     }
 
     @Override
@@ -83,7 +83,7 @@ public class PanelTareasEmpleado extends PanelCustom implements ITareas {
     }
 
     private PanelDeEntradas crearPanelDeEntradas(boolean completo) {
-        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo);
+        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo,"DNI");
         this.add(panelDeEntradas, crearConfiguracion(0.1, 0));
         return panelDeEntradas;
     }

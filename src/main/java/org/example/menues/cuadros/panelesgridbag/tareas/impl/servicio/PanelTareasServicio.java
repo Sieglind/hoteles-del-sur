@@ -60,7 +60,7 @@ public class PanelTareasServicio extends PanelCustom implements ITareas {
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelServicio = crearPanelServicio(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarServicio(this,panelDeEntradas,panelServicio));
+        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarServicio(panelDeEntradas,panelServicio));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class PanelTareasServicio extends PanelCustom implements ITareas {
     }
 
     private PanelDeEntradas crearPanelDeEntradas(boolean completo) {
-        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo);
+        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo,"Codigo");
         this.add(panelDeEntradas,crearConfiguracion(0.1,0));
         return panelDeEntradas;
     }

@@ -19,7 +19,7 @@ public class AccionBorraCliente implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evento) {
         try {
-            String dni = panelDeEntradas.getCampoDni();
+            String dni = panelDeEntradas.obtenerCampo();
             Sistema.getInstance().borrarCliente(dni);
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),"Cliente eliminado correctamente: " + dni);
         } catch (ObjectoNoEncontradoExcepcion ex) {

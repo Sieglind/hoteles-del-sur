@@ -12,11 +12,9 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GestorDeServicios implements IGestor<Integer, Servicio> {
+public class GestorDeServicios implements IGestor<String, Servicio> {
 
-    //private TreeMap<String, Servicio> servicios;
-
-    private TreeMap<Integer, Servicio> servicios;
+    private TreeMap<String, Servicio> servicios;
 
     private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
@@ -26,17 +24,17 @@ public class GestorDeServicios implements IGestor<Integer, Servicio> {
 
     // Crear un Servicio
     @Override
-    public Integer crear(Servicio servicio) throws ObjetoYaExisteExcepcion {
-        if (servicios.containsKey(servicio.getClave())) {
-            throw new ObjetoYaExisteExcepcion("El servicio con clave " + servicio.getClave() + " ya existe.");
+    public String crear(Servicio servicio) throws ObjetoYaExisteExcepcion {
+        if (servicios.containsKey(servicio.getCodigo())) {
+            throw new ObjetoYaExisteExcepcion("El servicio con clave " + servicio.getCodigo() + " ya existe.");
         }
-        servicios.put(servicio.getClave(), servicio);
-        return servicio.getClave();
+        servicios.put(servicio.getCodigo(), servicio);
+        return servicio.getCodigo();
     }
 
     // Buscar un Servicio
     @Override
-    public Servicio buscar(Integer key) throws ObjectoNoEncontradoExcepcion {
+    public Servicio buscar(String key) throws ObjectoNoEncontradoExcepcion {
         Servicio servicio = servicios.get(key);
         if (servicio == null) {
             throw new ObjectoNoEncontradoExcepcion("Servicio con clave " + key + " no encontrado.");
@@ -53,7 +51,7 @@ public class GestorDeServicios implements IGestor<Integer, Servicio> {
 
     // Actualizar los datos de un servicio
     @Override
-    public Servicio actualizar(Integer key, Servicio servicio) throws ObjectoNoEncontradoExcepcion {
+    public Servicio actualizar(String key, Servicio servicio) throws ObjectoNoEncontradoExcepcion {
         if (!servicios.containsKey(key)) {
             throw new ObjectoNoEncontradoExcepcion("Servicio con clave " + key + " no encontrado.");
         }
@@ -64,7 +62,7 @@ public class GestorDeServicios implements IGestor<Integer, Servicio> {
 
     // Eliminar un servicio
     @Override
-    public boolean borrar(Integer key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
         if (!servicios.containsKey(key)) {
                 throw new ObjectoNoEncontradoExcepcion("Servicio con clave " + key +" no encontrado.");
         }
