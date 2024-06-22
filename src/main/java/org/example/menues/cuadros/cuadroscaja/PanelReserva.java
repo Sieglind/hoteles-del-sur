@@ -16,32 +16,41 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 public class PanelReserva extends CuadroCajaCustom{
-    private final JLabel ETIQUETA_BUSCAR_RESERVA = crearEtiqueta("Ingrese el numero de Reserva: ");
+    private final JLabel ETIQUETA_BUSCAR_RESERVA = crearEtiqueta("Numero de Reserva: ");
     private final JTextField CAMPO_BUSCAR_RESERVA = crearCampoDeTexto();
-    private final JLabel ETIQUETA_BUSCAR_CLIENTE = crearEtiqueta("Ingrese el Dni: ");
+    private final JLabel ETIQUETA_BUSCAR_CLIENTE = crearEtiqueta("Dni: ");
     private final JTextField CAMPO_BUSCAR_CLIENTE = crearCampoDeTexto();
-    private final JLabel ETIQUETA_BUSCAR_HABITACION = crearEtiqueta("Ingrese el numero de habitacion: ");
+    private final JLabel ETIQUETA_NOMBRE_CLIENTE = crearEtiqueta("Nombre: ");
+    private final JTextField CAMPO_NOMBRE_CLIENTE = crearCampoDeTexto();
+    private final JLabel ETIQUETA_BUSCAR_HABITACION = crearEtiqueta("Numero de habitacion: ");
     private final JTextField CAMPO_BUSCAR_HABITACION = crearCampoDeTexto();
-    private final JLabel ETIQUETA_FECHA_INICIO = crearEtiqueta("Ingrese la fecha de entrada: ");
+    private final JLabel ETIQUETA_FECHA_INICIO = crearEtiqueta("Check-In: ");
     private final JTextField CAMPO_FECHA_INICIO = crearCampoDeTexto();
-    private final JLabel ETIQUETA_FECHA_FIN = crearEtiqueta("Ingrese la fecha de salida: ");
+    private final JLabel ETIQUETA_FECHA_FIN = crearEtiqueta("Check-Out: ");
     private final JTextField CAMPO_FECHA_FIN = crearCampoDeTexto();
+
 
     public PanelReserva(boolean editable) {
         this.setVisible(editable);
         this.add(this.ETIQUETA_BUSCAR_CLIENTE);
         this.add(this.CAMPO_BUSCAR_CLIENTE);
+        this.add(this.ETIQUETA_NOMBRE_CLIENTE);
+        this.add(this.CAMPO_NOMBRE_CLIENTE);
         this.add(this.ETIQUETA_BUSCAR_HABITACION);
         this.add(this.CAMPO_BUSCAR_HABITACION);
         this.add(this.ETIQUETA_FECHA_INICIO);
         this.add(this.CAMPO_FECHA_INICIO);
         this.add(this.ETIQUETA_FECHA_FIN);
         this.add(this.CAMPO_FECHA_FIN);
+        this.ETIQUETA_NOMBRE_CLIENTE.setVisible(false);
+        this.CAMPO_NOMBRE_CLIENTE.setVisible(false);
         //this.add(this.ETIQUETA_BUSCAR_RESERVA);
       //  this.add(this.CAMPO_BUSCAR_RESERVA);
         if(!editable){
             this.CAMPO_BUSCAR_CLIENTE.setEnabled(false);
             this.CAMPO_BUSCAR_CLIENTE.setDisabledTextColor(Color.BLACK);
+            this.CAMPO_NOMBRE_CLIENTE.setEnabled(false);
+            this.CAMPO_NOMBRE_CLIENTE.setDisabledTextColor(Color.BLACK);
             this.CAMPO_BUSCAR_HABITACION.setEnabled(false);
             this.CAMPO_BUSCAR_HABITACION.setDisabledTextColor(Color.BLACK);
             this.CAMPO_FECHA_INICIO.setEnabled(false);
@@ -71,8 +80,9 @@ public class PanelReserva extends CuadroCajaCustom{
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
         this.CAMPO_BUSCAR_CLIENTE.setText(reserva.getCliente().getDni());
-        this.CAMPO_BUSCAR_CLIENTE.setText(reserva.getCliente().getNombre());
-        this.CAMPO_BUSCAR_CLIENTE.setText(reserva.getCliente().getApellido());
+        this.ETIQUETA_NOMBRE_CLIENTE.setVisible(true);
+        this.CAMPO_NOMBRE_CLIENTE.setText(reserva.getCliente().getNombre());
+        this.CAMPO_NOMBRE_CLIENTE.setVisible(true);
         this.CAMPO_BUSCAR_HABITACION.setText(reserva.getHabitacion().getNumeroDeHabitacion());
         this.CAMPO_BUSCAR_RESERVA.setText(reserva.getIdReserva());
         this.CAMPO_FECHA_INICIO.setText(reserva.getFechaInicioFormateado());

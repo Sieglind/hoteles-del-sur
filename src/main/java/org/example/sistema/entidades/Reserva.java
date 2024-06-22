@@ -82,4 +82,15 @@ public class Reserva {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return
+                "Id : " + idReserva +
+                "||Cliente: " + cliente +
+                "||Habitacion: " + habitacion +
+                "||Check-In: " + fechaInicio +
+                "||Check-Out: " + fechaFin +
+                "||Estado: " + estado;
+    }
 }
