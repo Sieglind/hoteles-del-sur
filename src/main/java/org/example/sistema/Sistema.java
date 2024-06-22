@@ -71,6 +71,14 @@ public class Sistema {
         return gestorClientes.buscar(campoDni);
     }
 
+    public String crearReserva(Reserva reserva) throws ObjetoYaExisteExcepcion{
+        return gestorReservas.crear(reserva);
+    }
+
+    public Reserva buscarReserva (String idReserva)throws ObjectoNoEncontradoExcepcion{
+        return gestorReservas.buscar(idReserva);
+    }
+
     public Habitacion buscarHabitacion (String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
         return gestorHabitaciones.buscar(numeroHabitacion);
     }

@@ -5,20 +5,21 @@ import org.example.sistema.enums.Estado;
 
 import javax.swing.text.DateFormatter;
 import java.text.DateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Reserva {
-    private final String idReserva;
-    private final Cliente cliente;
+    private String idReserva;
+    private Cliente cliente;
     private Habitacion habitacion;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private Estado estado;
 
-    public Reserva(String idReserva, Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin, Estado estado) {
-        this.idReserva = "R" + cliente.getDni();
+    public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin) {
+        this.idReserva = "R" + Instant.now().getNano();
         this.cliente = cliente;
         this.habitacion = habitacion;
         this.fechaInicio = fechaInicio;
@@ -32,6 +33,14 @@ public class Reserva {
 
     public Cliente getCliente() {
         return cliente;
+    }
+
+    public void setIdReserva(String idReserva) {
+        this.idReserva = idReserva;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Habitacion getHabitacion() {

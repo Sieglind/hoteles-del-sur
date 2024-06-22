@@ -1,14 +1,19 @@
 package org.example.menues.cuadros.cuadroscaja;
 
+import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.persona.Cliente;
+import org.example.sistema.enums.TipoDeHabitacion;
+import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.time.Instant;
+import java.time.LocalDate;
 
 public class PanelReserva extends CuadroCajaCustom{
     private final JLabel ETIQUETA_BUSCAR_RESERVA = crearEtiqueta("Ingrese el numero de Reserva: ");
@@ -32,8 +37,8 @@ public class PanelReserva extends CuadroCajaCustom{
         this.add(this.CAMPO_FECHA_INICIO);
         this.add(this.ETIQUETA_FECHA_FIN);
         this.add(this.CAMPO_FECHA_FIN);
-        this.add(ETIQUETA_BUSCAR_RESERVA);
-        this.add(CAMPO_BUSCAR_RESERVA);
+        //this.add(this.ETIQUETA_BUSCAR_RESERVA);
+      //  this.add(this.CAMPO_BUSCAR_RESERVA);
         if(!editable){
             this.CAMPO_BUSCAR_CLIENTE.setEnabled(false);
             this.CAMPO_BUSCAR_CLIENTE.setDisabledTextColor(Color.BLACK);
@@ -50,8 +55,8 @@ public class PanelReserva extends CuadroCajaCustom{
 
     @Override
     protected void paintComponent(Graphics fondo) {
-        this.setBackground(Color.WHITE);
-        this.setOpaque(true);
+//        this.setBackground(Color.WHITE);
+//        this.setOpaque(true);
     }
 
     private JLabel crearEtiqueta(String texto){
@@ -62,13 +67,13 @@ public class PanelReserva extends CuadroCajaCustom{
         return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
-    public void fillValues(Cliente cliente, Habitacion habitacion, Reserva reserva) {
+    public void fillValues(Reserva reserva) {
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
-        this.CAMPO_BUSCAR_CLIENTE.setText(cliente.getDni());
-        this.CAMPO_BUSCAR_CLIENTE.setText(cliente.getNombre());
-        this.CAMPO_BUSCAR_CLIENTE.setText(cliente.getApellido());
-        this.CAMPO_BUSCAR_HABITACION.setText(habitacion.getNumeroDeHabitacion());
+        this.CAMPO_BUSCAR_CLIENTE.setText(reserva.getCliente().getDni());
+        this.CAMPO_BUSCAR_CLIENTE.setText(reserva.getCliente().getNombre());
+        this.CAMPO_BUSCAR_CLIENTE.setText(reserva.getCliente().getApellido());
+        this.CAMPO_BUSCAR_HABITACION.setText(reserva.getHabitacion().getNumeroDeHabitacion());
         this.CAMPO_BUSCAR_RESERVA.setText(reserva.getIdReserva());
         this.CAMPO_FECHA_INICIO.setText(reserva.getFechaInicioFormateado());
         this.CAMPO_FECHA_FIN.setText(reserva.getFechaFinFormateado());
@@ -76,4 +81,27 @@ public class PanelReserva extends CuadroCajaCustom{
         this.revalidate();
         this.repaint();
     }
+    public Reserva crearReserva(){
+        Cliente cliente=null;
+        Habitacion habitacion=null;
+        LocalDate fechaInicio;
+        LocalDate fechaFin;
+        try {
+            cliente = Sistema.getInstance().buscarCLiente(CAMPO_BUSCAR_CLIENTE.getText());
+        }catch (ObjectoNoEncontradoExcepcion e ){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        try {
+          habitacion = Sistema.getInstance().buscarHabitacion(CAMPO_BUSCAR_HABITACION.getText());
+        }catch (ObjectoNoEncontradoExcepcion e ){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+
+        fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());
+        fechaFin = LocalDate.parse(CAMPO_FECHA_FIN.getText());
+
+        Reserva reserva = new Reserva(cliente, habitacion, fechaInicio,fechaFin);
+        return reserva;
+    }
+
 }

@@ -54,7 +54,7 @@ public class TareasCliente extends CuadroCajaCustom implements Tareas {
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelCliente = crearPanelCliente(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarCliente(this,panelDeEntradas,panelCliente));
+        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarCliente(this, panelDeEntradas, panelCliente));
     }
 
     @Override
