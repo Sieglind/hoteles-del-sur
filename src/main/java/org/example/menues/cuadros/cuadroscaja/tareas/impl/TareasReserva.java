@@ -3,8 +3,10 @@ package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.cliente.AccionBuscarCliente;
 import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
+import org.example.menues.acciones.habitacion.AccionEliminarHabitacion;
 import org.example.menues.acciones.reserva.AccionBuscarReserva;
 import org.example.menues.acciones.reserva.AccionCrearReserva;
+import org.example.menues.acciones.reserva.AccionEliminarReserva;
 import org.example.menues.cuadros.cuadroscaja.*;
 import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
@@ -89,6 +91,7 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
 
         this.panelDeEntradasReserva = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
+        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarReserva(this,panelDeEntradasReserva));
     }
 
     private PanelEntradasReserva crearPanelDeEntradas(boolean completo) {

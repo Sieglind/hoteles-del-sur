@@ -79,6 +79,10 @@ public class Sistema {
         return gestorReservas.buscar(idReserva);
     }
 
+    public void eliminarReserva (String id)throws ObjectoNoEncontradoExcepcion{
+        gestorReservas.eliminar(id);
+    }
+
     public Habitacion buscarHabitacion (String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
         return gestorHabitaciones.buscar(numeroHabitacion);
     }
