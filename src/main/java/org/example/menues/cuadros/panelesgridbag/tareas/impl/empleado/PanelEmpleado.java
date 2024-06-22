@@ -10,23 +10,19 @@ import java.awt.*;
 
 public class PanelEmpleado extends PanelCustom {
 
-    private final JLabel ETIQUETA_DNI = crearEtiqueta("DNI:");
     private final JTextField CAMPO_DNI = crearCampoDeTexto();
-    private final JLabel EIQUETA_NOMBRE = crearEtiqueta("Nombre:");
     private final JTextField CAMPO_NOMBRE = crearCampoDeTexto();
-    private final JLabel ETIQUETA_APELLIDO = crearEtiqueta("Apellido:");
     private final JTextField CAMPO_APELLIDO = crearCampoDeTexto();
-    private final JLabel CARGO = crearEtiqueta("Cargo:");
     private final JComboBox<Cargo> LISTA_CARGO = new JComboBox<>(Cargo.values());
 
     public PanelEmpleado(boolean editable) {
         this.setVisible(editable);
         dimensionarCompomente(LISTA_CARGO,CENTER_ALIGNMENT);
-        this.add(this.ETIQUETA_DNI);
+        this.add(crearEtiqueta("DNI:"));
         this.add(this.CAMPO_DNI);
-        this.add(this.EIQUETA_NOMBRE);
+        this.add(crearEtiqueta("Nombre:"));
         this.add(this.CAMPO_NOMBRE);
-        this.add(this.ETIQUETA_APELLIDO);
+        this.add(crearEtiqueta("Apellido:"));
         this.add(this.CAMPO_APELLIDO);
         if(!editable){
             this.CAMPO_DNI.setEnabled(false);
@@ -38,15 +34,12 @@ public class PanelEmpleado extends PanelCustom {
             this.LISTA_CARGO.setEnabled(false);
             this.LISTA_CARGO.setSelectedIndex(-1);
         }
-        this.add(this.CARGO);
+        this.add(crearEtiqueta("Cargo:"));
         this.add(this.LISTA_CARGO);
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {
-        this.setBackground(Color.WHITE);
-        this.setOpaque(true);
-    }
+    protected void paintComponent(Graphics fondo) {}
 
     private JLabel crearEtiqueta(String texto){
         return crearEtiqueta(texto,Component.CENTER_ALIGNMENT);
