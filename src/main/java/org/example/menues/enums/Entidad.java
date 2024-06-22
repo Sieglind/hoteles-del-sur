@@ -5,8 +5,7 @@ public enum Entidad {
     EMPLEADOS("Empleado"),
     RESERVAS("Reserva"),
     HABITACIONES("Habitacion"),
-    SERVICIOS("Servicios"),
-    ACTIVIDADES("Actividad");
+    SERVICIOS("Servicios");
 
     private final String entidad;
 

@@ -18,9 +18,6 @@ public class FabricaPanelTareas {
             case RESERVAS -> new PanelTareasReserva(tarea);
             case HABITACIONES -> new PanelTareasHabitacion(tarea);
             case SERVICIOS -> new PanelTareasServicio(tarea);
-            case ACTIVIDADES ->
-                //TODO Retornar panel actividades
-                    null;
         };
     }
 
