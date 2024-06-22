@@ -21,9 +21,9 @@ public class AccionEliminarHabitacion implements ActionListener {
         try{
             String numeroDeHabitacion = panelDeEntradas.obtenerCampo();
             Sistema.getInstance().eliminarHabitacion(numeroDeHabitacion);
-            JOptionPane.showMessageDialog(null, "Habitacion eliminada con exito " +numeroDeHabitacion);
-        }catch(Exception excecion){
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excecion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Habitacion eliminada con exito " +numeroDeHabitacion);
+        }catch(Exception excepcion){
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
 }

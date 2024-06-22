@@ -20,7 +20,7 @@ public class AccionEliminarReserva implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             Sistema.getInstance().eliminarReserva(panelEntradasReserva.obtenerCampo());
-            JOptionPane.showMessageDialog(null, "Reserva eliminada con exito " +
+            JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), "Reserva eliminada con exito " +
                     panelEntradasReserva.obtenerCampo());
         } catch (ObjectoNoEncontradoExcepcion ex) {
             JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), ex.getMessage());

@@ -69,6 +69,7 @@ public class PanelEmpleado extends PanelCustom {
                 (Cargo) LISTA_CARGO.getSelectedItem());
     }
 
+
     public void habilitarEdicion() {
         this.CAMPO_NOMBRE.setEnabled(true);
         this.CAMPO_APELLIDO.setEnabled(true);
