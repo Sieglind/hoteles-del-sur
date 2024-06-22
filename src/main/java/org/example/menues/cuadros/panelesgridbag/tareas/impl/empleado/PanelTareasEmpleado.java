@@ -1,8 +1,6 @@
 package org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado;
 import org.example.menues.acciones.AccionVolver;
-import org.example.menues.acciones.empleado.AccionBuscarEmpleado;
-import org.example.menues.acciones.empleado.AccionCrearNuevoEmpleado;
-import org.example.menues.acciones.empleado.AccionEliminarEmpleado;
+import org.example.menues.acciones.empleado.*;
 import org.example.menues.cuadros.panelesgridbag.*;
 import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
@@ -56,7 +54,7 @@ public class PanelTareasEmpleado extends PanelCustom implements ITareas {
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelEmpleado = crearPanelEmpleado(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarEmpleado(this,panelDeEntradas,panelEmpleado));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarEmpleado(this,panelDeEntradas,panelEmpleado));
     }
 
     @Override
@@ -71,8 +69,11 @@ public class PanelTareasEmpleado extends PanelCustom implements ITareas {
     @Override
     public void panelActualizar() {
         this.setBorder(BorderFactory.createTitledBorder("Actualizar Empleado"));
-        this.panelDeEntradas = crearPanelDeEntradas(true);
-        this.panelBotones= crearPanelBotones(Tarea.ACTUALIZAR);
+        panelDeEntradas = crearPanelDeEntradas(true);
+        panelEmpleado = crearPanelEmpleado(false);
+        panelBotones= crearPanelBotones(Tarea.ACTUALIZAR);
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizar(panelDeEntradas, panelEmpleado, panelBotones));
+        panelBotones.getBotonActualizar().addActionListener(new AccionActualizarEmpleado(panelEmpleado));
     }
 
     @Override

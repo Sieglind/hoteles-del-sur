@@ -61,7 +61,7 @@ public class PanelTareasReserva extends PanelCustom implements ITareas {
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelReserva = crearPanelReserva(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarReserva(panelDeEntradas,panelReserva));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarReserva(panelDeEntradas,panelReserva));
     }
 
     @Override

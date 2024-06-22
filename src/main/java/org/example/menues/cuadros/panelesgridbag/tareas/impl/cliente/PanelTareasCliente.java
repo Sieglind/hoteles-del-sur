@@ -57,7 +57,7 @@ public class PanelTareasCliente extends PanelCustom implements ITareas {
         panelDeEntradas = crearPanelDeEntradas(true);
         panelCliente = crearPanelCliente(false);
         panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarCliente(panelDeEntradas,panelCliente));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarCliente(panelDeEntradas,panelCliente));
     }
 
     @Override

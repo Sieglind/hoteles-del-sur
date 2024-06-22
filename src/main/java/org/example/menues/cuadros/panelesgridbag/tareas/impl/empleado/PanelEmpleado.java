@@ -49,7 +49,7 @@ public class PanelEmpleado extends PanelCustom {
         return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
-    public void fillValues(Empleado empleado) {
+    public void llenarCampos (Empleado empleado) {
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
         this.CAMPO_DNI.setText(empleado.getDni());
@@ -67,5 +67,12 @@ public class PanelEmpleado extends PanelCustom {
                 CAMPO_APELLIDO.getText(),
                 CAMPO_DNI.getText(),
                 (Cargo) LISTA_CARGO.getSelectedItem());
+    }
+
+
+    public void habilitarEdicion() {
+        this.CAMPO_NOMBRE.setEnabled(true);
+        this.CAMPO_APELLIDO.setEnabled(true);
+        this.LISTA_CARGO.setEnabled(true);
     }
 }

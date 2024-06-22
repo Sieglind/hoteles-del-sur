@@ -98,12 +98,12 @@ public class PanelReserva extends PanelCustom {
         try {
             cliente = Sistema.getInstance().buscarCLiente(CAMPO_BUSCAR_CLIENTE.getText());
         }catch (ObjectoNoEncontradoExcepcion e ){
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            JOptionPane.showMessageDialog(this.getParent(),e.getMessage());
         }
         try {
           habitacion = Sistema.getInstance().buscarHabitacion(CAMPO_BUSCAR_HABITACION.getText());
         }catch (ObjectoNoEncontradoExcepcion e ){
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            JOptionPane.showMessageDialog(this.getParent(),e.getMessage());
         }
 
         fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());

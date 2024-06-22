@@ -20,9 +20,9 @@ public class AccionEliminarEmpleado implements ActionListener {
         try{
             String dni = panelDeEntradas.obtenerCampo();
             Sistema.getInstance().eliminarEmpleado(dni);
-            JOptionPane.showMessageDialog(null, "Empleado eliminada con exito " + dni);
-        }catch(Exception excecion){
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excecion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Empleado eliminada con exito " + dni);
+        }catch(Exception excepcion){
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
 }

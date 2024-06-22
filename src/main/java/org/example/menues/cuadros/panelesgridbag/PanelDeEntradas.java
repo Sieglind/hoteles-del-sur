@@ -30,4 +30,5 @@ public class PanelDeEntradas extends PanelCustom {
     public String obtenerCampo() {
         return CAMPO.getText();
     }
+
 }

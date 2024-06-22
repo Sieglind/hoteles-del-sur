@@ -60,7 +60,7 @@ public class PanelTareasHabitacion extends PanelCustom implements ITareas {
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelHabitacion = crearPanelHabitacion(false);
         this.panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonoBuscar().addActionListener(new AccionBuscarHabitacion(panelDeEntradas,panelHabitacion));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarHabitacion(panelDeEntradas,panelHabitacion));
     }
 
     @Override
