@@ -24,7 +24,7 @@ public class AccionBuscarServicio implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             try {
                Servicio servicio = Sistema.getInstance().buscarServicio(panelDeEntradas.obtenerCampo());
-                this.panelServicio.fillValues(servicio);
+                this.panelServicio.rellenarValor(servicio);
             } catch (ObjectoNoEncontradoExcepcion excepcion) {
                 JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
             }

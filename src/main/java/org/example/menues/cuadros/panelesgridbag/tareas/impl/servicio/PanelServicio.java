@@ -11,26 +11,21 @@ import java.awt.*;
 
 public class PanelServicio extends PanelCustom {
 
-    private final JLabel ETIQUETA_NOMBRE = crearEtiqueta("Nombre:");
     private final JTextField CAMPO_NOMBRE = crearCampoDeTexto();
-    private final JLabel ETIQUETA_DESCRIPCION = crearEtiqueta("Descripcion:");
     private final JTextField CAMPO_DESCRIPCION = crearCampoDeTexto();
-    private final JLabel ETIQUETA_PRECIO = crearEtiqueta("Precio:");
     private final JTextField CAMPO_PRECIO = crearCampoDeTexto();
-    private final JLabel ETIQUETA_CLAVE = crearEtiqueta("Clave:");
     private final JTextField CAMPO_CLAVE = crearCampoDeTexto();
 
     public PanelServicio(boolean editable) {
 
         this.setVisible(editable);
-
-        this.add(this.ETIQUETA_NOMBRE);
+        this.add(crearEtiqueta("Nombre:"));
         this.add(this.CAMPO_NOMBRE);
-        this.add(this.ETIQUETA_DESCRIPCION);
+        this.add(crearEtiqueta("Descripcion:"));
         this.add(this.CAMPO_DESCRIPCION);
-        this.add(this.ETIQUETA_PRECIO);
+        this.add(crearEtiqueta("Precio:"));
         this.add(this.CAMPO_PRECIO);
-        this.add(this.ETIQUETA_CLAVE);
+        this.add(crearEtiqueta("Clave:"));
         this.add(this.CAMPO_CLAVE);
 
         if(!editable){
@@ -47,10 +42,7 @@ public class PanelServicio extends PanelCustom {
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {
-        this.setBackground(Color.WHITE);
-        this.setOpaque(true);
-    }
+    protected void paintComponent(Graphics fondo) {}
 
     private JLabel crearEtiqueta(String texto){
         return crearEtiqueta(texto,Component.CENTER_ALIGNMENT);
@@ -60,7 +52,7 @@ public class PanelServicio extends PanelCustom {
         return crearCampoDeTexto(Component.CENTER_ALIGNMENT);
     }
 
-    public void fillValues(Servicio servicio){
+    public void rellenarValor(Servicio servicio){
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
         this.CAMPO_NOMBRE.setText(servicio.getNombre());
