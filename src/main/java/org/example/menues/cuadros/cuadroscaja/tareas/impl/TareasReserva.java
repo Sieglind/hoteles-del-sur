@@ -1,14 +1,11 @@
 package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 
 import org.example.menues.acciones.AccionVolver;
-import org.example.menues.acciones.cliente.AccionBuscarCliente;
-import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
-import org.example.menues.acciones.habitacion.AccionEliminarHabitacion;
 import org.example.menues.acciones.reserva.AccionBuscarReserva;
 import org.example.menues.acciones.reserva.AccionCrearReserva;
 import org.example.menues.acciones.reserva.AccionEliminarReserva;
 import org.example.menues.cuadros.cuadroscaja.*;
-import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
+import org.example.menues.cuadros.cuadroscaja.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
@@ -20,7 +17,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class TareasReserva extends CuadroCajaCustom implements Tareas {
+public class TareasReserva extends CuadroCajaCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.RESERVAS.name()));
 
@@ -43,7 +40,7 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
             case BUSCAR -> panelBuscar();
             case LISTAR -> panelListar();
             case ACTUALIZAR -> panelActualizar();
-            case BORRAR -> panelEliminar();
+            case BORRAR -> panelBorrar();
         }
     }
 
@@ -86,7 +83,7 @@ public class TareasReserva extends CuadroCajaCustom implements Tareas {
     }
 
     @Override
-    public void panelEliminar() {
+    public void panelBorrar() {
         this.setBorder(BorderFactory.createTitledBorder("Eliminar Cliente"));
 
         this.panelDeEntradasReserva = crearPanelDeEntradas(true);

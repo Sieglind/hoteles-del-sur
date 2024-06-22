@@ -6,7 +6,7 @@ import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
 import org.example.menues.acciones.habitacion.AccionEliminarHabitacion;
 import org.example.menues.cuadros.cuadroscaja.*;
 import org.example.menues.cuadros.cuadroscaja.PanelEntradaHabitacion;
-import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
+import org.example.menues.cuadros.cuadroscaja.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
@@ -15,12 +15,11 @@ import org.example.sistema.entidades.Habitacion;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
 
-public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
+public class TareasHabitacion extends CuadroCajaCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.HABITACIONES.name()));
 
@@ -42,7 +41,7 @@ public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
             case BUSCAR -> panelBuscar();
             case LISTAR -> panelListar();
             case ACTUALIZAR -> panelActualizar();
-            case BORRAR -> panelEliminar();
+            case BORRAR -> panelBorrar();
         }
     }
 
@@ -82,7 +81,7 @@ public class TareasHabitacion extends CuadroCajaCustom implements Tareas {
     }
 
     @Override
-    public void panelEliminar() {
+    public void panelBorrar() {
         this.setBorder(new TitledBorder("Eliminar Habitacion"));
 
         this.panelDeEntradas = crearPanelDeEntradas(true);

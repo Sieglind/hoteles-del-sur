@@ -3,7 +3,7 @@ import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.empleado.AccionBuscarEmpleado;
 import org.example.menues.acciones.empleado.AccionCrearNuevoEmpleado;
 import org.example.menues.cuadros.cuadroscaja.*;
-import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
+import org.example.menues.cuadros.cuadroscaja.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class TareasEmpleado extends CuadroCajaCustom implements Tareas {
+public class TareasEmpleado extends CuadroCajaCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.EMPLEADOS.name()));
 
@@ -35,7 +35,7 @@ public class TareasEmpleado extends CuadroCajaCustom implements Tareas {
             case CREAR -> panelCrear();
             case ACTUALIZAR -> panelActualizar();
             case LISTAR -> panelListar();
-            case BORRAR -> panelEliminar();
+            case BORRAR -> panelBorrar();
             case BUSCAR -> panelBuscar();
         }
     }
@@ -75,7 +75,7 @@ public class TareasEmpleado extends CuadroCajaCustom implements Tareas {
     }
 
     @Override
-    public void panelEliminar() {
+    public void panelBorrar() {
         this.setBorder(BorderFactory.createTitledBorder("Eliminar Empleado"));
 
         this.panelDeEntradas = crearPanelDeEntradas(true);

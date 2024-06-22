@@ -1,9 +1,9 @@
 package org.example.menues.cuadros.cuadroscaja.tareas;
 
-public interface Tareas {
+public interface ITareas {
     void panelCrear();
     void panelBuscar();
     void panelListar();
     void panelActualizar();
-    void panelEliminar();
+    void panelBorrar();
 }
