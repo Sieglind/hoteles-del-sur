@@ -1,11 +1,11 @@
-package org.example.menues.cuadros.cuadroscaja.tareas.impl;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl;
 
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.cliente.AccionBorraCliente;
 import org.example.menues.acciones.cliente.AccionBuscarCliente;
 import org.example.menues.acciones.cliente.AccionCrearCliente;
-import org.example.menues.cuadros.cuadroscaja.*;
-import org.example.menues.cuadros.cuadroscaja.tareas.ITareas;
+import org.example.menues.cuadros.panelesgridbag.*;
+import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
@@ -16,7 +16,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class TareasCliente extends CuadroCajaCustom implements ITareas {
+public class TareasCliente extends PanelCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.CLIENTES.name()));
 

@@ -1,22 +1,22 @@
-package org.example.menues.cuadros.cuadrosflow;
+package org.example.menues.cuadros.panelesflow;
 
-import org.example.menues.acciones.AccionCuadroEntidad;
+import org.example.menues.acciones.AccionPanelEntidad;
 import org.example.menues.enums.Entidad;
 
 import javax.swing.*;
 
-public class CuadroDeEntidades extends CuadroFlowCustom {
+public class PanelDeEntidades extends PanelFlowCustom {
 
-    public CuadroDeEntidades() {
+    public PanelDeEntidades() {
         cargarBotones();
     }
 
     private void cargarBotones() {
-        AccionCuadroEntidad accionCuadroEntidad = new AccionCuadroEntidad();
+        AccionPanelEntidad accionPanelEntidad = new AccionPanelEntidad();
         for (Entidad entidad : Entidad.values()) {
             JButton button = new JButton(entidad.name());
             button.setName(entidad.name());
-            button.addActionListener(accionCuadroEntidad);
+            button.addActionListener(accionPanelEntidad);
             this.add(button);
         }
     }

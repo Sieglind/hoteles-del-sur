@@ -1,6 +1,5 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
-import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.enums.TipoDeHabitacion;
 
@@ -10,7 +9,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class PanelHabitacion extends CuadroCajaCustom {
+public class PanelHabitacion extends PanelCustom {
     private final JLabel ETIQUETA_NUMERO_HABITACION = crearEtiqueta("Numero de Habitacion: ");
     private final JTextField CAMPO_NUMERO_HABITACION = crearCampoDeTexto();
     private final JLabel ETIQUETA_TIPO_HABITACION = crearEtiqueta("Tipo de Habitacion: ");

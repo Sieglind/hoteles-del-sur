@@ -1,5 +1,4 @@
-package org.example.menues.cuadros.cuadroscaja;
-import org.example.sistema.entidades.persona.Cliente;
+package org.example.menues.cuadros.panelesgridbag;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import javax.swing.*;
@@ -8,7 +7,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class PanelEmpleado extends CuadroCajaCustom {
+public class PanelEmpleado extends PanelCustom {
 
     private final JLabel ETIQUETA_DNI = crearEtiqueta("DNI:");
     private final JTextField CAMPO_DNI = crearCampoDeTexto();

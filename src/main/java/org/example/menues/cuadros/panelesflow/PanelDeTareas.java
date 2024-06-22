@@ -1,26 +1,26 @@
-package org.example.menues.cuadros.cuadrosflow;
+package org.example.menues.cuadros.panelesflow;
 
-import org.example.menues.acciones.AccionCuadroTareas;
+import org.example.menues.acciones.AccionPanelTareas;
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.enums.Tarea;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-public class CuadroDeTareas extends CuadroFlowCustom {
+public class PanelDeTareas extends PanelFlowCustom {
 
-    public CuadroDeTareas(String nombreDeEntidad) {
+    public PanelDeTareas(String nombreDeEntidad) {
         this.setBorder(new TitledBorder(nombreDeEntidad.toUpperCase()));
         cargarBotones(nombreDeEntidad);
     }
 
     private void cargarBotones(String nombreDeEntidad) {
-        AccionCuadroTareas accionCuadroTareas = new AccionCuadroTareas();
+        AccionPanelTareas accionPanelTareas = new AccionPanelTareas();
         for(Tarea tarea : Tarea.values()){
             Icon icono = new ImageIcon(tarea.getUrlIcono());
             JButton button = new JButton(tarea.name(),icono);
             button.setName(nombreDeEntidad);
-            button.addActionListener(accionCuadroTareas);
+            button.addActionListener(accionPanelTareas);
             this.add(button);
         }
         JButton botonVolver = new JButton("Volver");

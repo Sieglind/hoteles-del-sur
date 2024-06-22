@@ -1,11 +1,11 @@
-package org.example.menues.cuadros.cuadroscaja.tareas.impl;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl;
 
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.reserva.AccionBuscarReserva;
 import org.example.menues.acciones.reserva.AccionCrearReserva;
 import org.example.menues.acciones.reserva.AccionEliminarReserva;
-import org.example.menues.cuadros.cuadroscaja.*;
-import org.example.menues.cuadros.cuadroscaja.tareas.ITareas;
+import org.example.menues.cuadros.panelesgridbag.*;
+import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
@@ -17,7 +17,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class TareasReserva extends CuadroCajaCustom implements ITareas {
+public class TareasReserva extends PanelCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.RESERVAS.name()));
 

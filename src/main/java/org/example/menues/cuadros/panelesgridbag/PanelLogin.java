@@ -1,11 +1,11 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
 import org.example.menues.acciones.AccionLogin;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-public class CuadroLogin extends CuadroCajaCustom {
+public class PanelLogin extends PanelCustom {
 
     private final TitledBorder border = BorderFactory.createTitledBorder("Login");
     private final JLabel bienvenida = crearEtiqueta("Bienvenido");
@@ -14,7 +14,7 @@ public class CuadroLogin extends CuadroCajaCustom {
     private final JLabel etiquetaPassword = crearEtiqueta("Password:");
     private final JPasswordField campoPassword = new JPasswordField(COLUMNS);
 
-    public CuadroLogin() {
+    public PanelLogin() {
         super();
         setupPanel();
     }

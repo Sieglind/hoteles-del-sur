@@ -1,9 +1,7 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.cuadroscaja.PanelBotones;
-import org.example.menues.cuadros.cuadroscaja.PanelEntradaHabitacion;
-import org.example.menues.cuadros.cuadroscaja.PanelHabitacion;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasHabitacion;
+import org.example.menues.cuadros.panelesgridbag.PanelEntradaHabitacion;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasHabitacion;
 import org.example.sistema.Sistema;
 
 import javax.swing.*;

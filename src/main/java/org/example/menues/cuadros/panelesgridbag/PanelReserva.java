@@ -1,10 +1,9 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.persona.Cliente;
-import org.example.sistema.enums.TipoDeHabitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 
 import javax.swing.*;
@@ -12,10 +11,9 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.time.Instant;
 import java.time.LocalDate;
 
-public class PanelReserva extends CuadroCajaCustom{
+public class PanelReserva extends PanelCustom {
     private final JLabel ETIQUETA_BUSCAR_RESERVA = crearEtiqueta("Numero de Reserva: ");
     private final JTextField CAMPO_BUSCAR_RESERVA = crearCampoDeTexto();
     private final JLabel ETIQUETA_BUSCAR_CLIENTE = crearEtiqueta("Dni: ");

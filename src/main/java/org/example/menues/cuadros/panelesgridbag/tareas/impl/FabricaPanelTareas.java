@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.cuadroscaja.tareas.impl;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl;
 
 import org.example.menues.cuadros.JPanelCustom;
 import org.example.menues.enums.Entidad;

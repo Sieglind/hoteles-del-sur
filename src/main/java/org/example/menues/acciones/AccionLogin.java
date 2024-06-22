@@ -3,7 +3,7 @@ package org.example.menues.acciones;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.Sistema;
 import org.example.menues.VentanaPrincipal;
-import org.example.menues.cuadros.cuadrosflow.CuadroDeEntidades;
+import org.example.menues.cuadros.panelesflow.PanelDeEntidades;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -33,7 +33,7 @@ public class AccionLogin implements ActionListener {
         String password = String.valueOf(campoPassword.getPassword());
         try {
             if (sistema.login(usuario, password)) {
-                VentanaPrincipal.cambiarCuadro(new CuadroDeEntidades());
+                VentanaPrincipal.cambiarCuadro(new PanelDeEntidades());
             } else {
                 emitirError(MENSAJE_CONTRASENIA_ERRONEA);
             }

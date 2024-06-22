@@ -1,9 +1,9 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelEntradasReserva extends CuadroCajaCustom {
+public class PanelEntradasReserva extends PanelCustom {
     private final JLabel ETIQUETA_ID_RESERVA = crearEtiqueta("Id Reserva:");
     private final JTextField CAMPO_ID_RESERVA = crearCampoDeTexto();
 

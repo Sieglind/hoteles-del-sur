@@ -1,8 +1,8 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.cuadroscaja.PanelHabitacion;
-import org.example.menues.cuadros.cuadroscaja.PanelEntradaHabitacion;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasHabitacion;
+import org.example.menues.cuadros.panelesgridbag.PanelHabitacion;
+import org.example.menues.cuadros.panelesgridbag.PanelEntradaHabitacion;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;

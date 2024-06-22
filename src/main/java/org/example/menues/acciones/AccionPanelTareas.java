@@ -1,7 +1,7 @@
 package org.example.menues.acciones;
 
 import org.example.menues.VentanaPrincipal;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.FabricaPanelTareas;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.FabricaPanelTareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 
@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AccionCuadroTareas implements ActionListener {
+public class AccionPanelTareas implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {

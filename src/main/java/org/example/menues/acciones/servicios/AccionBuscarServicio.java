@@ -1,13 +1,10 @@
 package org.example.menues.acciones.servicios;
 
-import org.example.menues.cuadros.cuadroscaja.PanelCliente;
-import org.example.menues.cuadros.cuadroscaja.PanelDeEntradas;
-import org.example.menues.cuadros.cuadroscaja.PanelServicio;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasCliente;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasServicio;
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
+import org.example.menues.cuadros.panelesgridbag.PanelServicio;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasServicio;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
-import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 
 import javax.swing.*;

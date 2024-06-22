@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
 import org.example.sistema.entidades.Servicio;
 
@@ -8,7 +8,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class PanelServicio extends CuadroCajaCustom{
+public class PanelServicio extends PanelCustom {
 
     private final JLabel ETIQUETA_NOMBRE = crearEtiqueta("Nombre:");
     private final JTextField CAMPO_NOMBRE = crearCampoDeTexto();

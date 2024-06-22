@@ -1,9 +1,8 @@
 package org.example.menues.acciones.reserva;
 
-import org.example.menues.cuadros.cuadroscaja.PanelEntradasReserva;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasReserva;
+import org.example.menues.cuadros.panelesgridbag.PanelEntradasReserva;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasReserva;
 import org.example.sistema.Sistema;
-import org.example.sistema.entidades.Reserva;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 
 import javax.swing.*;

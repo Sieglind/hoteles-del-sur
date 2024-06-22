@@ -1,9 +1,9 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelDeEntradas extends CuadroCajaCustom {
+public class PanelDeEntradas extends PanelCustom {
 
     private final JLabel ETIQUETA_DNI = crearEtiqueta("DNI:");
     private final JTextField CAMPO_DNI = crearCampoDeTexto();

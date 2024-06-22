@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
 import org.example.menues.enums.Tarea;
 

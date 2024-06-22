@@ -1,9 +1,9 @@
-package org.example.menues.cuadros.cuadroscaja;
+package org.example.menues.cuadros.panelesgridbag;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelEntradaHabitacion extends CuadroCajaCustom {
+public class PanelEntradaHabitacion extends PanelCustom {
     private final JLabel ETIQUETA_NROHABITACION =crearEtiqueta("Numero de Habitacion");
     private final JTextField NROHABITACION = crearCampoDeTexto();
 

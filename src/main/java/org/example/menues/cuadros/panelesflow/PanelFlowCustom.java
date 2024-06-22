@@ -1,12 +1,12 @@
-package org.example.menues.cuadros.cuadrosflow;
+package org.example.menues.cuadros.panelesflow;
 
 import org.example.menues.cuadros.JPanelCustom;
 
 import java.awt.*;
 
-public class CuadroFlowCustom extends JPanelCustom {
+public class PanelFlowCustom extends JPanelCustom {
 
-    public CuadroFlowCustom() {
+    public PanelFlowCustom() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setVisible(true);
     }

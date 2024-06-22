@@ -1,7 +1,7 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.cuadros.cuadroscaja.PanelCliente;
-import org.example.menues.cuadros.cuadroscaja.PanelDeEntradas;
+import org.example.menues.cuadros.panelesgridbag.PanelCliente;
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
