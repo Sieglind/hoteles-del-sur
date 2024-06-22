@@ -139,11 +139,26 @@ public class Sistema {
         return camposNulos.toString();
     }
 
+    private static String verificacionCampoNuloHabitacion(Habitacion habitacion){
+        StringBuilder camposNulos = new StringBuilder();
+        if(habitacion.getNumeroDeHabitacion().isBlank()) camposNulos.append(" Numero de Habitacion");
+        return camposNulos.toString();
+    }
+
     public void actualizarEmpleado(Empleado empleado) throws CampoRequeridoExcepcion, ObjectoNoEncontradoExcepcion {
         String camposNulos = verificarCamposNulos(empleado);
         if(camposNulos.isBlank()) {
             gestorEmpleados.actualizar(empleado.getDni(), empleado);
         } else {
+            throw new CampoRequeridoExcepcion(camposNulos);
+        }
+    }
+
+    public void actualizarHabitacion(Habitacion habitacion) throws ObjectoNoEncontradoExcepcion, CampoRequeridoExcepcion {
+        String camposNulos = verificacionCampoNuloHabitacion(habitacion);
+        if(camposNulos.isBlank()) {
+            gestorHabitaciones.actualizar(habitacion.getNumeroDeHabitacion(), habitacion);
+        }else{
             throw new CampoRequeridoExcepcion(camposNulos);
         }
     }
