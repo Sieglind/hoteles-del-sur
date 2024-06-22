@@ -10,6 +10,7 @@ public class PanelBotones extends JPanel {
     private final JButton BOTON_GUARDAR = new JButton("Guardar");
     private final JButton BOTON_BUSCAR = new JButton("Buscar");
     private final JButton BOTON_BORRAR = new JButton("Borrar");
+    private final JButton BOTON_ACTUALIZAR = new JButton("Actualizar");
 
     public PanelBotones(Tarea tarea, JButton botonVolver) {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -17,6 +18,7 @@ public class PanelBotones extends JPanel {
             case CREAR -> this.add(BOTON_GUARDAR);
             case BUSCAR -> this.add(BOTON_BUSCAR);
             case BORRAR -> this.add(BOTON_BORRAR);
+            case ACTUALIZAR -> this.add(BOTON_ACTUALIZAR);
             default -> {}
         }
         this.add(botonVolver);
@@ -36,4 +38,6 @@ public class PanelBotones extends JPanel {
     public JButton getBotonBorrar() {
         return BOTON_BORRAR;
     }
+
+    public JButton getBotonActualizar() { return BOTON_ACTUALIZAR; }
 }
