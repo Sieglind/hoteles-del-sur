@@ -86,4 +86,12 @@ public class Sistema {
     public void eliminarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
         gestorHabitaciones.eliminar(numeroHabitacion);
     }
+
+    public void crearCliente(Cliente cliente) throws ObjetoYaExisteExcepcion {
+        gestorClientes.crear(cliente);
+    }
+
+    public void borrarCliente(String campoDni) throws ObjectoNoEncontradoExcepcion {
+        gestorClientes.eliminar(campoDni);
+    }
 }
