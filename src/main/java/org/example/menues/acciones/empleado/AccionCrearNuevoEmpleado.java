@@ -1,5 +1,4 @@
 package org.example.menues.acciones.empleado;
-
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
