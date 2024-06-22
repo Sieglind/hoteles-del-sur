@@ -126,6 +126,11 @@ public class Sistema {
         }
     }
 
+    public void eliminarEmpleado(String dni) throws ObjectoNoEncontradoExcepcion {
+        gestorEmpleados.borrar(dni);
+    }
+
+
     private static String verificarCamposNulos(Persona persona) {
         StringBuilder camposNulos = new StringBuilder();
         if (persona.getDni().isBlank()) camposNulos.append(" DNI");
