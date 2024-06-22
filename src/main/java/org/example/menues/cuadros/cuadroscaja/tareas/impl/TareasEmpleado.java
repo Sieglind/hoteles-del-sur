@@ -1,6 +1,7 @@
 package org.example.menues.cuadros.cuadroscaja.tareas.impl;
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.empleado.AccionBuscarEmpleado;
+import org.example.menues.acciones.empleado.AccionCrearNuevoEmpleado;
 import org.example.menues.cuadros.cuadroscaja.*;
 import org.example.menues.cuadros.cuadroscaja.tareas.Tareas;
 import org.example.menues.enums.Entidad;
@@ -45,6 +46,7 @@ public class TareasEmpleado extends CuadroCajaCustom implements Tareas {
         this.panelDeEntradas = crearPanelDeEntradas(false);
         this.panelEmpleado = crearPanelEmpleado(true);
         this.panelBotones = crearPanelBotones(Tarea.CREAR);
+        this.panelBotones.getBotonGuardar().addActionListener(new AccionCrearNuevoEmpleado(this, panelEmpleado));
     }
 
     @Override

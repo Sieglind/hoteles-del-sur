@@ -3,9 +3,8 @@ import org.example.menues.cuadros.cuadroscaja.PanelDeEntradas;
 import org.example.menues.cuadros.cuadroscaja.PanelEmpleado;
 import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasEmpleado;
 import org.example.sistema.Sistema;
-import org.example.sistema.entidades.persona.Cliente;
+import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,8 +24,8 @@ public class AccionBuscarEmpleado implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
-            Cliente cliente = Sistema.getInstance().buscarCLiente(panelDeEntradas.getCampoDni());
-            this.panelEmpleado.fillValues(cliente);
+            Empleado empleado = Sistema.getInstance().buscarEmpleado(panelDeEntradas.getCampoDni());
+            this.panelEmpleado.fillValues(empleado);
         } catch (ObjectoNoEncontradoExcepcion excepcion) {
             JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
         }
