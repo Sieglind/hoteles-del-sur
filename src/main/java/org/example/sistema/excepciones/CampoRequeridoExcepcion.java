@@ -2,7 +2,9 @@ package org.example.sistema.excepciones;
 
 public class CampoRequeridoExcepcion extends Exception {
 
-    public CampoRequeridoExcepcion(String campo) {
-        super("\nDebe completar el/los siguientes campos: " + campo);
+    private static final String ERROR_CAMPO_FALTANTE = "Complete los siguientes campos: ";
+
+    public CampoRequeridoExcepcion(String campos) {
+        super(ERROR_CAMPO_FALTANTE + campos);
     }
 }

@@ -12,23 +12,19 @@ import java.awt.*;
 
 public class PanelCliente extends PanelCustom {
 
-    private final JLabel ETIQUETA_DNI = crearEtiqueta("DNI:");
     private final JTextField CAMPO_DNI = crearCampoDeTexto();
-    private final JLabel EIQUETA_NOMBRE = crearEtiqueta("Nombre:");
     private final JTextField CAMPO_NOMBRE = crearCampoDeTexto();
-    private final JLabel ETIQUETA_APELLIDO = crearEtiqueta("Apellido:");
     private final JTextField CAMPO_APELLIDO = crearCampoDeTexto();
-    private final JLabel SEGMENTO = crearEtiqueta("Segmento:");
     private final JComboBox<Segmento> LISTA_SEGMENTO = new JComboBox<>(Segmento.values());
 
     public PanelCliente(boolean editable) {
         this.setVisible(editable);
         dimensionarCompomente(LISTA_SEGMENTO, CENTER_ALIGNMENT);
-        this.add(this.ETIQUETA_DNI);
+        this.add(crearEtiqueta("DNI:"));
         this.add(this.CAMPO_DNI);
-        this.add(this.EIQUETA_NOMBRE);
+        this.add(crearEtiqueta("Nombre:"));
         this.add(this.CAMPO_NOMBRE);
-        this.add(this.ETIQUETA_APELLIDO);
+        this.add(crearEtiqueta("Apellido:"));
         this.add(this.CAMPO_APELLIDO);
         if (!editable) {
             this.CAMPO_DNI.setEnabled(false);
@@ -40,7 +36,7 @@ public class PanelCliente extends PanelCustom {
             this.LISTA_SEGMENTO.setEnabled(false);
             this.LISTA_SEGMENTO.setSelectedIndex(-1);
         }
-        this.add(this.SEGMENTO);
+        this.add(crearEtiqueta("Segmento:"));
         this.add(this.LISTA_SEGMENTO);
     }
 

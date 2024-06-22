@@ -21,7 +21,7 @@ public class AccionCrearNuevoEmpleado implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Empleado empleado = panelEmpleado.crearEmpleado();
         try {
-            Sistema.getInstance().crearNuevoEmpleado(empleado);
+            Sistema.getInstance().crearEmpleado(empleado);
             JOptionPane.showMessageDialog(panelEmpleado.getParent(), "Nuevo empleado creado correctamente");
         }catch (ObjetoYaExisteExcepcion | CampoRequeridoExcepcion excepcion){
             JOptionPane.showMessageDialog(panelEmpleado.getParent(),excepcion.getMessage());
