@@ -1,5 +1,6 @@
-package org.example.menues.cuadros.panelesgridbag;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl.cliente;
 
+import org.example.menues.cuadros.panelesgridbag.PanelCustom;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.Segmento;
 

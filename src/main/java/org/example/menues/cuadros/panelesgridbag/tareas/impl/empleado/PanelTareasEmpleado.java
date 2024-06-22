@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado;
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.empleado.AccionBuscarEmpleado;
 import org.example.menues.acciones.empleado.AccionCrearNuevoEmpleado;
@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class TareasEmpleado extends PanelCustom implements ITareas {
+public class PanelTareasEmpleado extends PanelCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.EMPLEADOS.name()));
 
@@ -23,7 +23,7 @@ public class TareasEmpleado extends PanelCustom implements ITareas {
     private PanelBotones panelBotones;
 
 
-    public TareasEmpleado(Tarea tarea) {
+    public PanelTareasEmpleado(Tarea tarea) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setVisible(true);

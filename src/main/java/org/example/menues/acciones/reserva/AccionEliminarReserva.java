@@ -1,7 +1,7 @@
 package org.example.menues.acciones.reserva;
 
 import org.example.menues.cuadros.panelesgridbag.PanelEntradasReserva;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasReserva;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva.PanelTareasReserva;
 import org.example.sistema.Sistema;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 
@@ -10,11 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccionEliminarReserva implements ActionListener {
-    TareasReserva tareasReserva;
+    PanelTareasReserva panelTareasReserva;
     PanelEntradasReserva panelEntradasReserva;
 
-    public AccionEliminarReserva(TareasReserva tareasReserva, PanelEntradasReserva panelEntradasReserva) {
-        this.tareasReserva = tareasReserva;
+    public AccionEliminarReserva(PanelTareasReserva panelTareasReserva, PanelEntradasReserva panelEntradasReserva) {
+        this.panelTareasReserva = panelTareasReserva;
         this.panelEntradasReserva = panelEntradasReserva;
     }
 
@@ -25,7 +25,7 @@ public class AccionEliminarReserva implements ActionListener {
             JOptionPane.showMessageDialog(null, "Reserva eliminada con exito " +
                     panelEntradasReserva.getCampoId());
         } catch (ObjectoNoEncontradoExcepcion ex) {
-            JOptionPane.showMessageDialog(tareasReserva, ex.getMessage());
+            JOptionPane.showMessageDialog(panelTareasReserva, ex.getMessage());
         }
     }
 }

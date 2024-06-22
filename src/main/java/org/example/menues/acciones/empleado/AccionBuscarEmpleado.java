@@ -1,7 +1,7 @@
 package org.example.menues.acciones.empleado;
 import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.PanelEmpleado;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasEmpleado;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelTareasEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 
 public class AccionBuscarEmpleado implements ActionListener {
 
-    TareasEmpleado panelDeTareas;
+    PanelTareasEmpleado panelDeTareas;
     PanelDeEntradas panelDeEntradas;
     PanelEmpleado panelEmpleado;
 
-    public AccionBuscarEmpleado(TareasEmpleado panelDeTareas, PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
+    public AccionBuscarEmpleado(PanelTareasEmpleado panelDeTareas, PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
         this.panelDeTareas = panelDeTareas;
         this.panelDeEntradas = panelDeEntradas;
         this.panelEmpleado = panelEmpleado;

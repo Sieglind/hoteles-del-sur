@@ -1,7 +1,7 @@
 package org.example.menues.acciones.empleado;
 
-import org.example.menues.cuadros.panelesgridbag.PanelEmpleado;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasEmpleado;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelTareasEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.CampoRequeridoExcepcion;
@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
 
 public class AccionCrearNuevoEmpleado implements ActionListener{
 
-    TareasEmpleado panelDeTareas;
+    PanelTareasEmpleado panelDeTareas;
     PanelEmpleado panelEmpleado;
 
-    public AccionCrearNuevoEmpleado(TareasEmpleado panelDeTareas, PanelEmpleado panelEmpleado){
+    public AccionCrearNuevoEmpleado(PanelTareasEmpleado panelDeTareas, PanelEmpleado panelEmpleado){
         this.panelDeTareas = panelDeTareas;
         this.panelEmpleado = panelEmpleado;
     }

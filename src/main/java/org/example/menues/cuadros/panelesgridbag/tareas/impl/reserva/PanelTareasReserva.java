@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva;
 
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.reserva.AccionBuscarReserva;
@@ -17,7 +17,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class TareasReserva extends PanelCustom implements ITareas {
+public class PanelTareasReserva extends PanelCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.RESERVAS.name()));
 
@@ -26,7 +26,7 @@ public class TareasReserva extends PanelCustom implements ITareas {
     private PanelBotones panelBotones;
 
 
-    public TareasReserva(Tarea tarea) {
+    public PanelTareasReserva(Tarea tarea) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setVisible(true);

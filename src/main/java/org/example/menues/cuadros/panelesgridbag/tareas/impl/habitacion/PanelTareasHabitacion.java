@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion;
 
 import org.example.menues.acciones.habitacion.AccionBuscarHabitacion;
 import org.example.menues.acciones.AccionVolver;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Vector;
 
 
-public class TareasHabitacion extends PanelCustom implements ITareas {
+public class PanelTareasHabitacion extends PanelCustom implements ITareas {
 
     private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.HABITACIONES.name()));
 
@@ -27,7 +27,7 @@ public class TareasHabitacion extends PanelCustom implements ITareas {
     private PanelHabitacion panelHabitacion;
     private PanelBotones panelBotones;
 
-    public TareasHabitacion(Tarea tarea) {
+    public PanelTareasHabitacion(Tarea tarea) {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setVisible(true);

@@ -1,8 +1,8 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.panelesgridbag.PanelHabitacion;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.menues.cuadros.panelesgridbag.PanelEntradaHabitacion;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasHabitacion;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelTareasHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
@@ -13,11 +13,11 @@ import java.awt.event.ActionListener;
 
 public class AccionBuscarHabitacion implements ActionListener {
 
-   TareasHabitacion panelDeTareas;
+   PanelTareasHabitacion panelDeTareas;
    PanelEntradaHabitacion panelEntradas;
    PanelHabitacion panelHabitacion;
 
-    public AccionBuscarHabitacion(TareasHabitacion panelDeTareas, PanelEntradaHabitacion panelEntradas, PanelHabitacion panelHabitacion) {
+    public AccionBuscarHabitacion(PanelTareasHabitacion panelDeTareas, PanelEntradaHabitacion panelEntradas, PanelHabitacion panelHabitacion) {
         this.panelDeTareas = panelDeTareas;
         this.panelEntradas = panelEntradas;
         this.panelHabitacion = panelHabitacion;

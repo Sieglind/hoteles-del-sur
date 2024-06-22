@@ -1,8 +1,8 @@
 package org.example.menues.acciones.servicios;
 
 import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.PanelServicio;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.TareasServicio;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio.PanelServicio;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio.PanelTareasServicio;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
@@ -13,12 +13,12 @@ import java.awt.event.ActionListener;
 
 public class AccionBuscarServicio implements ActionListener {
 
-        TareasServicio panelDeTareas;
+        PanelTareasServicio panelDeTareas;
         PanelDeEntradas panelDeEntradas;
         PanelServicio panelServicio;
 
-    public AccionBuscarServicio(TareasServicio tareasServicio, PanelDeEntradas panelDeEntradas, PanelServicio panelServicio) {
-        this.panelDeTareas = tareasServicio;
+    public AccionBuscarServicio(PanelTareasServicio panelTareasServicio, PanelDeEntradas panelDeEntradas, PanelServicio panelServicio) {
+        this.panelDeTareas = panelTareasServicio;
         this.panelDeEntradas = panelDeEntradas;
         this.panelServicio = panelServicio;
     }

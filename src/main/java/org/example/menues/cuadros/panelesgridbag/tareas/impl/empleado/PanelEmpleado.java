@@ -1,4 +1,5 @@
-package org.example.menues.cuadros.panelesgridbag;
+package org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado;
+import org.example.menues.cuadros.panelesgridbag.PanelCustom;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import javax.swing.*;
