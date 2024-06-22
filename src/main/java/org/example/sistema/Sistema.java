@@ -6,7 +6,9 @@ import org.example.sistema.entidades.Servicio;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
+import org.example.sistema.excepciones.CampoRequeridoExcepcion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
@@ -66,4 +68,61 @@ public class Sistema {
         return this.gestorDeServicios.buscarTodos();
     }
 
+    public Cliente buscarCLiente(String campoDni) throws ObjectoNoEncontradoExcepcion {
+        return gestorClientes.buscar(campoDni);
+    }
+
+    public Servicio buscarServicio(Integer clave) throws ObjectoNoEncontradoExcepcion {
+        return gestorDeServicios.buscar(clave);
+    }
+
+    public String crearReserva(Reserva reserva) throws ObjetoYaExisteExcepcion{
+        return gestorReservas.crear(reserva);
+    }
+
+    public Reserva buscarReserva (String idReserva)throws ObjectoNoEncontradoExcepcion{
+        return gestorReservas.buscar(idReserva);
+    }
+
+    public void eliminarReserva (String id)throws ObjectoNoEncontradoExcepcion{
+        gestorReservas.eliminar(id);
+    }
+
+    public Habitacion buscarHabitacion (String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
+        return gestorHabitaciones.buscar(numeroHabitacion);
+    }
+
+    public void crearHabitacion(Habitacion valor) throws ObjetoYaExisteExcepcion {
+        gestorHabitaciones.crear(valor);
+    }
+
+    public void eliminarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
+        gestorHabitaciones.eliminar(numeroHabitacion);
+    }
+
+    public Empleado buscarEmpleado(String campoDni) throws ObjectoNoEncontradoExcepcion {
+        return gestorEmpleados.buscar(campoDni);
+    }
+
+    public void crearNuevoEmpleado(Empleado empleado) throws ObjetoYaExisteExcepcion, CampoRequeridoExcepcion {
+
+        StringBuilder camposNulos = new StringBuilder();
+
+        if (empleado.getDni().isBlank()) camposNulos.append(" DNI");
+        if (empleado.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (empleado.getApellido().isBlank()) camposNulos.append(" APELLIDO");
+        if(camposNulos.isEmpty()) {
+            gestorEmpleados.crear(empleado);
+        }else{
+            throw new CampoRequeridoExcepcion(camposNulos.toString());
+        }
+    }
+
+    public void crearCliente(Cliente cliente) throws ObjetoYaExisteExcepcion {
+        gestorClientes.crear(cliente);
+    }
+
+    public void borrarCliente(String campoDni) throws ObjectoNoEncontradoExcepcion {
+        gestorClientes.eliminar(campoDni);
+    }
 }

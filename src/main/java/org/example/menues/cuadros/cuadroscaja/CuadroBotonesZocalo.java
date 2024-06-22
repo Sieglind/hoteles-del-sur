@@ -6,8 +6,7 @@ import java.awt.*;
 public class CuadroBotonesZocalo extends JPanel {
     public CuadroBotonesZocalo() {
         super();
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.setAlignmentX(LEFT_ALIGNMENT);
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setVisible(true);
     }
 
