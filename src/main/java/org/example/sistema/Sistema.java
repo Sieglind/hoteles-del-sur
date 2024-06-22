@@ -6,6 +6,7 @@ import org.example.sistema.entidades.Servicio;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
+import org.example.sistema.excepciones.CampoRequeridoExcepcion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 import org.example.sistema.gestor.Hotel;
@@ -81,5 +82,23 @@ public class Sistema {
 
     public void eliminarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
         gestorHabitaciones.eliminar(numeroHabitacion);
+    }
+
+    public Empleado buscarEmpleado(String campoDni) throws ObjectoNoEncontradoExcepcion {
+        return gestorEmpleados.buscar(campoDni);
+    }
+
+    public void crearNuevoEmpleado(Empleado empleado) throws ObjetoYaExisteExcepcion, CampoRequeridoExcepcion {
+
+        StringBuilder camposNulos = new StringBuilder();
+
+        if (empleado.getDni().isBlank()) camposNulos.append(" DNI");
+        if (empleado.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (empleado.getApellido().isBlank()) camposNulos.append(" APELLIDO");
+        if(camposNulos.isEmpty()) {
+            gestorEmpleados.crear(empleado);
+        }else{
+            throw new CampoRequeridoExcepcion(camposNulos.toString());
+        }
     }
 }

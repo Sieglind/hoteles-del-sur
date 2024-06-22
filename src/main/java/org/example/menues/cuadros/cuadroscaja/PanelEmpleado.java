@@ -1,5 +1,6 @@
 package org.example.menues.cuadros.cuadroscaja;
 import org.example.sistema.entidades.persona.Cliente;
+import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -55,15 +56,23 @@ public class PanelEmpleado extends CuadroCajaCustom {
         return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
-    public void fillValues(Cliente cliente) {
+    public void fillValues(Empleado empleado) {
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
-        this.CAMPO_DNI.setText(cliente.getDni());
-        this.CAMPO_NOMBRE.setText(cliente.getNombre());
-        this.CAMPO_APELLIDO.setText(cliente.getApellido());
-        this.LISTA_CARGO.setSelectedItem(cliente.getSegmento());
+        this.CAMPO_DNI.setText(empleado.getDni());
+        this.CAMPO_NOMBRE.setText(empleado.getNombre());
+        this.CAMPO_APELLIDO.setText(empleado.getApellido());
+        this.LISTA_CARGO.setSelectedItem(empleado.getCargo());
         this.setVisible(true);
         this.revalidate();
         this.repaint();
+    }
+
+    public Empleado crearEmpleado(){
+        return new Empleado(
+                CAMPO_NOMBRE.getText(),
+                CAMPO_APELLIDO.getText(),
+                CAMPO_DNI.getText(),
+                (Cargo) LISTA_CARGO.getSelectedItem());
     }
 }
