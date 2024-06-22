@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class AccionVolver implements ActionListener {
 
-    private String nombreDeEntidad;
+    private final String nombreDeEntidad;
 
     public AccionVolver(String nombreDeEntidad) {
         this.nombreDeEntidad = nombreDeEntidad;
