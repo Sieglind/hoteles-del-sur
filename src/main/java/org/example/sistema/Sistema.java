@@ -49,23 +49,23 @@ public class Sistema {
     }
 
     public List<Habitacion> listarHabitaciones() {
-        return this.gestorHabitaciones.buscarTodos();
+        return this.gestorHabitaciones.listar();
     }
 
     public List<Cliente> listarClientes() {
-        return this.gestorClientes.buscarTodos();
+        return this.gestorClientes.listar();
     }
 
     public List<Reserva> listarReservas() {
-        return this.gestorReservas.buscarTodos();
+        return this.gestorReservas.listar();
     }
 
     public List<Empleado> listarEmpleados() {
-        return this.gestorEmpleados.buscarTodos();
+        return this.gestorEmpleados.listar();
     }
 
     public List<Servicio> listarServicios() {
-        return this.gestorDeServicios.buscarTodos();
+        return this.gestorDeServicios.listar();
     }
 
     public Cliente buscarCLiente(String campoDni) throws ObjectoNoEncontradoExcepcion {
@@ -85,7 +85,7 @@ public class Sistema {
     }
 
     public void eliminarReserva (String id)throws ObjectoNoEncontradoExcepcion{
-        gestorReservas.eliminar(id);
+        gestorReservas.borrar(id);
     }
 
     public Habitacion buscarHabitacion (String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
@@ -97,7 +97,7 @@ public class Sistema {
     }
 
     public void eliminarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
-        gestorHabitaciones.eliminar(numeroHabitacion);
+        gestorHabitaciones.borrar(numeroHabitacion);
     }
 
     public Empleado buscarEmpleado(String campoDni) throws ObjectoNoEncontradoExcepcion {
@@ -123,6 +123,6 @@ public class Sistema {
     }
 
     public void borrarCliente(String campoDni) throws ObjectoNoEncontradoExcepcion {
-        gestorClientes.eliminar(campoDni);
+        gestorClientes.borrar(campoDni);
     }
 }

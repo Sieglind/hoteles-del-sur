@@ -31,7 +31,7 @@ public class GestorReservas implements IGestor<String, Reserva> {
     }
 
     @Override
-    public List<Reserva> buscarTodos() {
+    public List<Reserva> listar() {
         return new ArrayList<>(this.reservas.values());
     }
 
@@ -43,7 +43,7 @@ public class GestorReservas implements IGestor<String, Reserva> {
     }
 
     @Override
-    public boolean eliminar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
         objetoExiste(key);
         reservas.remove(key);
         return true;

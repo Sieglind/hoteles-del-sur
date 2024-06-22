@@ -45,7 +45,7 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
     }
 
     @Override
-    public List<Habitacion> buscarTodos() {
+    public List<Habitacion> listar() {
         return new ArrayList<>(listaHabitaciones.values());
     }
 
@@ -58,7 +58,7 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
     }
 
     @Override
-    public boolean eliminar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
         if(!listaHabitaciones.containsKey(key)){
             throw new ObjectoNoEncontradoExcepcion("La habitacion no existe");
         }

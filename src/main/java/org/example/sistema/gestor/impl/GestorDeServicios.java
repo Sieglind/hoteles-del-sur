@@ -46,7 +46,7 @@ public class GestorDeServicios implements IGestor<Integer, Servicio> {
 
     // Devuelve una lista con todos los servicios
     @Override
-    public List<Servicio> buscarTodos() {
+    public List<Servicio> listar() {
         return new ArrayList<>(servicios.values());
     }
 
@@ -64,7 +64,7 @@ public class GestorDeServicios implements IGestor<Integer, Servicio> {
 
     // Eliminar un servicio
     @Override
-    public boolean eliminar(Integer key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(Integer key) throws ObjectoNoEncontradoExcepcion {
         if (!servicios.containsKey(key)) {
                 throw new ObjectoNoEncontradoExcepcion("Servicio con clave " + key +" no encontrado.");
         }
