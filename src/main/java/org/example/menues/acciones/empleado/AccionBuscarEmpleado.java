@@ -25,7 +25,7 @@ public class AccionBuscarEmpleado implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         try {
             Empleado empleado = Sistema.getInstance().buscarEmpleado(panelDeEntradas.obtenerCampo());
-            this.panelEmpleado.fillValues(empleado);
+            this.panelEmpleado.llenarCampos(empleado);
         } catch (ObjectoNoEncontradoExcepcion excepcion) {
             JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
         }

@@ -18,7 +18,11 @@ public class PanelBotones extends JPanel {
             case CREAR -> this.add(BOTON_GUARDAR);
             case BUSCAR -> this.add(BOTON_BUSCAR);
             case BORRAR -> this.add(BOTON_BORRAR);
-            case ACTUALIZAR -> this.add(BOTON_ACTUALIZAR);
+            case ACTUALIZAR -> {
+                this.add(BOTON_BUSCAR);
+                this.add(BOTON_ACTUALIZAR);
+                getBotonActualizar().setEnabled(false);
+            }
             default -> {}
         }
         this.add(botonVolver);
@@ -31,7 +35,7 @@ public class PanelBotones extends JPanel {
         return BOTON_GUARDAR;
     }
 
-    public JButton getBotonoBuscar() {
+    public JButton getBotonBuscar() {
         return BOTON_BUSCAR;
     }
 
