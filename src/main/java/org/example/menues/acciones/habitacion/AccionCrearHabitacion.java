@@ -24,9 +24,9 @@ public class AccionCrearHabitacion implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
-            Habitacion habitacion = panelHabitacion.obtenerHabitacion();
+            Habitacion habitacion = panelHabitacion.crearHabitacion();
             if(habitacion != null){
-                Sistema.getInstance().crearHabitacion(panelHabitacion.obtenerHabitacion());
+                Sistema.getInstance().crearHabitacion(habitacion);
                 JOptionPane.showMessageDialog(panelDeEntradas.getParent(),"Habitacion creada con exito");
             }
         }catch (ExcepcionObjetoYaExiste excepcion){

@@ -54,19 +54,13 @@ public class PanelHabitacion extends PanelCustom {
         return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
-    public Habitacion obtenerHabitacion() {
-        Border border = new LineBorder(Color.BLACK, 3);
-        this.setBorder(new TitledBorder(border, "Resultados"));
-
-        return new Habitacion(CAMPO_NUMERO_HABITACION.getText(), (TipoDeHabitacion) CAMPO_TIPO_HABITACION.getSelectedItem(), 0);
-
-    }
 
     public void llenarCampos(Habitacion habitacion) {
         Border border = new LineBorder(Color.BLACK, 3);
         this.setBorder(new TitledBorder(border, "Resultados"));
-        this.CAMPO_NUMERO_HABITACION.setText(habitacion.getNumeroDeHabitacion());
-        this.CAMPO_TIPO_HABITACION.setSelectedItem(habitacion.getTipoDeHabitacion());
+        CAMPO_NUMERO_HABITACION.setText(habitacion.getNumeroDeHabitacion());
+        CAMPO_TIPO_HABITACION.setSelectedItem(habitacion.getTipoDeHabitacion());
+        CAMPO_PRECIO_HABITACION.setText(String.valueOf(habitacion.getPrecio()));
         this.DISPONIBILIDAD.setSelected(habitacion.isDisponible());
         this.setVisible(true);
         this.revalidate();
