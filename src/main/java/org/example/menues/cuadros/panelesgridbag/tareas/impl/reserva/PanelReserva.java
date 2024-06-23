@@ -135,6 +135,7 @@ public class PanelReserva extends PanelCustom {
         this.CAMPO_FECHA_INICIO.setEnabled(true);
         this.CAMPO_FECHA_FIN.setEnabled(true);
         this.CAMPO_ESTADO_RESERVA.setEnabled(true);
+        LISTA_SERVICIOS.setEnabled(true);
     }
 
     public Estado getEstadoReserva(){
