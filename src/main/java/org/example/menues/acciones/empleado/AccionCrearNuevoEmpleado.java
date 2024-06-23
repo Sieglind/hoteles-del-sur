@@ -2,8 +2,8 @@ package org.example.menues.acciones.empleado;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.CampoRequeridoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.EscepcionCamposRequeridos;
+import org.example.sistema.excepciones.EscepcionObjetoYaExiste;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +22,7 @@ public class AccionCrearNuevoEmpleado implements ActionListener{
         try {
             Sistema.getInstance().crearEmpleado(empleado);
             JOptionPane.showMessageDialog(panelEmpleado.getParent(), "Nuevo empleado creado correctamente");
-        }catch (ObjetoYaExisteExcepcion | CampoRequeridoExcepcion excepcion){
+        }catch (EscepcionObjetoYaExiste | EscepcionCamposRequeridos excepcion){
             JOptionPane.showMessageDialog(panelEmpleado.getParent(),excepcion.getMessage());
         }
     }

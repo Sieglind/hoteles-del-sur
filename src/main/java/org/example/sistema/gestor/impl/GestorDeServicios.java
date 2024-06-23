@@ -1,8 +1,8 @@
 package org.example.sistema.gestor.impl;
 
 import org.example.sistema.entidades.Servicio;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.EscepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
 
@@ -24,9 +24,9 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     // Crear un Servicio
     @Override
-    public String crear(Servicio servicio) throws ObjetoYaExisteExcepcion {
+    public String crear(Servicio servicio) throws EscepcionObjetoYaExiste {
         if (servicios.containsKey(servicio.getCodigo())) {
-            throw new ObjetoYaExisteExcepcion("El servicio con clave " + servicio.getCodigo() + " ya existe.");
+            throw new EscepcionObjetoYaExiste(servicio.getCodigo());
         }
         servicios.put(servicio.getCodigo(), servicio);
         return servicio.getCodigo();
@@ -34,10 +34,10 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     // Buscar un Servicio
     @Override
-    public Servicio buscar(String key) throws ObjectoNoEncontradoExcepcion {
+    public Servicio buscar(String key) throws EscepcionObjectoNoEncontrado {
         Servicio servicio = servicios.get(key);
         if (servicio == null) {
-            throw new ObjectoNoEncontradoExcepcion("Servicio con clave " + key + " no encontrado.");
+            throw new EscepcionObjectoNoEncontrado(key);
         }
         return servicio;
     }
@@ -51,20 +51,19 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     // Actualizar los datos de un servicio
     @Override
-    public Servicio actualizar(String key, Servicio servicio) throws ObjectoNoEncontradoExcepcion {
+    public Servicio actualizar(String key, Servicio servicio) throws EscepcionObjectoNoEncontrado {
         if (!servicios.containsKey(key)) {
-            throw new ObjectoNoEncontradoExcepcion("Servicio con clave " + key + " no encontrado.");
+            throw new EscepcionObjectoNoEncontrado(key);
         }
         servicios.put(key, servicio);
         return servicio;
     }
 
 
-    // Eliminar un servicio
     @Override
-    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws EscepcionObjectoNoEncontrado {
         if (!servicios.containsKey(key)) {
-                throw new ObjectoNoEncontradoExcepcion("Servicio con clave " + key +" no encontrado.");
+                throw new EscepcionObjectoNoEncontrado(key);
         }
         servicios.remove(key);
         return true;
@@ -74,7 +73,7 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
         servicios.forEach(servicio -> {
             try {
                 crear(servicio);
-            } catch (ObjetoYaExisteExcepcion excepcion) {
+            } catch (EscepcionObjetoYaExiste excepcion) {
                 LOG.log(Level.WARNING,excepcion.getMessage());
             }
         });

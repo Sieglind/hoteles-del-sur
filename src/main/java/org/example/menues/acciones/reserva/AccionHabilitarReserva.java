@@ -5,7 +5,7 @@ import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva.PanelReserva;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,7 @@ public class AccionHabilitarReserva implements ActionListener {
             panelReserva.habilitarEdicion();
             panelBotones.getBotonActualizar().setEnabled(true);
             panelBotones.getBotonBuscar().setEnabled(false);
-        } catch (ObjectoNoEncontradoExcepcion excepcion) {
+        } catch (EscepcionObjectoNoEncontrado excepcion) {
             JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), excepcion.getMessage());
         }
     }

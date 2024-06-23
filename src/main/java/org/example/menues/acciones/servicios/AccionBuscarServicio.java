@@ -3,7 +3,7 @@ import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio.PanelServicio;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +24,7 @@ public class AccionBuscarServicio implements ActionListener {
             try {
                Servicio servicio = Sistema.getInstance().buscarServicio(panelDeEntradas.obtenerCampo());
                 this.panelServicio.rellenarValor(servicio);
-            } catch (ObjectoNoEncontradoExcepcion excepcion) {
+            } catch (EscepcionObjectoNoEncontrado excepcion) {
                 JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
             }
         }

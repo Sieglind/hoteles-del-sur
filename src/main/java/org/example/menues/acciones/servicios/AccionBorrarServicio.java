@@ -19,7 +19,7 @@ public class AccionBorrarServicio implements ActionListener {
     public void actionPerformed(ActionEvent evento) {
         try{
             String clave = panelDeEntradas.obtenerCampo();
-            Sistema.getInstance().eliminarServicio(clave);
+            Sistema.getInstance().borrarServicio(clave);
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Servicio eliminado con exito " + clave);
         }catch(Exception excepcion){
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);

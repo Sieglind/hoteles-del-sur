@@ -1,6 +1,7 @@
 package org.example.menues;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -12,7 +13,8 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void configurarVentana() {
-        setSize(1280, 768);
+        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        setBounds(screenBounds);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

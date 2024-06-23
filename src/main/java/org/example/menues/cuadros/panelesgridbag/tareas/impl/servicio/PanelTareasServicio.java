@@ -88,7 +88,7 @@ public class PanelTareasServicio extends PanelCustom implements ITareas {
 
     @Override
     public void panelBorrar() {
-        this.setBorder(BorderFactory.createTitledBorder("Eliminar Servicio"));
+        this.setBorder(BorderFactory.createTitledBorder("Borrar Servicio"));
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
         panelBotones.getBotonBorrar().addActionListener(new AccionBorrarServicio(panelDeEntradas));

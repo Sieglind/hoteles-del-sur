@@ -3,8 +3,8 @@ package org.example.menues.acciones.cliente;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.cliente.PanelCliente;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
-import org.example.sistema.excepciones.CampoRequeridoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.EscepcionCamposRequeridos;
+import org.example.sistema.excepciones.EscepcionObjetoYaExiste;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +24,7 @@ public class AccionCrearCliente implements ActionListener {
         try {
             Sistema.getInstance().crearCliente(cliente);
             JOptionPane.showMessageDialog(panelCliente.getParent(), "Cliente creado correctamente: " + cliente.getDni());
-        } catch (ObjetoYaExisteExcepcion | CampoRequeridoExcepcion excepcion) {
+        } catch (EscepcionObjetoYaExiste | EscepcionCamposRequeridos excepcion) {
             JOptionPane.showMessageDialog(panelCliente.getParent(), excepcion.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }

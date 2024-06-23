@@ -4,7 +4,7 @@ import org.example.menues.acciones.habitacion.AccionBuscarHabitacion;
 import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.habitacion.AccionBuscarParaActualizar;
 import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
-import org.example.menues.acciones.habitacion.AccionEliminarHabitacion;
+import org.example.menues.acciones.habitacion.AccionBorrarHabitacion;
 import org.example.menues.cuadros.panelesgridbag.*;
 import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
@@ -85,11 +85,11 @@ public class PanelTareasHabitacion extends PanelCustom implements ITareas {
 
     @Override
     public void panelBorrar() {
-        this.setBorder(new TitledBorder("Eliminar Habitacion"));
+        this.setBorder(new TitledBorder("Borrar Habitacion"));
 
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
-        panelBotones.getBotonBorrar().addActionListener(new AccionEliminarHabitacion(panelDeEntradas));
+        panelBotones.getBotonBorrar().addActionListener(new AccionBorrarHabitacion(panelDeEntradas));
     }
 
    private PanelDeEntradas crearPanelDeEntradas(boolean visible){

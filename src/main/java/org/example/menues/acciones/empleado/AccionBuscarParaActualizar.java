@@ -4,7 +4,7 @@ import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,7 +31,7 @@ public class AccionBuscarParaActualizar implements ActionListener {
             panelEmpleado.habilitarEdicion();
             panelBotones.getBotonActualizar().setEnabled(true);
             panelBotones.getBotonBuscar().setEnabled(false);
-        } catch (ObjectoNoEncontradoExcepcion excepcion) {
+        } catch (EscepcionObjectoNoEncontrado excepcion) {
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
         }
     }

@@ -7,15 +7,14 @@ import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.entidades.persona.Persona;
 import org.example.sistema.enums.Cargo;
-import org.example.sistema.excepciones.CampoRequeridoExcepcion;
-import org.example.sistema.excepciones.HabitacionNoDisponibleExcepcion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.EscepcionCamposRequeridos;
+import org.example.sistema.excepciones.EscepcionHabitacionNoDisponible;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.EscepcionObjetoYaExiste;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class Sistema {
@@ -38,7 +37,7 @@ public class Sistema {
         this.gestorReservas = new GestorReservas();
     }
 
-    public boolean login(String dni, String password) throws ObjectoNoEncontradoExcepcion {
+    public boolean login(String dni, String password) throws EscepcionObjectoNoEncontrado {
         Empleado empleado = gestorEmpleados.buscar(dni);
         return empleado.getPassword().equals(password) && empleado.getCargo().equals(Cargo.ADMINISTRADOR);
     }
@@ -50,16 +49,16 @@ public class Sistema {
         return sistema;
     }
 
-    public void crearCliente(Cliente cliente) throws ObjetoYaExisteExcepcion, CampoRequeridoExcepcion {
+    public void crearCliente(Cliente cliente) throws EscepcionObjetoYaExiste, EscepcionCamposRequeridos {
         String camposNulos = verificarCamposNulos(cliente);
         if (camposNulos.isBlank()) {
             gestorClientes.crear(cliente);
         } else {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         }
     }
 
-    public Cliente buscarCLiente(String campoDni) throws ObjectoNoEncontradoExcepcion {
+    public Cliente buscarCLiente(String campoDni) throws EscepcionObjectoNoEncontrado {
         return gestorClientes.buscar(campoDni);
     }
 
@@ -67,7 +66,7 @@ public class Sistema {
         return this.gestorClientes.listar();
     }
 
-    public void borrarCliente(String campoDni) throws ObjectoNoEncontradoExcepcion {
+    public void borrarCliente(String campoDni) throws EscepcionObjectoNoEncontrado {
         gestorClientes.borrar(campoDni);
     }
 
@@ -83,15 +82,15 @@ public class Sistema {
         return this.gestorDeServicios.listar();
     }
 
-    public Servicio buscarServicio(String clave) throws ObjectoNoEncontradoExcepcion {
+    public Servicio buscarServicio(String clave) throws EscepcionObjectoNoEncontrado {
         return gestorDeServicios.buscar(clave);
     }
 
-    public String crearReserva(Reserva reserva, String dni, String habitacion) throws ObjetoYaExisteExcepcion,
-            ObjectoNoEncontradoExcepcion, HabitacionNoDisponibleExcepcion, CampoRequeridoExcepcion {
+    public String crearReserva(Reserva reserva, String dni, String habitacion) throws EscepcionObjetoYaExiste,
+            EscepcionObjectoNoEncontrado, EscepcionHabitacionNoDisponible, EscepcionCamposRequeridos {
         String camposNulos = verificarCamposNulosReserva(dni, habitacion);
         if (!camposNulos.isBlank()) {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         } else {
             reserva.setCliente(buscarCLiente(dni));
             reserva.setHabitacion(buscarHabitacion(habitacion));
@@ -99,7 +98,7 @@ public class Sistema {
             if (habitacionLibre(reserva)) {
                 return gestorReservas.crear(reserva);
             } else {
-                throw new HabitacionNoDisponibleExcepcion(reserva.getHabitacion().getNumeroDeHabitacion());
+                throw new EscepcionHabitacionNoDisponible(reserva.getHabitacion().getNumeroDeHabitacion());
             }
         }
     }
@@ -126,18 +125,18 @@ public class Sistema {
         return this.gestorReservas.listar();
     }
 
-    public Reserva buscarReserva(String idReserva) throws ObjectoNoEncontradoExcepcion {
+    public Reserva buscarReserva(String idReserva) throws EscepcionObjectoNoEncontrado {
         return gestorReservas.buscar(idReserva);
     }
 
-    public void eliminarReserva(String id) throws ObjectoNoEncontradoExcepcion {
+    public void borrarReserva(String id) throws EscepcionObjectoNoEncontrado {
         gestorReservas.borrar(id);
     }
 
-    public void actualizarReserva(String id, String dni, String habitacion, Reserva reserva) throws ObjectoNoEncontradoExcepcion, CampoRequeridoExcepcion {
+    public void actualizarReserva(String id, String dni, String habitacion, Reserva reserva) throws EscepcionObjectoNoEncontrado, EscepcionCamposRequeridos {
         String camposNulos = verificarCamposNulosReserva(dni, habitacion);
         if (!camposNulos.isBlank()) {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         } else {
             reserva.setCliente(buscarCLiente(dni));
             reserva.setHabitacion(buscarHabitacion(habitacion));
@@ -145,32 +144,32 @@ public class Sistema {
         }
     }
 
-    public Habitacion buscarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
+    public Habitacion buscarHabitacion(String numeroHabitacion) throws EscepcionObjectoNoEncontrado {
         return gestorHabitaciones.buscar(numeroHabitacion);
     }
 
-    public void crearHabitacion(Habitacion valor) throws ObjetoYaExisteExcepcion {
+    public void crearHabitacion(Habitacion valor) throws EscepcionObjetoYaExiste {
         gestorHabitaciones.crear(valor);
     }
 
-    public void eliminarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
+    public void borrarHabitacion(String numeroHabitacion) throws EscepcionObjectoNoEncontrado {
         gestorHabitaciones.borrar(numeroHabitacion);
     }
 
-    public Empleado buscarEmpleado(String campoDni) throws ObjectoNoEncontradoExcepcion {
+    public Empleado buscarEmpleado(String campoDni) throws EscepcionObjectoNoEncontrado {
         return gestorEmpleados.buscar(campoDni);
     }
 
-    public void crearEmpleado(Empleado empleado) throws ObjetoYaExisteExcepcion, CampoRequeridoExcepcion {
+    public void crearEmpleado(Empleado empleado) throws EscepcionObjetoYaExiste, EscepcionCamposRequeridos {
         String camposNulos = verificarCamposNulos(empleado);
         if (camposNulos.isBlank()) {
             gestorEmpleados.crear(empleado);
         } else {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         }
     }
 
-    public void eliminarEmpleado(String dni) throws ObjectoNoEncontradoExcepcion {
+    public void borrarEmpleado(String dni) throws EscepcionObjectoNoEncontrado {
         gestorEmpleados.borrar(dni);
     }
 
@@ -198,43 +197,43 @@ public class Sistema {
         return camposNulos.toString();
     }
 
-    public void actualizarEmpleado(Empleado empleado) throws CampoRequeridoExcepcion, ObjectoNoEncontradoExcepcion {
+    public void actualizarEmpleado(Empleado empleado) throws EscepcionCamposRequeridos, EscepcionObjectoNoEncontrado {
         String camposNulos = verificarCamposNulos(empleado);
         if (camposNulos.isBlank()) {
             gestorEmpleados.actualizar(empleado.getDni(), empleado);
         } else {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         }
     }
 
-    public void actualizarHabitacion(Habitacion habitacion) throws ObjectoNoEncontradoExcepcion, CampoRequeridoExcepcion {
+    public void actualizarHabitacion(Habitacion habitacion) throws EscepcionObjectoNoEncontrado, EscepcionCamposRequeridos {
         String camposNulos = verificacionCampoNuloHabitacion(habitacion);
         if (camposNulos.isBlank()) {
             gestorHabitaciones.actualizar(habitacion.getNumeroDeHabitacion(), habitacion);
         } else {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         }
     }
 
-    public void crearServicio(Servicio servicio) throws ObjetoYaExisteExcepcion, CampoRequeridoExcepcion {
+    public void crearServicio(Servicio servicio) throws EscepcionObjetoYaExiste, EscepcionCamposRequeridos {
         String camposNulos = verificarCamposNulos(servicio);
         if (camposNulos.isBlank()) {
             gestorDeServicios.crear(servicio);
         } else {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         }
     }
 
-    public void eliminarServicio(String clave) throws ObjectoNoEncontradoExcepcion {
+    public void borrarServicio(String clave) throws EscepcionObjectoNoEncontrado {
         gestorDeServicios.borrar(clave);
     }
 
-    public void actualizarServicio(Servicio servicio) throws CampoRequeridoExcepcion, ObjectoNoEncontradoExcepcion {
+    public void actualizarServicio(Servicio servicio) throws EscepcionCamposRequeridos, EscepcionObjectoNoEncontrado {
         String camposNulos = verificarCamposNulos(servicio);
         if (camposNulos.isBlank()) {
             gestorDeServicios.actualizar(servicio.getCodigo(), servicio);
         } else {
-            throw new CampoRequeridoExcepcion(camposNulos);
+            throw new EscepcionCamposRequeridos(camposNulos);
         }
     }
 }

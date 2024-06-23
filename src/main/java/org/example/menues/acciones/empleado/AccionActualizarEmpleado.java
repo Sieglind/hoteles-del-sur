@@ -3,8 +3,8 @@ package org.example.menues.acciones.empleado;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.CampoRequeridoExcepcion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.EscepcionCamposRequeridos;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ public class AccionActualizarEmpleado implements ActionListener {
         try {
             Sistema.getInstance().actualizarEmpleado(empleado);
             JOptionPane.showMessageDialog(panelEmpleado.getParent(), "Empleado actualizado correctamente");
-        } catch (CampoRequeridoExcepcion | ObjectoNoEncontradoExcepcion excepcion) {
+        } catch (EscepcionCamposRequeridos | EscepcionObjectoNoEncontrado excepcion) {
             JOptionPane.showMessageDialog(panelEmpleado.getParent(),excepcion.getMessage());
         }
     }

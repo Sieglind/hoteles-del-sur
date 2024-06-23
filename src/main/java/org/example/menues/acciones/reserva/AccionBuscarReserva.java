@@ -4,7 +4,7 @@ import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva.PanelReserva;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +24,7 @@ public class AccionBuscarReserva implements ActionListener {
         try {
             Reserva reserva = Sistema.getInstance().buscarReserva(panelDeEntradas.obtenerCampo());
             this.panelReserva.rellenarCampos(reserva);
-        } catch (ObjectoNoEncontradoExcepcion excepcion) {
+        } catch (EscepcionObjectoNoEncontrado excepcion) {
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
         }
     }

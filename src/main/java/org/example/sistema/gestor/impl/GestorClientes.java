@@ -1,8 +1,8 @@
 package org.example.sistema.gestor.impl;
 
 import org.example.sistema.entidades.persona.Cliente;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.EscepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
 
@@ -23,9 +23,9 @@ public class GestorClientes implements IGestor<String, Cliente> {
 
     //Crea un Cliente
     @Override
-    public String crear(Cliente cliente) throws ObjetoYaExisteExcepcion {
+    public String crear(Cliente cliente) throws EscepcionObjetoYaExiste {
         if (listaClientes.containsKey(cliente.getDni())) {
-            throw new ObjetoYaExisteExcepcion(cliente);
+            throw new EscepcionObjetoYaExiste(cliente);
         }
         listaClientes.put(cliente.getDni(), cliente);
         return cliente.getDni();
@@ -33,10 +33,10 @@ public class GestorClientes implements IGestor<String, Cliente> {
 
     //Busca un cliente
     @Override
-    public Cliente buscar(String key) throws ObjectoNoEncontradoExcepcion {
+    public Cliente buscar(String key) throws EscepcionObjectoNoEncontrado {
         Cliente cliente = listaClientes.get(key);
         if (cliente == null) {
-            throw new ObjectoNoEncontradoExcepcion(key);
+            throw new EscepcionObjectoNoEncontrado(key);
         }
         return cliente;
     }
@@ -49,9 +49,9 @@ public class GestorClientes implements IGestor<String, Cliente> {
 
     //Actualiza los datos de un cliente
     @Override
-    public Cliente actualizar(String key, Cliente cliente) throws ObjectoNoEncontradoExcepcion {
+    public Cliente actualizar(String key, Cliente cliente) throws EscepcionObjectoNoEncontrado {
         if (!listaClientes.containsKey(key)) {
-            throw new ObjectoNoEncontradoExcepcion(key);
+            throw new EscepcionObjectoNoEncontrado(key);
         }
         listaClientes.put(key, cliente);
         return cliente;
@@ -59,9 +59,9 @@ public class GestorClientes implements IGestor<String, Cliente> {
 
     //Elimina un Cliente
     @Override
-    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws EscepcionObjectoNoEncontrado {
         if (!listaClientes.containsKey(key)) {
-            throw new ObjectoNoEncontradoExcepcion(key);
+            throw new EscepcionObjectoNoEncontrado(key);
         }
         listaClientes.remove(key);
         return true;
@@ -71,7 +71,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
         clientes.forEach(cliente -> {
             try {
                 crear(cliente);
-            } catch (ObjetoYaExisteExcepcion excepcion) {
+            } catch (EscepcionObjetoYaExiste excepcion) {
                 LOG.log(Level.WARNING,excepcion.getMessage());
             }
         });
