@@ -1,7 +1,9 @@
 package org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio;
 
 import org.example.menues.acciones.AccionVolver;
-import org.example.menues.acciones.servicios.AccionBuscarServicio;
+import org.example.menues.acciones.empleado.AccionActualizarEmpleado;
+import org.example.menues.acciones.empleado.AccionBuscarParaActualizar;
+import org.example.menues.acciones.servicios.*;
 import org.example.menues.cuadros.panelesgridbag.*;
 import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
@@ -51,6 +53,7 @@ public class PanelTareasServicio extends PanelCustom implements ITareas {
         this.panelDeEntradas = crearPanelDeEntradas(false);
         this.panelServicio = crearPanelServicio(true);
         this.panelBotones = crearPanelBotones(Tarea.CREAR);
+        panelBotones.getBotonGuardar().addActionListener(new AccionCrearServicio(panelServicio));
 
     }
 
@@ -76,7 +79,10 @@ public class PanelTareasServicio extends PanelCustom implements ITareas {
     public void panelActualizar() {
         this.setBorder(BorderFactory.createTitledBorder("Actualizar Servicio"));
         this.panelDeEntradas = crearPanelDeEntradas(true);
+        this.panelServicio = crearPanelServicio(false);
         this.panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizarServicio(panelDeEntradas, panelServicio, panelBotones));
+        panelBotones.getBotonActualizar().addActionListener(new AccionActualizarServicio(panelServicio));
 
     }
 
@@ -85,6 +91,7 @@ public class PanelTareasServicio extends PanelCustom implements ITareas {
         this.setBorder(BorderFactory.createTitledBorder("Eliminar Servicio"));
         this.panelDeEntradas = crearPanelDeEntradas(true);
         this.panelBotones = crearPanelBotones(Tarea.BORRAR);
+        panelBotones.getBotonBorrar().addActionListener(new AccionBorrarServicio(panelDeEntradas));
     }
 
     private PanelDeEntradas crearPanelDeEntradas(boolean completo) {

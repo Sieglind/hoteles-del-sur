@@ -1,4 +1,4 @@
-package org.example.menues.acciones.empleado;
+package org.example.menues.acciones.servicios;
 
 import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
@@ -7,20 +7,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AccionEliminarEmpleado implements ActionListener {
+public class AccionBorrarServicio implements ActionListener {
     private PanelDeEntradas panelDeEntradas;
 
-    public AccionEliminarEmpleado(PanelDeEntradas panelDeEntradas) {
+    public AccionBorrarServicio(PanelDeEntradas panelDeEntradas) {
         this.panelDeEntradas = panelDeEntradas;
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+
+    public void actionPerformed(ActionEvent evento) {
         try{
-            String dni = panelDeEntradas.obtenerCampo();
-            Sistema.getInstance().eliminarEmpleado(dni);
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Empleado eliminado con exito " + dni);
+            String clave = panelDeEntradas.obtenerCampo();
+            Sistema.getInstance().eliminarServicio(clave);
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Servicio eliminado con exito " + clave);
         }catch(Exception excepcion){
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }

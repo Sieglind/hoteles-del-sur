@@ -2,6 +2,8 @@ package org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio;
 
 import org.example.menues.cuadros.panelesgridbag.PanelCustom;
 import org.example.sistema.entidades.Servicio;
+import org.example.sistema.entidades.persona.Empleado;
+import org.example.sistema.enums.Cargo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -62,6 +64,20 @@ public class PanelServicio extends PanelCustom {
         this.setVisible(true);
         this.revalidate();
         this.repaint();
+    }
+
+    public Servicio crearServicio() {
+        return new Servicio(
+                CAMPO_NOMBRE.getText(),
+                CAMPO_DESCRIPCION.getText(),
+                CAMPO_PRECIO.getColumns(),
+                CAMPO_CLAVE.getText());
+    }
+
+    public void habilitarEdicion() {
+        this.CAMPO_NOMBRE.setEnabled(true);
+        this.CAMPO_DESCRIPCION.setEnabled(true);
+        this.CAMPO_PRECIO.setEnabled(true);
     }
 
 }

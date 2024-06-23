@@ -135,10 +135,10 @@ public class Sistema {
             throw new CampoRequeridoExcepcion(camposNulos);
         }
     }
-
-    public void eliminarEmpleado(String dni) throws ObjectoNoEncontradoExcepcion {
+    public void eliminarEmpleado (String dni) throws ObjectoNoEncontradoExcepcion {
         gestorEmpleados.borrar(dni);
     }
+
 
 
     private static String verificarCamposNulos(Persona persona) {
@@ -152,6 +152,15 @@ public class Sistema {
     private static String verificacionCampoNuloHabitacion(Habitacion habitacion){
         StringBuilder camposNulos = new StringBuilder();
         if(habitacion.getNumeroDeHabitacion().isBlank()) camposNulos.append(" Numero de Habitacion");
+        return camposNulos.toString();
+    }
+
+    private static String verificarCamposNulos(Servicio servicio) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (servicio.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (servicio.getDescripcion().isBlank()) camposNulos.append(" DESCRIPCION");
+        if (servicio.getPrecio() == 0) camposNulos.append(" PRECIO");
+        if (servicio.getCodigo().isBlank()) camposNulos.append(" CODIGO");
         return camposNulos.toString();
     }
 
@@ -169,6 +178,27 @@ public class Sistema {
         if(camposNulos.isBlank()) {
             gestorHabitaciones.actualizar(habitacion.getNumeroDeHabitacion(), habitacion);
         }else{
+            throw new CampoRequeridoExcepcion(camposNulos);
+        }
+    }
+
+    public void crearServicio(Servicio servicio) throws ObjetoYaExisteExcepcion, CampoRequeridoExcepcion {
+        String camposNulos = verificarCamposNulos(servicio);
+        if (camposNulos.isBlank()) {
+            gestorDeServicios.crear(servicio);
+        } else {
+            throw new CampoRequeridoExcepcion(camposNulos);
+        }
+    }
+    public void eliminarServicio (String clave) throws ObjectoNoEncontradoExcepcion {
+        gestorDeServicios.borrar(clave);
+    }
+
+    public void actualizarServicio(Servicio servicio) throws CampoRequeridoExcepcion, ObjectoNoEncontradoExcepcion {
+        String camposNulos = verificarCamposNulos(servicio);
+        if(camposNulos.isBlank()) {
+            gestorDeServicios.actualizar(servicio.getCodigo(), servicio);
+        } else {
             throw new CampoRequeridoExcepcion(camposNulos);
         }
     }
