@@ -72,7 +72,7 @@ public class PanelTareasEmpleado extends PanelCustom implements ITareas {
         panelDeEntradas = crearPanelDeEntradas(true);
         panelEmpleado = crearPanelEmpleado(false);
         panelBotones= crearPanelBotones(Tarea.ACTUALIZAR);
-        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizar(panelDeEntradas, panelEmpleado, panelBotones));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizarEmpelado(panelDeEntradas, panelEmpleado, panelBotones));
         panelBotones.getBotonActualizar().addActionListener(new AccionActualizarEmpleado(panelEmpleado));
     }
 

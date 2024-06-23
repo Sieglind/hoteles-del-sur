@@ -11,12 +11,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AccionHabilitarReserva implements ActionListener {
+public class AccionBuscarParaActualizarReserva implements ActionListener {
     private final PanelDeEntradas panelEntradasReserva;
     private final PanelReserva panelReserva;
     private final PanelBotones panelBotones;
 
-    public AccionHabilitarReserva(PanelDeEntradas panelEntradasReserva, PanelReserva panelReserva, PanelBotones panelBotones) {
+    public AccionBuscarParaActualizarReserva(PanelDeEntradas panelEntradasReserva, PanelReserva panelReserva, PanelBotones panelBotones) {
         this.panelEntradasReserva = panelEntradasReserva;
         this.panelReserva = panelReserva;
         this.panelBotones = panelBotones;

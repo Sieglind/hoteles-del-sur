@@ -2,7 +2,7 @@ package org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion;
 
 import org.example.menues.acciones.habitacion.AccionBuscarHabitacion;
 import org.example.menues.acciones.AccionVolver;
-import org.example.menues.acciones.habitacion.AccionBuscarParaActualizar;
+import org.example.menues.acciones.habitacion.AccionBuscarParaActualizarHabitacion;
 import org.example.menues.acciones.habitacion.AccionCrearHabitacion;
 import org.example.menues.acciones.habitacion.AccionBorrarHabitacion;
 import org.example.menues.cuadros.panelesgridbag.*;
@@ -79,7 +79,7 @@ public class PanelTareasHabitacion extends PanelCustom implements ITareas {
         panelDeEntradas = crearPanelDeEntradas(true);
         panelHabitacion = crearPanelHabitacion(false);
         panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
-        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizar(panelDeEntradas,panelHabitacion,panelBotones));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizarHabitacion(panelDeEntradas,panelHabitacion,panelBotones));
         panelBotones.getBotonActualizar().addActionListener(new AccionActualizarHabitacion(panelHabitacion));
     }
 
