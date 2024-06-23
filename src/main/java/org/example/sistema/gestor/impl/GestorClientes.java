@@ -21,7 +21,6 @@ public class GestorClientes implements IGestor<String, Cliente> {
         this.listaClientes = new TreeMap<>();
     }
 
-    //Crea un Cliente
     @Override
     public String crear(Cliente cliente) throws ExcepcionObjetoYaExiste {
         if (listaClientes.containsKey(cliente.getDni())) {
@@ -31,7 +30,6 @@ public class GestorClientes implements IGestor<String, Cliente> {
         return cliente.getDni();
     }
 
-    //Busca un cliente
     @Override
     public Cliente buscar(String key) throws ExcepcionObjectoNoEncontrado {
         Cliente cliente = listaClientes.get(key);
@@ -41,13 +39,11 @@ public class GestorClientes implements IGestor<String, Cliente> {
         return cliente;
     }
 
-    //Devuelve una lista con todos los clientes
     @Override
     public List<Cliente> listar() {
         return new ArrayList<>(listaClientes.values());
     }
 
-    //Actualiza los datos de un cliente
     @Override
     public Cliente actualizar(String key, Cliente cliente) throws ExcepcionObjectoNoEncontrado {
         if (!listaClientes.containsKey(key)) {
@@ -57,7 +53,6 @@ public class GestorClientes implements IGestor<String, Cliente> {
         return cliente;
     }
 
-    //Elimina un Cliente
     @Override
     public boolean borrar(String key) throws ExcepcionObjectoNoEncontrado {
         if (!listaClientes.containsKey(key)) {

@@ -22,7 +22,6 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
         this.servicios = new TreeMap<>();
     }
 
-    // Crear un Servicio
     @Override
     public String crear(Servicio servicio) throws ExcepcionObjetoYaExiste {
         if (servicios.containsKey(servicio.getCodigo())) {
@@ -32,7 +31,6 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
         return servicio.getCodigo();
     }
 
-    // Buscar un Servicio
     @Override
     public Servicio buscar(String key) throws ExcepcionObjectoNoEncontrado {
         Servicio servicio = servicios.get(key);
@@ -42,14 +40,12 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
         return servicio;
     }
 
-    // Devuelve una lista con todos los servicios
     @Override
     public List<Servicio> listar() {
         return new ArrayList<>(servicios.values());
     }
 
 
-    // Actualizar los datos de un servicio
     @Override
     public Servicio actualizar(String key, Servicio servicio) throws ExcepcionObjectoNoEncontrado {
         if (!servicios.containsKey(key)) {
