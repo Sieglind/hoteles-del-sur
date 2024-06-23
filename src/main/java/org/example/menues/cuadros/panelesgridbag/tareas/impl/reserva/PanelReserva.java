@@ -4,6 +4,8 @@ import org.example.menues.cuadros.panelesgridbag.PanelCustom;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.persona.Cliente;
+import org.example.sistema.enums.Estado;
+import org.example.sistema.enums.TipoDeHabitacion;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,6 +28,8 @@ public class PanelReserva extends PanelCustom {
     private final JTextField CAMPO_FECHA_INICIO = crearCampoDeTexto();
     private final JLabel ETIQUETA_FECHA_FIN = crearEtiqueta("Check-Out: ");
     private final JTextField CAMPO_FECHA_FIN = crearCampoDeTexto();
+    private final JLabel ETIQUETA_ESTADO_RESERVA = (crearEtiqueta("Estado de la Reserva: "));
+    private final JComboBox<Estado> CAMPO_ESTADO_RESERVA = new JComboBox<>(Estado.values());
 
 
     public PanelReserva(boolean editable) {
@@ -40,8 +44,14 @@ public class PanelReserva extends PanelCustom {
         this.add(this.CAMPO_FECHA_INICIO);
         this.add(this.ETIQUETA_FECHA_FIN);
         this.add(this.CAMPO_FECHA_FIN);
+        this.add(this.ETIQUETA_ESTADO_RESERVA);
+        dimensionarCompomente(CAMPO_ESTADO_RESERVA, CENTER_ALIGNMENT);
+        this.add(CAMPO_ESTADO_RESERVA);
         this.ETIQUETA_NOMBRE_CLIENTE.setVisible(false);
         this.CAMPO_NOMBRE_CLIENTE.setVisible(false);
+        this.CAMPO_ESTADO_RESERVA.setVisible(false);
+        this.ETIQUETA_ESTADO_RESERVA.setVisible(false);
+
         if (!editable) {
             this.CAMPO_BUSCAR_CLIENTE.setEnabled(false);
             this.CAMPO_BUSCAR_CLIENTE.setDisabledTextColor(Color.BLACK);
@@ -55,6 +65,8 @@ public class PanelReserva extends PanelCustom {
             this.CAMPO_FECHA_FIN.setDisabledTextColor(Color.BLACK);
             this.CAMPO_BUSCAR_RESERVA.setEnabled(false);
             this.CAMPO_BUSCAR_RESERVA.setDisabledTextColor(Color.BLACK);
+            this.CAMPO_ESTADO_RESERVA.setEnabled(false);
+            this.CAMPO_ESTADO_RESERVA.setSelectedItem(-1);
         }
     }
 
@@ -79,14 +91,15 @@ public class PanelReserva extends PanelCustom {
         this.CAMPO_NOMBRE_CLIENTE.setVisible(true);
         this.CAMPO_BUSCAR_HABITACION.setText(reserva.getHabitacion().getNumeroDeHabitacion());
         this.CAMPO_BUSCAR_RESERVA.setText(reserva.getIdReserva());
-        //this.CAMPO_FECHA_INICIO.setText(reserva.getFechaInicioFormateado());
         this.CAMPO_FECHA_INICIO.setText(String.valueOf(reserva.getFechaInicio()));
         this.CAMPO_FECHA_FIN.setText(String.valueOf(reserva.getFechaFin()));
+        this.ETIQUETA_ESTADO_RESERVA.setVisible(true);
+        this.CAMPO_ESTADO_RESERVA.setVisible(true);
+        this.CAMPO_ESTADO_RESERVA.setSelectedItem(reserva.getEstado());
         this.setVisible(true);
         this.revalidate();
         this.repaint();
     }
-
 
     public Reserva crearReserva() {
         Reserva reserva = null;
@@ -98,6 +111,7 @@ public class PanelReserva extends PanelCustom {
         try {
             fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());
             fechaFin = LocalDate.parse(CAMPO_FECHA_FIN.getText());
+
             reserva = new Reserva(idReserva, cliente, habitacion, fechaInicio, fechaFin);
         } catch (DateTimeParseException exception) {
             JOptionPane.showMessageDialog(this.getParent(), "Fecha no valida(yyyy-MM-dd): " + exception.getParsedString(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -118,6 +132,10 @@ public class PanelReserva extends PanelCustom {
         this.CAMPO_BUSCAR_HABITACION.setEnabled(true);
         this.CAMPO_FECHA_INICIO.setEnabled(true);
         this.CAMPO_FECHA_FIN.setEnabled(true);
+        this.CAMPO_ESTADO_RESERVA.setEnabled(true);
     }
 
+    public Estado getEstadoReserva(){
+        return (Estado) CAMPO_ESTADO_RESERVA.getSelectedItem();
+    }
 }

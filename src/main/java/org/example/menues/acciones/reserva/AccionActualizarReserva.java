@@ -26,7 +26,8 @@ public class AccionActualizarReserva implements ActionListener {
             Reserva reserva = panelReserva.crearReserva();
             if (reserva != null) {
                 reserva.setIdReserva(panelDeEntradas.obtenerCampo());
-                Sistema.getInstance().actualizarReserva(panelDeEntradas.obtenerCampo(),panelReserva.getCliente(),panelReserva.getHabitacion(), reserva);
+                Sistema.getInstance().actualizarReserva(panelReserva.getEstadoReserva(),panelDeEntradas.obtenerCampo(),
+                        panelReserva.getCliente(), panelReserva.getHabitacion(), reserva);
                 JOptionPane.showMessageDialog(panelReserva.getParent(), "Reserva actualizada correctamente");
             }
         } catch (ExcepcionObjectoNoEncontrado | ExcepcionCamposRequeridos excepcion) {
