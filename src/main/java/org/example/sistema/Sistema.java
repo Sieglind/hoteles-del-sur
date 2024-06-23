@@ -73,10 +73,6 @@ public class Sistema {
         return this.gestorHabitaciones.listar();
     }
 
-    public List<Reserva> listarReservas() {
-        return this.gestorReservas.listar();
-    }
-
     public List<Empleado> listarEmpleados() {
         return this.gestorEmpleados.listar();
     }
@@ -90,7 +86,17 @@ public class Sistema {
     }
 
     public String crearReserva(Reserva reserva) throws ObjetoYaExisteExcepcion {
+        asignarIdReserva(reserva);
         return gestorReservas.crear(reserva);
+
+    }
+
+    public String asignarIdReserva(Reserva reserva){
+        return gestorReservas.asignarId(reserva);
+    }
+
+    public List<Reserva> listarReservas() {
+        return this.gestorReservas.listar();
     }
 
     public Reserva buscarReserva(String idReserva) throws ObjectoNoEncontradoExcepcion {
@@ -99,6 +105,10 @@ public class Sistema {
 
     public void eliminarReserva(String id) throws ObjectoNoEncontradoExcepcion {
         gestorReservas.borrar(id);
+    }
+
+    public void actualizarReserva(String id, Reserva reserva) throws ObjectoNoEncontradoExcepcion {
+        gestorReservas.actualizar(id, reserva);
     }
 
     public Habitacion buscarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
@@ -141,7 +151,7 @@ public class Sistema {
 
     public void actualizarEmpleado(Empleado empleado) throws CampoRequeridoExcepcion, ObjectoNoEncontradoExcepcion {
         String camposNulos = verificarCamposNulos(empleado);
-        if(camposNulos.isBlank()) {
+        if (camposNulos.isBlank()) {
             gestorEmpleados.actualizar(empleado.getDni(), empleado);
         } else {
             throw new CampoRequeridoExcepcion(camposNulos);
