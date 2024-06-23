@@ -1,8 +1,6 @@
 package org.example.menues.cuadros.panelesgridbag.tareas.impl.cliente;
 
-import org.example.menues.acciones.cliente.AccionBorraCliente;
-import org.example.menues.acciones.cliente.AccionBuscarCliente;
-import org.example.menues.acciones.cliente.AccionCrearCliente;
+import org.example.menues.acciones.cliente.*;
 import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.PanelTareas;
 import org.example.menues.enums.Entidad;
@@ -39,7 +37,7 @@ public class PanelTareasCliente extends PanelTareas implements ITareas {
     @Override
     public void panelCrear() {
         setBorder(BorderFactory.createTitledBorder("Crear Cliente"));
-        panelDeEntradas = crearPanelDeEntradas(false,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(false, ETIQUEDA_DNI);
         panelCliente = crearPanelCliente(true);
         panelBotones = crearPanelBotones(Tarea.CREAR);
         panelBotones.getBotonGuardar().addActionListener(new AccionCrearCliente(panelCliente));
@@ -48,7 +46,7 @@ public class PanelTareasCliente extends PanelTareas implements ITareas {
     @Override
     public void panelBuscar() {
         this.setBorder(BorderFactory.createTitledBorder("Buscar Cliente"));
-        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(true, ETIQUEDA_DNI);
         panelCliente = crearPanelCliente(false);
         panelBotones = crearPanelBotones(Tarea.BUSCAR);
         panelBotones.getBotonBuscar().addActionListener(new AccionBuscarCliente(panelDeEntradas, panelCliente));
@@ -66,15 +64,18 @@ public class PanelTareasCliente extends PanelTareas implements ITareas {
     @Override
     public void panelActualizar() {
         setBorder(BorderFactory.createTitledBorder("Actualizar Cliente"));
-        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(true, ETIQUEDA_DNI);
+        panelCliente = crearPanelCliente(false);
         panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizarCliente(panelDeEntradas, panelCliente, panelBotones));
+        panelBotones.getBotonActualizar().addActionListener(new AccionActualizarCliente(panelCliente));
     }
 
     @Override
     public void panelBorrar() {
         this.setBorder(BorderFactory.createTitledBorder("Borrar Cliente"));
 
-        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(true, ETIQUEDA_DNI);
         panelBotones = crearPanelBotones(Tarea.BORRAR);
         panelBotones.getBotonBorrar().addActionListener(new AccionBorraCliente(panelDeEntradas));
     }
