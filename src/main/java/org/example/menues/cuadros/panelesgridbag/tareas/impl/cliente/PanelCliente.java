@@ -71,4 +71,10 @@ public class PanelCliente extends PanelCustom {
                 CAMPO_DNI.getText(),
                 (Segmento) LISTA_SEGMENTO.getSelectedItem());
     }
+
+    public void habilitarEdicion() {
+        this.CAMPO_NOMBRE.setEnabled(true);
+        this.CAMPO_APELLIDO.setEnabled(true);
+        this.LISTA_SEGMENTO.setEnabled(true);
+    }
 }

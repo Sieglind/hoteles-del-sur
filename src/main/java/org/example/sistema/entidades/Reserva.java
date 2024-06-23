@@ -92,6 +92,10 @@ public class Reserva {
         this.estado = estado;
     }
 
+    public void confirmar(){
+        estado = Estado.CONFIRMADA;
+    }
+
     @Override
     public String toString() {
         return
