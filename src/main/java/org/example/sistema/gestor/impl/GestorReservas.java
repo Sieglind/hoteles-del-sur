@@ -11,8 +11,7 @@ public class GestorReservas implements IGestor<String, Reserva> {
 
     private final Map<String, Reserva> reservas = new HashMap<>();
 
-    public GestorReservas() {
-    }
+    public GestorReservas() {}
 
     @Override
     public String crear(Reserva reserva) throws ExcepcionObjetoYaExiste {
@@ -37,18 +36,15 @@ public class GestorReservas implements IGestor<String, Reserva> {
 
     @Override
     public Reserva actualizar(String key, Reserva valor) throws ExcepcionObjectoNoEncontrado {
-        if (!reservas.containsKey(key)) {
-            throw new ExcepcionObjectoNoEncontrado(key);
-        }
+        objetoExiste(key);
         return reservas.put(key, valor);
 
     }
 
     @Override
-    public boolean borrar(String key) throws ExcepcionObjectoNoEncontrado {
+    public void borrar(String key) throws ExcepcionObjectoNoEncontrado {
         objetoExiste(key);
         reservas.remove(key);
-        return true;
     }
 
     private void objetoExiste(String key) throws ExcepcionObjectoNoEncontrado {
@@ -56,5 +52,4 @@ public class GestorReservas implements IGestor<String, Reserva> {
             throw new ExcepcionObjectoNoEncontrado(key);
         }
     }
-
 }

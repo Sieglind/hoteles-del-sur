@@ -15,5 +15,5 @@ public interface IGestor<K,V> {
 
     V actualizar(K key, V valor) throws ExcepcionObjectoNoEncontrado;
 
-    boolean borrar(K key) throws ExcepcionObjectoNoEncontrado;
+    void borrar(K key) throws ExcepcionObjectoNoEncontrado;
 }

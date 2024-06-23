@@ -15,11 +15,21 @@ import java.util.logging.Logger;
 public class GestorDeServicios implements IGestor<String, Servicio> {
 
     private final TreeMap<String, Servicio> servicios;
-
     private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
     public GestorDeServicios() {
         this.servicios = new TreeMap<>();
+    }
+
+    public GestorDeServicios conServicios(List<Servicio> servicios) {
+        servicios.forEach(servicio -> {
+            try {
+                crear(servicio);
+            } catch (ExcepcionObjetoYaExiste excepcion) {
+                LOG.log(Level.WARNING,excepcion.getMessage());
+            }
+        });
+        return this;
     }
 
     @Override
@@ -33,11 +43,8 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     @Override
     public Servicio buscar(String key) throws ExcepcionObjectoNoEncontrado {
-        Servicio servicio = servicios.get(key);
-        if (servicio == null) {
-            throw new ExcepcionObjectoNoEncontrado(key);
-        }
-        return servicio;
+        objetoExiste(key);
+        return servicios.get(key);
     }
 
     @Override
@@ -48,31 +55,21 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     @Override
     public Servicio actualizar(String key, Servicio servicio) throws ExcepcionObjectoNoEncontrado {
-        if (!servicios.containsKey(key)) {
-            throw new ExcepcionObjectoNoEncontrado(key);
-        }
+        objetoExiste(key);
         servicios.put(key, servicio);
         return servicio;
     }
 
 
     @Override
-    public boolean borrar(String key) throws ExcepcionObjectoNoEncontrado {
-        if (!servicios.containsKey(key)) {
-                throw new ExcepcionObjectoNoEncontrado(key);
-        }
+    public void borrar(String key) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
         servicios.remove(key);
-        return true;
     }
 
-    public GestorDeServicios conServicios(List<Servicio> servicios) {
-        servicios.forEach(servicio -> {
-            try {
-                crear(servicio);
-            } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
-            }
-        });
-        return this;
+    private void objetoExiste(String key) throws ExcepcionObjectoNoEncontrado {
+        if (!servicios.containsKey(key) || servicios.get(key) == null) {
+            throw new ExcepcionObjectoNoEncontrado(key);
+        }
     }
 }

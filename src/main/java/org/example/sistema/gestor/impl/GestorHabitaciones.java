@@ -13,61 +13,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GestorHabitaciones implements IGestor <String,Habitacion>{
-    private final Map<String,Habitacion> listaHabitaciones;
 
-    private final Logger LOG = Logger.getLogger(this.getClass().getName());
+    private final Map<String,Habitacion> habitaciones;
+    private final Logger LOG = Logger.getLogger(GestorHabitaciones.class.getName());
 
     public GestorHabitaciones() {
-        this.listaHabitaciones = new HashMap<>();
-    }
-
-    public Map<String, Habitacion> getListaHabitaciones() {
-        return listaHabitaciones;
-    }
-
-    @Override
-    public String crear(Habitacion valor) throws ExcepcionObjetoYaExiste {
-        String llave = obtenerClave(valor);
-        if(listaHabitaciones.containsKey(llave)){
-            throw new ExcepcionObjetoYaExiste(llave);
-        }
-        listaHabitaciones.put(llave,valor);
-        return llave;
-    }
-
-    @Override
-    public Habitacion buscar(String key) throws ExcepcionObjectoNoEncontrado {
-        Habitacion habitacion = listaHabitaciones.get(key);
-        if(habitacion == null){
-            throw new ExcepcionObjectoNoEncontrado(key);
-        }
-        return habitacion;
-    }
-
-    @Override
-    public List<Habitacion> listar() {
-        return new ArrayList<>(listaHabitaciones.values());
-    }
-
-    @Override
-    public Habitacion actualizar(String key, Habitacion valor) throws ExcepcionObjectoNoEncontrado {
-        if(!listaHabitaciones.containsKey(key)){
-            throw new ExcepcionObjectoNoEncontrado(key);
-        }
-        return listaHabitaciones.put(key,valor);
-    }
-
-    @Override
-    public boolean borrar(String key) throws ExcepcionObjectoNoEncontrado {
-        if(!listaHabitaciones.containsKey(key)){
-            throw new ExcepcionObjectoNoEncontrado(key);
-        }
-        listaHabitaciones.remove(key);
-        return true;
-    }
-
-    private String obtenerClave (Habitacion habitacion) {
-        return habitacion.getNumeroDeHabitacion();
+        this.habitaciones = new HashMap<>();
     }
 
     public GestorHabitaciones conHabitacion(List<Habitacion> habitaciones) {
@@ -81,5 +32,41 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
         return this;
     }
 
+    @Override
+    public String crear(Habitacion valor) throws ExcepcionObjetoYaExiste {
+        if(habitaciones.containsKey(valor.getNumeroDeHabitacion())){
+            throw new ExcepcionObjetoYaExiste(valor.getNumeroDeHabitacion());
+        }
+        habitaciones.put(valor.getNumeroDeHabitacion(),valor);
+        return valor.getNumeroDeHabitacion();
+    }
 
+    @Override
+    public Habitacion buscar(String key) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        return habitaciones.get(key);
+    }
+
+    @Override
+    public List<Habitacion> listar() {
+        return new ArrayList<>(habitaciones.values());
+    }
+
+    @Override
+    public Habitacion actualizar(String key, Habitacion valor) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        return habitaciones.put(key,valor);
+    }
+
+    @Override
+    public void borrar(String key) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        habitaciones.remove(key);
+    }
+
+    private void objetoExiste(String key) throws ExcepcionObjectoNoEncontrado {
+        if (!habitaciones.containsKey(key) || habitaciones.get(key) == null) {
+            throw new ExcepcionObjectoNoEncontrado(key);
+        }
+    }
 }
