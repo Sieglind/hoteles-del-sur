@@ -68,6 +68,10 @@ public class Sistema {
         return this.gestorClientes.listar();
     }
 
+    public void actualizarCliente(Cliente cliente) throws ExcepcionObjectoNoEncontrado {
+        gestorClientes.actualizar(cliente.getDni(),cliente);
+    }
+
     public void borrarCliente(String campoDni) throws ExcepcionObjectoNoEncontrado {
         gestorClientes.borrar(campoDni);
     }
