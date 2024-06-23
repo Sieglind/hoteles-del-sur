@@ -1,9 +1,7 @@
 package org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva;
 
 import org.example.menues.acciones.AccionVolver;
-import org.example.menues.acciones.reserva.AccionBuscarReserva;
-import org.example.menues.acciones.reserva.AccionCrearReserva;
-import org.example.menues.acciones.reserva.AccionEliminarReserva;
+import org.example.menues.acciones.reserva.*;
 import org.example.menues.cuadros.panelesgridbag.*;
 import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
@@ -78,7 +76,10 @@ public class PanelTareasReserva extends PanelCustom implements ITareas {
         this.setBorder(new TitledBorder("Actualizar Reserva"));
 
         this.panelDeEntradas = crearPanelDeEntradas(true);
+        panelReserva = crearPanelReserva(false);
         this.panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
+        panelBotones.getBotonBuscar().addActionListener(new AccionHabilitarReserva(panelDeEntradas, panelReserva, panelBotones));
+        panelBotones.getBotonActualizar().addActionListener(new AccionActualizarReserva(panelReserva, panelDeEntradas));
 
     }
 
