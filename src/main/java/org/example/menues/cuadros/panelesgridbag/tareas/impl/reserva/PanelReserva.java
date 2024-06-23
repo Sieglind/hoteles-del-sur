@@ -12,7 +12,9 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class PanelReserva extends PanelCustom {
     private final JLabel ETIQUETA_BUSCAR_RESERVA = crearEtiqueta("Numero de Reserva: ");
@@ -90,16 +92,19 @@ public class PanelReserva extends PanelCustom {
 
 
     public Reserva crearReserva() {
+        Reserva reserva = null;
         Cliente cliente = null;
         Habitacion habitacion = null;
         LocalDate fechaInicio;
         LocalDate fechaFin;
         String idReserva = null;
-
-        fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());
-        fechaFin = LocalDate.parse(CAMPO_FECHA_FIN.getText());
-
-        Reserva reserva = new Reserva(idReserva, cliente, habitacion, fechaInicio, fechaFin);
+        try {
+            fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());
+            fechaFin = LocalDate.parse(CAMPO_FECHA_FIN.getText());
+            reserva = new Reserva(idReserva, cliente, habitacion, fechaInicio, fechaFin);
+        } catch (DateTimeParseException exception) {
+            JOptionPane.showMessageDialog(this.getParent(), "Fecha no valida(yyyy-MM-dd): " + exception.getParsedString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         return reserva;
     }
 

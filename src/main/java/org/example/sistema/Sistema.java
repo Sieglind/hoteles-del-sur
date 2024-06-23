@@ -87,15 +87,28 @@ public class Sistema {
         return gestorDeServicios.buscar(clave);
     }
 
-    public String crearReserva(Reserva reserva, String dni, String habitacion) throws ObjetoYaExisteExcepcion, ObjectoNoEncontradoExcepcion, HabitacionNoDisponibleExcepcion {
-        reserva.setCliente(buscarCLiente(dni));
-        reserva.setHabitacion(buscarHabitacion(habitacion));
-        asignarIdReserva(reserva);
-        if (habitacionLibre(reserva)) {
-            return gestorReservas.crear(reserva);
+    public String crearReserva(Reserva reserva, String dni, String habitacion) throws ObjetoYaExisteExcepcion,
+            ObjectoNoEncontradoExcepcion, HabitacionNoDisponibleExcepcion, CampoRequeridoExcepcion {
+        String camposNulos = verificarCamposNulosReserva(dni, habitacion);
+        if (!camposNulos.isBlank()) {
+            throw new CampoRequeridoExcepcion(camposNulos);
         } else {
-            throw new HabitacionNoDisponibleExcepcion(reserva.getHabitacion().getNumeroDeHabitacion());
+            reserva.setCliente(buscarCLiente(dni));
+            reserva.setHabitacion(buscarHabitacion(habitacion));
+            asignarIdReserva(reserva);
+            if (habitacionLibre(reserva)) {
+                return gestorReservas.crear(reserva);
+            } else {
+                throw new HabitacionNoDisponibleExcepcion(reserva.getHabitacion().getNumeroDeHabitacion());
+            }
         }
+    }
+
+    private static String verificarCamposNulosReserva(String dni, String habitacion) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (dni.isBlank()) camposNulos.append(" DNI");
+        if (habitacion.isBlank()) camposNulos.append(" HABITACION");
+        return camposNulos.toString();
     }
 
     private boolean habitacionLibre(Reserva reserva) {
