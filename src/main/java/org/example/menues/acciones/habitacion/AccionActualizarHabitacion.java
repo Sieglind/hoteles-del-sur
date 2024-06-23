@@ -1,5 +1,6 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion;
+package org.example.menues.acciones.habitacion;
 
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.excepciones.ExcepcionCamposRequeridos;

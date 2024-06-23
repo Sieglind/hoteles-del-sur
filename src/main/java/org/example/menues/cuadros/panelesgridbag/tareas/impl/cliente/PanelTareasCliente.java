@@ -1,32 +1,26 @@
 package org.example.menues.cuadros.panelesgridbag.tareas.impl.cliente;
 
-import org.example.menues.acciones.AccionVolver;
 import org.example.menues.acciones.cliente.AccionBorraCliente;
 import org.example.menues.acciones.cliente.AccionBuscarCliente;
 import org.example.menues.acciones.cliente.AccionCrearCliente;
-import org.example.menues.cuadros.panelesgridbag.*;
 import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.PanelTareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class PanelTareasCliente extends PanelCustom implements ITareas {
+public class PanelTareasCliente extends PanelTareas implements ITareas {
 
-    private final JButton BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(Entidad.CLIENTES.name()));
-
-    private PanelDeEntradas panelDeEntradas;
     private PanelCliente panelCliente;
-    private PanelBotones panelBotones;
 
 
     public PanelTareasCliente(Tarea tarea) {
-        super();
+        super(Entidad.CLIENTES);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setVisible(true);
         elegirPanel(tarea);
@@ -45,7 +39,7 @@ public class PanelTareasCliente extends PanelCustom implements ITareas {
     @Override
     public void panelCrear() {
         setBorder(BorderFactory.createTitledBorder("Crear Cliente"));
-        panelDeEntradas = crearPanelDeEntradas(false);
+        panelDeEntradas = crearPanelDeEntradas(false,ETIQUEDA_DNI);
         panelCliente = crearPanelCliente(true);
         panelBotones = crearPanelBotones(Tarea.CREAR);
         panelBotones.getBotonGuardar().addActionListener(new AccionCrearCliente(panelCliente));
@@ -54,10 +48,10 @@ public class PanelTareasCliente extends PanelCustom implements ITareas {
     @Override
     public void panelBuscar() {
         this.setBorder(BorderFactory.createTitledBorder("Buscar Cliente"));
-        panelDeEntradas = crearPanelDeEntradas(true);
+        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
         panelCliente = crearPanelCliente(false);
         panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarCliente(panelDeEntradas,panelCliente));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarCliente(panelDeEntradas, panelCliente));
     }
 
     @Override
@@ -72,23 +66,17 @@ public class PanelTareasCliente extends PanelCustom implements ITareas {
     @Override
     public void panelActualizar() {
         setBorder(BorderFactory.createTitledBorder("Actualizar Cliente"));
-        panelDeEntradas = crearPanelDeEntradas(true);
-        panelBotones= crearPanelBotones(Tarea.ACTUALIZAR);
+        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
+        panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
     }
 
     @Override
     public void panelBorrar() {
         this.setBorder(BorderFactory.createTitledBorder("Borrar Cliente"));
 
-        panelDeEntradas = crearPanelDeEntradas(true);
+        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
         panelBotones = crearPanelBotones(Tarea.BORRAR);
         panelBotones.getBotonBorrar().addActionListener(new AccionBorraCliente(panelDeEntradas));
-    }
-
-    private PanelDeEntradas crearPanelDeEntradas(boolean completo) {
-        PanelDeEntradas panelDeEntradas = new PanelDeEntradas(completo,"DNI");
-        this.add(panelDeEntradas, crearConfiguracion(0.1, 0));
-        return panelDeEntradas;
     }
 
     private PanelCliente crearPanelCliente(boolean editable) {
@@ -96,24 +84,8 @@ public class PanelTareasCliente extends PanelCustom implements ITareas {
         return crearPanelCliente(panelCliente);
     }
 
-    private PanelCliente crearPanelCliente(PanelCliente panelCliente){
+    private PanelCliente crearPanelCliente(PanelCliente panelCliente) {
         this.add(panelCliente, crearConfiguracion(0.8, 1));
         return panelCliente;
-    }
-
-    private PanelBotones crearPanelBotones(Tarea tarea) {
-        PanelBotones panelBotones = new PanelBotones(tarea, BOTON_VOLVER);
-        this.add(panelBotones, crearConfiguracion(0.1, 2));
-        return panelBotones;
-    }
-
-    private GridBagConstraints crearConfiguracion(double weighty, int posicion) {
-        GridBagConstraints configuracion = new GridBagConstraints();
-        configuracion.weightx = 1.0;
-        configuracion.weighty = weighty;
-        configuracion.gridx = posicion;
-        configuracion.insets = new Insets(30, 30, 30, 30);
-        configuracion.fill = GridBagConstraints.BOTH;
-        return configuracion;
     }
 }
