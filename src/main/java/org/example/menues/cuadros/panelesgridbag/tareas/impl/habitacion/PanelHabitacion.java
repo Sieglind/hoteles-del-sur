@@ -74,4 +74,18 @@ public class PanelHabitacion extends PanelCustom {
         this.DISPONIBILIDAD.setSelected(false);
         this.setVisible(false);
     }
+
+    public void habilitarEdicion() {
+        //this.CAMPO_NUMERO_HABITACION.setEnabled(true);
+        this.CAMPO_TIPO_HABITACION.setEnabled(true);
+        this.DISPONIBILIDAD.setEnabled(true);
+    }
+
+    public Habitacion crearHabitacion() {
+        return new Habitacion(
+                CAMPO_NUMERO_HABITACION.getText(),
+                (TipoDeHabitacion) CAMPO_TIPO_HABITACION.getSelectedItem());
+    }
+
+
 }
