@@ -24,7 +24,7 @@ public class AccionActualizarHabitacion implements ActionListener {
         try{
             Sistema.getInstance().actualizarHabitacion(habitacion);
             JOptionPane.showMessageDialog(panelHabitacion.getParent(), "Habitacion actualizada");
-        }catch (ExcepcionCamposRequeridos | ExcepcionObjectoNoEncontrado excepcion){
+        }catch (ExcepcionObjectoNoEncontrado excepcion){
             JOptionPane.showMessageDialog(panelHabitacion.getParent(), excepcion.getMessage());
         }
     }
