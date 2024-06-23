@@ -134,10 +134,16 @@ public class Sistema {
         gestorReservas.borrar(id);
     }
 
-    public void actualizarReserva(String id, Reserva reserva) throws ObjectoNoEncontradoExcepcion {
-        gestorReservas.actualizar(id, reserva);
+    public void actualizarReserva(String id, String dni, String habitacion, Reserva reserva) throws ObjectoNoEncontradoExcepcion, CampoRequeridoExcepcion {
+        String camposNulos = verificarCamposNulosReserva(dni, habitacion);
+        if (!camposNulos.isBlank()) {
+            throw new CampoRequeridoExcepcion(camposNulos);
+        } else {
+            reserva.setCliente(buscarCLiente(dni));
+            reserva.setHabitacion(buscarHabitacion(habitacion));
+            gestorReservas.actualizar(id, reserva);
+        }
     }
-
 
     public Habitacion buscarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
         return gestorHabitaciones.buscar(numeroHabitacion);
