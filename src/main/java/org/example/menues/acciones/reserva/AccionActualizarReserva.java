@@ -5,6 +5,7 @@ import org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva.PanelReserv
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.persona.Empleado;
+import org.example.sistema.excepciones.CampoRequeridoExcepcion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 
@@ -24,11 +25,13 @@ public class AccionActualizarReserva implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evento) {
         try {
-            Reserva reserva1 = panelReserva.crearReserva();
-            reserva1.setIdReserva(panelDeEntradas.obtenerCampo());
-            Sistema.getInstance().actualizarReserva(panelDeEntradas.obtenerCampo(),reserva1);
-            JOptionPane.showMessageDialog(panelReserva.getParent(), "Reserva actualizada correctamente");
-        } catch (ObjectoNoEncontradoExcepcion excepcion) {
+            Reserva reserva = panelReserva.crearReserva();
+            if (reserva != null) {
+                reserva.setIdReserva(panelDeEntradas.obtenerCampo());
+                Sistema.getInstance().actualizarReserva(panelDeEntradas.obtenerCampo(),panelReserva.getCliente(),panelReserva.getHabitacion(), reserva);
+                JOptionPane.showMessageDialog(panelReserva.getParent(), "Reserva actualizada correctamente");
+            }
+        } catch (ObjectoNoEncontradoExcepcion | CampoRequeridoExcepcion excepcion) {
             JOptionPane.showMessageDialog(panelReserva.getParent(), excepcion.getMessage());
         }
     }
