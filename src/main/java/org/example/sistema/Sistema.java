@@ -244,4 +244,12 @@ public class Sistema {
             throw new ExcepcionCamposRequeridos(camposNulos);
         }
     }
+
+    public void exportarDatos() {
+        UtilidadesCSV.exportarClientes(gestorClientes.listar());
+        UtilidadesCSV.exportarHabitaciones(gestorHabitaciones.listar());
+        UtilidadesCSV.exportarServicios(gestorDeServicios.listar());
+        UtilidadesCSV.exportarEmpleados(gestorEmpleados.listar());
+        UtilidadesCSV.exportarReservas(gestorReservas.listar());
+    }
 }
