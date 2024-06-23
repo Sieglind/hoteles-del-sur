@@ -46,11 +46,11 @@ public class Servicio {
 
     @Override
     public String toString() {
-        return "\nServicio" +
-                "/Clave: " + codigo +
-                "/Nombre: " + nombre +
-                "/Descripcion: " + descripcion +
-                "/Precio: " + precio;
+        return
+                " | Clave: " + codigo +
+                  " | " + nombre +
+                " | Descripcion: " + descripcion +
+                " | Precio: " + precio;
     }
 
 }
