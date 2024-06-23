@@ -1,8 +1,8 @@
 package org.example.sistema.gestor.impl;
 
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
 import java.util.ArrayList;
@@ -26,20 +26,20 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
     }
 
     @Override
-    public String crear(Habitacion valor) throws ObjetoYaExisteExcepcion {
+    public String crear(Habitacion valor) throws ExcepcionObjetoYaExiste {
         String llave = obtenerClave(valor);
         if(listaHabitaciones.containsKey(llave)){
-            throw new ObjetoYaExisteExcepcion("La habitacion ya existe");
+            throw new ExcepcionObjetoYaExiste(llave);
         }
         listaHabitaciones.put(llave,valor);
         return llave;
     }
 
     @Override
-    public Habitacion buscar(String key) throws ObjectoNoEncontradoExcepcion {
+    public Habitacion buscar(String key) throws ExcepcionObjectoNoEncontrado {
         Habitacion habitacion = listaHabitaciones.get(key);
         if(habitacion == null){
-            throw new ObjectoNoEncontradoExcepcion("La habitacion no existe");
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
         return habitacion;
     }
@@ -50,17 +50,17 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
     }
 
     @Override
-    public Habitacion actualizar(String key, Habitacion valor) throws ObjectoNoEncontradoExcepcion {
+    public Habitacion actualizar(String key, Habitacion valor) throws ExcepcionObjectoNoEncontrado {
         if(!listaHabitaciones.containsKey(key)){
-            throw new ObjectoNoEncontradoExcepcion("La habitacion no existe");
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
         return listaHabitaciones.put(key,valor);
     }
 
     @Override
-    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws ExcepcionObjectoNoEncontrado {
         if(!listaHabitaciones.containsKey(key)){
-            throw new ObjectoNoEncontradoExcepcion("La habitacion no existe");
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
         listaHabitaciones.remove(key);
         return true;
@@ -74,7 +74,7 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
         habitaciones.forEach(habitacion -> {
             try {
                 crear(habitacion);
-            } catch (ObjetoYaExisteExcepcion excepcion) {
+            } catch (ExcepcionObjetoYaExiste excepcion) {
                 LOG.log(Level.WARNING,excepcion.getMessage());
             }
         });

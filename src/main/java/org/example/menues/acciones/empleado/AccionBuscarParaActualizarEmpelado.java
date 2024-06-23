@@ -4,19 +4,19 @@ import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AccionBuscarParaActualizar implements ActionListener {
+public class AccionBuscarParaActualizarEmpelado implements ActionListener {
 
     private final PanelDeEntradas panelDeEntradas;
     private final PanelEmpleado panelEmpleado;
     private final PanelBotones panelBotones;
 
-    public AccionBuscarParaActualizar(PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado, PanelBotones panelBotones) {
+    public AccionBuscarParaActualizarEmpelado(PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado, PanelBotones panelBotones) {
         this.panelDeEntradas = panelDeEntradas;
         this.panelEmpleado = panelEmpleado;
         this.panelBotones = panelBotones;
@@ -31,7 +31,7 @@ public class AccionBuscarParaActualizar implements ActionListener {
             panelEmpleado.habilitarEdicion();
             panelBotones.getBotonActualizar().setEnabled(true);
             panelBotones.getBotonBuscar().setEnabled(false);
-        } catch (ObjectoNoEncontradoExcepcion excepcion) {
+        } catch (ExcepcionObjectoNoEncontrado excepcion) {
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
         }
     }

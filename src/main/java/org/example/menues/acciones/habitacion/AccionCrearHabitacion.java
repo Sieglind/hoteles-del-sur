@@ -4,7 +4,7 @@ import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelTareasHabitacion;
 import org.example.sistema.Sistema;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,7 +27,7 @@ public class AccionCrearHabitacion implements ActionListener {
 
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),"Habitacion creada con exito");
 
-        }catch (ObjetoYaExisteExcepcion excepcion){
+        }catch (ExcepcionObjetoYaExiste excepcion){
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(), excepcion.getMessage());
         }
    }

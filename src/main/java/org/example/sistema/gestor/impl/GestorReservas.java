@@ -1,8 +1,8 @@
 package org.example.sistema.gestor.impl;
 
 import org.example.sistema.entidades.Reserva;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
 import java.util.*;
@@ -15,9 +15,9 @@ public class GestorReservas implements IGestor<String, Reserva> {
     }
 
     @Override
-    public String crear(Reserva reserva) throws ObjetoYaExisteExcepcion {
+    public String crear(Reserva reserva) throws ExcepcionObjetoYaExiste {
         if (reservas.containsKey(reserva.getIdReserva())) {
-            throw new ObjetoYaExisteExcepcion("Ya existe una reserva con el id: " + reserva.getIdReserva());
+            throw new ExcepcionObjetoYaExiste(reserva.getIdReserva());
         } else {
             reservas.put(reserva.getIdReserva(), reserva);
         }
@@ -25,7 +25,7 @@ public class GestorReservas implements IGestor<String, Reserva> {
     }
 
     @Override
-    public Reserva buscar(String key) throws ObjectoNoEncontradoExcepcion {
+    public Reserva buscar(String key) throws ExcepcionObjectoNoEncontrado {
         objetoExiste(key);
         return reservas.get(key);
     }
@@ -36,25 +36,24 @@ public class GestorReservas implements IGestor<String, Reserva> {
     }
 
     @Override
-    public Reserva actualizar(String key, Reserva valor) throws ObjectoNoEncontradoExcepcion {
-//        objetoExiste(key);
+    public Reserva actualizar(String key, Reserva valor) throws ExcepcionObjectoNoEncontrado {
         if (!reservas.containsKey(key)) {
-            throw new ObjectoNoEncontradoExcepcion("La reserva no existe");
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
         return reservas.put(key, valor);
 
     }
 
     @Override
-    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws ExcepcionObjectoNoEncontrado {
         objetoExiste(key);
         reservas.remove(key);
         return true;
     }
 
-    private void objetoExiste(String key) throws ObjectoNoEncontradoExcepcion {
+    private void objetoExiste(String key) throws ExcepcionObjectoNoEncontrado {
         if (!reservas.containsKey(key) || reservas.get(key) == null) {
-            throw new ObjectoNoEncontradoExcepcion("No existe una reserva con el id: " + key);
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
     }
 

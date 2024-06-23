@@ -4,7 +4,7 @@ import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,7 +25,7 @@ public class AccionBuscarHabitacion implements ActionListener {
         try{
             Habitacion habitacion = Sistema.getInstance().buscarHabitacion(panelEntradas.obtenerCampo());
             this.panelHabitacion.llenarCampos(habitacion);
-        }catch(ObjectoNoEncontradoExcepcion e){
+        }catch(ExcepcionObjectoNoEncontrado e){
             JOptionPane.showMessageDialog(panelEntradas.getParent(),e.getMessage());
         }
     }

@@ -1,7 +1,7 @@
 package org.example.sistema.gestor.impl;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
 import java.util.ArrayList;
@@ -21,23 +21,23 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
     }
 
     @Override
-    public String crear(Empleado empleado) throws ObjetoYaExisteExcepcion {
+    public String crear(Empleado empleado) throws ExcepcionObjetoYaExiste {
         if(empleado==null){
             throw new IllegalArgumentException("El empleado no pudo ser registrado correctamente");
         }
         if(empleados.containsKey(empleado.getDni())){
-            throw new ObjetoYaExisteExcepcion("Ya existe registrado un empleado con DNI " + empleado.getDni());
+            throw new ExcepcionObjetoYaExiste(empleado.getDni());
         }
         empleados.put(empleado.getDni(), empleado);
         return empleado.getDni();
     }
 
     @Override
-    public Empleado buscar(String dni) throws ObjectoNoEncontradoExcepcion {
+    public Empleado buscar(String dni) throws ExcepcionObjectoNoEncontrado {
         Empleado empleado = empleados.get(dni);
 
         if(empleado == null){
-            throw new ObjectoNoEncontradoExcepcion("No existe registrado ningún empleado con DNI: " + dni);
+            throw new ExcepcionObjectoNoEncontrado(dni);
         }
         return empleado;
     }
@@ -48,20 +48,20 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
     }
 
     @Override
-    public Empleado actualizar(String dni, Empleado empleadoActualizado) throws ObjectoNoEncontradoExcepcion {
+    public Empleado actualizar(String dni, Empleado empleadoActualizado) throws ExcepcionObjectoNoEncontrado {
 
         if(!empleados.containsKey(dni)){
-            throw new ObjectoNoEncontradoExcepcion("No existe ningún empleado registrado con DNI " + dni);
+            throw new ExcepcionObjectoNoEncontrado(dni);
         }
         empleados.put(dni, empleadoActualizado);
         return empleadoActualizado;
     }
 
     @Override
-    public boolean borrar(String dni) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String dni) throws ExcepcionObjectoNoEncontrado {
 
         if(!empleados.containsKey(dni)){
-            throw new ObjectoNoEncontradoExcepcion("No existe ningún empleado registrado con DNI " + dni);
+            throw new ExcepcionObjectoNoEncontrado(dni);
         }
         empleados.remove(dni);
         return true;
@@ -71,7 +71,7 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
         empleados.forEach(empleado -> {
             try {
                 crear(empleado);
-            } catch (ObjetoYaExisteExcepcion excepcion) {
+            } catch (ExcepcionObjetoYaExiste excepcion) {
                 LOG.log(Level.WARNING,excepcion.getMessage());
             }
         });

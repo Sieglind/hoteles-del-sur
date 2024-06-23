@@ -1,6 +1,6 @@
 package org.example.menues.acciones;
 
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import org.example.sistema.Sistema;
 import org.example.menues.VentanaPrincipal;
 import org.example.menues.cuadros.panelesflow.PanelDeEntidades;
@@ -37,7 +37,7 @@ public class AccionLogin implements ActionListener {
             } else {
                 emitirError(MENSAJE_CONTRASENIA_ERRONEA);
             }
-        } catch (ObjectoNoEncontradoExcepcion excepcion) {
+        } catch (ExcepcionObjectoNoEncontrado excepcion) {
             emitirError(MENSAJE_USUARIO_INVALIDO);
         }
     }

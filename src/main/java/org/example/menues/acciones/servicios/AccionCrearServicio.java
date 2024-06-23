@@ -3,8 +3,8 @@ package org.example.menues.acciones.servicios;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio.PanelServicio;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
-import org.example.sistema.excepciones.CampoRequeridoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +23,7 @@ public class AccionCrearServicio implements ActionListener{
         try {
             Sistema.getInstance().crearServicio(servicio);
             JOptionPane.showMessageDialog(panelServicio.getParent(), "Nuevo servicio creado correctamente");
-        }catch (ObjetoYaExisteExcepcion | CampoRequeridoExcepcion excepcion){
+        }catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion){
             JOptionPane.showMessageDialog(panelServicio.getParent(),excepcion.getMessage());
         }
     }
