@@ -5,16 +5,15 @@ import org.example.sistema.enums.Estado;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Reserva {
+
     private String idReserva;
     private Cliente cliente;
     private Habitacion habitacion;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
-    private int[] serviciosElegidos;
+    private final LocalDate fechaInicio;
+    private final LocalDate fechaFin;
+    private final int[] serviciosElegidos;
     private Estado estado;
 
     public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin, int[] serviciosElegidos) {
@@ -46,7 +45,7 @@ public class Reserva {
     }
 
     public void setIdReserva(String idReserva) {
-        this.idReserva = "R" + Instant.now().getNano();
+        this.idReserva = idReserva;
     }
 
     public void setCliente(Cliente cliente) {
@@ -65,24 +64,8 @@ public class Reserva {
         return fechaInicio;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public String getFechaInicioFormateado() {
-        return fechaInicio.format(formatter);
-    }
-
     public LocalDate getFechaFin() {
         return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
-    public String getFechaFinFormateado() {
-        return fechaFin.format(formatter);
     }
 
     public Estado getEstado() {
@@ -91,10 +74,6 @@ public class Reserva {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public void confirmar(){
-        estado = Estado.CONFIRMADA;
     }
 
     @Override

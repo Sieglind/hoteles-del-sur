@@ -8,14 +8,11 @@ public abstract class Persona {
     private final String apellido;
     private final String dni;
 
-    private boolean deleted = false;
-
     public Persona(String nombre, String apellido, String dni) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -28,15 +25,6 @@ public abstract class Persona {
     public String getDni() {
         return dni;
     }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
 
     @Override
     public boolean equals(Object o) {

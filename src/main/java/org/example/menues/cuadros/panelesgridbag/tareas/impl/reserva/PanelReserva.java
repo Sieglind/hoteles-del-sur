@@ -2,10 +2,8 @@ package org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva;
 
 import org.example.menues.cuadros.panelesgridbag.PanelCustom;
 import org.example.sistema.Sistema;
-import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.Servicio;
-import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.Estado;
 
 import javax.swing.*;
@@ -15,7 +13,6 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Vector;
 
 public class PanelReserva extends PanelCustom {
@@ -106,15 +103,12 @@ public class PanelReserva extends PanelCustom {
 
     public Reserva crearReserva() {
         Reserva reserva = null;
-        Cliente cliente = null;
-        Habitacion habitacion = null;
         LocalDate fechaInicio;
         LocalDate fechaFin;
-        String idReserva = null;
         try {
             fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());
             fechaFin = LocalDate.parse(CAMPO_FECHA_FIN.getText());
-            reserva = new Reserva(idReserva, cliente, habitacion, fechaInicio, fechaFin,LISTA_SERVICIOS.getSelectedIndices());
+            reserva = new Reserva(null, null, null, fechaInicio, fechaFin,LISTA_SERVICIOS.getSelectedIndices());
         } catch (DateTimeParseException exception) {
             JOptionPane.showMessageDialog(this.getParent(), "Fecha no valida(yyyy-MM-dd): " + exception.getParsedString(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -150,9 +144,5 @@ public class PanelReserva extends PanelCustom {
         JScrollPane scroll = new JScrollPane(listaServicios);
         scroll.setMaximumSize(new Dimension(600,160));
         return scroll;
-    }
-
-    public List<Servicio> obtenerServiciosElegidos(){
-        return LISTA_SERVICIOS.getSelectedValuesList();
     }
 }

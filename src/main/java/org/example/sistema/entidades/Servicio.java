@@ -1,11 +1,11 @@
 package org.example.sistema.entidades;
 
 public class Servicio {
+
     private final String nombre;
     private final String descripcion;
-    private float precio;
+    private final float precio;
     private final String codigo;
-
 
     public Servicio(String nombre, String descripcion, float precio, String codigo) {
         this.nombre = nombre;
@@ -30,10 +30,6 @@ public class Servicio {
         return codigo;
     }
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
-
     @Override
     public String toString() {
         return
@@ -42,5 +38,4 @@ public class Servicio {
                         " | Descripcion: " + descripcion +
                         " | Precio: " + precio;
     }
-
 }

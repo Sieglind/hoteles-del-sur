@@ -12,8 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccionActualizarReserva implements ActionListener {
-    private PanelReserva panelReserva;
-    PanelDeEntradas panelDeEntradas;
+    private final PanelReserva panelReserva;
+    private final PanelDeEntradas panelDeEntradas;
 
     public AccionActualizarReserva(PanelReserva panelReserva, PanelDeEntradas panelDeEntradas) {
         this.panelReserva = panelReserva;

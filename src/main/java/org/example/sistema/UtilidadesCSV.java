@@ -185,8 +185,8 @@ public class UtilidadesCSV {
                         reserva.getIdReserva(),
                         String.valueOf(reserva.getCliente()),
                         String.valueOf(reserva.getHabitacion()),
-                        reserva.getFechaInicioFormateado(),
-                        reserva.getFechaFinFormateado()
+                        reserva.getFechaInicio().toString(),
+                        reserva.getFechaFin().toString()
                 };
                 csvWriter.writeNext(valores);
             });

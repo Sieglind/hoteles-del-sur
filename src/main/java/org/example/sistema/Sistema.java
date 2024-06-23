@@ -16,6 +16,7 @@ import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
+import java.time.Instant;
 import java.util.List;
 
 
@@ -117,6 +118,7 @@ public class Sistema {
         } else {
             reserva.setCliente(buscarCLiente(dni));
             reserva.setHabitacion(buscarHabitacion(habitacion));
+            reserva.setIdReserva("R" + Instant.now().getNano());
             if (habitacionLibre(reserva)) {
                 return gestorReservas.crear(reserva);
             } else {
