@@ -8,6 +8,7 @@ import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.entidades.persona.Persona;
 import org.example.sistema.enums.Cargo;
+import org.example.sistema.enums.Estado;
 import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
 import org.example.sistema.excepciones.ExcepcionHabitacionNoDisponible;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
@@ -134,11 +135,12 @@ public class Sistema {
         gestorReservas.borrar(id);
     }
 
-    public void actualizarReserva(String id, String dni, String habitacion, Reserva reserva) throws ExcepcionObjectoNoEncontrado, ExcepcionCamposRequeridos {
+    public void actualizarReserva(Estado estadoReserva, String id, String dni, String habitacion, Reserva reserva) throws ExcepcionObjectoNoEncontrado, ExcepcionCamposRequeridos {
         String camposNulos = verificarCamposNulosReserva(dni, habitacion);
         if (!camposNulos.isBlank()) {
             throw new ExcepcionCamposRequeridos(camposNulos);
         } else {
+            reserva.setEstado(estadoReserva);
             reserva.setCliente(buscarCLiente(dni));
             reserva.setHabitacion(buscarHabitacion(habitacion));
             gestorReservas.actualizar(id, reserva);
