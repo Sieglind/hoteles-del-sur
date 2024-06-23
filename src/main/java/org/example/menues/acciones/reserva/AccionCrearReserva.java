@@ -7,6 +7,7 @@ import org.example.sistema.excepciones.CampoRequeridoExcepcion;
 import org.example.sistema.excepciones.HabitacionNoDisponibleExcepcion;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.entidades.Reserva;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
