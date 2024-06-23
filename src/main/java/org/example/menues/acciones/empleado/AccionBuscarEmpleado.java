@@ -4,7 +4,7 @@ import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmple
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelTareasEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ public class AccionBuscarEmpleado implements ActionListener {
         try {
             Empleado empleado = Sistema.getInstance().buscarEmpleado(panelDeEntradas.obtenerCampo());
             this.panelEmpleado.llenarCampos(empleado);
-        } catch (EscepcionObjectoNoEncontrado excepcion) {
+        } catch (ExcepcionObjectoNoEncontrado excepcion) {
             JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
         }
     }

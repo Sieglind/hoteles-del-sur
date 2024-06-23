@@ -2,8 +2,8 @@ package org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion;
 
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.excepciones.EscepcionCamposRequeridos;
-import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +23,7 @@ public class AccionActualizarHabitacion implements ActionListener {
         try{
             Sistema.getInstance().actualizarHabitacion(habitacion);
             JOptionPane.showMessageDialog(panelHabitacion.getParent(), "Habitacion actualizada");
-        }catch (EscepcionCamposRequeridos | EscepcionObjectoNoEncontrado excepcion){
+        }catch (ExcepcionCamposRequeridos | ExcepcionObjectoNoEncontrado excepcion){
             JOptionPane.showMessageDialog(panelHabitacion.getParent(), excepcion.getMessage());
         }
     }

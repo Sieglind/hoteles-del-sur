@@ -1,8 +1,8 @@
 package org.example.sistema.gestor.impl;
 
 import org.example.sistema.entidades.Servicio;
-import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
-import org.example.sistema.excepciones.EscepcionObjetoYaExiste;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
 
@@ -24,9 +24,9 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     // Crear un Servicio
     @Override
-    public String crear(Servicio servicio) throws EscepcionObjetoYaExiste {
+    public String crear(Servicio servicio) throws ExcepcionObjetoYaExiste {
         if (servicios.containsKey(servicio.getCodigo())) {
-            throw new EscepcionObjetoYaExiste(servicio.getCodigo());
+            throw new ExcepcionObjetoYaExiste(servicio.getCodigo());
         }
         servicios.put(servicio.getCodigo(), servicio);
         return servicio.getCodigo();
@@ -34,10 +34,10 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     // Buscar un Servicio
     @Override
-    public Servicio buscar(String key) throws EscepcionObjectoNoEncontrado {
+    public Servicio buscar(String key) throws ExcepcionObjectoNoEncontrado {
         Servicio servicio = servicios.get(key);
         if (servicio == null) {
-            throw new EscepcionObjectoNoEncontrado(key);
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
         return servicio;
     }
@@ -51,9 +51,9 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
     // Actualizar los datos de un servicio
     @Override
-    public Servicio actualizar(String key, Servicio servicio) throws EscepcionObjectoNoEncontrado {
+    public Servicio actualizar(String key, Servicio servicio) throws ExcepcionObjectoNoEncontrado {
         if (!servicios.containsKey(key)) {
-            throw new EscepcionObjectoNoEncontrado(key);
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
         servicios.put(key, servicio);
         return servicio;
@@ -61,9 +61,9 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
 
 
     @Override
-    public boolean borrar(String key) throws EscepcionObjectoNoEncontrado {
+    public boolean borrar(String key) throws ExcepcionObjectoNoEncontrado {
         if (!servicios.containsKey(key)) {
-                throw new EscepcionObjectoNoEncontrado(key);
+                throw new ExcepcionObjectoNoEncontrado(key);
         }
         servicios.remove(key);
         return true;
@@ -73,7 +73,7 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
         servicios.forEach(servicio -> {
             try {
                 crear(servicio);
-            } catch (EscepcionObjetoYaExiste excepcion) {
+            } catch (ExcepcionObjetoYaExiste excepcion) {
                 LOG.log(Level.WARNING,excepcion.getMessage());
             }
         });

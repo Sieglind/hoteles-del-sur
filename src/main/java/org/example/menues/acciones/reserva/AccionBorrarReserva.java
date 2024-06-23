@@ -2,7 +2,7 @@ package org.example.menues.acciones.reserva;
 
 import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
-import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +22,7 @@ public class AccionBorrarReserva implements ActionListener {
             Sistema.getInstance().borrarReserva(panelEntradasReserva.obtenerCampo());
             JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), "Reserva eliminada con exito " +
                     panelEntradasReserva.obtenerCampo());
-        } catch (EscepcionObjectoNoEncontrado ex) {
+        } catch (ExcepcionObjectoNoEncontrado ex) {
             JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), ex.getMessage());
         }
     }

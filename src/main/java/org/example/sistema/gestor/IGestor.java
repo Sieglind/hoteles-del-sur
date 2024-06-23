@@ -1,19 +1,19 @@
 package org.example.sistema.gestor;
 
-import org.example.sistema.excepciones.EscepcionObjectoNoEncontrado;
-import org.example.sistema.excepciones.EscepcionObjetoYaExiste;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 
 import java.util.List;
 
 public interface IGestor<K,V> {
 
-    K crear(V valor) throws EscepcionObjetoYaExiste;
+    K crear(V valor) throws ExcepcionObjetoYaExiste;
 
-    V buscar(K key) throws EscepcionObjectoNoEncontrado;
+    V buscar(K key) throws ExcepcionObjectoNoEncontrado;
 
     List<V> listar();
 
-    V actualizar(K key, V valor) throws EscepcionObjectoNoEncontrado;
+    V actualizar(K key, V valor) throws ExcepcionObjectoNoEncontrado;
 
-    boolean borrar(K key) throws EscepcionObjectoNoEncontrado;
+    boolean borrar(K key) throws ExcepcionObjectoNoEncontrado;
 }
