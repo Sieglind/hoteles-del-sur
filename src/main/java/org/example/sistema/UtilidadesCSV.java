@@ -1,8 +1,10 @@
 package org.example.sistema;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import org.example.sistema.entidades.Habitacion;
+import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.Servicio;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.entidades.persona.Empleado;
@@ -11,6 +13,7 @@ import org.example.sistema.enums.Segmento;
 import org.example.sistema.enums.TipoDeHabitacion;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,5 +151,111 @@ public class UtilidadesCSV {
 
     }
 
+    public static void exportarClientes(List<Cliente> clientes) {
 
+        String filePath = "src/main/resources/clientes.csv";
+
+        try(CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))){
+
+            clientes.forEach(cliente -> {
+
+                String[] valores = {
+                        cliente.getNombre(),
+                        cliente.getApellido(),
+                        cliente.getDni(),
+                        String.valueOf(cliente.getSegmento())
+                };
+                csvWriter.writeNext(valores);
+            });
+
+        }catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+
+    }
+
+    public static void exportarHabitaciones(List<Habitacion> habitaciones) {
+
+        String filePath = "src/main/resources/habitaciones.csv";
+
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))){
+
+            habitaciones.forEach(habitacion -> {
+
+                String[] valores ={
+                        habitacion.getNumeroDeHabitacion(),
+                        String.valueOf(habitacion.getTipoDeHabitacion())
+                };
+                csvWriter.writeNext(valores);
+            });
+
+        }catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
+
+    public static void exportarServicios(List<Servicio> servicios) {
+        String filePath = "src/main/resources/servicios.csv";
+
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath));){
+
+
+            for (Servicio servicio : servicios) {
+                String[] valores = {
+                        servicio.getNombre(),
+                        servicio.getDescripcion(),
+                        String.valueOf(servicio.getPrecio()),
+                        servicio.getCodigo()
+
+                };
+                csvWriter.writeNext(valores);
+            }
+
+        }catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
+
+    public static void exportarEmpleados(List<Empleado> empleados) {
+
+        String filePath = "src/main/resources/empleados.csv";
+
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))){
+
+            empleados.forEach(empleado -> {
+                String[] valores = {
+                        empleado.getNombre(),
+                        empleado.getApellido(),
+                        empleado.getDni(),
+                        String.valueOf(empleado.getCargo())
+                };
+
+                csvWriter.writeNext(valores);
+            });
+
+        }catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
+
+    public static void exportarReservas(List<Reserva> reservas) {
+        String filePath = "src/main/resources/reservas.csv";
+
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))){
+
+            reservas.forEach(reserva -> {
+                String[] valores = {
+                        reserva.getIdReserva(),
+                        String.valueOf(reserva.getCliente()),
+                        String.valueOf(reserva.getHabitacion()),
+                        reserva.getFechaInicioFormateado(),
+                        reserva.getFechaFinFormateado()
+                };
+                csvWriter.writeNext(valores);
+            });
+
+        }catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
 }
