@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Reserva {
     private String idReserva;
@@ -16,9 +17,11 @@ public class Reserva {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    private int[] serviciosElegidos;
     private Estado estado;
 
-    public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin, int[] serviciosElegidos) {
+        this.serviciosElegidos = serviciosElegidos;
         this.idReserva = "R" + Instant.now().getNano();
         this.cliente = cliente;
         this.habitacion = habitacion;
@@ -27,12 +30,13 @@ public class Reserva {
         this.estado = Estado.PENDIENTE;
     }
 
-    public Reserva(String idReserva, Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Reserva(String idReserva, Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin, int[] serviciosElegidos) {
         this.idReserva = idReserva;
         this.cliente = cliente;
         this.habitacion = habitacion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.serviciosElegidos = serviciosElegidos;
         this.estado = Estado.PENDIENTE;
     }
 
@@ -105,5 +109,13 @@ public class Reserva {
                         "||Check-In: " + fechaInicio +
                         "||Check-Out: " + fechaFin +
                         "||Estado: " + estado;
+    }
+
+    public int[] getServiciosElegidos() {
+        return serviciosElegidos;
+    }
+
+    public void setServiciosElegidos(int[] serviciosElegidos) {
+        this.serviciosElegidos = serviciosElegidos;
     }
 }
