@@ -3,12 +3,9 @@ package org.example.sistema.entidades;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.Estado;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class Reserva {
     private String idReserva;
@@ -103,19 +100,15 @@ public class Reserva {
     @Override
     public String toString() {
         return
-                "Id : " + idReserva +
-                        "||Cliente: " + cliente +
-                        "||Habitacion: " + habitacion +
-                        "||Check-In: " + fechaInicio +
-                        "||Check-Out: " + fechaFin +
-                        "||Estado: " + estado;
+                " | Id : " + idReserva +
+                        " | Cliente: " + cliente +
+                        " | Habitacion: " + habitacion +
+                        " | Check-In: " + fechaInicio +
+                        " | Check-Out: " + fechaFin +
+                        " | Estado: " + estado;
     }
 
     public int[] getServiciosElegidos() {
         return serviciosElegidos;
-    }
-
-    public void setServiciosElegidos(int[] serviciosElegidos) {
-        this.serviciosElegidos = serviciosElegidos;
     }
 }

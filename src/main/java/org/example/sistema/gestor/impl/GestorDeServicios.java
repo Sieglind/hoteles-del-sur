@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class GestorDeServicios implements IGestor<String, Servicio> {
 
-    private TreeMap<String, Servicio> servicios;
+    private final TreeMap<String, Servicio> servicios;
 
     private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
@@ -75,5 +75,4 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
         });
         return this;
     }
-
 }

@@ -144,7 +144,7 @@ public class UtilidadesCSV {
 
     public static void exportarServicios(List<Servicio> servicios) {
         String filePath = RESOURCE_PATH + FILENAME_SERVICIOS;
-        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath));) {
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             for (Servicio servicio : servicios) {
                 String[] valores = {
                         servicio.getNombre(),

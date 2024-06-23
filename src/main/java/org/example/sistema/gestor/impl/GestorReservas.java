@@ -57,9 +57,4 @@ public class GestorReservas implements IGestor<String, Reserva> {
         }
     }
 
-    public String asignarId(Reserva reserva) {
-        reserva.setIdReserva(reserva.getIdReserva());
-        return reserva.getIdReserva();
-    }
-
 }

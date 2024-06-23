@@ -2,8 +2,6 @@ package org.example.menues;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class VentanaPrincipal extends JFrame {
 
