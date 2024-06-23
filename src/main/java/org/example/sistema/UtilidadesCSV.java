@@ -98,7 +98,8 @@ public class UtilidadesCSV {
 
                 Habitacion habitacion = new Habitacion(
                         valores[0], //nro de habitacion
-                        tipoDeHabitacion //tipo de habitacion
+                        tipoDeHabitacion ,//tipo de habitacion
+                        0
                 );
 
                 habitaciones.add(habitacion);

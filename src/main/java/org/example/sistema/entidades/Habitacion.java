@@ -8,12 +8,14 @@ public class Habitacion {
 
     private final String numeroDeHabitacion;
     private TipoDeHabitacion tipoDeHabitacion;
+    private float precio;
     private boolean disponible;
 
-    public Habitacion(String numeroDeHabitacion, TipoDeHabitacion tipoDeHabitacion) {
+
+    public Habitacion(String numeroDeHabitacion, TipoDeHabitacion tipoDeHabitacion,float precio) {
         this.numeroDeHabitacion = numeroDeHabitacion;
         this.tipoDeHabitacion = tipoDeHabitacion;
-
+        this.precio = precio;
         this.disponible = true;
     }
 
@@ -37,13 +39,19 @@ public class Habitacion {
         this.disponible = disponible;
     }
 
+    public float getPrecio() {
+        return precio;
+    }
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
     @Override
     public String toString() {
-        return "Habitacion{" +
-                "numeroDeHabitacion='" + numeroDeHabitacion + '\'' +
-                ", tipoDeHabitacion=" + tipoDeHabitacion +
-                ", disponible=" + disponible +
-                '}';
+        return "| Numero de habitacion: " + numeroDeHabitacion+
+                "| Tipo de habitacion: " + tipoDeHabitacion +
+                "| Precio: " + precio +
+                "| Disponible: " + disponible ;
     }
 
     @Override
