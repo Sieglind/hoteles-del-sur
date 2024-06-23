@@ -1,7 +1,7 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.cuadros.cuadroscaja.PanelCliente;
-import org.example.menues.cuadros.cuadroscaja.PanelDeEntradas;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.cliente.PanelCliente;
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
@@ -23,7 +23,7 @@ public class AccionBuscarCliente implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
-            Cliente cliente = Sistema.getInstance().buscarCLiente(panelDeEntradas.getCampoDni());
+            Cliente cliente = Sistema.getInstance().buscarCLiente(panelDeEntradas.obtenerCampo());
             this.panelCliente.fillValues(cliente);
             panelCliente.getParent().revalidate();
             panelCliente.getParent().repaint();

@@ -127,14 +127,11 @@ public class UtilidadesCSV {
             while ((renglon = csvReader.readNext()) != null) {
                 String[] valores = renglon[0].split(";");
 
-                float precio = Float.parseFloat(valores[2]);
-                int clave = Integer.parseInt(valores[3]);
-
                 Servicio servicio = new Servicio(
                         valores[0], //nombre
                         valores[1],//descripcion
-                        precio, //precio
-                        clave //clave
+                        Float.parseFloat(valores[2]), //precio
+                        valores[3] //clave
                 );
 
                 servicios.add(servicio);

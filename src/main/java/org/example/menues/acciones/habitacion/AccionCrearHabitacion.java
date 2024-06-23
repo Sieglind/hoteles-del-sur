@@ -1,10 +1,9 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.cuadroscaja.PanelEntradaHabitacion;
-import org.example.menues.cuadros.cuadroscaja.PanelHabitacion;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasHabitacion;
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelTareasHabitacion;
 import org.example.sistema.Sistema;
-import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
 
 import javax.swing.*;
@@ -12,13 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccionCrearHabitacion implements ActionListener {
-    TareasHabitacion tareasHabitacion;
-    PanelEntradaHabitacion panelEntradaHabitacion;
+
+    PanelDeEntradas panelDeEntradas;
     PanelHabitacion panelHabitacion;
 
-    public AccionCrearHabitacion(TareasHabitacion tareasHabitacion, PanelEntradaHabitacion panelEntradaHabitacion, PanelHabitacion panelHabitacion) {
-        this.tareasHabitacion = tareasHabitacion;
-        this.panelEntradaHabitacion = panelEntradaHabitacion;
+    public AccionCrearHabitacion(PanelTareasHabitacion panelTareasHabitacion, PanelDeEntradas panelEntradaHabitacion, PanelHabitacion panelHabitacion) {
+        this.panelDeEntradas = panelEntradaHabitacion;
         this.panelHabitacion = panelHabitacion;
     }
 
@@ -27,10 +25,10 @@ public class AccionCrearHabitacion implements ActionListener {
         try{
             Sistema.getInstance().crearHabitacion(panelHabitacion.obtenerHabitacion());
 
-            JOptionPane.showMessageDialog(tareasHabitacion,"Habitacion creada con exito");
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),"Habitacion creada con exito");
 
         }catch (ObjetoYaExisteExcepcion excepcion){
-            JOptionPane.showMessageDialog(tareasHabitacion, excepcion.getMessage());
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), excepcion.getMessage());
         }
    }
 }

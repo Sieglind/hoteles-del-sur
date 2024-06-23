@@ -11,9 +11,9 @@ public interface IGestor<K,V> {
 
     V buscar(K key) throws ObjectoNoEncontradoExcepcion;
 
-    List<V> buscarTodos();
+    List<V> listar();
 
     V actualizar(K key, V valor) throws ObjectoNoEncontradoExcepcion;
 
-    boolean eliminar(K key) throws ObjectoNoEncontradoExcepcion;
+    boolean borrar(K key) throws ObjectoNoEncontradoExcepcion;
 }

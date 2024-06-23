@@ -18,7 +18,7 @@ public class GestorReservas implements IGestor<String, Reserva> {
     public String crear(Reserva reserva) throws ObjetoYaExisteExcepcion {
         if (reservas.containsKey(reserva.getIdReserva())) {
             throw new ObjetoYaExisteExcepcion("Ya existe una reserva con el id: " + reserva.getIdReserva());
-        }else{
+        } else {
             reservas.put(reserva.getIdReserva(), reserva);
         }
         return reserva.getIdReserva();
@@ -31,19 +31,22 @@ public class GestorReservas implements IGestor<String, Reserva> {
     }
 
     @Override
-    public List<Reserva> buscarTodos() {
+    public List<Reserva> listar() {
         return new ArrayList<>(this.reservas.values());
     }
 
     @Override
     public Reserva actualizar(String key, Reserva valor) throws ObjectoNoEncontradoExcepcion {
-        objetoExiste(key);
-        reservas.put(key,valor);
-        return valor;
+//        objetoExiste(key);
+        if (!reservas.containsKey(key)) {
+            throw new ObjectoNoEncontradoExcepcion("La reserva no existe");
+        }
+        return reservas.put(key, valor);
+
     }
 
     @Override
-    public boolean eliminar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
         objetoExiste(key);
         reservas.remove(key);
         return true;
@@ -54,4 +57,10 @@ public class GestorReservas implements IGestor<String, Reserva> {
             throw new ObjectoNoEncontradoExcepcion("No existe una reserva con el id: " + key);
         }
     }
+
+    public String asignarId(Reserva reserva) {
+        reserva.setIdReserva(reserva.getIdReserva());
+        return reserva.getIdReserva();
+    }
+
 }

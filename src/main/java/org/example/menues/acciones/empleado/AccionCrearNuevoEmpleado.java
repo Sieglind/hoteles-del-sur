@@ -1,7 +1,5 @@
 package org.example.menues.acciones.empleado;
-
-import org.example.menues.cuadros.cuadroscaja.PanelEmpleado;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasEmpleado;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.CampoRequeridoExcepcion;
@@ -12,11 +10,9 @@ import java.awt.event.ActionListener;
 
 public class AccionCrearNuevoEmpleado implements ActionListener{
 
-    TareasEmpleado panelDeTareas;
     PanelEmpleado panelEmpleado;
 
-    public AccionCrearNuevoEmpleado(TareasEmpleado panelDeTareas, PanelEmpleado panelEmpleado){
-        this.panelDeTareas = panelDeTareas;
+    public AccionCrearNuevoEmpleado(PanelEmpleado panelEmpleado){
         this.panelEmpleado = panelEmpleado;
     }
 
@@ -24,10 +20,10 @@ public class AccionCrearNuevoEmpleado implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Empleado empleado = panelEmpleado.crearEmpleado();
         try {
-            Sistema.getInstance().crearNuevoEmpleado(empleado);
-            JOptionPane.showMessageDialog(panelDeTareas, "Nuevo empleado creado correctamente");
+            Sistema.getInstance().crearEmpleado(empleado);
+            JOptionPane.showMessageDialog(panelEmpleado.getParent(), "Nuevo empleado creado correctamente");
         }catch (ObjetoYaExisteExcepcion | CampoRequeridoExcepcion excepcion){
-            JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
+            JOptionPane.showMessageDialog(panelEmpleado.getParent(),excepcion.getMessage());
         }
     }
 }

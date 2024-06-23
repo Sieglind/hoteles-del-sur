@@ -43,7 +43,7 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
     }
 
     @Override
-    public List<Empleado> buscarTodos() {
+    public List<Empleado> listar() {
         return new ArrayList<>(empleados.values());
     }
 
@@ -58,7 +58,7 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
     }
 
     @Override
-    public boolean eliminar(String dni) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String dni) throws ObjectoNoEncontradoExcepcion {
 
         if(!empleados.containsKey(dni)){
             throw new ObjectoNoEncontradoExcepcion("No existe ningún empleado registrado con DNI " + dni);

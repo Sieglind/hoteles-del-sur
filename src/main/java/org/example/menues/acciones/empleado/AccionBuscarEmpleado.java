@@ -1,7 +1,7 @@
 package org.example.menues.acciones.empleado;
-import org.example.menues.cuadros.cuadroscaja.PanelDeEntradas;
-import org.example.menues.cuadros.cuadroscaja.PanelEmpleado;
-import org.example.menues.cuadros.cuadroscaja.tareas.impl.TareasEmpleado;
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
+import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelTareasEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 
 public class AccionBuscarEmpleado implements ActionListener {
 
-    TareasEmpleado panelDeTareas;
+    PanelTareasEmpleado panelDeTareas;
     PanelDeEntradas panelDeEntradas;
     PanelEmpleado panelEmpleado;
 
-    public AccionBuscarEmpleado(TareasEmpleado panelDeTareas, PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
+    public AccionBuscarEmpleado(PanelTareasEmpleado panelDeTareas, PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
         this.panelDeTareas = panelDeTareas;
         this.panelDeEntradas = panelDeEntradas;
         this.panelEmpleado = panelEmpleado;
@@ -24,8 +24,8 @@ public class AccionBuscarEmpleado implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
-            Empleado empleado = Sistema.getInstance().buscarEmpleado(panelDeEntradas.getCampoDni());
-            this.panelEmpleado.fillValues(empleado);
+            Empleado empleado = Sistema.getInstance().buscarEmpleado(panelDeEntradas.obtenerCampo());
+            this.panelEmpleado.llenarCampos(empleado);
         } catch (ObjectoNoEncontradoExcepcion excepcion) {
             JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
         }

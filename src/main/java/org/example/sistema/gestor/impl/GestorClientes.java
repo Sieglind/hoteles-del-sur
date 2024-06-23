@@ -43,7 +43,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
 
     //Devuelve una lista con todos los clientes
     @Override
-    public List<Cliente> buscarTodos() {
+    public List<Cliente> listar() {
         return new ArrayList<>(listaClientes.values());
     }
 
@@ -59,7 +59,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
 
     //Elimina un Cliente
     @Override
-    public boolean eliminar(String key) throws ObjectoNoEncontradoExcepcion {
+    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
         if (!listaClientes.containsKey(key)) {
             throw new ObjectoNoEncontradoExcepcion(key);
         }

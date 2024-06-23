@@ -1,6 +1,6 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.cuadros.cuadroscaja.PanelDeEntradas;
+import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
 import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
 
@@ -19,7 +19,7 @@ public class AccionBorraCliente implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evento) {
         try {
-            String dni = panelDeEntradas.getCampoDni();
+            String dni = panelDeEntradas.obtenerCampo();
             Sistema.getInstance().borrarCliente(dni);
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(),"Cliente eliminado correctamente: " + dni);
         } catch (ObjectoNoEncontradoExcepcion ex) {
