@@ -1,5 +1,6 @@
 package org.example.sistema;
 
+import org.apache.commons.lang3.StringUtils;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.Servicio;
@@ -148,8 +149,13 @@ public class Sistema {
         return gestorHabitaciones.buscar(numeroHabitacion);
     }
 
-    public void crearHabitacion(Habitacion valor) throws ExcepcionObjetoYaExiste {
-        gestorHabitaciones.crear(valor);
+    public void crearHabitacion(Habitacion valor) throws ExcepcionObjetoYaExiste, ExcepcionCamposRequeridos {
+        String camposNulos = verificacionCampoNuloHabitacion(valor);
+        if (!camposNulos.isBlank()) {
+            throw new ExcepcionCamposRequeridos(camposNulos);
+        } else {
+            gestorHabitaciones.crear(valor);
+        }
     }
 
     public void borrarHabitacion(String numeroHabitacion) throws ExcepcionObjectoNoEncontrado {
@@ -184,7 +190,8 @@ public class Sistema {
 
     private static String verificacionCampoNuloHabitacion(Habitacion habitacion) {
         StringBuilder camposNulos = new StringBuilder();
-        if (habitacion.getNumeroDeHabitacion().isBlank()) camposNulos.append(" Numero de Habitacion");
+        if (habitacion.getNumeroDeHabitacion().isBlank() || !StringUtils.isNumeric(habitacion.getNumeroDeHabitacion()))
+            camposNulos.append(" Numero de Habitacion");
         return camposNulos.toString();
     }
 
@@ -206,13 +213,8 @@ public class Sistema {
         }
     }
 
-    public void actualizarHabitacion(Habitacion habitacion) throws ExcepcionObjectoNoEncontrado, ExcepcionCamposRequeridos {
-        String camposNulos = verificacionCampoNuloHabitacion(habitacion);
-        if (camposNulos.isBlank()) {
-            gestorHabitaciones.actualizar(habitacion.getNumeroDeHabitacion(), habitacion);
-        } else {
-            throw new ExcepcionCamposRequeridos(camposNulos);
-        }
+    public void actualizarHabitacion(Habitacion habitacion) throws ExcepcionObjectoNoEncontrado {
+        gestorHabitaciones.actualizar(habitacion.getNumeroDeHabitacion(), habitacion);
     }
 
     public void crearServicio(Servicio servicio) throws ExcepcionObjetoYaExiste, ExcepcionCamposRequeridos {

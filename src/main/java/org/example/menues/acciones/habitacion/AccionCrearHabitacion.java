@@ -5,6 +5,7 @@ import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHab
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelTareasHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
+import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
 import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class AccionCrearHabitacion implements ActionListener {
                 Sistema.getInstance().crearHabitacion(habitacion);
                 JOptionPane.showMessageDialog(panelDeEntradas.getParent(),"Habitacion creada con exito");
             }
-        }catch (ExcepcionObjetoYaExiste excepcion){
+        }catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion){
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(), excepcion.getMessage());
         }
    }
