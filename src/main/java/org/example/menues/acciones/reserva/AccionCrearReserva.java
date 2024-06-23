@@ -22,8 +22,8 @@ public class AccionCrearReserva implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
-            String reserva = Sistema.getInstance().crearReserva(panelReserva.crearReserva());
-            JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), "Reserva creada con exito: ID " + reserva);
+           String reserva1 = Sistema.getInstance().crearReserva(panelReserva.crearReserva());
+            JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), "Reserva creada con exito: ID " + reserva1);
         } catch (ObjetoYaExisteExcepcion excepcion) {
             JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), excepcion.getMessage());
         }

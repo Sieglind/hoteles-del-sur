@@ -13,13 +13,22 @@ public class Reserva {
     private String idReserva;
     private Cliente cliente;
     private Habitacion habitacion;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private Estado estado;
 
     public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin) {
         this.idReserva = "R" + Instant.now().getNano();
+        this.cliente = cliente;
+        this.habitacion = habitacion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.estado = Estado.PENDIENTE;
+    }
+
+    public Reserva(String idReserva, Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin) {
+        this.idReserva = idReserva;
         this.cliente = cliente;
         this.habitacion = habitacion;
         this.fechaInicio = fechaInicio;
@@ -36,7 +45,7 @@ public class Reserva {
     }
 
     public void setIdReserva(String idReserva) {
-        this.idReserva = idReserva;
+        this.idReserva = "R" + Instant.now().getNano();
     }
 
     public void setCliente(Cliente cliente) {
@@ -87,10 +96,10 @@ public class Reserva {
     public String toString() {
         return
                 "Id : " + idReserva +
-                "||Cliente: " + cliente +
-                "||Habitacion: " + habitacion +
-                "||Check-In: " + fechaInicio +
-                "||Check-Out: " + fechaFin +
-                "||Estado: " + estado;
+                        "||Cliente: " + cliente +
+                        "||Habitacion: " + habitacion +
+                        "||Check-In: " + fechaInicio +
+                        "||Check-Out: " + fechaFin +
+                        "||Estado: " + estado;
     }
 }

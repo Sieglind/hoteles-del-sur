@@ -73,10 +73,6 @@ public class Sistema {
         return this.gestorHabitaciones.listar();
     }
 
-    public List<Reserva> listarReservas() {
-        return this.gestorReservas.listar();
-    }
-
     public List<Empleado> listarEmpleados() {
         return this.gestorEmpleados.listar();
     }
@@ -90,7 +86,17 @@ public class Sistema {
     }
 
     public String crearReserva(Reserva reserva) throws ObjetoYaExisteExcepcion {
+        asignarIdReserva(reserva);
         return gestorReservas.crear(reserva);
+
+    }
+
+    public String asignarIdReserva(Reserva reserva){
+        return gestorReservas.asignarId(reserva);
+    }
+
+    public List<Reserva> listarReservas() {
+        return this.gestorReservas.listar();
     }
 
     public Reserva buscarReserva(String idReserva) throws ObjectoNoEncontradoExcepcion {
@@ -99,6 +105,10 @@ public class Sistema {
 
     public void eliminarReserva(String id) throws ObjectoNoEncontradoExcepcion {
         gestorReservas.borrar(id);
+    }
+
+    public void actualizarReserva(String id, Reserva reserva) throws ObjectoNoEncontradoExcepcion {
+        gestorReservas.actualizar(id, reserva);
     }
 
     public Habitacion buscarHabitacion(String numeroHabitacion) throws ObjectoNoEncontradoExcepcion {
@@ -139,6 +149,12 @@ public class Sistema {
         return camposNulos.toString();
     }
 
+    private static String verificacionCampoNuloHabitacion(Habitacion habitacion){
+        StringBuilder camposNulos = new StringBuilder();
+        if(habitacion.getNumeroDeHabitacion().isBlank()) camposNulos.append(" Numero de Habitacion");
+        return camposNulos.toString();
+    }
+
     private static String verificarCamposNulos(Servicio servicio) {
         StringBuilder camposNulos = new StringBuilder();
         if (servicio.getNombre().isBlank()) camposNulos.append(" NOMBRE");
@@ -150,9 +166,18 @@ public class Sistema {
 
     public void actualizarEmpleado(Empleado empleado) throws CampoRequeridoExcepcion, ObjectoNoEncontradoExcepcion {
         String camposNulos = verificarCamposNulos(empleado);
-        if(camposNulos.isBlank()) {
+        if (camposNulos.isBlank()) {
             gestorEmpleados.actualizar(empleado.getDni(), empleado);
         } else {
+            throw new CampoRequeridoExcepcion(camposNulos);
+        }
+    }
+
+    public void actualizarHabitacion(Habitacion habitacion) throws ObjectoNoEncontradoExcepcion, CampoRequeridoExcepcion {
+        String camposNulos = verificacionCampoNuloHabitacion(habitacion);
+        if(camposNulos.isBlank()) {
+            gestorHabitaciones.actualizar(habitacion.getNumeroDeHabitacion(), habitacion);
+        }else{
             throw new CampoRequeridoExcepcion(camposNulos);
         }
     }
