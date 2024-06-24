@@ -1,5 +1,6 @@
 package org.example.menues.paneles.panelesgridbag.tareas.impl.reserva;
 
+import org.example.menues.modelosdetabla.ModeloTablaServicios;
 import org.example.menues.paneles.panelesgridbag.PanelCustom;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
@@ -13,7 +14,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Vector;
+import java.util.List;
 
 public class PanelReserva extends PanelCustom {
     private final JTextField CAMPO_BUSCAR_RESERVA = crearCampoDeTexto();
@@ -25,7 +26,7 @@ public class PanelReserva extends PanelCustom {
     private final JTextField CAMPO_FECHA_FIN = crearCampoDeTexto();
     private final JLabel ETIQUETA_ESTADO_RESERVA = (crearEtiqueta("Estado de la Reserva: "));
     private final JComboBox<Estado> CAMPO_ESTADO_RESERVA = new JComboBox<>(Estado.values());
-    private JList<Servicio> LISTA_SERVICIOS;
+    private JTable LISTA_SERVICIOS;
 
 
     public PanelReserva(boolean editable) {
@@ -87,10 +88,16 @@ public class PanelReserva extends PanelCustom {
         ETIQUETA_ESTADO_RESERVA.setVisible(true);
         CAMPO_ESTADO_RESERVA.setVisible(true);
         CAMPO_ESTADO_RESERVA.setSelectedItem(reserva.getEstado());
-        LISTA_SERVICIOS.setSelectedIndices(reserva.getServiciosElegidos());
+        seleccionarValores(reserva.getServiciosElegidos());
         this.setVisible(true);
         this.revalidate();
         this.repaint();
+    }
+
+    private void seleccionarValores(int[] indices) {
+        for (int index : indices) {
+            LISTA_SERVICIOS.addRowSelectionInterval(index, index);
+        }
     }
 
     public Reserva crearReserva() {
@@ -100,7 +107,7 @@ public class PanelReserva extends PanelCustom {
         try {
             fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());
             fechaFin = LocalDate.parse(CAMPO_FECHA_FIN.getText());
-            reserva = new Reserva(null, null, null, fechaInicio, fechaFin, LISTA_SERVICIOS.getSelectedIndices());
+            reserva = new Reserva(null, null, null, fechaInicio, fechaFin, LISTA_SERVICIOS.getSelectedRows());
         } catch (DateTimeParseException exception) {
             JOptionPane.showMessageDialog(this.getParent(), "Fecha no valida(yyyy-MM-dd): " + exception.getParsedString(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -129,12 +136,10 @@ public class PanelReserva extends PanelCustom {
     }
 
     private JScrollPane crearListaDeServicios() {
-        JList<Servicio> listaServicios = new JList<>(new Vector<>(Sistema.getInstance().listarServicios()));
-        listaServicios.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        listaServicios.setVisibleRowCount(5);
-        LISTA_SERVICIOS = listaServicios;
-        JScrollPane scroll = new JScrollPane(listaServicios);
-        scroll.setMaximumSize(new Dimension(600, 160));
-        return scroll;
+        List<Servicio> servicios = Sistema.getInstance().listarServicios();
+        ModeloTablaServicios modelo = new ModeloTablaServicios(servicios);
+        JTable tabla = new JTable(modelo);
+        LISTA_SERVICIOS = tabla;
+        return new JScrollPane(tabla);
     }
 }
