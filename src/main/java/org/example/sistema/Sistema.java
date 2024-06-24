@@ -42,7 +42,11 @@ public class Sistema {
 
     public static synchronized Sistema getInstance() {
         if (sistema == null) {
-            sistema = new Sistema(new Hotel("Hoteles del Sur", "Fake St 123", "Please no"));
+            sistema = new Sistema(new Hotel(
+                    "Hoteles del Sur",
+                    "Fake St 123",
+                    "+54 9 334 4871096",
+                    "38-91586584-10"));
         }
         return sistema;
     }
@@ -170,7 +174,7 @@ public class Sistema {
         return this.gestorReservas.listar();
     }
 
-    public void actualizarReserva(Estado estadoReserva, String id, String dni, String habitacion, Reserva reserva) throws ExcepcionObjectoNoEncontrado, ExcepcionCamposRequeridos {
+    public Reserva actualizarReserva(Estado estadoReserva, String id, String dni, String habitacion, Reserva reserva) throws ExcepcionObjectoNoEncontrado, ExcepcionCamposRequeridos {
         String camposNulos = verificarCamposNulos(dni, habitacion);
         if (!camposNulos.isBlank()) {
             throw new ExcepcionCamposRequeridos(camposNulos);
@@ -178,7 +182,7 @@ public class Sistema {
             reserva.setEstado(estadoReserva);
             reserva.setCliente(buscarCLiente(dni));
             reserva.setHabitacion(buscarHabitacion(habitacion));
-            gestorReservas.actualizar(id, reserva);
+            return gestorReservas.actualizar(id, reserva);
         }
     }
 
@@ -255,5 +259,9 @@ public class Sistema {
         UtilidadesCSV.exportarHabitaciones(gestorHabitaciones.listar());
         UtilidadesCSV.exportarReservas(gestorReservas.listar());
         UtilidadesCSV.exportarServicios(gestorDeServicios.listar());
+    }
+
+    public Hotel getHotel() {
+        return hotel;
     }
 }
