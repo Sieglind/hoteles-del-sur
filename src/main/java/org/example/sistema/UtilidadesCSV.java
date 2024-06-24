@@ -105,6 +105,24 @@ public class UtilidadesCSV {
         return habitaciones;
     }
 
+    public static void exportarEmpleados(List<Empleado> empleados) {
+        String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
+            empleados.forEach(empleado -> {
+                String[] valores = {
+                        empleado.getNombre(),
+                        empleado.getApellido(),
+                        empleado.getDni(),
+                        String.valueOf(empleado.getCargo()),
+                        empleado.getCargo().equals(Cargo.ADMINISTRADOR) ? empleado.getPassword() : ""
+                };
+                csvWriter.writeNext(valores);
+            });
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
+
     public static List<Servicio> importarServicios() {
         String filePath = RESOURCE_PATH + FILENAME_SERVICIOS;
         List<Servicio> servicios = new ArrayList<>();
@@ -152,24 +170,6 @@ public class UtilidadesCSV {
                 };
                 csvWriter.writeNext(valores);
             }
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo" + e.getMessage());
-        }
-    }
-
-    public static void exportarEmpleados(List<Empleado> empleados) {
-        String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
-        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
-            empleados.forEach(empleado -> {
-                String[] valores = {
-                        empleado.getNombre(),
-                        empleado.getApellido(),
-                        empleado.getDni(),
-                        String.valueOf(empleado.getCargo()),
-                        empleado.getCargo().equals(Cargo.ADMINISTRADOR) ? empleado.getPassword() : ""
-                };
-                csvWriter.writeNext(valores);
-            });
         } catch (IOException e) {
             System.out.println("Error al escribir en el archivo" + e.getMessage());
         }
