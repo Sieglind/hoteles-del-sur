@@ -2,20 +2,20 @@ package org.example.sistema.entidades;
 
 public class Servicio {
 
-    private final String nombre;
+    private final String codigo;
+    private final String categoria;
     private final String descripcion;
     private final float precio;
-    private final String codigo;
 
-    public Servicio(String nombre, String descripcion, float precio, String codigo) {
-        this.nombre = nombre;
+    public Servicio(String codigo, String categoria, String descripcion, float precio) {
+        this.codigo = codigo;
+        this.categoria = categoria;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.codigo = codigo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCategoria() {
+        return categoria;
     }
 
     public String getDescripcion() {
@@ -34,7 +34,7 @@ public class Servicio {
     public String toString() {
         return
                 " | Clave: " + codigo +
-                        " | " + nombre +
+                        " | " + categoria +
                         " | Descripcion: " + descripcion +
                         " | Precio: " + precio;
     }

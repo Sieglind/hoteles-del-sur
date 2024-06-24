@@ -71,7 +71,7 @@ public class Sistema {
 
     private static String verificarCamposNulos(Servicio servicio) {
         StringBuilder camposNulos = new StringBuilder();
-        if (servicio.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (servicio.getCategoria().isBlank()) camposNulos.append(" NOMBRE");
         if (servicio.getDescripcion().isBlank()) camposNulos.append(" DESCRIPCION");
         if (servicio.getPrecio() == 0) camposNulos.append(" PRECIO");
         if (servicio.getCodigo().isBlank()) camposNulos.append(" CODIGO");
@@ -245,7 +245,7 @@ public class Sistema {
         UtilidadesCSV.exportarClientes(gestorClientes.listar());
         UtilidadesCSV.exportarEmpleados(gestorEmpleados.listar());
         UtilidadesCSV.exportarHabitaciones(gestorHabitaciones.listar());
-//        UtilidadesCSV.exportarServicios(gestorDeServicios.listar());
 //        UtilidadesCSV.exportarReservas(gestorReservas.listar());
+        UtilidadesCSV.exportarServicios(gestorDeServicios.listar());
     }
 }

@@ -139,6 +139,24 @@ public class UtilidadesCSV {
         }
     }
 
+    public static void exportarReservas(List<Reserva> reservas) {
+        String filePath = RESOURCE_PATH + FILENAME_RESERVAS;
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
+            reservas.forEach(reserva -> {
+                String[] valores = {
+                        reserva.getIdReserva(),
+                        String.valueOf(reserva.getCliente()),
+                        String.valueOf(reserva.getHabitacion()),
+                        reserva.getFechaInicio().toString(),
+                        reserva.getFechaFin().toString()
+                };
+                csvWriter.writeNext(valores);
+            });
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
+
     public static List<Servicio> importarServicios() {
         String filePath = RESOURCE_PATH + FILENAME_SERVICIOS;
         List<Servicio> servicios = new ArrayList<>();
@@ -148,8 +166,8 @@ public class UtilidadesCSV {
                 Servicio servicio = new Servicio(
                         renglon[0],
                         renglon[1],
-                        Float.parseFloat(renglon[2]),
-                        renglon[3]
+                        renglon[2],
+                        Float.parseFloat(renglon[3])
                 );
                 servicios.add(servicio);
             }
@@ -164,31 +182,13 @@ public class UtilidadesCSV {
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             for (Servicio servicio : servicios) {
                 String[] valores = {
-                        servicio.getNombre(),
+                        servicio.getCodigo(),
+                        servicio.getCategoria(),
                         servicio.getDescripcion(),
-                        String.valueOf(servicio.getPrecio()),
-                        servicio.getCodigo()
+                        String.valueOf(servicio.getPrecio())
                 };
                 csvWriter.writeNext(valores);
             }
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo" + e.getMessage());
-        }
-    }
-
-    public static void exportarReservas(List<Reserva> reservas) {
-        String filePath = RESOURCE_PATH + FILENAME_RESERVAS;
-        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
-            reservas.forEach(reserva -> {
-                String[] valores = {
-                        reserva.getIdReserva(),
-                        String.valueOf(reserva.getCliente()),
-                        String.valueOf(reserva.getHabitacion()),
-                        reserva.getFechaInicio().toString(),
-                        reserva.getFechaFin().toString()
-                };
-                csvWriter.writeNext(valores);
-            });
         } catch (IOException e) {
             System.out.println("Error al escribir en el archivo" + e.getMessage());
         }
