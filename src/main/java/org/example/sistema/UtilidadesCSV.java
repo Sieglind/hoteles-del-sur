@@ -86,6 +86,24 @@ public class UtilidadesCSV {
         return empleados;
     }
 
+    public static void exportarEmpleados(List<Empleado> empleados) {
+        String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
+            empleados.forEach(empleado -> {
+                String[] valores = {
+                        empleado.getNombre(),
+                        empleado.getApellido(),
+                        empleado.getDni(),
+                        String.valueOf(empleado.getCargo()),
+                        empleado.getCargo().equals(Cargo.ADMINISTRADOR) ? empleado.getPassword() : ""
+                };
+                csvWriter.writeNext(valores);
+            });
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
+
     public static List<Habitacion> importarHabitaciones() {
         String filePath = RESOURCE_PATH + FILENAME_HABITACIONES;
         List<Habitacion> habitaciones = new ArrayList<>();
@@ -105,16 +123,14 @@ public class UtilidadesCSV {
         return habitaciones;
     }
 
-    public static void exportarEmpleados(List<Empleado> empleados) {
-        String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
+    public static void exportarHabitaciones(List<Habitacion> habitaciones) {
+        String filePath = RESOURCE_PATH + FILENAME_HABITACIONES;
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
-            empleados.forEach(empleado -> {
+            habitaciones.forEach(habitacion -> {
                 String[] valores = {
-                        empleado.getNombre(),
-                        empleado.getApellido(),
-                        empleado.getDni(),
-                        String.valueOf(empleado.getCargo()),
-                        empleado.getCargo().equals(Cargo.ADMINISTRADOR) ? empleado.getPassword() : ""
+                        habitacion.getNumeroDeHabitacion(),
+                        String.valueOf(habitacion.getTipoDeHabitacion()),
+                        String.valueOf(habitacion.getPrecio())
                 };
                 csvWriter.writeNext(valores);
             });
@@ -141,21 +157,6 @@ public class UtilidadesCSV {
             System.out.println(e.getMessage());
         }
         return servicios;
-    }
-
-    public static void exportarHabitaciones(List<Habitacion> habitaciones) {
-        String filePath = RESOURCE_PATH + FILENAME_HABITACIONES;
-        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
-            habitaciones.forEach(habitacion -> {
-                String[] valores = {
-                        habitacion.getNumeroDeHabitacion(),
-                        String.valueOf(habitacion.getTipoDeHabitacion())
-                };
-                csvWriter.writeNext(valores);
-            });
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo" + e.getMessage());
-        }
     }
 
     public static void exportarServicios(List<Servicio> servicios) {
