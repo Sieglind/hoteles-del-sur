@@ -1,10 +1,19 @@
 package org.example.menues.enums;
 
 public enum Entidad {
-    CLIENTES(),
-    EMPLEADOS(),
-    RESERVAS(),
-    HABITACIONES(),
-    SERVICIOS();
+    CLIENTES("src/main/resources/iconos/clientes.png"),
+    EMPLEADOS("src/main/resources/iconos/empleados.png"),
+    RESERVAS("src/main/resources/iconos/reservas.png"),
+    HABITACIONES("src/main/resources/iconos/habitaciones.png"),
+    SERVICIOS("src/main/resources/iconos/servicios.png"),;
 
+    String urlIcono;
+
+    Entidad(String urlIcono) {
+        this.urlIcono = urlIcono;
+    }
+
+    public String getUrlIcono() {
+        return urlIcono;
+    }
 }

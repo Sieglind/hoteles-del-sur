@@ -22,7 +22,7 @@ public class AccionActualizarCliente implements ActionListener {
         Cliente cliente = panelCliente.obtenerCliente();
         try {
             Sistema.getInstance().actualizarCliente(cliente);
-            JOptionPane.showMessageDialog(panelCliente, "Cliente actualizado");
+            JOptionPane.showMessageDialog(panelCliente.getParent(), "Cliente actualizado");
         } catch (ExcepcionObjectoNoEncontrado excepcion) {
             JOptionPane.showMessageDialog(panelCliente.getParent(), excepcion.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
