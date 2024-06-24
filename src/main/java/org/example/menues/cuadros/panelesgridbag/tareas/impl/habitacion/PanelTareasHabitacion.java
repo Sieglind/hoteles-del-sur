@@ -1,7 +1,6 @@
 package org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion;
 
 import org.example.menues.acciones.habitacion.*;
-import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.cuadros.panelesgridbag.tareas.impl.PanelTareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
@@ -9,32 +8,21 @@ import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.util.List;
 import java.util.Vector;
 
 
-public class PanelTareasHabitacion extends PanelTareas implements ITareas {
+public class PanelTareasHabitacion extends PanelTareas {
 
     private static final String ETIQUETA_NRO_HABITACION = "Nro Habitacion";
     
     private PanelHabitacion panelHabitacion;
     
     public PanelTareasHabitacion(Tarea tarea) {
-        super(Entidad.HABITACIONES);
+        super(tarea, Entidad.HABITACIONES);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setVisible(true);
-        seleccionarPanel(tarea);
-    }
-
-    private void seleccionarPanel(Tarea tarea) {
-        switch (tarea) {
-            case CREAR -> panelCrear();
-            case BUSCAR -> panelBuscar();
-            case LISTAR -> panelListar();
-            case ACTUALIZAR -> panelActualizar();
-            case BORRAR -> panelBorrar();
-        }
+        elegirPanel(tarea);
     }
 
     @Override
@@ -45,10 +33,8 @@ public class PanelTareasHabitacion extends PanelTareas implements ITareas {
         panelBotones.getBotonGuardar().addActionListener(new AccionCrearHabitacion(this,panelDeEntradas,panelHabitacion) );
     }
 
-
     @Override
     public void panelBuscar() {
-        this.setBorder(new TitledBorder("Buscar Habitacion"));
         panelDeEntradas = crearPanelDeEntradas(true,ETIQUETA_NRO_HABITACION);
         panelHabitacion = crearPanelHabitacion(false);
         panelBotones = crearPanelBotones(Tarea.BUSCAR);
@@ -57,7 +43,6 @@ public class PanelTareasHabitacion extends PanelTareas implements ITareas {
 
     @Override
     public void panelListar() {
-        this.setBorder(new TitledBorder("Listar Habitaciones"));
         List<Habitacion> habitaciones = Sistema.getInstance().listarHabitaciones();
         JList<Habitacion> listaHabitaciones = new JList<>(new Vector<>(habitaciones));
         this.add(new JScrollPane(listaHabitaciones));
@@ -66,7 +51,6 @@ public class PanelTareasHabitacion extends PanelTareas implements ITareas {
 
     @Override
     public void panelActualizar() {
-        this.setBorder(new TitledBorder("Actualizar Habitacion"));
         panelDeEntradas = crearPanelDeEntradas(true,ETIQUETA_NRO_HABITACION);
         panelHabitacion = crearPanelHabitacion(false);
         panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
@@ -76,8 +60,6 @@ public class PanelTareasHabitacion extends PanelTareas implements ITareas {
 
     @Override
     public void panelBorrar() {
-        this.setBorder(new TitledBorder("Borrar Habitacion"));
-
         panelDeEntradas = crearPanelDeEntradas(true,ETIQUETA_NRO_HABITACION);
         panelBotones = crearPanelBotones(Tarea.BORRAR);
         panelBotones.getBotonBorrar().addActionListener(new AccionBorrarHabitacion(panelDeEntradas));

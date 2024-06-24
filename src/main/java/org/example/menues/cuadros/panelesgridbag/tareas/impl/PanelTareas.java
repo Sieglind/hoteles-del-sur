@@ -4,13 +4,15 @@ import org.example.menues.acciones.AccionVolver;
 import org.example.menues.cuadros.panelesgridbag.PanelBotones;
 import org.example.menues.cuadros.panelesgridbag.PanelCustom;
 import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
+import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class PanelTareas extends PanelCustom {
+public abstract class PanelTareas extends PanelCustom implements ITareas {
 
     protected final JButton BOTON_VOLVER;
     protected static final String ETIQUEDA_DNI = "DNI";
@@ -18,8 +20,21 @@ public class PanelTareas extends PanelCustom {
     protected PanelDeEntradas panelDeEntradas;
     protected PanelBotones panelBotones;
 
-    public PanelTareas(Entidad entidad) {
+    public PanelTareas(Tarea tarea, Entidad entidad) {
+        this.setBorder(new TitledBorder(tarea.name() + " " + entidad.name()));
         this.BOTON_VOLVER = crearBoton("Volver",LEFT_ALIGNMENT, new AccionVolver(entidad.name()));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setVisible(true);
+    }
+
+    protected void elegirPanel(Tarea tarea) {
+        switch (tarea) {
+            case CREAR -> panelCrear();
+            case ACTUALIZAR -> panelActualizar();
+            case LISTAR -> panelListar();
+            case BORRAR -> panelBorrar();
+            case BUSCAR -> panelBuscar();
+        }
     }
 
     protected PanelDeEntradas crearPanelDeEntradas(boolean completo, String etiqueta) {
