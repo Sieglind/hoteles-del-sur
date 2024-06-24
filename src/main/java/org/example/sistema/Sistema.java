@@ -22,22 +22,22 @@ import java.util.List;
 
 public class Sistema {
 
-    public static Sistema sistema;
+    private static Sistema sistema;
 
     private final Hotel hotel;
-    private final GestorEmpleados gestorEmpleados;
     private final GestorClientes gestorClientes;
+    private final GestorEmpleados gestorEmpleados;
     private final GestorHabitaciones gestorHabitaciones;
     private final GestorDeServicios gestorDeServicios;
     private final GestorReservas gestorReservas;
 
     private Sistema(Hotel hotel) {
         this.hotel = hotel;
-        this.gestorClientes = new GestorClientes().conClientes(UtilidadesCSV.importarClientes());
-        this.gestorEmpleados = new GestorEmpleados().conEmpleados(UtilidadesCSV.importarEmpleados());
-        this.gestorHabitaciones = new GestorHabitaciones().conHabitacion(UtilidadesCSV.importarHabitaciones());
-        this.gestorDeServicios = new GestorDeServicios().conServicios(UtilidadesCSV.importarServicios());
+        this.gestorClientes = new GestorClientes();
+        this.gestorEmpleados = new GestorEmpleados();
+        this.gestorHabitaciones = new GestorHabitaciones();
         this.gestorReservas = new GestorReservas();
+        this.gestorDeServicios = new GestorDeServicios();
     }
 
     public static synchronized Sistema getInstance() {
@@ -71,7 +71,7 @@ public class Sistema {
 
     private static String verificarCamposNulos(Servicio servicio) {
         StringBuilder camposNulos = new StringBuilder();
-        if (servicio.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (servicio.getCategoria().isBlank()) camposNulos.append(" NOMBRE");
         if (servicio.getDescripcion().isBlank()) camposNulos.append(" DESCRIPCION");
         if (servicio.getPrecio() == 0) camposNulos.append(" PRECIO");
         if (servicio.getCodigo().isBlank()) camposNulos.append(" CODIGO");
@@ -241,11 +241,19 @@ public class Sistema {
         gestorDeServicios.borrar(clave);
     }
 
+    public void importarDatos(){
+        gestorClientes.importarDatos(UtilidadesCSV.importarClientes());
+        gestorEmpleados.importarDatos(UtilidadesCSV.importarEmpleados());
+        gestorHabitaciones.importarDatos(UtilidadesCSV.importarHabitaciones());
+        gestorReservas.importarDatos(UtilidadesCSV.importarReservas());
+        gestorDeServicios.importarDatos(UtilidadesCSV.importarServicios());
+    }
+
     public void exportarDatos() {
-//        UtilidadesCSV.exportarClientes(gestorClientes.listar());
-//        UtilidadesCSV.exportarHabitaciones(gestorHabitaciones.listar());
-//        UtilidadesCSV.exportarServicios(gestorDeServicios.listar());
-//        UtilidadesCSV.exportarEmpleados(gestorEmpleados.listar());
-//        UtilidadesCSV.exportarReservas(gestorReservas.listar());
+        UtilidadesCSV.exportarClientes(gestorClientes.listar());
+        UtilidadesCSV.exportarEmpleados(gestorEmpleados.listar());
+        UtilidadesCSV.exportarHabitaciones(gestorHabitaciones.listar());
+        UtilidadesCSV.exportarReservas(gestorReservas.listar());
+        UtilidadesCSV.exportarServicios(gestorDeServicios.listar());
     }
 }

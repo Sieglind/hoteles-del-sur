@@ -8,7 +8,7 @@ import java.util.List;
 public class ModeloTablaServicios  extends AbstractTableModel {
 
     private final List<Servicio> servicios;
-    private final String[] columnas = {"Codigo","Tipo","Descripcion","Precion"};
+    private final String[] columnas = {"Codigo","Categoria","Descripcion","Precion"};
 
     public ModeloTablaServicios(List<Servicio> servicios) {
         this.servicios = servicios;
@@ -19,7 +19,7 @@ public class ModeloTablaServicios  extends AbstractTableModel {
         Servicio servicio = servicios.get(rowIndex);
         return switch (columnIndex) {
             case 0 -> servicio.getCodigo();
-            case 1 -> servicio.getNombre();
+            case 1 -> servicio.getCategoria();
             case 2 -> servicio.getDescripcion();
             case 3 -> servicio.getPrecio();
             default -> null;

@@ -21,7 +21,7 @@ public class GestorHabitaciones implements IGestor<String, Habitacion> {
         this.habitaciones = new HashMap<>();
     }
 
-    public GestorHabitaciones conHabitacion(List<Habitacion> habitaciones) {
+    public void importarDatos(List<Habitacion> habitaciones) {
         habitaciones.forEach(habitacion -> {
             try {
                 crear(habitacion);
@@ -29,7 +29,6 @@ public class GestorHabitaciones implements IGestor<String, Habitacion> {
                 LOG.log(Level.WARNING, excepcion.getMessage());
             }
         });
-        return this;
     }
 
     @Override
