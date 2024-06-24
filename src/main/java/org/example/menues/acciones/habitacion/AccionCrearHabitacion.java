@@ -2,7 +2,6 @@ package org.example.menues.acciones.habitacion;
 
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
-import org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion.PanelTareasHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
@@ -17,7 +16,7 @@ public class AccionCrearHabitacion implements ActionListener {
     PanelDeEntradas panelDeEntradas;
     PanelHabitacion panelHabitacion;
 
-    public AccionCrearHabitacion(PanelTareasHabitacion panelTareasHabitacion, PanelDeEntradas panelEntradaHabitacion, PanelHabitacion panelHabitacion) {
+    public AccionCrearHabitacion(PanelDeEntradas panelEntradaHabitacion, PanelHabitacion panelHabitacion) {
         this.panelDeEntradas = panelEntradaHabitacion;
         this.panelHabitacion = panelHabitacion;
     }

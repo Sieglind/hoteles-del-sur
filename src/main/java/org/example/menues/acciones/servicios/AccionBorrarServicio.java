@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccionBorrarServicio implements ActionListener {
-    private PanelDeEntradas panelDeEntradas;
+    private final PanelDeEntradas panelDeEntradas;
 
     public AccionBorrarServicio(PanelDeEntradas panelDeEntradas) {
         this.panelDeEntradas = panelDeEntradas;

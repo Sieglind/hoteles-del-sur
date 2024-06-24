@@ -30,7 +30,7 @@ public class PanelTareasHabitacion extends PanelTareas {
         panelDeEntradas = crearPanelDeEntradas(false,ETIQUETA_NRO_HABITACION);
         panelHabitacion = crearPanelHabitacion(true);
         panelBotones = crearPanelBotones(Tarea.CREAR);
-        panelBotones.getBotonGuardar().addActionListener(new AccionCrearHabitacion(this,panelDeEntradas,panelHabitacion) );
+        panelBotones.getBotonGuardar().addActionListener(new AccionCrearHabitacion(panelDeEntradas,panelHabitacion) );
     }
 
     @Override

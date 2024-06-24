@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class AccionBorrarHabitacion implements ActionListener {
 
-    private PanelDeEntradas panelDeEntradas;
+    private final PanelDeEntradas panelDeEntradas;
 
     public AccionBorrarHabitacion(PanelDeEntradas panelDeEntradas) {
         this.panelDeEntradas = panelDeEntradas;
