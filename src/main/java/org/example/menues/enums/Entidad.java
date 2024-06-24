@@ -7,7 +7,7 @@ public enum Entidad {
     HABITACIONES("src/main/resources/iconos/habitaciones.png"),
     SERVICIOS("src/main/resources/iconos/servicios.png"),;
 
-    String urlIcono;
+    private final String urlIcono;
 
     Entidad(String urlIcono) {
         this.urlIcono = urlIcono;
