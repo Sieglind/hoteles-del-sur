@@ -14,7 +14,7 @@ public class JPanelCustom extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-            BufferedImage fondo = ImageIO.read(new File("src/main/resources/fondo.jpg"));
+            BufferedImage fondo = ImageIO.read(new File("src/main/resources/fondos/fondo.jpg"));
             g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
