@@ -70,7 +70,8 @@ public class PanelReserva extends PanelCustom {
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {}
+    protected void paintComponent(Graphics fondo) {
+    }
 
     public void rellenarCampos(Reserva reserva) {
         Border border = new LineBorder(Color.BLACK, 3);
@@ -99,7 +100,7 @@ public class PanelReserva extends PanelCustom {
         try {
             fechaInicio = LocalDate.parse(CAMPO_FECHA_INICIO.getText());
             fechaFin = LocalDate.parse(CAMPO_FECHA_FIN.getText());
-            reserva = new Reserva(null, null, null, fechaInicio, fechaFin,LISTA_SERVICIOS.getSelectedIndices());
+            reserva = new Reserva(null, null, null, fechaInicio, fechaFin, LISTA_SERVICIOS.getSelectedIndices());
         } catch (DateTimeParseException exception) {
             JOptionPane.showMessageDialog(this.getParent(), "Fecha no valida(yyyy-MM-dd): " + exception.getParsedString(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -123,17 +124,17 @@ public class PanelReserva extends PanelCustom {
         LISTA_SERVICIOS.setEnabled(true);
     }
 
-    public Estado getEstadoReserva(){
+    public Estado getEstadoReserva() {
         return (Estado) CAMPO_ESTADO_RESERVA.getSelectedItem();
     }
 
     private JScrollPane crearListaDeServicios() {
-        JList<Servicio>  listaServicios = new JList<>(new Vector<>(Sistema.getInstance().listarServicios()));
+        JList<Servicio> listaServicios = new JList<>(new Vector<>(Sistema.getInstance().listarServicios()));
         listaServicios.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         listaServicios.setVisibleRowCount(5);
         LISTA_SERVICIOS = listaServicios;
         JScrollPane scroll = new JScrollPane(listaServicios);
-        scroll.setMaximumSize(new Dimension(600,160));
+        scroll.setMaximumSize(new Dimension(600, 160));
         return scroll;
     }
 }

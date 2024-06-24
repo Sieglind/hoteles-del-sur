@@ -1,5 +1,6 @@
 package org.example.menues.acciones.reserva;
 
+import org.example.menues.acciones.AccionGenerica;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.reserva.PanelReserva;
 import org.example.sistema.Sistema;
@@ -9,9 +10,9 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionActualizarReserva implements ActionListener {
+public class AccionActualizarReserva extends AccionGenerica {
+
     private final PanelReserva panelReserva;
     private final PanelDeEntradas panelDeEntradas;
 
@@ -26,12 +27,12 @@ public class AccionActualizarReserva implements ActionListener {
             Reserva reserva = panelReserva.crearReserva();
             if (reserva != null) {
                 reserva.setIdReserva(panelDeEntradas.obtenerCampo());
-                Sistema.getInstance().actualizarReserva(panelReserva.getEstadoReserva(),panelDeEntradas.obtenerCampo(),
+                Sistema.getInstance().actualizarReserva(panelReserva.getEstadoReserva(), panelDeEntradas.obtenerCampo(),
                         panelReserva.getCliente(), panelReserva.getHabitacion(), reserva);
-                JOptionPane.showMessageDialog(panelReserva.getParent(), "Reserva actualizada correctamente");
+                JOptionPane.showMessageDialog(panelReserva.getParent(), "Reserva actualizada");
             }
         } catch (ExcepcionObjectoNoEncontrado | ExcepcionCamposRequeridos excepcion) {
-            JOptionPane.showMessageDialog(panelReserva.getParent(), excepcion.getMessage());
+            mostrarDialogoDeError(panelReserva, excepcion);
         }
     }
 }

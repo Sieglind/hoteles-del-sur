@@ -1,5 +1,6 @@
 package org.example.menues.acciones.cliente;
 
+import org.example.menues.acciones.AccionGenerica;
 import org.example.menues.paneles.panelesgridbag.PanelBotones;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.cliente.PanelCliente;
@@ -7,17 +8,17 @@ import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarParaActualizarCliente implements ActionListener {
+public class AccionBuscarParaActualizarCliente extends AccionGenerica {
 
     private final PanelDeEntradas panelEntradas;
     private final PanelCliente panelCliente;
     private final PanelBotones panelBotones;
 
-    public AccionBuscarParaActualizarCliente(PanelDeEntradas panelDeEntradas, PanelCliente panelCliente, PanelBotones panelBotones) {
+    public AccionBuscarParaActualizarCliente(PanelDeEntradas panelDeEntradas,
+                                             PanelCliente panelCliente,
+                                             PanelBotones panelBotones) {
         this.panelEntradas = panelDeEntradas;
         this.panelCliente = panelCliente;
         this.panelBotones = panelBotones;
@@ -33,7 +34,7 @@ public class AccionBuscarParaActualizarCliente implements ActionListener {
             panelBotones.getBotonBuscar().setEnabled(false);
             panelBotones.getBotonActualizar().setEnabled(true);
         } catch (ExcepcionObjectoNoEncontrado excepcion) {
-            JOptionPane.showMessageDialog(panelEntradas.getParent(), excepcion.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            mostrarDialogoDeError(panelEntradas, excepcion);
         }
     }
 }

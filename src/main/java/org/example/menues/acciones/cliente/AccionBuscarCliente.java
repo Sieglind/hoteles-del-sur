@@ -1,19 +1,18 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.paneles.panelesgridbag.tareas.impl.cliente.PanelCliente;
+import org.example.menues.acciones.AccionGenerica;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.cliente.PanelCliente;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarCliente implements ActionListener {
+public class AccionBuscarCliente extends AccionGenerica {
 
-    PanelDeEntradas panelDeEntradas;
-    PanelCliente panelCliente;
+    private final PanelDeEntradas panelDeEntradas;
+    private final PanelCliente panelCliente;
 
     public AccionBuscarCliente(PanelDeEntradas panelDeEntradas, PanelCliente panelCliente) {
         this.panelDeEntradas = panelDeEntradas;
@@ -28,7 +27,7 @@ public class AccionBuscarCliente implements ActionListener {
             panelCliente.getParent().revalidate();
             panelCliente.getParent().repaint();
         } catch (ExcepcionObjectoNoEncontrado excepcion) {
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
+            mostrarDialogoDeError(panelDeEntradas, excepcion);
         }
     }
 }

@@ -8,12 +8,12 @@ import java.time.LocalDate;
 
 public class Reserva {
 
-    private String idReserva;
-    private Cliente cliente;
-    private Habitacion habitacion;
     private final LocalDate fechaInicio;
     private final LocalDate fechaFin;
     private final int[] serviciosElegidos;
+    private String idReserva;
+    private Cliente cliente;
+    private Habitacion habitacion;
     private Estado estado;
 
     public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin, int[] serviciosElegidos) {
@@ -40,12 +40,12 @@ public class Reserva {
         return idReserva;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
     public void setIdReserva(String idReserva) {
         this.idReserva = idReserva;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {

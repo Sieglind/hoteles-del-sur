@@ -16,8 +16,8 @@ public class PanelDeTareas extends PanelFlowCustom {
 
     private void cargarBotones(String nombreDeEntidad) {
         AccionPanelTareas accionPanelTareas = new AccionPanelTareas();
-        for(Tarea tarea : Tarea.values()){
-            JButton button = new JButton(tarea.name(),new ImageIcon(tarea.getUrlIcono()));
+        for (Tarea tarea : Tarea.values()) {
+            JButton button = new JButton(tarea.name(), new ImageIcon(tarea.getUrlIcono()));
             button.setName(nombreDeEntidad);
             button.addActionListener(accionPanelTareas);
             this.add(button);

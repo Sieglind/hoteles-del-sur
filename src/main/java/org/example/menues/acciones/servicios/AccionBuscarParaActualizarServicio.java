@@ -1,5 +1,6 @@
 package org.example.menues.acciones.servicios;
 
+import org.example.menues.acciones.AccionGenerica;
 import org.example.menues.paneles.panelesgridbag.PanelBotones;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.servicio.PanelServicio;
@@ -7,11 +8,10 @@ import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarParaActualizarServicio implements ActionListener {
+public class AccionBuscarParaActualizarServicio extends AccionGenerica {
+
     private final PanelDeEntradas panelDeEntradas;
     private final PanelServicio panelServicios;
     private final PanelBotones panelBotones;
@@ -31,7 +31,7 @@ public class AccionBuscarParaActualizarServicio implements ActionListener {
             panelBotones.getBotonActualizar().setEnabled(true);
             panelBotones.getBotonBuscar().setEnabled(false);
         } catch (ExcepcionObjectoNoEncontrado excepcion) {
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
+            mostrarDialogoDeError(panelDeEntradas, excepcion);
         }
     }
 }

@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GestorHabitaciones implements IGestor <String,Habitacion>{
+public class GestorHabitaciones implements IGestor<String, Habitacion> {
 
-    private final Map<String,Habitacion> habitaciones;
+    private final Map<String, Habitacion> habitaciones;
     private final Logger LOG = Logger.getLogger(GestorHabitaciones.class.getName());
 
     public GestorHabitaciones() {
@@ -26,7 +26,7 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
             try {
                 crear(habitacion);
             } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
+                LOG.log(Level.WARNING, excepcion.getMessage());
             }
         });
         return this;
@@ -34,10 +34,10 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
 
     @Override
     public String crear(Habitacion valor) throws ExcepcionObjetoYaExiste {
-        if(habitaciones.containsKey(valor.getNumeroDeHabitacion())){
+        if (habitaciones.containsKey(valor.getNumeroDeHabitacion())) {
             throw new ExcepcionObjetoYaExiste(valor.getNumeroDeHabitacion());
         }
-        habitaciones.put(valor.getNumeroDeHabitacion(),valor);
+        habitaciones.put(valor.getNumeroDeHabitacion(), valor);
         return valor.getNumeroDeHabitacion();
     }
 
@@ -55,7 +55,7 @@ public class GestorHabitaciones implements IGestor <String,Habitacion>{
     @Override
     public Habitacion actualizar(String key, Habitacion valor) throws ExcepcionObjectoNoEncontrado {
         objetoExiste(key);
-        return habitaciones.put(key,valor);
+        return habitaciones.put(key, valor);
     }
 
     @Override

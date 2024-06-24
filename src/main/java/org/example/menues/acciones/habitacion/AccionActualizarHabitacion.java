@@ -1,5 +1,6 @@
 package org.example.menues.acciones.habitacion;
 
+import org.example.menues.acciones.AccionGenerica;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
@@ -7,9 +8,8 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionActualizarHabitacion implements ActionListener {
+public class AccionActualizarHabitacion extends AccionGenerica {
 
     private final PanelHabitacion panelHabitacion;
 
@@ -20,11 +20,11 @@ public class AccionActualizarHabitacion implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Habitacion habitacion = panelHabitacion.crearHabitacion();
-        try{
+        try {
             Sistema.getInstance().actualizarHabitacion(habitacion);
             JOptionPane.showMessageDialog(panelHabitacion.getParent(), "Habitacion actualizada");
-        }catch (ExcepcionObjectoNoEncontrado excepcion){
-            JOptionPane.showMessageDialog(panelHabitacion.getParent(), excepcion.getMessage());
+        } catch (ExcepcionObjectoNoEncontrado excepcion) {
+            mostrarDialogoDeError(panelHabitacion, excepcion);
         }
     }
 }

@@ -5,7 +5,8 @@ public enum Entidad {
     EMPLEADOS("src/main/resources/iconos/empleados.png"),
     RESERVAS("src/main/resources/iconos/reservas.png"),
     HABITACIONES("src/main/resources/iconos/habitaciones.png"),
-    SERVICIOS("src/main/resources/iconos/servicios.png"),;
+    SERVICIOS("src/main/resources/iconos/servicios.png"),
+    ;
 
     private final String urlIcono;
 

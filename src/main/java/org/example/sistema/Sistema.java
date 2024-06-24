@@ -40,11 +40,6 @@ public class Sistema {
         this.gestorReservas = new GestorReservas();
     }
 
-    public boolean login(String dni, String password) throws ExcepcionObjectoNoEncontrado {
-        Empleado empleado = gestorEmpleados.buscar(dni);
-        return empleado.getPassword().equals(password) && empleado.getCargo().equals(Cargo.ADMINISTRADOR);
-    }
-
     public static synchronized Sistema getInstance() {
         if (sistema == null) {
             sistema = new Sistema(new Hotel("Hoteles del Sur", "Fake St 123", "Please no"));
@@ -52,6 +47,41 @@ public class Sistema {
         return sistema;
     }
 
+    private static String verificarCamposNulos(String dni, String habitacion) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (dni.isBlank()) camposNulos.append(" DNI");
+        if (habitacion.isBlank()) camposNulos.append(" HABITACION");
+        return camposNulos.toString();
+    }
+
+    private static String verificarCamposNulos(Persona persona) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (persona.getDni().isBlank()) camposNulos.append(" DNI");
+        if (persona.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (persona.getApellido().isBlank()) camposNulos.append(" APELLIDO");
+        return camposNulos.toString();
+    }
+
+    private static String verificacionCamposNulos(Habitacion habitacion) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (habitacion.getNumeroDeHabitacion().isBlank() || !StringUtils.isNumeric(habitacion.getNumeroDeHabitacion()))
+            camposNulos.append(" Numero de Habitacion");
+        return camposNulos.toString();
+    }
+
+    private static String verificarCamposNulos(Servicio servicio) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (servicio.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (servicio.getDescripcion().isBlank()) camposNulos.append(" DESCRIPCION");
+        if (servicio.getPrecio() == 0) camposNulos.append(" PRECIO");
+        if (servicio.getCodigo().isBlank()) camposNulos.append(" CODIGO");
+        return camposNulos.toString();
+    }
+
+    public boolean login(String dni, String password) throws ExcepcionObjectoNoEncontrado {
+        Empleado empleado = gestorEmpleados.buscar(dni);
+        return empleado.getPassword().equals(password) && empleado.getCargo().equals(Cargo.ADMINISTRADOR);
+    }
 
     public void crearCliente(Cliente cliente) throws ExcepcionObjetoYaExiste, ExcepcionCamposRequeridos {
         String camposNulos = verificarCamposNulos(cliente);
@@ -71,13 +101,12 @@ public class Sistema {
     }
 
     public void actualizarCliente(Cliente cliente) throws ExcepcionObjectoNoEncontrado {
-        gestorClientes.actualizar(cliente.getDni(),cliente);
+        gestorClientes.actualizar(cliente.getDni(), cliente);
     }
 
     public void borrarCliente(String campoDni) throws ExcepcionObjectoNoEncontrado {
         gestorClientes.borrar(campoDni);
     }
-
 
     public void crearEmpleado(Empleado empleado) throws ExcepcionObjetoYaExiste, ExcepcionCamposRequeridos {
         String camposNulos = verificarCamposNulos(empleado);
@@ -108,7 +137,6 @@ public class Sistema {
     public void borrarEmpleado(String dni) throws ExcepcionObjectoNoEncontrado {
         gestorEmpleados.borrar(dni);
     }
-
 
     public String crearReserva(Reserva reserva, String dni, String habitacion) throws ExcepcionObjetoYaExiste,
             ExcepcionObjectoNoEncontrado, ExcepcionHabitacionNoDisponible, ExcepcionCamposRequeridos {
@@ -158,7 +186,6 @@ public class Sistema {
         gestorReservas.borrar(id);
     }
 
-
     public void crearHabitacion(Habitacion valor) throws ExcepcionObjetoYaExiste, ExcepcionCamposRequeridos {
         String camposNulos = verificacionCamposNulos(valor);
         if (!camposNulos.isBlank()) {
@@ -183,7 +210,6 @@ public class Sistema {
     public void borrarHabitacion(String numeroHabitacion) throws ExcepcionObjectoNoEncontrado {
         gestorHabitaciones.borrar(numeroHabitacion);
     }
-
 
     public void crearServicio(Servicio servicio) throws ExcepcionObjetoYaExiste, ExcepcionCamposRequeridos {
         String camposNulos = verificarCamposNulos(servicio);
@@ -214,40 +240,6 @@ public class Sistema {
     public void borrarServicio(String clave) throws ExcepcionObjectoNoEncontrado {
         gestorDeServicios.borrar(clave);
     }
-
-
-
-    private static String verificarCamposNulos(String dni, String habitacion) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (dni.isBlank()) camposNulos.append(" DNI");
-        if (habitacion.isBlank()) camposNulos.append(" HABITACION");
-        return camposNulos.toString();
-    }
-
-    private static String verificarCamposNulos(Persona persona) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (persona.getDni().isBlank()) camposNulos.append(" DNI");
-        if (persona.getNombre().isBlank()) camposNulos.append(" NOMBRE");
-        if (persona.getApellido().isBlank()) camposNulos.append(" APELLIDO");
-        return camposNulos.toString();
-    }
-
-    private static String verificacionCamposNulos(Habitacion habitacion) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (habitacion.getNumeroDeHabitacion().isBlank() || !StringUtils.isNumeric(habitacion.getNumeroDeHabitacion()))
-            camposNulos.append(" Numero de Habitacion");
-        return camposNulos.toString();
-    }
-
-    private static String verificarCamposNulos(Servicio servicio) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (servicio.getNombre().isBlank()) camposNulos.append(" NOMBRE");
-        if (servicio.getDescripcion().isBlank()) camposNulos.append(" DESCRIPCION");
-        if (servicio.getPrecio() == 0) camposNulos.append(" PRECIO");
-        if (servicio.getCodigo().isBlank()) camposNulos.append(" CODIGO");
-        return camposNulos.toString();
-    }
-
 
     public void exportarDatos() {
         UtilidadesCSV.exportarClientes(gestorClientes.listar());

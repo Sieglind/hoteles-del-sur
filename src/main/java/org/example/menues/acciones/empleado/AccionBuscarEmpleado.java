@@ -1,22 +1,20 @@
 package org.example.menues.acciones.empleado;
+
+import org.example.menues.acciones.AccionGenerica;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
-import org.example.menues.paneles.panelesgridbag.tareas.impl.empleado.PanelTareasEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
-import javax.swing.*;
+
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarEmpleado implements ActionListener {
+public class AccionBuscarEmpleado extends AccionGenerica {
 
-    PanelTareasEmpleado panelDeTareas;
-    PanelDeEntradas panelDeEntradas;
-    PanelEmpleado panelEmpleado;
+    private final PanelDeEntradas panelDeEntradas;
+    private final PanelEmpleado panelEmpleado;
 
-    public AccionBuscarEmpleado(PanelTareasEmpleado panelDeTareas, PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
-        this.panelDeTareas = panelDeTareas;
+    public AccionBuscarEmpleado(PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
         this.panelDeEntradas = panelDeEntradas;
         this.panelEmpleado = panelEmpleado;
     }
@@ -27,7 +25,7 @@ public class AccionBuscarEmpleado implements ActionListener {
             Empleado empleado = Sistema.getInstance().buscarEmpleado(panelDeEntradas.obtenerCampo());
             this.panelEmpleado.llenarCampos(empleado);
         } catch (ExcepcionObjectoNoEncontrado excepcion) {
-            JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
+            mostrarDialogoDeError(panelDeEntradas, excepcion);
         }
     }
 }

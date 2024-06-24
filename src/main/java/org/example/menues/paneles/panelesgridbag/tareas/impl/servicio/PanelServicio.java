@@ -28,7 +28,7 @@ public class PanelServicio extends PanelCustom {
         this.add(crearEtiqueta("Clave:"));
         this.add(this.CAMPO_CLAVE);
 
-        if(!editable){
+        if (!editable) {
             this.CAMPO_NOMBRE.setEnabled(false);
             this.CAMPO_NOMBRE.setDisabledTextColor(Color.BLACK);
             this.CAMPO_DESCRIPCION.setEnabled(false);
@@ -42,11 +42,12 @@ public class PanelServicio extends PanelCustom {
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {}
+    protected void paintComponent(Graphics fondo) {
+    }
 
-    public void rellenarValor(Servicio servicio){
-        Border border = new LineBorder(Color.BLACK,3);
-        this.setBorder(new TitledBorder(border,"Resultados"));
+    public void rellenarValor(Servicio servicio) {
+        Border border = new LineBorder(Color.BLACK, 3);
+        this.setBorder(new TitledBorder(border, "Resultados"));
         this.CAMPO_NOMBRE.setText(servicio.getNombre());
         this.CAMPO_DESCRIPCION.setText(servicio.getDescripcion());
         this.CAMPO_PRECIO.setText(String.valueOf(servicio.getPrecio()));

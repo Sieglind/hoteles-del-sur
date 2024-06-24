@@ -1,7 +1,9 @@
 package org.example.menues.paneles.panelesgridbag.tareas.impl.empleado;
+
 import org.example.menues.paneles.panelesgridbag.PanelCustom;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -24,7 +26,7 @@ public class PanelEmpleado extends PanelCustom {
         this.add(this.CAMPO_NOMBRE);
         this.add(crearEtiqueta("Apellido:"));
         this.add(this.CAMPO_APELLIDO);
-        if(!editable){
+        if (!editable) {
             this.CAMPO_DNI.setEnabled(false);
             this.CAMPO_DNI.setDisabledTextColor(Color.BLACK);
             this.CAMPO_NOMBRE.setEnabled(false);
@@ -39,11 +41,12 @@ public class PanelEmpleado extends PanelCustom {
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {}
+    protected void paintComponent(Graphics fondo) {
+    }
 
-    public void llenarCampos (Empleado empleado) {
-        Border border = new LineBorder(Color.BLACK,3);
-        this.setBorder(new TitledBorder(border,"Resultados"));
+    public void llenarCampos(Empleado empleado) {
+        Border border = new LineBorder(Color.BLACK, 3);
+        this.setBorder(new TitledBorder(border, "Resultados"));
         this.CAMPO_DNI.setText(empleado.getDni());
         this.CAMPO_NOMBRE.setText(empleado.getNombre());
         this.CAMPO_APELLIDO.setText(empleado.getApellido());
@@ -53,7 +56,7 @@ public class PanelEmpleado extends PanelCustom {
         this.repaint();
     }
 
-    public Empleado crearEmpleado(){
+    public Empleado crearEmpleado() {
         return new Empleado(
                 CAMPO_NOMBRE.getText(),
                 CAMPO_APELLIDO.getText(),

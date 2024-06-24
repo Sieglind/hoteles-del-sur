@@ -1,4 +1,5 @@
 package org.example.sistema.gestor.impl;
+
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
@@ -25,7 +26,7 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
             try {
                 crear(empleado);
             } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
+                LOG.log(Level.WARNING, excepcion.getMessage());
             }
         });
         return this;
@@ -33,7 +34,7 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
 
     @Override
     public String crear(Empleado empleado) throws ExcepcionObjetoYaExiste {
-        if(empleados.containsKey(empleado.getDni())){
+        if (empleados.containsKey(empleado.getDni())) {
             throw new ExcepcionObjetoYaExiste(empleado.getDni());
         }
         empleados.put(empleado.getDni(), empleado);

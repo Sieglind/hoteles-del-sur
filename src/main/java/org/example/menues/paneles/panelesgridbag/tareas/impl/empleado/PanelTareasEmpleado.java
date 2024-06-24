@@ -1,9 +1,9 @@
 package org.example.menues.paneles.panelesgridbag.tareas.impl.empleado;
 
 import org.example.menues.acciones.empleado.*;
-import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareas;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 
@@ -24,7 +24,7 @@ public class PanelTareasEmpleado extends PanelTareas {
 
     @Override
     public void panelCrear() {
-        panelDeEntradas = crearPanelDeEntradas(false,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(false, ETIQUEDA_DNI);
         panelEmpleado = crearPanelEmpleado(true);
         panelBotones = crearPanelBotones(Tarea.CREAR);
         panelBotones.getBotonGuardar().addActionListener(new AccionCrearNuevoEmpleado(panelEmpleado));
@@ -32,10 +32,10 @@ public class PanelTareasEmpleado extends PanelTareas {
 
     @Override
     public void panelBuscar() {
-        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(true, ETIQUEDA_DNI);
         panelEmpleado = crearPanelEmpleado(false);
         panelBotones = crearPanelBotones(Tarea.BUSCAR);
-        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarEmpleado(this, panelDeEntradas, panelEmpleado));
+        panelBotones.getBotonBuscar().addActionListener(new AccionBuscarEmpleado(panelDeEntradas, panelEmpleado));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PanelTareasEmpleado extends PanelTareas {
 
     @Override
     public void panelActualizar() {
-        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(true, ETIQUEDA_DNI);
         panelEmpleado = crearPanelEmpleado(false);
         panelBotones = crearPanelBotones(Tarea.ACTUALIZAR);
         panelBotones.getBotonBuscar().addActionListener(new AccionBuscarParaActualizarEmpelado(panelDeEntradas, panelEmpleado, panelBotones));
@@ -57,7 +57,7 @@ public class PanelTareasEmpleado extends PanelTareas {
 
     @Override
     public void panelBorrar() {
-        panelDeEntradas = crearPanelDeEntradas(true,ETIQUEDA_DNI);
+        panelDeEntradas = crearPanelDeEntradas(true, ETIQUEDA_DNI);
         panelBotones = crearPanelBotones(Tarea.BORRAR);
         panelBotones.getBotonBorrar().addActionListener(new AccionBorrarEmpleado(panelDeEntradas));
     }

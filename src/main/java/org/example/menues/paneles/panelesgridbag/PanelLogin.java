@@ -30,6 +30,6 @@ public class PanelLogin extends PanelCustom {
         campoPassword.setMaximumSize(DIMENSION);
         this.add(campoPassword);
         this.add(ESPACIO);
-        this.add(crearBoton("Enviar",CENTER_ALIGNMENT, new AccionLogin(this, campoUsuario, campoPassword)));
+        this.add(crearBoton("Enviar", CENTER_ALIGNMENT, new AccionLogin(this, campoUsuario, campoPassword)));
     }
 }

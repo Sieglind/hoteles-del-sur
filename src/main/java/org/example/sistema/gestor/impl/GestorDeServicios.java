@@ -5,7 +5,6 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -26,7 +25,7 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
             try {
                 crear(servicio);
             } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
+                LOG.log(Level.WARNING, excepcion.getMessage());
             }
         });
         return this;

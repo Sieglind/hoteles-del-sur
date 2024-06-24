@@ -10,14 +10,15 @@ public class PanelDeEntradas extends PanelCustom {
 
     public PanelDeEntradas(boolean completo, String etiqueta) {
         JLabel ETIQUETA = crearEtiqueta(etiqueta);
-        if (completo){
+        if (completo) {
             this.add(ETIQUETA);
             this.add(CAMPO);
         }
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {}
+    protected void paintComponent(Graphics fondo) {
+    }
 
     public String obtenerCampo() {
         return CAMPO.getText();

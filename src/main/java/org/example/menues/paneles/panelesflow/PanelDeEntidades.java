@@ -16,7 +16,7 @@ public class PanelDeEntidades extends PanelFlowCustom {
     private void cargarBotones() {
         AccionPanelEntidad accionPanelEntidad = new AccionPanelEntidad();
         for (Entidad entidad : Entidad.values()) {
-            JButton button = new JButton(entidad.name(),new ImageIcon(entidad.getUrlIcono()));
+            JButton button = new JButton(entidad.name(), new ImageIcon(entidad.getUrlIcono()));
             button.setName(entidad.name());
             button.addActionListener(accionPanelEntidad);
             this.add(button);

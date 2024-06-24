@@ -1,4 +1,6 @@
 package org.example.menues.acciones.servicios;
+
+import org.example.menues.acciones.AccionGenerica;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.servicio.PanelServicio;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
@@ -7,16 +9,14 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionActualizarServicio implements ActionListener
-{
+public class AccionActualizarServicio extends AccionGenerica {
+
     private final PanelServicio panelServicio;
 
     public AccionActualizarServicio(PanelServicio panelServicio) {
         this.panelServicio = panelServicio;
     }
-
 
     public void actionPerformed(ActionEvent evento) {
 
@@ -24,9 +24,9 @@ public class AccionActualizarServicio implements ActionListener
 
         try {
             Sistema.getInstance().actualizarServicio(servicio);
-            JOptionPane.showMessageDialog(panelServicio.getParent(), "Servicio actualizado correctamente");
+            JOptionPane.showMessageDialog(panelServicio.getParent(), "Servicio actualizado");
         } catch (ExcepcionCamposRequeridos | ExcepcionObjectoNoEncontrado excepcion) {
-            JOptionPane.showMessageDialog(panelServicio.getParent(),excepcion.getMessage());
+            mostrarDialogoDeError(panelServicio, excepcion);
         }
     }
 }

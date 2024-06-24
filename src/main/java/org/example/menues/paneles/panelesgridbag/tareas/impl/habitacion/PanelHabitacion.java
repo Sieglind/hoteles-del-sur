@@ -40,7 +40,8 @@ public class PanelHabitacion extends PanelCustom {
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {}
+    protected void paintComponent(Graphics fondo) {
+    }
 
     public void llenarCampos(Habitacion habitacion) {
         Border border = new LineBorder(Color.BLACK, 3);

@@ -2,7 +2,7 @@ package org.example.sistema.entidades.persona;
 
 import org.example.sistema.enums.Segmento;
 
-public class Cliente extends Persona{
+public class Cliente extends Persona {
 
     private final Segmento segmento;
 

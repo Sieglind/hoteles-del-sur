@@ -25,7 +25,7 @@ public class GestorClientes implements IGestor<String, Cliente> {
             try {
                 crear(cliente);
             } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
+                LOG.log(Level.WARNING, excepcion.getMessage());
             }
         });
         return this;

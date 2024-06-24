@@ -13,14 +13,6 @@ public class VentanaPrincipal extends JFrame {
         addWindowListener(new CierreVentana(this));
     }
 
-    private void configurarVentana() {
-        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        setBounds(screenBounds);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setVisible(true);
-    }
-
     public static synchronized VentanaPrincipal obtenerVentanaPrincipal() {
         if (ventanaPrincipal == null) {
             ventanaPrincipal = new VentanaPrincipal();
@@ -28,9 +20,17 @@ public class VentanaPrincipal extends JFrame {
         return ventanaPrincipal;
     }
 
-    public static void cambiarCuadro(JPanel panel){
+    public static void cambiarCuadro(JPanel panel) {
         obtenerVentanaPrincipal().setContentPane(panel);
         obtenerVentanaPrincipal().revalidate();
         obtenerVentanaPrincipal().repaint();
+    }
+
+    private void configurarVentana() {
+        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        setBounds(screenBounds);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setVisible(true);
     }
 }
