@@ -18,15 +18,15 @@ public class PanelCustom extends JPanelCustom {
         this.setVisible(true);
     }
 
-    protected JLabel crearEtiqueta(String texto, float alineacion) {
+    protected JLabel crearEtiqueta(String texto) {
         JLabel etiqueta = new JLabel(texto);
-        dimensionarCompomente(etiqueta, alineacion);
+        dimensionarCompomente(etiqueta);
         return etiqueta;
     }
 
-    protected JTextField crearCampoDeTexto(float alineacion) {
+    protected JTextField crearCampoDeTexto() {
         JTextField campo = new JTextField(COLUMNS);
-        dimensionarCompomente(campo, alineacion);
+        dimensionarCompomente(campo);
         return campo;
     }
 
@@ -37,8 +37,8 @@ public class PanelCustom extends JPanelCustom {
         return button;
     }
 
-    protected void dimensionarCompomente(JComponent componente, float alineacion) {
+    protected void dimensionarCompomente(JComponent componente) {
         componente.setMaximumSize(DIMENSION);
-        componente.setAlignmentX(alineacion);
+        componente.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 }

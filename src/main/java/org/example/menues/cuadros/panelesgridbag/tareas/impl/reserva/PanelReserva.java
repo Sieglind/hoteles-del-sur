@@ -41,7 +41,7 @@ public class PanelReserva extends PanelCustom {
         this.add(crearEtiqueta("Check-Out: "));
         this.add(this.CAMPO_FECHA_FIN);
         this.add(this.ETIQUETA_ESTADO_RESERVA);
-        dimensionarCompomente(CAMPO_ESTADO_RESERVA, CENTER_ALIGNMENT);
+        dimensionarCompomente(CAMPO_ESTADO_RESERVA);
         this.add(CAMPO_ESTADO_RESERVA);
         this.ETIQUETA_NOMBRE_CLIENTE.setVisible(false);
         this.CAMPO_NOMBRE_CLIENTE.setVisible(false);
@@ -70,16 +70,7 @@ public class PanelReserva extends PanelCustom {
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {
-    }
-
-    private JLabel crearEtiqueta(String texto) {
-        return crearEtiqueta(texto, Component.CENTER_ALIGNMENT);
-    }
-
-    private JTextField crearCampoDeTexto() {
-        return crearCampoDeTexto(CENTER_ALIGNMENT);
-    }
+    protected void paintComponent(Graphics fondo) {}
 
     public void rellenarCampos(Reserva reserva) {
         Border border = new LineBorder(Color.BLACK, 3);

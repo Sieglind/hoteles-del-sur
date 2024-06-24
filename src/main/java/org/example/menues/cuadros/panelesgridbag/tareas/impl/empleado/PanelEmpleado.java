@@ -17,7 +17,7 @@ public class PanelEmpleado extends PanelCustom {
 
     public PanelEmpleado(boolean editable) {
         this.setVisible(editable);
-        dimensionarCompomente(LISTA_CARGO,CENTER_ALIGNMENT);
+        dimensionarCompomente(LISTA_CARGO);
         this.add(crearEtiqueta("DNI:"));
         this.add(this.CAMPO_DNI);
         this.add(crearEtiqueta("Nombre:"));
@@ -41,14 +41,6 @@ public class PanelEmpleado extends PanelCustom {
     @Override
     protected void paintComponent(Graphics fondo) {}
 
-    private JLabel crearEtiqueta(String texto){
-        return crearEtiqueta(texto,Component.CENTER_ALIGNMENT);
-    }
-
-    private JTextField crearCampoDeTexto(){
-        return crearCampoDeTexto(CENTER_ALIGNMENT);
-    }
-
     public void llenarCampos (Empleado empleado) {
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
@@ -68,7 +60,6 @@ public class PanelEmpleado extends PanelCustom {
                 CAMPO_DNI.getText(),
                 (Cargo) LISTA_CARGO.getSelectedItem());
     }
-
 
     public void habilitarEdicion() {
         this.CAMPO_NOMBRE.setEnabled(true);

@@ -19,7 +19,7 @@ public class PanelCliente extends PanelCustom {
 
     public PanelCliente(boolean editable) {
         this.setVisible(editable);
-        dimensionarCompomente(LISTA_SEGMENTO, CENTER_ALIGNMENT);
+        dimensionarCompomente(LISTA_SEGMENTO);
         this.add(crearEtiqueta("DNI:"));
         this.add(this.CAMPO_DNI);
         this.add(crearEtiqueta("Nombre:"));
@@ -42,14 +42,6 @@ public class PanelCliente extends PanelCustom {
 
     @Override
     protected void paintComponent(Graphics fondo) {
-    }
-
-    private JLabel crearEtiqueta(String texto) {
-        return crearEtiqueta(texto, Component.CENTER_ALIGNMENT);
-    }
-
-    private JTextField crearCampoDeTexto() {
-        return crearCampoDeTexto(CENTER_ALIGNMENT);
     }
 
     public void fillValues(Cliente cliente) {

@@ -32,13 +32,4 @@ public class PanelLogin extends PanelCustom {
         this.add(ESPACIO);
         this.add(crearBoton("Enviar",CENTER_ALIGNMENT, new AccionLogin(this, campoUsuario, campoPassword)));
     }
-
-    private JTextField crearCampoDeTexto(){
-        return crearCampoDeTexto(CENTER_ALIGNMENT);
-    }
-
-    private JLabel crearEtiqueta(String texto) {
-        return crearEtiqueta(texto, CENTER_ALIGNMENT);
-    }
-
 }

@@ -2,8 +2,6 @@ package org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio;
 
 import org.example.menues.cuadros.panelesgridbag.PanelCustom;
 import org.example.sistema.entidades.Servicio;
-import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.enums.Cargo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -46,14 +44,6 @@ public class PanelServicio extends PanelCustom {
     @Override
     protected void paintComponent(Graphics fondo) {}
 
-    private JLabel crearEtiqueta(String texto){
-        return crearEtiqueta(texto,Component.CENTER_ALIGNMENT);
-    }
-
-    private JTextField crearCampoDeTexto(){
-        return crearCampoDeTexto(Component.CENTER_ALIGNMENT);
-    }
-
     public void rellenarValor(Servicio servicio){
         Border border = new LineBorder(Color.BLACK,3);
         this.setBorder(new TitledBorder(border,"Resultados"));
@@ -79,5 +69,4 @@ public class PanelServicio extends PanelCustom {
         this.CAMPO_DESCRIPCION.setEnabled(true);
         this.CAMPO_PRECIO.setEnabled(true);
     }
-
 }

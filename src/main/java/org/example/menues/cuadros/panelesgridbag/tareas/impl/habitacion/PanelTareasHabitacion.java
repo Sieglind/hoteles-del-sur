@@ -28,7 +28,6 @@ public class PanelTareasHabitacion extends PanelTareas implements ITareas {
     }
 
     private void seleccionarPanel(Tarea tarea) {
-
         switch (tarea) {
             case CREAR -> panelCrear();
             case BUSCAR -> panelBuscar();

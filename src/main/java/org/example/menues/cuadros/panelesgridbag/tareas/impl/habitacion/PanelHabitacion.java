@@ -8,9 +8,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.text.NumberFormat;
 
 public class PanelHabitacion extends PanelCustom {
     private final JTextField CAMPO_NUMERO_HABITACION = crearCampoDeTexto();
@@ -25,10 +23,10 @@ public class PanelHabitacion extends PanelCustom {
         this.add(crearEtiqueta("Numero de Habitacion: "));
         this.add(CAMPO_NUMERO_HABITACION);
         this.add(crearEtiqueta("Tipo de Habitacion: "));
-        dimensionarCompomente(CAMPO_TIPO_HABITACION, CENTER_ALIGNMENT);
+        dimensionarCompomente(CAMPO_TIPO_HABITACION);
         this.add(CAMPO_TIPO_HABITACION);
         this.add(crearEtiqueta("Precio: "));
-        dimensionarCompomente(CAMPO_PRECIO_HABITACION, CENTER_ALIGNMENT);
+        dimensionarCompomente(CAMPO_PRECIO_HABITACION);
         this.add(CAMPO_PRECIO_HABITACION);
 
         if (!editable) {
@@ -42,18 +40,7 @@ public class PanelHabitacion extends PanelCustom {
     }
 
     @Override
-    protected void paintComponent(Graphics fondo) {
-
-    }
-
-    private JLabel crearEtiqueta(String texto) {
-        return crearEtiqueta(texto, Component.CENTER_ALIGNMENT);
-    }
-
-    private JTextField crearCampoDeTexto() {
-        return crearCampoDeTexto(CENTER_ALIGNMENT);
-    }
-
+    protected void paintComponent(Graphics fondo) {}
 
     public void llenarCampos(Habitacion habitacion) {
         Border border = new LineBorder(Color.BLACK, 3);
@@ -85,6 +72,4 @@ public class PanelHabitacion extends PanelCustom {
         return habitacion;
 
     }
-
-
 }

@@ -19,14 +19,6 @@ public class PanelDeEntradas extends PanelCustom {
     @Override
     protected void paintComponent(Graphics fondo) {}
 
-    private JLabel crearEtiqueta(String texto){
-        return crearEtiqueta(texto,Component.CENTER_ALIGNMENT);
-    }
-
-    private JTextField crearCampoDeTexto(){
-        return crearCampoDeTexto(CENTER_ALIGNMENT);
-    }
-
     public String obtenerCampo() {
         return CAMPO.getText();
     }
