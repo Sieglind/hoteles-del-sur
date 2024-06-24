@@ -1,14 +1,17 @@
 package org.example.sistema.gestor;
 
 public class Hotel {
+
     private final String nombre;
     private final String direccion;
-    private final String contacto;
+    private final String telefono;
+    private final String cuil;
 
-    public Hotel(String nombre, String direccion, String contacto) {
+    public Hotel(String nombre, String direccion, String telefono, String cuil) {
         this.nombre = nombre;
         this.direccion = direccion;
-        this.contacto = contacto;
+        this.telefono = telefono;
+        this.cuil = cuil;
     }
 
     public String getNombre() {
@@ -19,8 +22,11 @@ public class Hotel {
         return direccion;
     }
 
-    public String getContacto() {
-        return contacto;
+    public String getTelefono() {
+        return telefono;
     }
 
+    public String getCuil() {
+        return cuil;
+    }
 }
