@@ -20,7 +20,7 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
         this.servicios = new TreeMap<>();
     }
 
-    public GestorDeServicios conServicios(List<Servicio> servicios) {
+    public void importarDatos(List<Servicio> servicios) {
         servicios.forEach(servicio -> {
             try {
                 crear(servicio);
@@ -28,7 +28,6 @@ public class GestorDeServicios implements IGestor<String, Servicio> {
                 LOG.log(Level.WARNING, excepcion.getMessage());
             }
         });
-        return this;
     }
 
     @Override

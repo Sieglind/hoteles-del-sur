@@ -15,6 +15,11 @@ public class CierreVentana extends WindowAdapter {
     }
 
     @Override
+    public void windowOpened(WindowEvent e) {
+        Sistema.getInstance().importarDatos();
+    }
+
+    @Override
     public void windowClosing(WindowEvent e) {
         Sistema.getInstance().exportarDatos();
         this.frame.dispose();

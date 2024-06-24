@@ -21,7 +21,7 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
         this.empleados = new HashMap<>();
     }
 
-    public GestorEmpleados conEmpleados(List<Empleado> empleados) {
+    public void importarDatos(List<Empleado> empleados) {
         empleados.forEach(empleado -> {
             try {
                 crear(empleado);
@@ -29,7 +29,6 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
                 LOG.log(Level.WARNING, excepcion.getMessage());
             }
         });
-        return this;
     }
 
     @Override

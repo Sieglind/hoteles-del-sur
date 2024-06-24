@@ -11,12 +11,19 @@ import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import org.example.sistema.enums.Segmento;
 import org.example.sistema.enums.TipoDeHabitacion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UtilidadesCSV {
 
@@ -26,6 +33,8 @@ public class UtilidadesCSV {
     private static final String FILENAME_HABITACIONES = "datos/habitaciones.csv";
     private static final String FILENAME_RESERVAS = "datos/reservas.csv";
     private static final String FILENAME_SERVICIOS = "datos/servicios.csv";
+
+    private static final Logger LOGGER = Logger.getLogger(UtilidadesCSV.class.getName());
 
     public static List<Cliente> importarClientes() {
         String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
@@ -139,14 +148,40 @@ public class UtilidadesCSV {
         }
     }
 
+    public static List<Reserva> importarReservas() {
+        String filePath = RESOURCE_PATH + FILENAME_RESERVAS;
+        List<Reserva> reservas = new ArrayList<>();
+        try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
+            String[] renglon;
+            while ((renglon = csvReader.readNext()) != null) {
+                try {
+                    Reserva reserva = new Reserva(
+                            renglon[0],
+                            Sistema.getInstance().buscarCLiente(renglon[1]),
+                            Sistema.getInstance().buscarHabitacion(renglon[2]),
+                            LocalDate.parse(renglon[3]),
+                            LocalDate.parse(renglon[4]),
+                            null
+                            );
+                    reservas.add(reserva);
+                } catch (ExcepcionObjectoNoEncontrado | DateTimeParseException excepcion){
+                    LOGGER.log(Level.WARNING,excepcion.getMessage());
+                }
+            }
+        } catch (IOException | CsvValidationException e) {
+            throw new RuntimeException(e);
+        }
+        return reservas;
+    }
+
     public static void exportarReservas(List<Reserva> reservas) {
         String filePath = RESOURCE_PATH + FILENAME_RESERVAS;
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             reservas.forEach(reserva -> {
                 String[] valores = {
                         reserva.getIdReserva(),
-                        String.valueOf(reserva.getCliente()),
-                        String.valueOf(reserva.getHabitacion()),
+                        String.valueOf(reserva.getCliente().getDni()),
+                        String.valueOf(reserva.getHabitacion().getNumeroDeHabitacion()),
                         reserva.getFechaInicio().toString(),
                         reserva.getFechaFin().toString()
                 };
