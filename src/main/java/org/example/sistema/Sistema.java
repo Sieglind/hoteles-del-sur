@@ -242,7 +242,7 @@ public class Sistema {
     }
 
     public void exportarDatos() {
-//        UtilidadesCSV.exportarClientes(gestorClientes.listar());
+        UtilidadesCSV.exportarClientes(gestorClientes.listar());
 //        UtilidadesCSV.exportarHabitaciones(gestorHabitaciones.listar());
 //        UtilidadesCSV.exportarServicios(gestorDeServicios.listar());
 //        UtilidadesCSV.exportarEmpleados(gestorEmpleados.listar());

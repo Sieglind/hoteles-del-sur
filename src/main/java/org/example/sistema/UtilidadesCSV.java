@@ -27,6 +27,43 @@ public class UtilidadesCSV {
     private static final String FILENAME_RESERVAS = "datos/reservas.csv";
     private static final String FILENAME_SERVICIOS = "datos/servicios.csv";
 
+    public static List<Cliente> importarClientes() {
+        String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
+        List<Cliente> clientes = new ArrayList<>();
+        try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
+            String[] renglon;
+            while ((renglon = csvReader.readNext()) != null) {
+                Cliente cliente = new Cliente(
+                        renglon[0],
+                        renglon[1],
+                        renglon[2],
+                        Segmento.valueOf(renglon[3])
+                );
+                clientes.add(cliente);
+            }
+        } catch (IOException | CsvValidationException e) {
+            System.out.println(e.getMessage());
+        }
+        return clientes;
+    }
+
+    public static void exportarClientes(List<Cliente> clientes) {
+        String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
+            clientes.forEach(cliente -> {
+                String[] valores = {
+                        cliente.getNombre(),
+                        cliente.getApellido(),
+                        cliente.getDni(),
+                        String.valueOf(cliente.getSegmento())
+                };
+                csvWriter.writeNext(valores);
+            });
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo" + e.getMessage());
+        }
+    }
+
     public static List<Empleado> importarEmpleados() {
         String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
         List<Empleado> empleados = new ArrayList<>();
@@ -47,27 +84,6 @@ public class UtilidadesCSV {
             System.out.println(e.getMessage());
         }
         return empleados;
-    }
-
-    public static List<Cliente> importarClientes() {
-        String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
-        List<Cliente> clientes = new ArrayList<>();
-        try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
-            String[] renglon;
-            while ((renglon = csvReader.readNext()) != null) {
-                Segmento segmento = Segmento.valueOf(renglon[3]);
-                Cliente cliente = new Cliente(
-                        renglon[0],
-                        renglon[1],
-                        renglon[2],
-                        segmento
-                );
-                clientes.add(cliente);
-            }
-        } catch (IOException | CsvValidationException e) {
-            System.out.println(e.getMessage());
-        }
-        return clientes;
     }
 
     public static List<Habitacion> importarHabitaciones() {
@@ -107,23 +123,6 @@ public class UtilidadesCSV {
             System.out.println(e.getMessage());
         }
         return servicios;
-    }
-
-    public static void exportarClientes(List<Cliente> clientes) {
-        String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
-        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
-            clientes.forEach(cliente -> {
-                String[] valores = {
-                        cliente.getNombre(),
-                        cliente.getApellido(),
-                        cliente.getDni(),
-                        String.valueOf(cliente.getSegmento())
-                };
-                csvWriter.writeNext(valores);
-            });
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo" + e.getMessage());
-        }
     }
 
     public static void exportarHabitaciones(List<Habitacion> habitaciones) {
