@@ -21,11 +21,11 @@ import java.util.List;
 public class UtilidadesCSV {
 
     private static final String RESOURCE_PATH = "src/main/resources/";
-    private static final String FILENAME_EMPLEADOS = "empleados.csv";
-    private static final String FILENAME_CLIENTES = "clientes.csv";
-    private static final String FILENAME_HABITACIONES = "habitaciones.csv";
-    private static final String FILENAME_RESERVAS = "reservas.csv";
-    private static final String FILENAME_SERVICIOS = "servicios.csv";
+    private static final String FILENAME_EMPLEADOS = "datos/empleados.csv";
+    private static final String FILENAME_CLIENTES = "datos/clientes.csv";
+    private static final String FILENAME_HABITACIONES = "datos/habitaciones.csv";
+    private static final String FILENAME_RESERVAS = "datos/reservas.csv";
+    private static final String FILENAME_SERVICIOS = "datos/servicios.csv";
 
     public static List<Empleado> importarEmpleados() {
         String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
@@ -76,11 +76,10 @@ public class UtilidadesCSV {
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
-                TipoDeHabitacion tipoDeHabitacion = TipoDeHabitacion.valueOf(renglon[1]);
                 Habitacion habitacion = new Habitacion(
                         renglon[0],
-                        tipoDeHabitacion,
-                        0
+                        TipoDeHabitacion.valueOf(renglon[1]),
+                        Float.parseFloat(renglon[2])
                 );
                 habitaciones.add(habitacion);
             }

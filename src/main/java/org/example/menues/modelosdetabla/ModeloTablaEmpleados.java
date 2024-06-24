@@ -8,7 +8,7 @@ import java.util.List;
 public class ModeloTablaEmpleados extends AbstractTableModel {
 
     private final List<Empleado> empleados;
-    private final String[] colunas = {"Nombre", "Nombre Completo", "Cargo"};
+    private final String[] colunas = {"DNI", "Nombre Completo", "Cargo"};
 
     public ModeloTablaEmpleados(List<Empleado> empleados){
         this.empleados = empleados;
@@ -18,7 +18,7 @@ public class ModeloTablaEmpleados extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Empleado empleado = empleados.get(rowIndex);
         return switch (columnIndex) {
-            case 0 -> empleado.getNombre();
+            case 0 -> empleado.getDni();
             case 1 -> empleado.getApellido() + " " + empleado.getApellido();
             case 2 -> empleado.getCargo();
             default -> null;
