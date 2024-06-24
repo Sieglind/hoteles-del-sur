@@ -20,16 +20,20 @@ import java.util.List;
 
 public class UtilidadesCSV {
 
-    private static final String COMMA = ",";
+    private static final String RESOURCE_PATH = "src/main/resources/";
+    private static final String FILENAME_EMPLEADOS = "empleados.csv";
+    private static final String FILENAME_CLIENTES = "clientes.csv";
+    private static final String FILENAME_HABITACIONES = "habitaciones.csv";
+    private static final String FILENAME_RESERVAS = "reservas.csv";
+    private static final String FILENAME_SERVICIOS = "servicios.csv";
 
     public static List<Empleado> importarEmpleados() {
-        String filePath = "src/main/resources/empleados.csv";
+        String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
         List<Empleado> empleados = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
                 Cargo cargo = Cargo.valueOf(renglon[3]);
-
                 Empleado empleado = new Empleado(
                         renglon[0],
                         renglon[1],
@@ -37,9 +41,7 @@ public class UtilidadesCSV {
                         Cargo.valueOf(renglon[3]),
                         cargo.equals(Cargo.ADMINISTRADOR) ? renglon[4] : null
                 );
-
                 empleados.add(empleado);
-
             }
         } catch (IOException | CsvValidationException e) {
             System.out.println(e.getMessage());
@@ -48,17 +50,17 @@ public class UtilidadesCSV {
     }
 
     public static List<Cliente> importarClientes() {
-        String filePath = "src/main/resources/clientes.csv";
+        String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
         List<Cliente> clientes = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
                 Segmento segmento = Segmento.valueOf(renglon[3]);
                 Cliente cliente = new Cliente(
-                        renglon[0], //nombre
-                        renglon[1], //apellido
-                        renglon[2], //dni
-                        segmento //segmento
+                        renglon[0],
+                        renglon[1],
+                        renglon[2],
+                        segmento
                 );
                 clientes.add(cliente);
             }
@@ -66,19 +68,18 @@ public class UtilidadesCSV {
             System.out.println(e.getMessage());
         }
         return clientes;
-
     }
 
     public static List<Habitacion> importarHabitaciones() {
-        String filePath = "src/main/resources/habitaciones.csv";
+        String filePath = RESOURCE_PATH + FILENAME_HABITACIONES;
         List<Habitacion> habitaciones = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
                 TipoDeHabitacion tipoDeHabitacion = TipoDeHabitacion.valueOf(renglon[1]);
                 Habitacion habitacion = new Habitacion(
-                        renglon[0], //nro de habitacion
-                        tipoDeHabitacion,//tipo de habitacion
+                        renglon[0],
+                        tipoDeHabitacion,
                         0
                 );
                 habitaciones.add(habitacion);
@@ -86,22 +87,20 @@ public class UtilidadesCSV {
         } catch (IOException | CsvValidationException e) {
             System.out.println(e.getMessage());
         }
-
         return habitaciones;
-
     }
 
     public static List<Servicio> importarServicios() {
-        String filePath = "src/main/resources/servicios.csv";
+        String filePath = RESOURCE_PATH + FILENAME_SERVICIOS;
         List<Servicio> servicios = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
                 Servicio servicio = new Servicio(
-                        renglon[0], //nombre
-                        renglon[1],//descripcion
-                        Float.parseFloat(renglon[2]), //precio
-                        renglon[3] //clave
+                        renglon[0],
+                        renglon[1],
+                        Float.parseFloat(renglon[2]),
+                        renglon[3]
                 );
                 servicios.add(servicio);
             }
@@ -112,7 +111,7 @@ public class UtilidadesCSV {
     }
 
     public static void exportarClientes(List<Cliente> clientes) {
-        String filePath = "src/main/resources/clientes.csv";
+        String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             clientes.forEach(cliente -> {
                 String[] valores = {
@@ -129,7 +128,7 @@ public class UtilidadesCSV {
     }
 
     public static void exportarHabitaciones(List<Habitacion> habitaciones) {
-        String filePath = "src/main/resources/habitaciones.csv";
+        String filePath = RESOURCE_PATH + FILENAME_HABITACIONES;
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             habitaciones.forEach(habitacion -> {
                 String[] valores = {
@@ -144,15 +143,14 @@ public class UtilidadesCSV {
     }
 
     public static void exportarServicios(List<Servicio> servicios) {
-        String filePath = "src/main/resources/servicios.csv";
-        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath));) {
+        String filePath = RESOURCE_PATH + FILENAME_SERVICIOS;
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             for (Servicio servicio : servicios) {
                 String[] valores = {
                         servicio.getNombre(),
                         servicio.getDescripcion(),
                         String.valueOf(servicio.getPrecio()),
                         servicio.getCodigo()
-
                 };
                 csvWriter.writeNext(valores);
             }
@@ -162,7 +160,7 @@ public class UtilidadesCSV {
     }
 
     public static void exportarEmpleados(List<Empleado> empleados) {
-        String filePath = "src/main/resources/empleados.csv";
+        String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             empleados.forEach(empleado -> {
                 String[] valores = {
@@ -180,15 +178,15 @@ public class UtilidadesCSV {
     }
 
     public static void exportarReservas(List<Reserva> reservas) {
-        String filePath = "src/main/resources/reservas.csv";
+        String filePath = RESOURCE_PATH + FILENAME_RESERVAS;
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
             reservas.forEach(reserva -> {
                 String[] valores = {
                         reserva.getIdReserva(),
                         String.valueOf(reserva.getCliente()),
                         String.valueOf(reserva.getHabitacion()),
-                        reserva.getFechaInicioFormateado(),
-                        reserva.getFechaFinFormateado()
+                        reserva.getFechaInicio().toString(),
+                        reserva.getFechaFin().toString()
                 };
                 csvWriter.writeNext(valores);
             });

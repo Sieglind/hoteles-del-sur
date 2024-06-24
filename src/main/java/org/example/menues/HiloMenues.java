@@ -1,6 +1,6 @@
 package org.example.menues;
 
-import org.example.menues.cuadros.panelesgridbag.PanelLogin;
+import org.example.menues.paneles.panelesgridbag.PanelLogin;
 
 public class HiloMenues implements Runnable {
 

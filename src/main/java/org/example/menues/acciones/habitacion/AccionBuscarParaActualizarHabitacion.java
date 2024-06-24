@@ -1,17 +1,16 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.panelesgridbag.PanelBotones;
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelBotones;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarParaActualizarHabitacion implements ActionListener {
+public class AccionBuscarParaActualizarHabitacion extends AccionAbstracta {
 
     private final PanelDeEntradas panelDeEntradas;
     private final PanelHabitacion panelHabitacion;
@@ -25,14 +24,14 @@ public class AccionBuscarParaActualizarHabitacion implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        try{
+        try {
             Habitacion habitacion = Sistema.getInstance().buscarHabitacion(panelDeEntradas.obtenerCampo());
             panelHabitacion.llenarCampos(habitacion);
             panelHabitacion.habilitarEdicion();
             panelBotones.getBotonActualizar().setEnabled(true);
             panelBotones.getBotonBuscar().setEnabled(false);
-        }catch (ExcepcionObjectoNoEncontrado excepcion){
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage());
+        } catch (ExcepcionObjectoNoEncontrado excepcion) {
+            mostrarDialogoDeError(panelDeEntradas, excepcion);
         }
 
     }

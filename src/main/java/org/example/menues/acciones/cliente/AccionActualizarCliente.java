@@ -1,15 +1,15 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.cliente.PanelCliente;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.cliente.PanelCliente;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionActualizarCliente implements ActionListener {
+public class AccionActualizarCliente extends AccionAbstracta {
 
     private final PanelCliente panelCliente;
 
@@ -22,10 +22,9 @@ public class AccionActualizarCliente implements ActionListener {
         Cliente cliente = panelCliente.obtenerCliente();
         try {
             Sistema.getInstance().actualizarCliente(cliente);
-            JOptionPane.showMessageDialog(panelCliente, "Cliente actualizado");
+            JOptionPane.showMessageDialog(panelCliente.getParent(), "Cliente actualizado.");
         } catch (ExcepcionObjectoNoEncontrado excepcion) {
-            JOptionPane.showMessageDialog(panelCliente.getParent(), excepcion.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            mostrarDialogoDeError(panelCliente.getParent(), excepcion);
         }
-
     }
 }

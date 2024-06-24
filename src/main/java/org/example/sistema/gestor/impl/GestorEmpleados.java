@@ -1,4 +1,5 @@
 package org.example.sistema.gestor.impl;
+
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
@@ -20,12 +21,20 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
         this.empleados = new HashMap<>();
     }
 
+    public GestorEmpleados conEmpleados(List<Empleado> empleados) {
+        empleados.forEach(empleado -> {
+            try {
+                crear(empleado);
+            } catch (ExcepcionObjetoYaExiste excepcion) {
+                LOG.log(Level.WARNING, excepcion.getMessage());
+            }
+        });
+        return this;
+    }
+
     @Override
     public String crear(Empleado empleado) throws ExcepcionObjetoYaExiste {
-        if(empleado==null){
-            throw new IllegalArgumentException("El empleado no pudo ser registrado correctamente");
-        }
-        if(empleados.containsKey(empleado.getDni())){
+        if (empleados.containsKey(empleado.getDni())) {
             throw new ExcepcionObjetoYaExiste(empleado.getDni());
         }
         empleados.put(empleado.getDni(), empleado);
@@ -33,13 +42,9 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
     }
 
     @Override
-    public Empleado buscar(String dni) throws ExcepcionObjectoNoEncontrado {
-        Empleado empleado = empleados.get(dni);
-
-        if(empleado == null){
-            throw new ExcepcionObjectoNoEncontrado(dni);
-        }
-        return empleado;
+    public Empleado buscar(String key) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        return empleados.get(key);
     }
 
     @Override
@@ -48,34 +53,21 @@ public class GestorEmpleados implements IGestor<String, Empleado> {
     }
 
     @Override
-    public Empleado actualizar(String dni, Empleado empleadoActualizado) throws ExcepcionObjectoNoEncontrado {
-
-        if(!empleados.containsKey(dni)){
-            throw new ExcepcionObjectoNoEncontrado(dni);
-        }
-        empleados.put(dni, empleadoActualizado);
-        return empleadoActualizado;
+    public Empleado actualizar(String key, Empleado valor) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        return empleados.put(key, valor);
     }
 
     @Override
-    public boolean borrar(String dni) throws ExcepcionObjectoNoEncontrado {
-
-        if(!empleados.containsKey(dni)){
-            throw new ExcepcionObjectoNoEncontrado(dni);
-        }
-        empleados.remove(dni);
-        return true;
+    public void borrar(String key) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        empleados.remove(key);
     }
 
-    public GestorEmpleados conEmpleados(List<Empleado> empleados) {
-        empleados.forEach(empleado -> {
-            try {
-                crear(empleado);
-            } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
-            }
-        });
-        return this;
+    private void objetoExiste(String key) throws ExcepcionObjectoNoEncontrado {
+        if (!empleados.containsKey(key) || empleados.get(key) == null) {
+            throw new ExcepcionObjectoNoEncontrado(key);
+        }
     }
 }
 

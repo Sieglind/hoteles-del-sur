@@ -1,8 +1,8 @@
 package org.example.menues.acciones;
 
 import org.example.menues.VentanaPrincipal;
-import org.example.menues.cuadros.panelesflow.PanelDeEntidades;
-import org.example.menues.cuadros.panelesflow.PanelDeTareas;
+import org.example.menues.paneles.panelesflow.PanelDeEntidades;
+import org.example.menues.paneles.panelesflow.PanelDeTareas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

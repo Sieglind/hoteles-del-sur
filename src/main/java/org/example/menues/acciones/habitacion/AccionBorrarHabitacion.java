@@ -1,15 +1,15 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBorrarHabitacion implements ActionListener {
+public class AccionBorrarHabitacion extends AccionAbstracta {
 
-    private PanelDeEntradas panelDeEntradas;
+    private final PanelDeEntradas panelDeEntradas;
 
     public AccionBorrarHabitacion(PanelDeEntradas panelDeEntradas) {
         this.panelDeEntradas = panelDeEntradas;
@@ -18,12 +18,12 @@ public class AccionBorrarHabitacion implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try{
+        try {
             String numeroDeHabitacion = panelDeEntradas.obtenerCampo();
             Sistema.getInstance().borrarHabitacion(numeroDeHabitacion);
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Habitacion eliminada con exito " +numeroDeHabitacion);
-        }catch(Exception excepcion){
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Habitacion eliminada: " + numeroDeHabitacion);
+        } catch (Exception excepcion) {
+            mostrarDialogoDeError(panelDeEntradas.getParent(), excepcion);
         }
     }
 }

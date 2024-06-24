@@ -1,17 +1,17 @@
 package org.example.menues.acciones.reserva;
 
-import org.example.menues.cuadros.panelesgridbag.PanelBotones;
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva.PanelReserva;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelBotones;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.reserva.PanelReserva;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarParaActualizarReserva implements ActionListener {
+public class AccionBuscarParaActualizarReserva extends AccionAbstracta {
+
     private final PanelDeEntradas panelEntradasReserva;
     private final PanelReserva panelReserva;
     private final PanelBotones panelBotones;
@@ -31,7 +31,7 @@ public class AccionBuscarParaActualizarReserva implements ActionListener {
             panelBotones.getBotonActualizar().setEnabled(true);
             panelBotones.getBotonBuscar().setEnabled(false);
         } catch (ExcepcionObjectoNoEncontrado excepcion) {
-            JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), excepcion.getMessage());
+            mostrarDialogoDeError(panelEntradasReserva, excepcion);
         }
     }
 }

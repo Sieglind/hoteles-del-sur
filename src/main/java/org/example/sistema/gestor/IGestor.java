@@ -5,7 +5,7 @@ import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 
 import java.util.List;
 
-public interface IGestor<K,V> {
+public interface IGestor<K, V> {
 
     K crear(V valor) throws ExcepcionObjetoYaExiste;
 
@@ -15,5 +15,5 @@ public interface IGestor<K,V> {
 
     V actualizar(K key, V valor) throws ExcepcionObjectoNoEncontrado;
 
-    boolean borrar(K key) throws ExcepcionObjectoNoEncontrado;
+    void borrar(K key) throws ExcepcionObjectoNoEncontrado;
 }
