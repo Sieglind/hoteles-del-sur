@@ -3,15 +3,15 @@ package org.example.menues.paneles.panelesgridbag.tareas.impl.servicio;
 import org.example.menues.acciones.servicios.*;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
-import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareas;
+import org.example.menues.modelosdetabla.ModeloTablaServicios;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareasAbstracto;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
 
 import javax.swing.*;
 import java.util.List;
-import java.util.Vector;
 
-public class PanelTareasServicio extends PanelTareas {
+public class PanelTareasServicio extends PanelTareasAbstracto {
 
     private static final String ETIQUETA_CODIGO = "Codigo";
 
@@ -43,8 +43,9 @@ public class PanelTareasServicio extends PanelTareas {
     @Override
     public void panelListar() {
         List<Servicio> servicios = Sistema.getInstance().listarServicios();
-        JList<Servicio> listaServicios = new JList<>(new Vector<>(servicios));
-        this.add(new JScrollPane(listaServicios));
+        ModeloTablaServicios modelo = new ModeloTablaServicios(servicios);
+        JTable tabla = new JTable(modelo);
+        this.add(new JScrollPane(tabla));
         panelBotones = crearPanelBotones(Tarea.LISTAR);
     }
 

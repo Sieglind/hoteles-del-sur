@@ -1,6 +1,6 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.acciones.AccionGenerica;
+import org.example.menues.acciones.AccionAbstracta;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
@@ -9,7 +9,7 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class AccionActualizarHabitacion extends AccionGenerica {
+public class AccionActualizarHabitacion extends AccionAbstracta {
 
     private final PanelHabitacion panelHabitacion;
 

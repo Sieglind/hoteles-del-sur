@@ -1,6 +1,6 @@
 package org.example.menues.acciones.servicios;
 
-import org.example.menues.acciones.AccionGenerica;
+import org.example.menues.acciones.AccionAbstracta;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.servicio.PanelServicio;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
@@ -10,7 +10,7 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class AccionActualizarServicio extends AccionGenerica {
+public class AccionActualizarServicio extends AccionAbstracta {
 
     private final PanelServicio panelServicio;
 

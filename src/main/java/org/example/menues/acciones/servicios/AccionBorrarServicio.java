@@ -1,13 +1,13 @@
 package org.example.menues.acciones.servicios;
 
-import org.example.menues.acciones.AccionGenerica;
+import org.example.menues.acciones.AccionAbstracta;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class AccionBorrarServicio extends AccionGenerica {
+public class AccionBorrarServicio extends AccionAbstracta {
 
     private final PanelDeEntradas panelDeEntradas;
 

@@ -3,15 +3,15 @@ package org.example.menues.paneles.panelesgridbag.tareas.impl.reserva;
 import org.example.menues.acciones.reserva.*;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
-import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareas;
+import org.example.menues.modelosdetabla.ModeloTablaReservas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareasAbstracto;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
 
 import javax.swing.*;
 import java.util.List;
-import java.util.Vector;
 
-public class PanelTareasReserva extends PanelTareas {
+public class PanelTareasReserva extends PanelTareasAbstracto {
 
     private static final String ETIQUETA_ID_DE_RESERVA = "Id de reserva";
 
@@ -43,8 +43,9 @@ public class PanelTareasReserva extends PanelTareas {
     @Override
     public void panelListar() {
         List<Reserva> reservas = Sistema.getInstance().listarReservas();
-        JList<Reserva> listaReservas = new JList<>(new Vector<>(reservas));
-        this.add(new JScrollPane(listaReservas));
+        ModeloTablaReservas modelo = new ModeloTablaReservas(reservas);
+        JTable tabla = new JTable(modelo);
+        this.add(new JScrollPane(tabla));
         panelBotones = crearPanelBotones(Tarea.LISTAR);
     }
 

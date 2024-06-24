@@ -1,6 +1,6 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.acciones.AccionGenerica;
+import org.example.menues.acciones.AccionAbstracta;
 import org.example.menues.paneles.panelesgridbag.PanelBotones;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.cliente.PanelCliente;
@@ -10,7 +10,7 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import java.awt.event.ActionEvent;
 
-public class AccionBuscarParaActualizarCliente extends AccionGenerica {
+public class AccionBuscarParaActualizarCliente extends AccionAbstracta {
 
     private final PanelDeEntradas panelEntradas;
     private final PanelCliente panelCliente;

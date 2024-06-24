@@ -1,6 +1,6 @@
 package org.example.menues.acciones.reserva;
 
-import org.example.menues.acciones.AccionGenerica;
+import org.example.menues.acciones.AccionAbstracta;
 import org.example.menues.paneles.panelesgridbag.PanelBotones;
 import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.reserva.PanelReserva;
@@ -10,7 +10,7 @@ import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import java.awt.event.ActionEvent;
 
-public class AccionBuscarParaActualizarReserva extends AccionGenerica {
+public class AccionBuscarParaActualizarReserva extends AccionAbstracta {
 
     private final PanelDeEntradas panelEntradasReserva;
     private final PanelReserva panelReserva;

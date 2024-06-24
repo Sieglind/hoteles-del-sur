@@ -12,14 +12,14 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public abstract class PanelTareas extends PanelCustom implements ITareas {
+public abstract class PanelTareasAbstracto extends PanelCustom implements ITareas {
 
     protected static final String ETIQUEDA_DNI = "DNI";
     protected final JButton BOTON_VOLVER;
     protected PanelDeEntradas panelDeEntradas;
     protected PanelBotones panelBotones;
 
-    public PanelTareas(Tarea tarea, Entidad entidad) {
+    public PanelTareasAbstracto(Tarea tarea, Entidad entidad) {
         this.setBorder(new TitledBorder(tarea.name() + " " + entidad.name()));
         this.BOTON_VOLVER = crearBoton("Volver", LEFT_ALIGNMENT, new AccionVolver(entidad.name()));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

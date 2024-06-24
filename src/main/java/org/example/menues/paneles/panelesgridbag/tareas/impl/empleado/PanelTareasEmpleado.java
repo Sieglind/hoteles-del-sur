@@ -3,15 +3,15 @@ package org.example.menues.paneles.panelesgridbag.tareas.impl.empleado;
 import org.example.menues.acciones.empleado.*;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
-import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareasAbstracto;
+import org.example.menues.modelosdetabla.ModeloTablaEmpleados;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 
 import javax.swing.*;
 import java.util.List;
-import java.util.Vector;
 
-public class PanelTareasEmpleado extends PanelTareas {
+public class PanelTareasEmpleado extends PanelTareasAbstracto {
 
     private PanelEmpleado panelEmpleado;
 
@@ -41,8 +41,9 @@ public class PanelTareasEmpleado extends PanelTareas {
     @Override
     public void panelListar() {
         List<Empleado> empleados = Sistema.getInstance().listarEmpleados();
-        JList<Empleado> listaEmpleados = new JList<>(new Vector<>(empleados));
-        this.add(new JScrollPane(listaEmpleados));
+        ModeloTablaEmpleados modelo = new ModeloTablaEmpleados(empleados);
+        JTable tabla = new JTable(modelo);
+        this.add(new JScrollPane(tabla));
         panelBotones = crearPanelBotones(Tarea.LISTAR);
     }
 

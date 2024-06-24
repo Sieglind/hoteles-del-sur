@@ -3,16 +3,16 @@ package org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion;
 import org.example.menues.acciones.habitacion.*;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
-import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareas;
+import org.example.menues.modelosdetabla.ModeloTablaHabitaciones;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareasAbstracto;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
 
 import javax.swing.*;
 import java.util.List;
-import java.util.Vector;
 
 
-public class PanelTareasHabitacion extends PanelTareas {
+public class PanelTareasHabitacion extends PanelTareasAbstracto {
 
     private static final String ETIQUETA_NRO_HABITACION = "Nro Habitacion";
 
@@ -44,8 +44,9 @@ public class PanelTareasHabitacion extends PanelTareas {
     @Override
     public void panelListar() {
         List<Habitacion> habitaciones = Sistema.getInstance().listarHabitaciones();
-        JList<Habitacion> listaHabitaciones = new JList<>(new Vector<>(habitaciones));
-        this.add(new JScrollPane(listaHabitaciones));
+        ModeloTablaHabitaciones modelo = new ModeloTablaHabitaciones(habitaciones);
+        JTable tabla = new JTable(modelo);
+        this.add(new JScrollPane(tabla));
         panelBotones = crearPanelBotones(Tarea.LISTAR);
     }
 
