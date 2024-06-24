@@ -1,5 +1,5 @@
 package org.example.menues.acciones.empleado;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.excepciones.ExcepcionCamposRequeridos;

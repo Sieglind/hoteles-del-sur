@@ -1,4 +1,4 @@
-package org.example.menues.cuadros;
+package org.example.menues.paneles;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

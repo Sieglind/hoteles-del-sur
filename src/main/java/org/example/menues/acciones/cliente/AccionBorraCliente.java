@@ -1,6 +1,6 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 

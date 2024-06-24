@@ -1,6 +1,6 @@
-package org.example.menues.cuadros.panelesflow;
+package org.example.menues.paneles.panelesflow;
 
-import org.example.menues.cuadros.JPanelCustom;
+import org.example.menues.paneles.JPanelCustom;
 
 import java.awt.*;
 

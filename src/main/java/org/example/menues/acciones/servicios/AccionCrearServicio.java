@@ -1,6 +1,6 @@
 package org.example.menues.acciones.servicios;
 
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.servicio.PanelServicio;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.servicio.PanelServicio;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Servicio;
 import org.example.sistema.excepciones.ExcepcionCamposRequeridos;

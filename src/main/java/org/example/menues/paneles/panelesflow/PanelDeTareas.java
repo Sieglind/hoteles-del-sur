@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.panelesflow;
+package org.example.menues.paneles.panelesflow;
 
 import org.example.menues.acciones.AccionPanelTareas;
 import org.example.menues.acciones.AccionVolver;

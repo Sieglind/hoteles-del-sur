@@ -1,7 +1,7 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva;
+package org.example.menues.paneles.panelesgridbag.tareas.impl.reserva;
 
 import org.example.menues.acciones.reserva.*;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.PanelTareas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.PanelTareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 import org.example.sistema.Sistema;

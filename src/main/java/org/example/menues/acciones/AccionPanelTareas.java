@@ -1,7 +1,7 @@
 package org.example.menues.acciones;
 
 import org.example.menues.VentanaPrincipal;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.FabricaPanelTareas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.FabricaPanelTareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 

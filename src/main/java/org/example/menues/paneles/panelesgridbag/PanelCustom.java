@@ -1,6 +1,6 @@
-package org.example.menues.cuadros.panelesgridbag;
+package org.example.menues.paneles.panelesgridbag;
 
-import org.example.menues.cuadros.JPanelCustom;
+import org.example.menues.paneles.JPanelCustom;
 
 import javax.swing.*;
 import java.awt.*;

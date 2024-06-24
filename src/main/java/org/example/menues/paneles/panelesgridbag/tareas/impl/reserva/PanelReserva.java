@@ -1,6 +1,6 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva;
+package org.example.menues.paneles.panelesgridbag.tareas.impl.reserva;
 
-import org.example.menues.cuadros.panelesgridbag.PanelCustom;
+import org.example.menues.paneles.panelesgridbag.PanelCustom;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.Servicio;

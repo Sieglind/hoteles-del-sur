@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.panelesgridbag.tareas;
+package org.example.menues.paneles.panelesgridbag.tareas;
 
 public interface ITareas {
     void panelCrear();

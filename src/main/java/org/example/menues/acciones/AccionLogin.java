@@ -3,7 +3,7 @@ package org.example.menues.acciones;
 import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 import org.example.sistema.Sistema;
 import org.example.menues.VentanaPrincipal;
-import org.example.menues.cuadros.panelesflow.PanelDeEntidades;
+import org.example.menues.paneles.panelesflow.PanelDeEntidades;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

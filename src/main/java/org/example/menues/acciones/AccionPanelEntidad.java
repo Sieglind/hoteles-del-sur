@@ -1,7 +1,7 @@
 package org.example.menues.acciones;
 
 import org.example.menues.VentanaPrincipal;
-import org.example.menues.cuadros.panelesflow.PanelDeTareas;
+import org.example.menues.paneles.panelesflow.PanelDeTareas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

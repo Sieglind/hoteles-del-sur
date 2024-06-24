@@ -1,10 +1,10 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl;
+package org.example.menues.paneles.panelesgridbag.tareas.impl;
 
 import org.example.menues.acciones.AccionVolver;
-import org.example.menues.cuadros.panelesgridbag.PanelBotones;
-import org.example.menues.cuadros.panelesgridbag.PanelCustom;
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.tareas.ITareas;
+import org.example.menues.paneles.panelesgridbag.PanelBotones;
+import org.example.menues.paneles.panelesgridbag.PanelCustom;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.ITareas;
 import org.example.menues.enums.Entidad;
 import org.example.menues.enums.Tarea;
 

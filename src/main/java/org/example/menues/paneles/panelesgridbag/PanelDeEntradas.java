@@ -1,4 +1,4 @@
-package org.example.menues.cuadros.panelesgridbag;
+package org.example.menues.paneles.panelesgridbag;
 
 import javax.swing.*;
 import java.awt.*;

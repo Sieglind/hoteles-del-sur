@@ -1,6 +1,6 @@
-package org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion;
+package org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion;
 
-import org.example.menues.cuadros.panelesgridbag.PanelCustom;
+import org.example.menues.paneles.panelesgridbag.PanelCustom;
 import org.example.sistema.entidades.Habitacion;
 import org.example.sistema.enums.TipoDeHabitacion;
 
