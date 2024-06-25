@@ -21,6 +21,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -161,17 +162,28 @@ public class UtilidadesCSV {
                             Sistema.getInstance().buscarHabitacion(renglon[2]),
                             LocalDate.parse(renglon[3]),
                             LocalDate.parse(renglon[4]),
-                            null
+                            renglon.length == 6 ? leearArregloInt(renglon[5]) : new int[0]
                             );
                     reservas.add(reserva);
-                } catch (ExcepcionObjectoNoEncontrado | DateTimeParseException excepcion){
+                } catch (Exception excepcion){
                     LOGGER.log(Level.WARNING,excepcion.getMessage());
                 }
             }
-        } catch (IOException | CsvValidationException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | CsvValidationException excepcion) {
+            LOGGER.log(Level.WARNING,excepcion.getMessage());
         }
         return reservas;
+    }
+
+    private static int[] leearArregloInt(String string) {
+        try {
+            String[] indices = string.substring(1, string.length() - 1).split(",");
+            return Arrays.stream(indices)
+                    .mapToInt(num -> Integer.parseInt(num.trim()))
+                    .toArray();
+        } catch (NumberFormatException e) {
+            return new int[0];
+        }
     }
 
     public static void exportarReservas(List<Reserva> reservas) {
@@ -183,7 +195,8 @@ public class UtilidadesCSV {
                         String.valueOf(reserva.getCliente().getDni()),
                         String.valueOf(reserva.getHabitacion().getNumeroDeHabitacion()),
                         reserva.getFechaInicio().toString(),
-                        reserva.getFechaFin().toString()
+                        reserva.getFechaFin().toString(),
+                        Arrays.toString(reserva.getServiciosElegidos())
                 };
                 csvWriter.writeNext(valores);
             });
