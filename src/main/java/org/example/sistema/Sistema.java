@@ -9,14 +9,12 @@ import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.entidades.persona.Persona;
 import org.example.sistema.enums.Cargo;
 import org.example.sistema.enums.Estado;
-import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
-import org.example.sistema.excepciones.ExcepcionHabitacionNoDisponible;
-import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
-import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
+import org.example.sistema.excepciones.*;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -143,7 +141,7 @@ public class Sistema {
     }
 
     public String crearReserva(Reserva reserva, String dni, String habitacion) throws ExcepcionObjetoYaExiste,
-            ExcepcionObjectoNoEncontrado, ExcepcionHabitacionNoDisponible, ExcepcionCamposRequeridos {
+            ExcepcionObjectoNoEncontrado, ExcepcionHabitacionNoDisponible, ExcepcionCamposRequeridos, ExcepcionFechasNoValidas {
         String camposNulos = verificarCamposNulos(dni, habitacion);
         if (!camposNulos.isBlank()) {
             throw new ExcepcionCamposRequeridos(camposNulos);
@@ -151,11 +149,13 @@ public class Sistema {
             reserva.setCliente(buscarCLiente(dni));
             reserva.setHabitacion(buscarHabitacion(habitacion));
             reserva.setIdReserva("R" + Instant.now().getNano());
-            if (habitacionLibre(reserva)) {
-                return gestorReservas.crear(reserva);
-            } else {
+            if (!habitacionLibre(reserva)){
                 throw new ExcepcionHabitacionNoDisponible(reserva.getHabitacion().getNumeroDeHabitacion());
             }
+            if(!verificarfechas(reserva)){
+                throw new ExcepcionFechasNoValidas();
+            }
+            return gestorReservas.crear(reserva);
         }
     }
 
@@ -164,6 +164,14 @@ public class Sistema {
                 .filter(reservaExistente -> reservaExistente.getHabitacion() == reserva.getHabitacion())
                 .filter(reservaExistente -> reservaExistente.getFechaFin().isBefore(reserva.getFechaInicio()) || reservaExistente.getFechaInicio().isBefore(reserva.getFechaFin()))
                 .toList().isEmpty();
+    }
+
+    private boolean verificarfechas(Reserva reserva) {
+        LocalDate fechaActual = LocalDate.now();
+       if(reserva.getFechaInicio().isBefore(fechaActual) || reserva.getFechaFin().isBefore(reserva.getFechaInicio())){
+           return false;
+       }
+       return true;
     }
 
     public Reserva buscarReserva(String idReserva) throws ExcepcionObjectoNoEncontrado {
