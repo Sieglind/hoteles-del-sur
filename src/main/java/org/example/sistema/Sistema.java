@@ -13,7 +13,6 @@ import org.example.sistema.excepciones.*;
 import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,37 +46,6 @@ public class Sistema {
                     "38-91586584-10"));
         }
         return sistema;
-    }
-
-    private static String verificarCamposNulos(String dni, String habitacion) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (dni.isBlank()) camposNulos.append(" DNI");
-        if (habitacion.isBlank()) camposNulos.append(" HABITACION");
-        return camposNulos.toString();
-    }
-
-    private static String verificarCamposNulos(Persona persona) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (persona.getDni().isBlank()) camposNulos.append(" DNI");
-        if (persona.getNombre().isBlank()) camposNulos.append(" NOMBRE");
-        if (persona.getApellido().isBlank()) camposNulos.append(" APELLIDO");
-        return camposNulos.toString();
-    }
-
-    private static String verificacionCamposNulos(Habitacion habitacion) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (habitacion.getNumeroDeHabitacion().isBlank() || !StringUtils.isNumeric(habitacion.getNumeroDeHabitacion()))
-            camposNulos.append(" Numero de Habitacion");
-        return camposNulos.toString();
-    }
-
-    private static String verificarCamposNulos(Servicio servicio) {
-        StringBuilder camposNulos = new StringBuilder();
-        if (servicio.getCategoria().isBlank()) camposNulos.append(" NOMBRE");
-        if (servicio.getDescripcion().isBlank()) camposNulos.append(" DESCRIPCION");
-        if (servicio.getPrecio() == 0) camposNulos.append(" PRECIO");
-        if (servicio.getCodigo().isBlank()) camposNulos.append(" CODIGO");
-        return camposNulos.toString();
     }
 
     public boolean login(String dni, String password) throws ExcepcionObjectoNoEncontrado {
@@ -148,30 +116,23 @@ public class Sistema {
         } else {
             reserva.setCliente(buscarCLiente(dni));
             reserva.setHabitacion(buscarHabitacion(habitacion));
-            reserva.setIdReserva("R" + Instant.now().getNano());
-            if (!habitacionLibre(reserva)){
-                throw new ExcepcionHabitacionNoDisponible(reserva.getHabitacion().getNumeroDeHabitacion());
-            }
-            if(!verificarfechas(reserva)){
-                throw new ExcepcionFechasNoValidas();
-            }
+            reserva.setIdReserva("R" + System.nanoTime());
+            habitacionLibre(reserva);
+            verificarfechas(reserva);
             return gestorReservas.crear(reserva);
         }
     }
 
-    private boolean habitacionLibre(Reserva reserva) {
-        return listarReservas().stream()
+    private void habitacionLibre(Reserva reserva) throws ExcepcionHabitacionNoDisponible {
+        if (!listarReservas().stream()
                 .filter(reservaExistente -> reservaExistente.getHabitacion() == reserva.getHabitacion())
                 .filter(reservaExistente -> reservaExistente.getFechaFin().isBefore(reserva.getFechaInicio()) || reservaExistente.getFechaInicio().isBefore(reserva.getFechaFin()))
-                .toList().isEmpty();
+                .toList().isEmpty()) throw new ExcepcionHabitacionNoDisponible(reserva.getHabitacion().getNumeroDeHabitacion());
     }
 
-    private boolean verificarfechas(Reserva reserva) {
-        LocalDate fechaActual = LocalDate.now();
-       if(reserva.getFechaInicio().isBefore(fechaActual) || reserva.getFechaFin().isBefore(reserva.getFechaInicio())){
-           return false;
-       }
-       return true;
+    private void verificarfechas(Reserva reserva) throws ExcepcionFechasNoValidas {
+        if(reserva.getFechaInicio().isBefore(LocalDate.now())
+                || reserva.getFechaFin().isBefore(reserva.getFechaInicio())) throw new ExcepcionFechasNoValidas();
     }
 
     public Reserva buscarReserva(String idReserva) throws ExcepcionObjectoNoEncontrado {
@@ -253,12 +214,39 @@ public class Sistema {
         gestorDeServicios.borrar(clave);
     }
 
+    private static String verificarCamposNulos(String dni, String habitacion) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (dni.isBlank()) camposNulos.append(" DNI");
+        if (habitacion.isBlank()) camposNulos.append(" HABITACION");
+        return camposNulos.toString();
+    }
+
+    private static String verificarCamposNulos(Persona persona) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (persona.getDni().isBlank()) camposNulos.append(" DNI");
+        if (persona.getNombre().isBlank()) camposNulos.append(" NOMBRE");
+        if (persona.getApellido().isBlank()) camposNulos.append(" APELLIDO");
+        return camposNulos.toString();
+    }
+
+    private static String verificacionCamposNulos(Habitacion habitacion) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (habitacion.getNumeroDeHabitacion().isBlank() || !StringUtils.isNumeric(habitacion.getNumeroDeHabitacion()))
+            camposNulos.append(" Numero de Habitacion");
+        return camposNulos.toString();
+    }
+
+    private static String verificarCamposNulos(Servicio servicio) {
+        StringBuilder camposNulos = new StringBuilder();
+        if (servicio.getCategoria().isBlank()) camposNulos.append(" NOMBRE");
+        if (servicio.getDescripcion().isBlank()) camposNulos.append(" DESCRIPCION");
+        if (servicio.getPrecio() == 0) camposNulos.append(" PRECIO");
+        if (servicio.getCodigo().isBlank()) camposNulos.append(" CODIGO");
+        return camposNulos.toString();
+    }
+
     public void importarDatos(){
-        gestorClientes.importarDatos(UtilidadesCSV.importarClientes());
-        gestorEmpleados.importarDatos(UtilidadesCSV.importarEmpleados());
-        gestorHabitaciones.importarDatos(UtilidadesCSV.importarHabitaciones());
-        gestorReservas.importarDatos(UtilidadesCSV.importarReservas());
-        gestorDeServicios.importarDatos(UtilidadesCSV.importarServicios());
+        UtilidadesCSV.importarDatos();
     }
 
     public void exportarDatos() {

@@ -11,16 +11,13 @@ import org.example.sistema.entidades.persona.Empleado;
 import org.example.sistema.enums.Cargo;
 import org.example.sistema.enums.Segmento;
 import org.example.sistema.enums.TipoDeHabitacion;
-import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,9 +34,16 @@ public class UtilidadesCSV {
 
     private static final Logger LOGGER = Logger.getLogger(UtilidadesCSV.class.getName());
 
-    public static List<Cliente> importarClientes() {
+    public static void importarDatos(){
+        importarClientes();
+        importarEmpleados();
+        importarHabitaciones();
+        importarReservas();
+        importarServicios();
+    }
+
+    public static void importarClientes() {
         String filePath = RESOURCE_PATH + FILENAME_CLIENTES;
-        List<Cliente> clientes = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
@@ -49,12 +53,15 @@ public class UtilidadesCSV {
                         renglon[2],
                         Segmento.valueOf(renglon[3])
                 );
-                clientes.add(cliente);
+                try {
+                    Sistema.getInstance().crearCliente(cliente);
+                } catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion) {
+                    logearAlerta(excepcion);
+                }
             }
-        } catch (IOException | CsvValidationException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException | CsvValidationException excepcion) {
+            logearAlerta(excepcion);
         }
-        return clientes;
     }
 
     public static void exportarClientes(List<Cliente> clientes) {
@@ -74,9 +81,8 @@ public class UtilidadesCSV {
         }
     }
 
-    public static List<Empleado> importarEmpleados() {
+    public static void importarEmpleados() {
         String filePath = RESOURCE_PATH + FILENAME_EMPLEADOS;
-        List<Empleado> empleados = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
@@ -88,12 +94,15 @@ public class UtilidadesCSV {
                         Cargo.valueOf(renglon[3]),
                         cargo.equals(Cargo.ADMINISTRADOR) ? renglon[4] : null
                 );
-                empleados.add(empleado);
+                try {
+                    Sistema.getInstance().crearEmpleado(empleado);
+                } catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion) {
+                    logearAlerta(excepcion);
+                }
             }
-        } catch (IOException | CsvValidationException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException | CsvValidationException excepcion) {
+            logearAlerta(excepcion);
         }
-        return empleados;
     }
 
     public static void exportarEmpleados(List<Empleado> empleados) {
@@ -114,9 +123,8 @@ public class UtilidadesCSV {
         }
     }
 
-    public static List<Habitacion> importarHabitaciones() {
+    public static void importarHabitaciones() {
         String filePath = RESOURCE_PATH + FILENAME_HABITACIONES;
-        List<Habitacion> habitaciones = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
@@ -125,12 +133,15 @@ public class UtilidadesCSV {
                         TipoDeHabitacion.valueOf(renglon[1]),
                         Float.parseFloat(renglon[2])
                 );
-                habitaciones.add(habitacion);
+                try{
+                    Sistema.getInstance().crearHabitacion(habitacion);
+                } catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion) {
+                    logearAlerta(excepcion);
+                }
             }
-        } catch (IOException | CsvValidationException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException | CsvValidationException excepcion) {
+            logearAlerta(excepcion);
         }
-        return habitaciones;
     }
 
     public static void exportarHabitaciones(List<Habitacion> habitaciones) {
@@ -149,30 +160,28 @@ public class UtilidadesCSV {
         }
     }
 
-    public static List<Reserva> importarReservas() {
+    public static void importarReservas() {
         String filePath = RESOURCE_PATH + FILENAME_RESERVAS;
-        List<Reserva> reservas = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
+                Reserva reserva = new Reserva(
+                        renglon[0],
+                        null,
+                        null,
+                        LocalDate.parse(renglon[3]),
+                        LocalDate.parse(renglon[4]),
+                        renglon.length == 6 ? leearArregloInt(renglon[5]) : new int[0]
+                );
                 try {
-                    Reserva reserva = new Reserva(
-                            renglon[0],
-                            Sistema.getInstance().buscarCLiente(renglon[1]),
-                            Sistema.getInstance().buscarHabitacion(renglon[2]),
-                            LocalDate.parse(renglon[3]),
-                            LocalDate.parse(renglon[4]),
-                            renglon.length == 6 ? leearArregloInt(renglon[5]) : new int[0]
-                            );
-                    reservas.add(reserva);
-                } catch (Exception excepcion){
-                    LOGGER.log(Level.WARNING,excepcion.getMessage());
+                    Sistema.getInstance().crearReserva(reserva, renglon[1], renglon[2]);
+                } catch (Exception excepcion) {
+                    logearAlerta(excepcion);
                 }
             }
         } catch (IOException | CsvValidationException excepcion) {
-            LOGGER.log(Level.WARNING,excepcion.getMessage());
+            logearAlerta(excepcion);
         }
-        return reservas;
     }
 
     private static int[] leearArregloInt(String string) {
@@ -205,9 +214,8 @@ public class UtilidadesCSV {
         }
     }
 
-    public static List<Servicio> importarServicios() {
+    public static void importarServicios() {
         String filePath = RESOURCE_PATH + FILENAME_SERVICIOS;
-        List<Servicio> servicios = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] renglon;
             while ((renglon = csvReader.readNext()) != null) {
@@ -217,12 +225,15 @@ public class UtilidadesCSV {
                         renglon[2],
                         Float.parseFloat(renglon[3])
                 );
-                servicios.add(servicio);
+                try {
+                    Sistema.getInstance().crearServicio(servicio);
+                } catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion) {
+                    logearAlerta(excepcion);
+                }
             }
-        } catch (IOException | CsvValidationException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException | CsvValidationException excepcion) {
+            logearAlerta(excepcion);
         }
-        return servicios;
     }
 
     public static void exportarServicios(List<Servicio> servicios) {
@@ -240,5 +251,9 @@ public class UtilidadesCSV {
         } catch (IOException e) {
             System.out.println("Error al escribir en el archivo" + e.getMessage());
         }
+    }
+
+    private static void logearAlerta(Exception excepcion){
+        LOGGER.log(Level.WARNING, excepcion.getMessage());
     }
 }
