@@ -7,6 +7,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.Servicio;
+import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.gestor.Hotel;
 
 import java.io.ByteArrayOutputStream;
@@ -16,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,22 +26,46 @@ public class Factura {
     private static final String URL_PLANTILLA = "src/main/resources/plantillas/plantilla.pdf";
     private static final Logger LOG = Logger.getLogger(Factura.class.getName());
 
-    private final Map<String, String> valoresDeFormulario;
+    private final Map<String, String> campos = new HashMap<>();
 
     public Factura(Reserva reserva) {
-        Hotel hotel = Sistema.getInstance().getHotel();
-        String nombreCliente = reserva.getCliente().getNombre() + " " + reserva.getCliente().getApellido();
+        campos.put("CAMPO_FACTURA", String.valueOf(new Random().nextInt(90000000) + 10000000));
+        campos.put("CAMPO_FECHA", LocalDate.now().toString());
+        campos.put("CANTIDAD_DESCUENTOS", String.valueOf(1));
+
+        llenarCamposDeHotel(Sistema.getInstance().getHotel());
+        llenarCamposdeCliente(reserva.getCliente());
+        llenarCantidadDeServicios(reserva);
+    }
+
+    private void llenarCamposDeHotel(Hotel hotel) {
+        campos.put("CAMPO_EMPRESA", hotel.getNombre());
+        campos.put("CAMPO_DIRECCION_EMPRESA", hotel.getDireccion());
+        campos.put("CAMPO_TELEFONO", hotel.getTelefono());
+        campos.put("CAMPO_CUIL", hotel.getCuil());
+    }
+
+    private void llenarCamposdeCliente(Cliente cliente) {
+        campos.put("CAMPO_CLIENTE", cliente.getNombre() + " " + cliente.getApellido());
+        campos.put("CAMPO_DNI", cliente.getDni());
+    }
+
+    private void llenarCantidadDeServicios(Reserva reserva) {
+        campos.put("CANTIDAD_SERVICIOS", String.valueOf(reserva.getServiciosElegidos().length));
+
+        llenarCantidadDias(reserva);
+    }
+
+    private void llenarCantidadDias(Reserva reserva) {
         float cantidadDias = ChronoUnit.DAYS.between(reserva.getFechaInicio(), reserva.getFechaFin());
-        String cantidadDeServicios = String.valueOf(reserva.getServiciosElegidos().length);
-        String descripcionHabitacion = reserva.getHabitacion().getTipoDeHabitacion().toString();
+
+        campos.put("CANTIDAD_HABITACION", String.valueOf(cantidadDias));
+
+        llenarTotales(reserva, cantidadDias);
+    }
+
+    private void llenarTotales(Reserva reserva, float cantidadDias) {
         List<Servicio> listaServicios = Sistema.getInstance().listarServicios();
-        String descripcionServicios;
-        if (reserva.getServiciosElegidos().length == 1) {
-            descripcionServicios = listaServicios.get(reserva.getServiciosElegidos()[0]).getDescripcion();
-        } else {
-            descripcionServicios = "Servicios Varios";
-        }
-        String descripcionDescuento = reserva.getCliente().getSegmento().toString();
         float totalHabitacion = reserva.getHabitacion().getPrecio() * cantidadDias;
         float totalServicios = 0;
         for (int indice : reserva.getServiciosElegidos()) {
@@ -54,30 +80,29 @@ public class Factura {
         float iva = (float) (0.21 * subtotal);
         float total = subtotal + iva;
 
-        Map<String,String> valoresDeFormulario = new HashMap<>();
+        campos.put("TOTAL_HABITACION", String.valueOf(totalHabitacion));
+        campos.put("TOTAL_SERVICIOS", String.valueOf(totalServicios));
+        campos.put("TOTAL_DESCUENTO", String.valueOf(totalDescuento));
+        campos.put("SUBTOTAL", String.valueOf(subtotal));
+        campos.put("IVA", String.valueOf(iva));
+        campos.put("TOTAL", String.valueOf(total));
 
-        valoresDeFormulario.put("CAMPO_FACTURA","321564987");
-        valoresDeFormulario.put("CAMPO_FECHA", LocalDate.now().toString());
-        valoresDeFormulario.put("CAMPO_EMPRESA", hotel.getNombre());
-        valoresDeFormulario.put("CAMPO_DIRECCION_EMPRESA", hotel.getDireccion());
-        valoresDeFormulario.put("CAMPO_TELEFONO", hotel.getTelefono());
-        valoresDeFormulario.put("CAMPO_CUIL", hotel.getCuil());
-        valoresDeFormulario.put("CAMPO_CLIENTE", nombreCliente);
-        valoresDeFormulario.put("CAMPO_DNI", reserva.getCliente().getDni());
-        valoresDeFormulario.put("CANTIDAD_HABITACION", String.valueOf(cantidadDias));
-        valoresDeFormulario.put("CANTIDAD_SERVICIOS", cantidadDeServicios);
-        valoresDeFormulario.put("CANTIDAD_DESCUENTOS", "1");
-        valoresDeFormulario.put("DESCRIPCION_HABITACION", descripcionHabitacion);
-        valoresDeFormulario.put("DESCRIPCION_SERVICIOS", descripcionServicios);
-        valoresDeFormulario.put("DESCRIPCION_DESCUENTO", descripcionDescuento);
-        valoresDeFormulario.put("TOTAL_HABITACION", String.valueOf(totalHabitacion));
-        valoresDeFormulario.put("TOTAL_SERVICIOS", String.valueOf(totalServicios));
-        valoresDeFormulario.put("TOTAL_DESCUENTO", String.valueOf(totalDescuento));
-        valoresDeFormulario.put("SUBTOTAL", String.valueOf(subtotal));
-        valoresDeFormulario.put("IVA", String.valueOf(iva));
-        valoresDeFormulario.put("TOTAL", String.valueOf(total));
+        llenarDescripciones(reserva, listaServicios);
+    }
 
-        this.valoresDeFormulario = valoresDeFormulario;
+    private void llenarDescripciones(Reserva reserva, List<Servicio> listaServicios) {
+        String descripcionHabitacion = reserva.getHabitacion().getTipoDeHabitacion().toString();
+        String descripcionServicios;
+        if (reserva.getServiciosElegidos().length == 1) {
+            descripcionServicios = listaServicios.get(reserva.getServiciosElegidos()[0]).getDescripcion();
+        } else {
+            descripcionServicios = "Servicios Varios";
+        }
+        String descripcionDescuento = reserva.getCliente().getSegmento().toString();
+
+        campos.put("DESCRIPCION_HABITACION", descripcionHabitacion);
+        campos.put("DESCRIPCION_SERVICIOS", descripcionServicios);
+        campos.put("DESCRIPCION_DESCUENTO", descripcionDescuento);
     }
 
     public ByteArrayOutputStream generarFacturaDeReserva() {
@@ -86,8 +111,8 @@ public class Factura {
         try {
             pdf = new PdfDocument(new PdfReader(URL_PLANTILLA), new PdfWriter(baos));
             PdfAcroForm form = PdfAcroForm.getAcroForm(pdf, true);
-            for (String llave : valoresDeFormulario.keySet()) {
-                form.getField(llave).setValue(valoresDeFormulario.get(llave)).setReadOnly(true);
+            for (String llave : campos.keySet()) {
+                form.getField(llave).setValue(campos.get(llave)).setReadOnly(true);
             }
             pdf.close();
             return baos;
