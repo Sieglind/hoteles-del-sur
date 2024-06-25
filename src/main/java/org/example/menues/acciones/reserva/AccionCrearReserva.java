@@ -5,10 +5,7 @@ import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.menues.paneles.panelesgridbag.tareas.impl.reserva.PanelReserva;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
-import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
-import org.example.sistema.excepciones.ExcepcionHabitacionNoDisponible;
-import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
-import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
+import org.example.sistema.excepciones.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +29,7 @@ public class AccionCrearReserva extends AccionAbstracta {
                 JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), "Reserva creada: " + idReserva);
             }
         } catch (ExcepcionObjetoYaExiste | ExcepcionObjectoNoEncontrado | ExcepcionHabitacionNoDisponible |
-                 ExcepcionCamposRequeridos excepcion) {
+                 ExcepcionCamposRequeridos | ExcepcionFechasNoValidas excepcion) {
             mostrarDialogoDeError(panelEntradasReserva, excepcion);
         }
     }
