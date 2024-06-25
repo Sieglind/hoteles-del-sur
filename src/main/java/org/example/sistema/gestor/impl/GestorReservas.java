@@ -53,8 +53,8 @@ public class GestorReservas implements IGestor<String, Reserva> {
     @Override
     public Reserva actualizar(String key, Reserva valor) throws ExcepcionObjectoNoEncontrado {
         objetoExiste(key);
-        return reservas.put(key, valor);
-
+        reservas.put(key, valor);
+        return valor;
     }
 
     @Override
