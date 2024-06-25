@@ -43,25 +43,27 @@ public class AccionActualizarReserva extends AccionAbstracta {
                         dniCliente,
                         numeroDeHabitacion,
                         reserva);
-                if(estadoReserva.equals(Estado.CONFIRMADA)){
-                    Factura factura = new Factura(reservaActualizada);
-                    ByteArrayOutputStream inputStream = factura.generarFacturaDeReserva();
-                    JFileChooser cuadroDeDialogo = new JFileChooser();
-                    cuadroDeDialogo.setSelectedFile(new File("factura.pdf"));
-                    cuadroDeDialogo.setDialogTitle("Guardar Factura");
-                    cuadroDeDialogo.setApproveButtonText("Guardar");
-                    int seleccion = cuadroDeDialogo.showOpenDialog(panelReserva.getParent());
-                    if (seleccion == JFileChooser.APPROVE_OPTION) {
-                        File archivo = cuadroDeDialogo.getSelectedFile();
-                        FileOutputStream outputStream = new FileOutputStream(archivo);
-                        inputStream.writeTo(outputStream);
-                        outputStream.close();
-                    }
+                if (estadoReserva.equals(Estado.CONFIRMADA)) {
+                    crearFactura(reservaActualizada);
                 }
                 JOptionPane.showMessageDialog(panelReserva.getParent(), "Reserva actualizada");
             }
         } catch (ExcepcionObjectoNoEncontrado | ExcepcionCamposRequeridos | IOException excepcion) {
             mostrarDialogoDeError(panelReserva, excepcion);
+        }
+    }
+
+    private void crearFactura(Reserva reservaActualizada) throws IOException {
+        Factura factura = new Factura(reservaActualizada);
+        ByteArrayOutputStream inputStream = factura.generarFacturaDeReserva();
+        JFileChooser cuadroDeDialogo = new JFileChooser();
+        cuadroDeDialogo.setSelectedFile(new File("factura.pdf"));
+        cuadroDeDialogo.setDialogTitle("Guardar Factura");
+        cuadroDeDialogo.setApproveButtonText("Guardar");
+        if (cuadroDeDialogo.showOpenDialog(panelReserva.getParent()) == JFileChooser.APPROVE_OPTION) {
+            FileOutputStream outputStream = new FileOutputStream(cuadroDeDialogo.getSelectedFile());
+            inputStream.writeTo(outputStream);
+            outputStream.close();
         }
     }
 }
