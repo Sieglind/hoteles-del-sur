@@ -8,27 +8,14 @@ import org.example.sistema.gestor.IGestor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class GestorEmpleados implements IGestor<String, Empleado> {
 
     private final HashMap<String, Empleado> empleados;
-    Logger LOG = Logger.getLogger(GestorEmpleados.class.getName());
 
     public GestorEmpleados() {
         this.empleados = new HashMap<>();
-    }
-
-    public void importarDatos(List<Empleado> empleados) {
-        empleados.forEach(empleado -> {
-            try {
-                crear(empleado);
-            } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING, excepcion.getMessage());
-            }
-        });
     }
 
     @Override

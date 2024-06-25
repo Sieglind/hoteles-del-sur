@@ -10,7 +10,6 @@ import org.example.sistema.entidades.persona.Persona;
 import org.example.sistema.enums.Cargo;
 import org.example.sistema.enums.Estado;
 import org.example.sistema.excepciones.*;
-import org.example.sistema.gestor.Hotel;
 import org.example.sistema.gestor.impl.*;
 
 import java.time.LocalDate;

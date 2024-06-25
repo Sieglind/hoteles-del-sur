@@ -1,4 +1,4 @@
-package org.example.sistema.gestor;
+package org.example.sistema;
 
 public class Hotel {
 

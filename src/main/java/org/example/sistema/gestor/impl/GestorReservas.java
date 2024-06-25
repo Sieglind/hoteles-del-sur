@@ -9,25 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GestorReservas implements IGestor<String, Reserva> {
 
     private final Map<String, Reserva> reservas = new HashMap<>();
-    private final Logger LOG = Logger.getLogger(GestorReservas.class.getName());
 
     public GestorReservas() {}
-
-    public void importarDatos(List<Reserva> reservas){
-        reservas.forEach(reserva -> {
-            try {
-                crear(reserva);
-            } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
-            }
-        });
-    }
 
     @Override
     public String crear(Reserva reserva) throws ExcepcionObjetoYaExiste {

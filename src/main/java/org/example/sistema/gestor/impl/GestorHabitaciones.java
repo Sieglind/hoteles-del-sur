@@ -9,26 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GestorHabitaciones implements IGestor<String, Habitacion> {
 
     private final Map<String, Habitacion> habitaciones;
-    private final Logger LOG = Logger.getLogger(GestorHabitaciones.class.getName());
 
     public GestorHabitaciones() {
         this.habitaciones = new HashMap<>();
-    }
-
-    public void importarDatos(List<Habitacion> habitaciones) {
-        habitaciones.forEach(habitacion -> {
-            try {
-                crear(habitacion);
-            } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING, excepcion.getMessage());
-            }
-        });
     }
 
     @Override

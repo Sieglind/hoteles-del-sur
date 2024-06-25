@@ -8,7 +8,7 @@ import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Reserva;
 import org.example.sistema.entidades.Servicio;
 import org.example.sistema.entidades.persona.Cliente;
-import org.example.sistema.gestor.Hotel;
+import org.example.sistema.Hotel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

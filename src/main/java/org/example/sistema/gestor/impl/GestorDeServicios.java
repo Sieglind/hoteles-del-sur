@@ -8,26 +8,13 @@ import org.example.sistema.gestor.IGestor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GestorDeServicios implements IGestor<String, Servicio> {
 
     private final TreeMap<String, Servicio> servicios;
-    private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
     public GestorDeServicios() {
         this.servicios = new TreeMap<>();
-    }
-
-    public void importarDatos(List<Servicio> servicios) {
-        servicios.forEach(servicio -> {
-            try {
-                crear(servicio);
-            } catch (ExcepcionObjetoYaExiste excepcion) {
-                LOG.log(Level.WARNING, excepcion.getMessage());
-            }
-        });
     }
 
     @Override
