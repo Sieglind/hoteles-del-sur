@@ -1,22 +1,20 @@
 package org.example.menues.acciones.empleado;
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelTareasEmpleado;
+
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import javax.swing.*;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarEmpleado implements ActionListener {
+public class AccionBuscarEmpleado extends AccionAbstracta {
 
-    PanelTareasEmpleado panelDeTareas;
-    PanelDeEntradas panelDeEntradas;
-    PanelEmpleado panelEmpleado;
+    private final PanelDeEntradas panelDeEntradas;
+    private final PanelEmpleado panelEmpleado;
 
-    public AccionBuscarEmpleado(PanelTareasEmpleado panelDeTareas, PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
-        this.panelDeTareas = panelDeTareas;
+    public AccionBuscarEmpleado(PanelDeEntradas panelDeEntradas, PanelEmpleado panelEmpleado) {
         this.panelDeEntradas = panelDeEntradas;
         this.panelEmpleado = panelEmpleado;
     }
@@ -26,8 +24,8 @@ public class AccionBuscarEmpleado implements ActionListener {
         try {
             Empleado empleado = Sistema.getInstance().buscarEmpleado(panelDeEntradas.obtenerCampo());
             this.panelEmpleado.llenarCampos(empleado);
-        } catch (ObjectoNoEncontradoExcepcion excepcion) {
-            JOptionPane.showMessageDialog(panelDeTareas,excepcion.getMessage());
+        } catch (ExcepcionObjectoNoEncontrado excepcion) {
+            mostrarDialogoDeError(panelDeEntradas, excepcion);
         }
     }
 }

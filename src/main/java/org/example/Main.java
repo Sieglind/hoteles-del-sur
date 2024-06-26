@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.menues.HiloMenues;
-
 import javax.swing.*;
 
 public class Main {
@@ -9,3 +7,4 @@ public class Main {
         SwingUtilities.invokeLater(new HiloMenues());
     }
 }
+

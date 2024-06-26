@@ -7,13 +7,15 @@ import java.util.Objects;
 public class Habitacion {
 
     private final String numeroDeHabitacion;
-    private TipoDeHabitacion tipoDeHabitacion;
-    private boolean disponible;
+    private final TipoDeHabitacion tipoDeHabitacion;
+    private final float precio;
+    private final boolean disponible;
 
-    public Habitacion(String numeroDeHabitacion, TipoDeHabitacion tipoDeHabitacion) {
+
+    public Habitacion(String numeroDeHabitacion, TipoDeHabitacion tipoDeHabitacion, float precio) {
         this.numeroDeHabitacion = numeroDeHabitacion;
         this.tipoDeHabitacion = tipoDeHabitacion;
-
+        this.precio = precio;
         this.disponible = true;
     }
 
@@ -25,25 +27,20 @@ public class Habitacion {
         return tipoDeHabitacion;
     }
 
-    public void setTipoDeHabitacion(TipoDeHabitacion tipoDeHabitacion) {
-        this.tipoDeHabitacion = tipoDeHabitacion;
-    }
-
     public boolean isDisponible() {
         return disponible;
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    public float getPrecio() {
+        return precio;
     }
 
     @Override
     public String toString() {
-        return "Habitacion{" +
-                "numeroDeHabitacion='" + numeroDeHabitacion + '\'' +
-                ", tipoDeHabitacion=" + tipoDeHabitacion +
-                ", disponible=" + disponible +
-                '}';
+        return "| Numero de habitacion: " + numeroDeHabitacion +
+                "| Tipo de habitacion: " + tipoDeHabitacion +
+                "| Precio: " + precio +
+                "| Disponible: " + disponible;
     }
 
     @Override

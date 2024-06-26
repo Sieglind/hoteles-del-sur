@@ -1,23 +1,21 @@
 package org.example.sistema.entidades;
 
 public class Servicio {
-    private final String nombre;
-    private final String descripcion;
-    private float precio;
+
     private final String codigo;
-    private boolean disponible;
+    private final String categoria;
+    private final String descripcion;
+    private final float precio;
 
-
-    public Servicio(String nombre, String descripcion, float precio,String codigo) {
-        this.nombre = nombre;
+    public Servicio(String codigo, String categoria, String descripcion, float precio) {
+        this.codigo = codigo;
+        this.categoria = categoria;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.disponible = true;
-        this.codigo = codigo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCategoria() {
+        return categoria;
     }
 
     public String getDescripcion() {
@@ -28,29 +26,16 @@ public class Servicio {
         return precio;
     }
 
-    public String getCodigo(){
+    public String getCodigo() {
         return codigo;
-    }
-
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
-
-    public boolean isDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
     }
 
     @Override
     public String toString() {
-        return "\nServicio" +
-                "/Clave: " + codigo +
-                "/Nombre: " + nombre +
-                "/Descripcion: " + descripcion +
-                "/Precio: " + precio;
+        return
+                " | Clave: " + codigo +
+                        " | " + categoria +
+                        " | Descripcion: " + descripcion +
+                        " | Precio: " + precio;
     }
-
 }

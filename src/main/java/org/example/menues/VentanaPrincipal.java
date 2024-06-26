@@ -1,21 +1,21 @@
 package org.example.menues;
 
+import org.example.sistema.Sistema;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class VentanaPrincipal extends JFrame {
 
     private static VentanaPrincipal ventanaPrincipal;
 
     private VentanaPrincipal() {
-        super("Hotel del Sur");
+        super(Sistema.getInstance().getHotel().getNombre());
         configurarVentana();
-    }
-
-    private void configurarVentana() {
-        setSize(1280, 768);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        addWindowListener(new CierreVentana(this));
     }
 
     public static synchronized VentanaPrincipal obtenerVentanaPrincipal() {
@@ -25,9 +25,24 @@ public class VentanaPrincipal extends JFrame {
         return ventanaPrincipal;
     }
 
-    public static void cambiarCuadro(JPanel panel){
+    public static void cambiarCuadro(JPanel panel) {
         obtenerVentanaPrincipal().setContentPane(panel);
         obtenerVentanaPrincipal().revalidate();
         obtenerVentanaPrincipal().repaint();
+    }
+
+    private void configurarVentana() {
+        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        setBounds(screenBounds);
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            this.setIconImage(ImageIO.read(new File("src/main/resources/iconos/icono-hotel.png")));
+        } catch (IOException | UnsupportedLookAndFeelException | ClassNotFoundException | IllegalAccessException |
+                 InstantiationException exception) {
+            System.out.println(exception.getMessage());
+        }
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setVisible(true);
     }
 }

@@ -1,19 +1,18 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBuscarHabitacion implements ActionListener {
+public class AccionBuscarHabitacion extends AccionAbstracta {
 
-    PanelDeEntradas panelEntradas;
-    PanelHabitacion panelHabitacion;
+    private final PanelDeEntradas panelEntradas;
+    private final PanelHabitacion panelHabitacion;
 
     public AccionBuscarHabitacion(PanelDeEntradas panelEntradas, PanelHabitacion panelHabitacion) {
         this.panelEntradas = panelEntradas;
@@ -22,12 +21,11 @@ public class AccionBuscarHabitacion implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        try{
+        try {
             Habitacion habitacion = Sistema.getInstance().buscarHabitacion(panelEntradas.obtenerCampo());
             this.panelHabitacion.llenarCampos(habitacion);
-        }catch(ObjectoNoEncontradoExcepcion e){
-            JOptionPane.showMessageDialog(panelEntradas.getParent(),e.getMessage());
+        } catch (ExcepcionObjectoNoEncontrado excepcion) {
+            mostrarDialogoDeError(panelEntradas, excepcion);
         }
     }
-
 }

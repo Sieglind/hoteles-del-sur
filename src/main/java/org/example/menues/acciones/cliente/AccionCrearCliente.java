@@ -1,18 +1,18 @@
 package org.example.menues.acciones.cliente;
 
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.cliente.PanelCliente;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.cliente.PanelCliente;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Cliente;
-import org.example.sistema.excepciones.CampoRequeridoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionCrearCliente implements ActionListener {
+public class AccionCrearCliente extends AccionAbstracta {
 
-    PanelCliente panelCliente;
+    private final PanelCliente panelCliente;
 
     public AccionCrearCliente(PanelCliente panelCliente) {
         this.panelCliente = panelCliente;
@@ -23,9 +23,9 @@ public class AccionCrearCliente implements ActionListener {
         Cliente cliente = panelCliente.obtenerCliente();
         try {
             Sistema.getInstance().crearCliente(cliente);
-            JOptionPane.showMessageDialog(panelCliente.getParent(), "Cliente creado correctamente: " + cliente.getDni());
-        } catch (ObjetoYaExisteExcepcion | CampoRequeridoExcepcion excepcion) {
-            JOptionPane.showMessageDialog(panelCliente.getParent(), excepcion.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(panelCliente.getParent(), "Cliente creado: " + cliente.getDni());
+        } catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion) {
+            mostrarDialogoDeError(panelCliente.getParent(), excepcion);
         }
     }
 }

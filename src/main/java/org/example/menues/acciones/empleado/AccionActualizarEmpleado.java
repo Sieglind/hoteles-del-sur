@@ -1,16 +1,16 @@
 package org.example.menues.acciones.empleado;
 
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.empleado.PanelEmpleado;
 import org.example.sistema.Sistema;
 import org.example.sistema.entidades.persona.Empleado;
-import org.example.sistema.excepciones.CampoRequeridoExcepcion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
+import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionActualizarEmpleado implements ActionListener {
+public class AccionActualizarEmpleado extends AccionAbstracta {
 
     private final PanelEmpleado panelEmpleado;
 
@@ -18,16 +18,15 @@ public class AccionActualizarEmpleado implements ActionListener {
         this.panelEmpleado = panelEmpleado;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent evento) {
 
         Empleado empleado = panelEmpleado.crearEmpleado();
         try {
             Sistema.getInstance().actualizarEmpleado(empleado);
-            JOptionPane.showMessageDialog(panelEmpleado.getParent(), "Empleado actualizado correctamente");
-        } catch (CampoRequeridoExcepcion | ObjectoNoEncontradoExcepcion excepcion) {
-            JOptionPane.showMessageDialog(panelEmpleado.getParent(),excepcion.getMessage());
+            JOptionPane.showMessageDialog(panelEmpleado.getParent(), "Empleado actualizado");
+        } catch (ExcepcionCamposRequeridos | ExcepcionObjectoNoEncontrado excepcion) {
+            mostrarDialogoDeError(panelEmpleado, excepcion);
         }
     }
 }

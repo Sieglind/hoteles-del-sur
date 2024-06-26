@@ -1,85 +1,58 @@
 package org.example.sistema.gestor.impl;
 
 import org.example.sistema.entidades.Habitacion;
-import org.example.sistema.excepciones.ObjectoNoEncontradoExcepcion;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.excepciones.ExcepcionObjectoNoEncontrado;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 import org.example.sistema.gestor.IGestor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class GestorHabitaciones implements IGestor <String,Habitacion>{
-    private final Map<String,Habitacion> listaHabitaciones;
+public class GestorHabitaciones implements IGestor<String, Habitacion> {
 
-    private final Logger LOG = Logger.getLogger(this.getClass().getName());
+    private final Map<String, Habitacion> habitaciones;
 
     public GestorHabitaciones() {
-        this.listaHabitaciones = new HashMap<>();
-    }
-
-    public Map<String, Habitacion> getListaHabitaciones() {
-        return listaHabitaciones;
+        this.habitaciones = new HashMap<>();
     }
 
     @Override
-    public String crear(Habitacion valor) throws ObjetoYaExisteExcepcion {
-        String llave = obtenerClave(valor);
-        if(listaHabitaciones.containsKey(llave)){
-            throw new ObjetoYaExisteExcepcion("La habitacion ya existe");
+    public String crear(Habitacion valor) throws ExcepcionObjetoYaExiste {
+        if (habitaciones.containsKey(valor.getNumeroDeHabitacion())) {
+            throw new ExcepcionObjetoYaExiste(valor.getNumeroDeHabitacion());
         }
-        listaHabitaciones.put(llave,valor);
-        return llave;
+        habitaciones.put(valor.getNumeroDeHabitacion(), valor);
+        return valor.getNumeroDeHabitacion();
     }
 
     @Override
-    public Habitacion buscar(String key) throws ObjectoNoEncontradoExcepcion {
-        Habitacion habitacion = listaHabitaciones.get(key);
-        if(habitacion == null){
-            throw new ObjectoNoEncontradoExcepcion("La habitacion no existe");
-        }
-        return habitacion;
+    public Habitacion buscar(String key) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        return habitaciones.get(key);
     }
 
     @Override
     public List<Habitacion> listar() {
-        return new ArrayList<>(listaHabitaciones.values());
+        return new ArrayList<>(habitaciones.values());
     }
 
     @Override
-    public Habitacion actualizar(String key, Habitacion valor) throws ObjectoNoEncontradoExcepcion {
-        if(!listaHabitaciones.containsKey(key)){
-            throw new ObjectoNoEncontradoExcepcion("La habitacion no existe");
-        }
-        return listaHabitaciones.put(key,valor);
+    public Habitacion actualizar(String key, Habitacion valor) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        return habitaciones.put(key, valor);
     }
 
     @Override
-    public boolean borrar(String key) throws ObjectoNoEncontradoExcepcion {
-        if(!listaHabitaciones.containsKey(key)){
-            throw new ObjectoNoEncontradoExcepcion("La habitacion no existe");
+    public void borrar(String key) throws ExcepcionObjectoNoEncontrado {
+        objetoExiste(key);
+        habitaciones.remove(key);
+    }
+
+    private void objetoExiste(String key) throws ExcepcionObjectoNoEncontrado {
+        if (!habitaciones.containsKey(key) || habitaciones.get(key) == null) {
+            throw new ExcepcionObjectoNoEncontrado(key);
         }
-        listaHabitaciones.remove(key);
-        return true;
     }
-
-    private String obtenerClave (Habitacion habitacion) {
-        return habitacion.getNumeroDeHabitacion();
-    }
-
-    public GestorHabitaciones conHabitacion(List<Habitacion> habitaciones) {
-        habitaciones.forEach(habitacion -> {
-            try {
-                crear(habitacion);
-            } catch (ObjetoYaExisteExcepcion excepcion) {
-                LOG.log(Level.WARNING,excepcion.getMessage());
-            }
-        });
-        return this;
-    }
-
-
 }

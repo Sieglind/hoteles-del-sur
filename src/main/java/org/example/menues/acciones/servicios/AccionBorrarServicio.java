@@ -1,28 +1,27 @@
 package org.example.menues.acciones.servicios;
 
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
 import org.example.sistema.Sistema;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionBorrarServicio implements ActionListener {
-    private PanelDeEntradas panelDeEntradas;
+public class AccionBorrarServicio extends AccionAbstracta {
+
+    private final PanelDeEntradas panelDeEntradas;
 
     public AccionBorrarServicio(PanelDeEntradas panelDeEntradas) {
         this.panelDeEntradas = panelDeEntradas;
-
     }
 
-
     public void actionPerformed(ActionEvent evento) {
-        try{
+        try {
             String clave = panelDeEntradas.obtenerCampo();
-            Sistema.getInstance().eliminarServicio(clave);
+            Sistema.getInstance().borrarServicio(clave);
             JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Servicio eliminado con exito " + clave);
-        }catch(Exception excepcion){
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),excepcion.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        } catch (Exception excepcion) {
+            mostrarDialogoDeError(panelDeEntradas.getParent(), excepcion);
         }
     }
 }

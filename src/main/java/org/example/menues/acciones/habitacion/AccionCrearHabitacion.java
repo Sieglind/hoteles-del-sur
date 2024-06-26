@@ -1,34 +1,36 @@
 package org.example.menues.acciones.habitacion;
 
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.habitacion.PanelTareasHabitacion;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.habitacion.PanelHabitacion;
 import org.example.sistema.Sistema;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.entidades.Habitacion;
+import org.example.sistema.excepciones.ExcepcionCamposRequeridos;
+import org.example.sistema.excepciones.ExcepcionObjetoYaExiste;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionCrearHabitacion implements ActionListener {
+public class AccionCrearHabitacion extends AccionAbstracta {
 
-    PanelDeEntradas panelDeEntradas;
-    PanelHabitacion panelHabitacion;
+    private final PanelDeEntradas panelDeEntradas;
+    private final PanelHabitacion panelHabitacion;
 
-    public AccionCrearHabitacion(PanelTareasHabitacion panelTareasHabitacion, PanelDeEntradas panelEntradaHabitacion, PanelHabitacion panelHabitacion) {
+    public AccionCrearHabitacion(PanelDeEntradas panelEntradaHabitacion, PanelHabitacion panelHabitacion) {
         this.panelDeEntradas = panelEntradaHabitacion;
         this.panelHabitacion = panelHabitacion;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try{
-            Sistema.getInstance().crearHabitacion(panelHabitacion.obtenerHabitacion());
-
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(),"Habitacion creada con exito");
-
-        }catch (ObjetoYaExisteExcepcion excepcion){
-            JOptionPane.showMessageDialog(panelDeEntradas.getParent(), excepcion.getMessage());
+        try {
+            Habitacion habitacion = panelHabitacion.crearHabitacion();
+            if (habitacion != null) {
+                Sistema.getInstance().crearHabitacion(habitacion);
+                JOptionPane.showMessageDialog(panelDeEntradas.getParent(), "Habitacion creada");
+            }
+        } catch (ExcepcionObjetoYaExiste | ExcepcionCamposRequeridos excepcion) {
+            mostrarDialogoDeError(panelDeEntradas.getParent(), excepcion);
         }
-   }
+    }
 }

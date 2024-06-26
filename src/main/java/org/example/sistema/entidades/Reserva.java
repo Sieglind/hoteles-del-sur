@@ -3,22 +3,21 @@ package org.example.sistema.entidades;
 import org.example.sistema.entidades.persona.Cliente;
 import org.example.sistema.enums.Estado;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Reserva {
+
+    private final LocalDate fechaInicio;
+    private final LocalDate fechaFin;
+    private final int[] serviciosElegidos;
     private String idReserva;
     private Cliente cliente;
     private Habitacion habitacion;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
     private Estado estado;
 
-    public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin, int[] serviciosElegidos) {
+        this.serviciosElegidos = serviciosElegidos;
         this.idReserva = "R" + Instant.now().getNano();
         this.cliente = cliente;
         this.habitacion = habitacion;
@@ -27,12 +26,13 @@ public class Reserva {
         this.estado = Estado.PENDIENTE;
     }
 
-    public Reserva(String idReserva, Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Reserva(String idReserva, Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin, int[] serviciosElegidos) {
         this.idReserva = idReserva;
         this.cliente = cliente;
         this.habitacion = habitacion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.serviciosElegidos = serviciosElegidos;
         this.estado = Estado.PENDIENTE;
     }
 
@@ -40,12 +40,12 @@ public class Reserva {
         return idReserva;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public void setIdReserva(String idReserva) {
+        this.idReserva = idReserva;
     }
 
-    public void setIdReserva(String idReserva) {
-        this.idReserva = "R" + Instant.now().getNano();
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
@@ -64,24 +64,8 @@ public class Reserva {
         return fechaInicio;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public String getFechaInicioFormateado() {
-        return fechaInicio.format(formatter);
-    }
-
     public LocalDate getFechaFin() {
         return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
-    public String getFechaFinFormateado() {
-        return fechaFin.format(formatter);
     }
 
     public Estado getEstado() {
@@ -95,11 +79,15 @@ public class Reserva {
     @Override
     public String toString() {
         return
-                "Id : " + idReserva +
-                        "||Cliente: " + cliente +
-                        "||Habitacion: " + habitacion +
-                        "||Check-In: " + fechaInicio +
-                        "||Check-Out: " + fechaFin +
-                        "||Estado: " + estado;
+                " | Id : " + idReserva +
+                        " | Cliente: " + cliente +
+                        " | Habitacion: " + habitacion +
+                        " | Check-In: " + fechaInicio +
+                        " | Check-Out: " + fechaFin +
+                        " | Estado: " + estado;
+    }
+
+    public int[] getServiciosElegidos() {
+        return serviciosElegidos;
     }
 }

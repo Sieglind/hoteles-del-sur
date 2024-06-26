@@ -1,18 +1,19 @@
 package org.example.menues.acciones.reserva;
 
-import org.example.menues.cuadros.panelesgridbag.PanelDeEntradas;
-import org.example.menues.cuadros.panelesgridbag.tareas.impl.reserva.PanelReserva;
+import org.example.menues.acciones.AccionAbstracta;
+import org.example.menues.paneles.panelesgridbag.PanelDeEntradas;
+import org.example.menues.paneles.panelesgridbag.tareas.impl.reserva.PanelReserva;
 import org.example.sistema.Sistema;
-import org.example.sistema.excepciones.ObjetoYaExisteExcepcion;
+import org.example.sistema.entidades.Reserva;
+import org.example.sistema.excepciones.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AccionCrearReserva implements ActionListener {
+public class AccionCrearReserva extends AccionAbstracta {
 
-    PanelDeEntradas panelEntradasReserva;
-    PanelReserva panelReserva;
+    private final PanelDeEntradas panelEntradasReserva;
+    private final PanelReserva panelReserva;
 
     public AccionCrearReserva(PanelDeEntradas panelEntradasReserva, PanelReserva panelReserva) {
         this.panelEntradasReserva = panelEntradasReserva;
@@ -22,10 +23,14 @@ public class AccionCrearReserva implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
-           String reserva1 = Sistema.getInstance().crearReserva(panelReserva.crearReserva());
-            JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), "Reserva creada con exito: ID " + reserva1);
-        } catch (ObjetoYaExisteExcepcion excepcion) {
-            JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), excepcion.getMessage());
+            Reserva reserva = panelReserva.crearReserva();
+            if (reserva != null) {
+                String idReserva = Sistema.getInstance().crearReserva(reserva, panelReserva.getCliente(), panelReserva.getHabitacion());
+                JOptionPane.showMessageDialog(panelEntradasReserva.getParent(), "Reserva creada: " + idReserva);
+            }
+        } catch (ExcepcionObjetoYaExiste | ExcepcionObjectoNoEncontrado | ExcepcionHabitacionNoDisponible |
+                 ExcepcionCamposRequeridos | ExcepcionFechasNoValidas excepcion) {
+            mostrarDialogoDeError(panelEntradasReserva, excepcion);
         }
     }
 }
